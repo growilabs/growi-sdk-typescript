@@ -1,0 +1,1 @@
+# growi-sdk-typescript
