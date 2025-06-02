@@ -42,6 +42,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'pnpm'
 
       - uses: pnpm/action-setup@v2
         if: steps.check_changes.outputs.has_changes == 'true'
@@ -55,10 +56,6 @@ jobs:
       - name: Generate SDK
         if: steps.check_changes.outputs.has_changes == 'true'
         run: pnpm run generate:api
-
-      - name: Format generated code
-        if: steps.check_changes.outputs.has_changes == 'true'
-        run: pnpm exec biome format --write ./src/generated
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true'
@@ -82,3 +79,6 @@ jobs:
           labels: |
             sdk-update
             automated-pr
+          add-paths: |
+            src/generated/**/*
+            .openapi-cache/**/*

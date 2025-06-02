@@ -8,8 +8,9 @@
   "keywords": ["sdk", "growi", "typescript", "api"],
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generate:api": "orval && biome format --write src/generated"
+    "lint": "biome check",
+    "generate:api": "orval && biome format --write src/generated",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
