@@ -7,7 +7,18 @@
   "author": "Yuki Takei <yuki@weseek.co.jp>",
   "keywords": ["sdk", "growi", "typescript", "api"],
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "src", "README.md", "CHANGELOG.md", "LICENSE"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weseek/growi-sdk-typescript.git"
+  },
+  "homepage": "https://github.com/weseek/growi-sdk-typescript#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "lint": "biome check",
     "generate:api": "orval && biome format --write src/generated",
     "test": "echo \"Error: no test specified\" && exit 1",
