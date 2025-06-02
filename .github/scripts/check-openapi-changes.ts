@@ -59,21 +59,25 @@ async function main(): Promise<void> {
     const v1Changed = await hasFileChanged(v1New, v1Cache);
     const v3Changed = await hasFileChanged(v3New, v3Cache);
 
-    if (v1Changed || v3Changed) {
+    const hasChanges = v1Changed || v3Changed;
+
+    if (hasChanges) {
       // If there are changes, copy files
       await copyFile(v1New, v1Cache);
       await copyFile(v3New, v3Cache);
-      console.log('::set-output name=has_changes::true');
-    } else {
-      console.log('::set-output name=has_changes::false');
     }
+
+    // Output the result to stdout
+    console.log(hasChanges ? 'true' : 'false');
+    process.exit(0); // Always exit with 0 for successful execution
   } catch (error) {
+    // Output error message to stderr
     if (error instanceof Error) {
-      console.error(`An error occurred: ${error.message}`);
+      console.error(`Error: ${error.message}`);
     } else {
       console.error('An unexpected error occurred');
     }
-    process.exit(1);
+    process.exit(1); // Exit with 1 for errors
   }
 }
 
