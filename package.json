@@ -9,10 +9,14 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate:api": "orval"
+    "generate:api": "orval && biome format --write src/generated"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "orval": "^7.9.0"
   },
-  "packageManager": "pnpm@10.11.0"
+  "packageManager": "pnpm@10.11.0",
+  "dependencies": {
+    "axios": "^1.9.0"
+  }
 }
