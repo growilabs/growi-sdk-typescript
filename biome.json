@@ -8,6 +8,7 @@
   },
   "linter": {
     "enabled": true,
+    "ignore": ["src/generated"],
     "rules": {
       "recommended": true
     }
