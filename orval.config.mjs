@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   apiv1: {
     input: {
       target: 'https://docs.growi.org/openapi-spec-apiv1.json',
