@@ -10,10 +10,12 @@
   "scripts": {
     "lint": "biome check",
     "generate:api": "orval && biome format --write src/generated",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodets": "node --experimental-strip-types --experimental-transform-types --experimental-detect-module --no-warnings=ExperimentalWarning"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.15.29",
     "orval": "^7.9.0"
   },
   "packageManager": "pnpm@10.11.0",
