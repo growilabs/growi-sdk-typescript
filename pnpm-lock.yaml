@@ -1716,7 +1716,7 @@ snapshots:
   '@orval/mock@7.9.0(openapi-types@12.1.3)':
     dependencies:
       '@orval/core': 7.9.0(openapi-types@12.1.3)
-      openapi3-ts: 4.2.2
+      openapi3-ts: 4.4.0
     transitivePeerDependencies:
       - encoding
       - openapi-types
