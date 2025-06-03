@@ -1,4 +1,6 @@
-export default {
+import { defineConfig } from 'orval';
+
+export default defineConfig({
   apiv1: {
     input: {
       target: 'https://docs.growi.org/openapi-spec-apiv1.json',
@@ -33,4 +35,4 @@ export default {
       },
     },
   },
-};
+});
