@@ -22,7 +22,7 @@
     "lint": "biome check",
     "generate:api": "orval && biome format --write src/generated",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "nodets": "node --experimental-strip-types --experimental-transform-types --experimental-detect-module --no-warnings=ExperimentalWarning"
+    "nodets": "node --experimental-strip-types --experimental-transform-types --no-warnings=ExperimentalWarning"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
