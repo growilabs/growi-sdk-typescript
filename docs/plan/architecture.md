@@ -28,7 +28,7 @@
 ### 生成コードの品質
 
 *   **Linter/Formatter との連携:**
-    *   `orval` コマンドによるコード生成後、`package.json` の `generate:api` スクリプト内で `biome format --write src/generated` を実行し、Biome によるフォーマットを適用する。
+    *   `orval` コマンドによるコード生成時、`--biome` オプションを有効化し、Biome によるフォーマットを適用する。
 *   **テストの方針:**
     *   orval が生成するコードは信頼するため、生成されたコードに対する個別のテストは記述しない。
 
