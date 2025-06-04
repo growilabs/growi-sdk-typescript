@@ -5,20 +5,27 @@
  * OpenAPI spec version: 7.2.6-RC.0
  */
 /**
+ * The type for Comment.comment
+ */
+export type CommentBody = string;
+
+/**
+ * comment position
+ */
+export type CommentPosition = number;
+
+/**
  * Comment
  */
 export interface Comment {
-  /** revision ID */
-  _id?: string;
+  _id?: ObjectId;
   /** DB record version */
   __v?: number;
-  page?: _Id;
-  creator?: _Id;
-  revision?: _Id;
-  /** comment */
-  comment?: string;
-  /** comment position */
-  commentPosition?: number;
+  page?: ObjectId;
+  creator?: ObjectId;
+  revision?: ObjectId;
+  comment?: CommentBody;
+  commentPosition?: CommentPosition;
   /** date created at */
   createdAt?: string;
 }
@@ -56,37 +63,20 @@ export interface UpdatePost {
   createdAt?: string;
 }
 
-export type ElasticsearchResultMeta = {
+export interface ElasticsearchResultMeta {
   /** Time Elasticsearch took to execute a search(milliseconds) */
   took?: number;
   /** Number of documents matching search criteria */
   total?: number;
   /** Actual array length of search results */
   results?: number;
-};
+}
 
 /**
  * Elasticsearch result v1
  */
 export interface ElasticsearchResult {
   meta?: ElasticsearchResultMeta;
-}
-
-/**
- * Tags
- */
-export type Tags = Name[];
-
-/**
- * Tag
- */
-export interface Tag {
-  /** tag ID */
-  _id?: string;
-  /** tag name */
-  name?: string;
-  /** Count of tagged pages */
-  count?: number;
 }
 
 /**
@@ -158,7 +148,7 @@ export interface AttachmentProfile {
   fileName?: string;
   /** original file name */
   originalName?: string;
-  creator?: _Id;
+  creator?: ObjectId;
   /** page ID attached at */
   page?: string;
   /** date created at */
@@ -186,6 +176,21 @@ export interface ErrorV3 {
 }
 
 /**
+ * Object ID
+ */
+export type ObjectId = string;
+
+/**
+ * Page path
+ */
+export type PagePath = string;
+
+/**
+ * Grant for page
+ */
+export type PageGrant = number;
+
+/**
  * extend data
  */
 export type PageExtended = { [key: string]: unknown };
@@ -207,8 +212,7 @@ export const PageStatus = {
  * Page
  */
 export interface Page {
-  /** page ID */
-  _id?: string;
+  _id?: ObjectId;
   /** DB record version */
   __v?: number;
   /** count of comments */
@@ -218,15 +222,13 @@ export interface Page {
   creator?: User;
   /** extend data */
   extended?: PageExtended;
-  /** grant */
-  grant?: number;
+  grant?: PageGrant;
   /** granted users */
   grantedUsers?: string[];
   lastUpdateUser?: User;
   /** granted users */
   liker?: string[];
-  /** page path */
-  path?: string;
+  path?: PagePath;
   /** page revision */
   revision?: string;
   /** granted users */
@@ -236,6 +238,16 @@ export interface Page {
   /** date updated at */
   updatedAt?: string;
 }
+
+/**
+ * Offset for pagination
+ */
+export type Offset = number;
+
+/**
+ * Limit for pagination
+ */
+export type Limit = number;
 
 export type PaginateResultDocsItem = { [key: string]: unknown };
 
@@ -247,8 +259,7 @@ export interface PaginateResult {
   docs?: PaginateResultDocsItem[];
   /** Total number of documents in collection that match a query */
   totalDocs?: number;
-  /** Limit that was used */
-  limit?: number;
+  limit?: Limit;
   /** Availability of prev page. */
   hasPrevPage?: number;
   /** Availability of next page. */
@@ -258,7 +269,7 @@ export interface PaginateResult {
   /** Total number of pages. */
   totalPages?: number;
   /** Only if specified or default page/offset values were used */
-  offset?: number;
+  offset?: Offset;
   /** Previous page number if available or NULL */
   prefPage?: number;
   /** Next page number if available or NULL */
@@ -272,10 +283,9 @@ export interface PaginateResult {
 export type V1PaginateResultMeta = {
   /** Total number of documents in collection that match a query */
   total?: number;
-  /** Limit that was used */
-  limit?: number;
+  limit?: Limit;
   /** Only if specified or default page/offset values were used */
-  offset?: number;
+  offset?: Offset;
 };
 
 /**
@@ -293,16 +303,19 @@ export interface V1PaginateResult {
 }
 
 /**
+ * Revision content body
+ */
+export type RevisionBody = string;
+
+/**
  * Revision
  */
 export interface Revision {
-  /** revision ID */
-  _id?: string;
+  _id?: ObjectId;
   /** DB record version */
   __v?: number;
-  author?: _Id;
-  /** content body */
-  body?: string;
+  author?: ObjectId;
+  body?: RevisionBody;
   /** format */
   format?: string;
   /** path */
@@ -312,11 +325,36 @@ export interface Revision {
 }
 
 /**
+ * Tags
+ */
+export type Tags = TagName[];
+
+/**
+ * Tag name
+ */
+export type TagName = string;
+
+/**
+ * Tag
+ */
+export interface Tag {
+  /** tag ID */
+  _id?: string;
+  name?: TagName;
+  /** Count of tagged pages */
+  count?: number;
+}
+
+/**
+ * API is succeeded
+ */
+export type V1ResponseOK = boolean;
+
+/**
  * Response v1
  */
 export interface V1Response {
-  /** API is succeeded */
-  ok?: boolean;
+  ok?: V1ResponseOK;
 }
 
 /**
@@ -330,19 +368,19 @@ export type N403Response = void;
 export type N500Response = void;
 
 export type GetCommentsParams = {
-  page_id?: _Id;
-  revision_id?: _Id;
+  page_id?: ObjectId;
+  revision_id?: ObjectId;
 };
 
 export type GetComments200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   comments?: Comment[];
 };
 
 export type AddCommentBodyCommentForm = {
-  page_id?: _Id;
-  revision_id?: _Id;
-  comment?: Comment;
+  page_id?: ObjectId;
+  revision_id?: ObjectId;
+  comment?: CommentBody;
   comment_position?: CommentPosition;
 };
 
@@ -351,15 +389,15 @@ export type AddCommentBody = {
 };
 
 export type AddComment200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   comment?: Comment;
 };
 
 export type UpdateCommentBodyFormCommentForm = {
-  page_id?: _Id;
-  revision_id?: _Id;
-  comment_id?: _Id;
-  comment?: Comment;
+  page_id?: ObjectId;
+  revision_id?: ObjectId;
+  comment_id?: ObjectId;
+  comment?: CommentBody;
 };
 
 export type UpdateCommentBodyForm = {
@@ -371,16 +409,16 @@ export type UpdateCommentBody = {
 };
 
 export type UpdateComment200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   comment?: Comment;
 };
 
 export type RemoveCommentBody = {
-  comment_id: _Id;
+  comment_id: ObjectId;
 };
 
 export type RemoveComment200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   comment?: Comment;
 };
 
@@ -413,33 +451,33 @@ export type PostRegister200 = {
 };
 
 export type GetPageTagParams = {
-  pageId?: _Id;
+  pageId?: ObjectId;
 };
 
 export type GetPageTag200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   tags?: Tags;
 };
 
 export type GetUpdatePostPageParams = {
-  path?: Path;
+  path?: PagePath;
 };
 
 export type GetUpdatePostPage200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   updatePost?: UpdatePost;
 };
 
 export type SearchPagesParams = {
   q: string;
-  path?: Path;
+  path?: PagePath;
   offset?: Offset;
   limit?: Limit;
 };
 
 export type SearchPages200 = {
-  ok?: Ok;
-  meta?: Meta;
+  ok?: V1ResponseOK;
+  meta?: ElasticsearchResultMeta;
   /** total count of pages */
   totalCount?: number;
   /** page list */
@@ -454,18 +492,18 @@ export type SearchTagsParams = {
 };
 
 export type SearchTags200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   tags?: Tags;
 };
 
 export type UpdateTagBody = {
-  pageId?: _Id;
-  revisionId?: _Id;
+  pageId?: ObjectId;
+  revisionId?: ObjectId;
   tags?: Tags;
 };
 
 export type UpdateTag200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   tags?: Tags;
 };
 
@@ -475,7 +513,7 @@ export type ListTagsParams = {
 };
 
 export type ListTags200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   data?: Tag[];
 };
 
@@ -494,16 +532,16 @@ export type UploadProfileImageBodyTwo = {
 };
 
 export type UploadProfileImage200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
   attachment?: AttachmentProfile;
 };
 
 export type RemoveAttachmentBody = {
-  attachment_id: _Id;
+  attachment_id: ObjectId;
 };
 
 export type RemoveAttachment200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
 };
 
 export type RemoveProfileImageBody = {
@@ -512,5 +550,5 @@ export type RemoveProfileImageBody = {
 };
 
 export type RemoveProfileImage200 = {
-  ok?: Ok;
+  ok?: V1ResponseOK;
 };

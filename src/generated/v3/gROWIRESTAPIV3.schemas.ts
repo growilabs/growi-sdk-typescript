@@ -400,7 +400,7 @@ export interface Bookmark {
   /** date created at */
   createdAt?: string;
   page?: Page;
-  user?: _Id;
+  user?: ObjectId;
 }
 
 /**
@@ -1013,23 +1013,6 @@ export interface PageParams {
 }
 
 /**
- * Tags
- */
-export type Tags = Name[];
-
-/**
- * Tag
- */
-export interface Tag {
-  /** tag ID */
-  _id?: string;
-  /** tag name */
-  name?: string;
-  /** Count of tagged pages */
-  count?: number;
-}
-
-/**
  * personal settings
  */
 export interface PersonalSettings {
@@ -1069,15 +1052,15 @@ export interface DisassociateUser {
  * Revision
  */
 export interface Revision {
-  /** revision ID */
-  _id?: string;
+  /** The revision ID */
+  _id?: ObjectId;
   /** format */
   format?: string;
   /** The ID of the page the revision belongs to */
   pageId?: string;
-  /** content body */
-  body?: string;
-  author?: _Id;
+  /** The content of the revision */
+  body?: RevisionBody;
+  author?: ObjectId;
   /** The origin of the revision */
   origin?: string;
   /** Whether the revision has differences to the previous one */
@@ -1479,6 +1462,21 @@ export interface ErrorV3 {
 }
 
 /**
+ * Object ID
+ */
+export type ObjectId = string;
+
+/**
+ * Page path
+ */
+export type PagePath = string;
+
+/**
+ * Grant for page
+ */
+export type PageGrant = number;
+
+/**
  * extend data
  */
 export type PageExtended = { [key: string]: unknown };
@@ -1500,8 +1498,7 @@ export const PageStatus = {
  * Page
  */
 export interface Page {
-  /** page ID */
-  _id?: string;
+  _id?: ObjectId;
   /** DB record version */
   __v?: number;
   /** count of comments */
@@ -1511,15 +1508,13 @@ export interface Page {
   creator?: User;
   /** extend data */
   extended?: PageExtended;
-  /** grant */
-  grant?: number;
+  grant?: PageGrant;
   /** granted users */
   grantedUsers?: string[];
   lastUpdateUser?: User;
   /** granted users */
   liker?: string[];
-  /** page path */
-  path?: string;
+  path?: PagePath;
   /** page revision */
   revision?: string;
   /** granted users */
@@ -1529,6 +1524,16 @@ export interface Page {
   /** date updated at */
   updatedAt?: string;
 }
+
+/**
+ * Offset for pagination
+ */
+export type Offset = number;
+
+/**
+ * Limit for pagination
+ */
+export type Limit = number;
 
 export type PaginateResultDocsItem = { [key: string]: unknown };
 
@@ -1540,8 +1545,7 @@ export interface PaginateResult {
   docs?: PaginateResultDocsItem[];
   /** Total number of documents in collection that match a query */
   totalDocs?: number;
-  /** Limit that was used */
-  limit?: number;
+  limit?: Limit;
   /** Availability of prev page. */
   hasPrevPage?: number;
   /** Availability of next page. */
@@ -1551,7 +1555,7 @@ export interface PaginateResult {
   /** Total number of pages. */
   totalPages?: number;
   /** Only if specified or default page/offset values were used */
-  offset?: number;
+  offset?: Offset;
   /** Previous page number if available or NULL */
   prefPage?: number;
   /** Next page number if available or NULL */
@@ -1565,10 +1569,9 @@ export interface PaginateResult {
 export type V1PaginateResultMeta = {
   /** Total number of documents in collection that match a query */
   total?: number;
-  /** Limit that was used */
-  limit?: number;
+  limit?: Limit;
   /** Only if specified or default page/offset values were used */
-  offset?: number;
+  offset?: Offset;
 };
 
 /**
@@ -1586,11 +1589,41 @@ export interface V1PaginateResult {
 }
 
 /**
+ * Revision content body
+ */
+export type RevisionBody = string;
+
+/**
+ * Tags
+ */
+export type Tags = TagName[];
+
+/**
+ * Tag name
+ */
+export type TagName = string;
+
+/**
+ * Tag
+ */
+export interface Tag {
+  /** tag ID */
+  _id?: string;
+  name?: TagName;
+  /** Count of tagged pages */
+  count?: number;
+}
+
+/**
+ * API is succeeded
+ */
+export type V1ResponseOK = boolean;
+
+/**
  * Response v1
  */
 export interface V1Response {
-  /** API is succeeded */
-  ok?: boolean;
+  ok?: V1ResponseOK;
 }
 
 /**
@@ -1623,7 +1656,7 @@ export type GetExternalUserGroupRelations200 = {
   relationsOfChildGroups?: GetExternalUserGroupRelations200RelationsOfChildGroupsItem[];
 };
 
-export type ListExternalUserGroupsParams = {
+export type GetExternalUserGroupsParams = {
   /**
    * Page number for pagination
    */
@@ -1642,28 +1675,28 @@ export type ListExternalUserGroupsParams = {
   pagination?: boolean;
 };
 
-export type ListExternalUserGroups200UserGroupsItem = { [key: string]: unknown };
+export type GetExternalUserGroups200UserGroupsItem = { [key: string]: unknown };
 
-export type ListExternalUserGroups200 = {
-  userGroups?: ListExternalUserGroups200UserGroupsItem[];
+export type GetExternalUserGroups200 = {
+  userGroups?: GetExternalUserGroups200UserGroupsItem[];
   totalUserGroups?: number;
   pagingLimit?: number;
 };
 
-export type GetAncestorsParams = {
+export type GetExternalUserGroupsAncestorsParams = {
   /**
    * The ID of the user group to get ancestors for
    */
   groupId: string;
 };
 
-export type GetAncestors200AncestorUserGroupsItem = { [key: string]: unknown };
+export type GetExternalUserGroupsAncestors200AncestorUserGroupsItem = { [key: string]: unknown };
 
-export type GetAncestors200 = {
-  ancestorUserGroups?: GetAncestors200AncestorUserGroupsItem[];
+export type GetExternalUserGroupsAncestors200 = {
+  ancestorUserGroups?: GetExternalUserGroupsAncestors200AncestorUserGroupsItem[];
 };
 
-export type ListChildrenParams = {
+export type GetExternalUserGroupsChildrenParams = {
   /**
    * The IDs of the parent user groups
    */
@@ -1674,22 +1707,22 @@ export type ListChildrenParams = {
   includeGrandChildren?: boolean;
 };
 
-export type ListChildren200ChildUserGroupsItem = { [key: string]: unknown };
+export type GetExternalUserGroupsChildren200ChildUserGroupsItem = { [key: string]: unknown };
 
-export type ListChildren200GrandChildUserGroupsItem = { [key: string]: unknown };
+export type GetExternalUserGroupsChildren200GrandChildUserGroupsItem = { [key: string]: unknown };
 
-export type ListChildren200 = {
-  childUserGroups?: ListChildren200ChildUserGroupsItem[];
-  grandChildUserGroups?: ListChildren200GrandChildUserGroupsItem[];
+export type GetExternalUserGroupsChildren200 = {
+  childUserGroups?: GetExternalUserGroupsChildren200ChildUserGroupsItem[];
+  grandChildUserGroups?: GetExternalUserGroupsChildren200GrandChildUserGroupsItem[];
 };
 
-export type GetExternalUserGroup200UserGroup = { [key: string]: unknown };
+export type GetExternalUserGroupsId200UserGroup = { [key: string]: unknown };
 
-export type GetExternalUserGroup200 = {
-  userGroup?: GetExternalUserGroup200UserGroup;
+export type GetExternalUserGroupsId200 = {
+  userGroup?: GetExternalUserGroupsId200UserGroup;
 };
 
-export type DeleteExternalUserGroupParams = {
+export type DeleteExternalUserGroupsIdParams = {
   /**
    * The action to perform on group delete
    */
@@ -1704,29 +1737,29 @@ export type DeleteExternalUserGroupParams = {
   transferToUserGroupType?: string;
 };
 
-export type DeleteExternalUserGroup200UserGroupsItem = { [key: string]: unknown };
+export type DeleteExternalUserGroupsId200UserGroupsItem = { [key: string]: unknown };
 
-export type DeleteExternalUserGroup200 = {
-  userGroups?: DeleteExternalUserGroup200UserGroupsItem[];
+export type DeleteExternalUserGroupsId200 = {
+  userGroups?: DeleteExternalUserGroupsId200UserGroupsItem[];
 };
 
-export type UpdateExternalUserGroupBody = {
+export type PutExternalUserGroupsIdBody = {
   description?: string;
 };
 
-export type UpdateExternalUserGroup200UserGroup = { [key: string]: unknown };
+export type PutExternalUserGroupsId200UserGroup = { [key: string]: unknown };
 
-export type UpdateExternalUserGroup200 = {
-  userGroup?: UpdateExternalUserGroup200UserGroup;
+export type PutExternalUserGroupsId200 = {
+  userGroup?: PutExternalUserGroupsId200UserGroup;
 };
 
-export type GetExternalUserGroupRelations200UserGroupRelationsItem = { [key: string]: unknown };
+export type GetExternalUserGroupsIdExternalUserGroupRelations200UserGroupRelationsItem = { [key: string]: unknown };
 
-export type GetExternalUserGroupRelations200 = {
-  userGroupRelations?: GetExternalUserGroupRelations200UserGroupRelationsItem[];
+export type GetExternalUserGroupsIdExternalUserGroupRelations200 = {
+  userGroupRelations?: GetExternalUserGroupsIdExternalUserGroupRelations200UserGroupRelationsItem[];
 };
 
-export type GetLdapSyncSettings200 = {
+export type GetExternalUserGroupsLdapSyncSettings200 = {
   ldapGroupSearchBase?: string;
   ldapGroupMembershipAttribute?: string;
   ldapGroupMembershipAttributeType?: string;
@@ -1737,7 +1770,7 @@ export type GetLdapSyncSettings200 = {
   ldapGroupDescriptionAttribute?: string;
 };
 
-export type UpdateLdapSyncSettingsBody = {
+export type PutExternalUserGroupsLdapSyncSettingsBody = {
   ldapGroupSearchBase?: string;
   ldapGroupMembershipAttribute?: string;
   ldapGroupMembershipAttributeType?: string;
@@ -1748,9 +1781,9 @@ export type UpdateLdapSyncSettingsBody = {
   ldapGroupDescriptionAttribute?: string;
 };
 
-export type UpdateLdapSyncSettings204 = { [key: string]: unknown };
+export type PutExternalUserGroupsLdapSyncSettings204 = { [key: string]: unknown };
 
-export type GetKeycloakSyncSettings200 = {
+export type GetExternalUserGroupsKeycloakSyncSettings200 = {
   keycloakHost?: string;
   keycloakGroupRealm?: string;
   keycloakGroupSyncClientRealm?: string;
@@ -1761,7 +1794,7 @@ export type GetKeycloakSyncSettings200 = {
   keycloakGroupDescriptionAttribute?: string;
 };
 
-export type UpdateKeycloakSyncSettingsBody = {
+export type PutExternalUserGroupsKeycloakSyncSettingsBody = {
   keycloakHost?: string;
   keycloakGroupRealm?: string;
   keycloakGroupSyncClientRealm?: string;
@@ -1772,11 +1805,11 @@ export type UpdateKeycloakSyncSettingsBody = {
   keycloakGroupDescriptionAttribute?: string;
 };
 
-export type UpdateKeycloakSyncSettings204 = { [key: string]: unknown };
+export type PutExternalUserGroupsKeycloakSyncSettings204 = { [key: string]: unknown };
 
-export type SyncExternalUserGroupsLdap202 = { [key: string]: unknown };
+export type PutExternalUserGroupsLdapSync202 = { [key: string]: unknown };
 
-export type SyncExternalUserGroupsKeycloak202 = { [key: string]: unknown };
+export type PutExternalUserGroupsKeycloakSync202 = { [key: string]: unknown };
 
 export type GetQuestionnaireOrders200QuestionnaireOrdersItem = { [key: string]: unknown };
 
@@ -1878,47 +1911,47 @@ export type GetAppSettings200 = {
   appSettingsParams?: AppSettingParams;
 };
 
-export type UpdateAppSettings200 = {
+export type PutAppSettingsAppSetting200 = {
   appSettingParams?: AppSettingPutParams;
 };
 
-export type UpdateAppSettingSiteUrlSetting200SiteUrlSettingParams = {
+export type PutAppSettingsSiteUrlSetting200SiteUrlSettingParams = {
   /** Site URL. e.g. https://example.com, https://example.com:3000 */
   siteUrl?: string;
 };
 
-export type UpdateAppSettingSiteUrlSetting200 = {
-  siteUrlSettingParams?: UpdateAppSettingSiteUrlSetting200SiteUrlSettingParams;
+export type PutAppSettingsSiteUrlSetting200 = {
+  siteUrlSettingParams?: PutAppSettingsSiteUrlSetting200SiteUrlSettingParams;
 };
 
-export type UpdateAppSettingSmtpSetting200 = {
+export type PutAppSettingsSmtpSetting200 = {
   mailSettingParams?: SmtpSettingResponseParams;
 };
 
 /**
  * Empty object
  */
-export type PostSmtpTest200 = { [key: string]: unknown };
+export type PostAppSettingsSmtpTest200 = { [key: string]: unknown };
 
-export type UpdateAppSettingFileUploadSetting200 = {
+export type PutAppSettingsFileUploadSettings200 = {
   responseParams?: FileUploadSettingParams;
 };
 
-export type UpdateAppSettingQuestionnaireSettings200 = {
+export type PutAppSettingsQuestionnaireSettings200 = {
   responseParams?: QuestionnaireSettingParams;
 };
 
-export type UpdateAppSettingV5SchemaMigration200 = {
+export type PostAppSettingsV5SchemaMigration200 = {
   /** is V5 compatible, or not */
   isV5Compatible?: boolean;
 };
 
-export type UpdateAppSettingMaintenanceModeBody = {
+export type PostAppSettingsMaintenanceModeBody = {
   /** flag for maintenance mode */
   flag?: boolean;
 };
 
-export type UpdateAppSettingMaintenanceMode200 = {
+export type PostAppSettingsMaintenanceMode200 = {
   /** true if maintenance mode is enabled */
   flag?: boolean;
 };
@@ -1947,21 +1980,21 @@ export type GetAttachmentLimit200 = {
   isUploadable?: boolean;
 };
 
-export type AddAttachmentBodyOne = {
+export type PostAttachmentBodyOne = {
   /** */
   page_id?: string;
   /** attachment data */
   file?: Blob;
 };
 
-export type AddAttachmentBodyTwo = {
+export type PostAttachmentBodyTwo = {
   /** */
   page_id?: string;
   /** attachment data */
   file?: Blob;
 };
 
-export type AddAttachment200 = {
+export type PostAttachment200 = {
   page?: Page;
   attachment?: Attachment;
   revision?: string;
@@ -1971,7 +2004,7 @@ export type GetAttachmentId200 = {
   attachment?: Attachment;
 };
 
-export type CreateBookmarkFolderBody = {
+export type PostBookmarkFolderBody = {
   /**
    * Name of the bookmark folder
    */
@@ -1980,11 +2013,11 @@ export type CreateBookmarkFolderBody = {
   parent?: string;
 };
 
-export type CreateBookmarkFolder200 = {
+export type PostBookmarkFolder200 = {
   bookmarkFolder?: BookmarkFolder;
 };
 
-export type UpdateBookmarkFolderBody = {
+export type PutBookmarkFolderBody = {
   /** Bookmark Folder ID */
   bookmarkFolderId?: string;
   /**
@@ -1997,20 +2030,20 @@ export type UpdateBookmarkFolderBody = {
   childFolder?: BookmarkFolder[];
 };
 
-export type UpdateBookmarkFolder200 = {
+export type PutBookmarkFolder200 = {
   bookmarkFolder?: BookmarkFolder;
 };
 
-export type ListBookmarkFolders200 = {
+export type GetBookmarkFolderListUserId200 = {
   bookmarkFolderItems?: BookmarkFolder[];
 };
 
-export type DeleteBookmarkFolder200 = {
+export type DeleteBookmarkFolderId200 = {
   /** Number of deleted folders */
   deletedCount?: number;
 };
 
-export type AddBookmarkToFolderBody = {
+export type PostBookmarkFolderAddBookmarkToFolderBody = {
   /**
    * Page ID
    */
@@ -2022,11 +2055,11 @@ export type AddBookmarkToFolderBody = {
   folderId?: string | null;
 };
 
-export type AddBookmarkToFolder200 = {
+export type PostBookmarkFolderAddBookmarkToFolder200 = {
   bookmarkFolder?: BookmarkFolder;
 };
 
-export type UpdateBookmarkInFolderBody = {
+export type PutBookmarkFolderUpdateBookmarkBody = {
   /**
    * Page ID
    */
@@ -2035,18 +2068,18 @@ export type UpdateBookmarkInFolderBody = {
   status?: string;
 };
 
-export type UpdateBookmarkInFolder200 = {
+export type PutBookmarkFolderUpdateBookmark200 = {
   bookmarkFolder?: BookmarkFolder;
 };
 
-export type GetBookmarkedInfoParams = {
+export type GetBookmarksInfoParams = {
   /**
    * page id
    */
   pageId?: string;
 };
 
-export type UpdateBookmarkedStatus200 = {
+export type PutBookmarks200 = {
   bookmark?: Bookmark;
 };
 
@@ -2055,73 +2088,73 @@ export type GetCustomizeSetting200 = {
   customizeParams?: CustomizeSetting;
 };
 
-export type UpdateLayoutCustomizeSetting200 = {
+export type PutCustomizeSettingLayout200 = {
   /** customized params */
   customizedParams?: CustomizeLayout;
 };
 
-export type GetThemeCustomizeSetting200 = {
+export type GetCustomizeSettingTheme200 = {
   /** The current theme name. */
   currentTheme?: string;
   /** Metadata for available plugin themes. */
   pluginThemesMetadatas?: ThemesMetadata[];
 };
 
-export type UpdateThemeCustomizeSetting200 = {
+export type PutCustomizeSettingTheme200 = {
   customizedParams?: CustomizeTheme;
 };
 
-export type UpdateCustomizeSettingSidebar200 = {
+export type PutCustomizeSettingSidebar200 = {
   customizedParams?: CustomizeSidebar;
 };
 
-export type UpdateFunctionCustomizeSetting200 = {
+export type PutCustomizeSettingFunction200 = {
   customizedParams?: CustomizeFunction;
 };
 
-export type UpdatePresentationCustomizeSetting200 = {
+export type PutCustomizeSettingPresentation200 = {
   customizedParams?: CustomizePresentation;
 };
 
-export type UpdateHighlightCustomizeSetting200 = {
+export type PutCustomizeSettingHighlight200 = {
   customizedParams?: CustomizeHighlightResponse;
 };
 
-export type UpdateCustomizeTitleCustomizeSetting200 = {
+export type PutCustomizeSettingCustomizeTitle200 = {
   customizedParams?: CustomizeTitle;
 };
 
-export type UpdateCustomizeNoscriptCustomizeSetting200 = {
+export type PutCustomizeSettingCustomizeNoscript200 = {
   customizedParams?: CustomizeNoscript;
 };
 
-export type UpdateCustomizeCssCustomizeSetting200 = {
+export type PutCustomizeSettingCustomizeCss200 = {
   customizedParams?: CustomizeCss;
 };
 
-export type UpdateCustomizeScriptCustomizeSetting200 = {
+export type PutCustomizeSettingCustomizeScript200 = {
   customizedParams?: CustomizeScript;
 };
 
-export type UpdateCustomizeLogoCustomizeSetting200 = {
+export type PutCustomizeSettingCustomizeLogo200 = {
   customizedParams?: CustomizeLogo;
 };
 
-export type UploadBrandLogoCustomizeSettingBody = {
+export type PutCustomizeSettingUploadBrandLogoBody = {
   file?: unknown;
 };
 
-export type UploadBrandLogoCustomizeSetting200AttachmentAllOf = {
+export type PutCustomizeSettingUploadBrandLogo200AttachmentAllOf = {
   creator?: string;
   page?: unknown;
   temporaryUrlExpiredAt?: unknown;
   temporaryUrlCached?: unknown;
 };
 
-export type UploadBrandLogoCustomizeSetting200Attachment = Attachment & UploadBrandLogoCustomizeSetting200AttachmentAllOf;
+export type PutCustomizeSettingUploadBrandLogo200Attachment = Attachment & PutCustomizeSettingUploadBrandLogo200AttachmentAllOf;
 
-export type UploadBrandLogoCustomizeSetting200 = {
-  attachment?: UploadBrandLogoCustomizeSetting200Attachment;
+export type PutCustomizeSettingUploadBrandLogo200 = {
+  attachment?: PutCustomizeSettingUploadBrandLogo200Attachment;
 };
 
 export type GetExportStatus200 = {
@@ -2130,16 +2163,16 @@ export type GetExportStatus200 = {
   status?: ExportStatus;
 };
 
-export type CreateExportBody = {
+export type PostExportBody = {
   collections?: string[];
 };
 
-export type CreateExport200 = {
+export type PostExport200 = {
   /** whether the request is succeeded */
   ok?: boolean;
 };
 
-export type DeleteExport200 = {
+export type DeleteExportFileName200 = {
   /** whether the request is succeeded */
   ok?: boolean;
 };
@@ -2298,7 +2331,7 @@ export type GetHealthcheck503 = {
 /**
  * import settings params
  */
-export type GetImportSettingsParams200ImportSettingsParams = {
+export type GetImport200ImportSettingsParams = {
   /** the team name of esa.io */
   esaTeamName?: string;
   /** the access token of esa.io */
@@ -2309,32 +2342,32 @@ export type GetImportSettingsParams200ImportSettingsParams = {
   qiitaAccessToken?: string;
 };
 
-export type GetImportSettingsParams200 = {
+export type GetImport200 = {
   /** import settings params */
-  importSettingsParams?: GetImportSettingsParams200ImportSettingsParams;
+  importSettingsParams?: GetImport200ImportSettingsParams;
 };
 
 /**
  * the array of importing option that have collection name as the key
 
  */
-export type ExecuteImportBodyOptions = { [key: string]: GrowiArchiveImportOption[] };
+export type PostImportBodyOptions = { [key: string]: GrowiArchiveImportOption[] };
 
-export type ExecuteImportBody = {
+export type PostImportBody = {
   /** the file name of zip file */
   fileName?: string;
   /** collection names to import */
   collections?: string[];
   /** the array of importing option that have collection name as the key
    */
-  options?: ExecuteImportBodyOptions;
+  options?: PostImportBodyOptions;
 };
 
 export type GetImportStatus200 = {
   status?: ImportStatus;
 };
 
-export type UploadImportBody = {
+export type PostImportUploadBody = {
   file?: unknown;
 };
 
@@ -2358,14 +2391,14 @@ export type GetInAppNotificationStatus200 = {
   count?: number;
 };
 
-export type OpenInAppNotificationBody = {
+export type PostInAppNotificationOpenBody = {
   /** Notification ID */
   id: string;
 };
 
-export type OpenInAppNotification200 = { [key: string]: unknown };
+export type PostInAppNotificationOpen200 = { [key: string]: unknown };
 
-export type InstallBodyRegisterForm = {
+export type PostInstallerBodyRegisterForm = {
   name?: string;
   username?: string;
   email?: string;
@@ -2373,15 +2406,15 @@ export type InstallBodyRegisterForm = {
   'app:globalLang'?: string;
 };
 
-export type InstallBody = {
-  registerForm?: InstallBodyRegisterForm;
+export type PostInstallerBody = {
+  registerForm?: PostInstallerBodyRegisterForm;
 };
 
-export type Install200 = {
+export type PostInstaller200 = {
   message?: string;
 };
 
-export type ActivateInvitedUserBodyInvitedForm = {
+export type PostInvitedBodyInvitedForm = {
   /** The username of the invited user. */
   username?: string;
   /** The name of the invited user. */
@@ -2390,11 +2423,11 @@ export type ActivateInvitedUserBodyInvitedForm = {
   password?: string;
 };
 
-export type ActivateInvitedUserBody = {
-  invitedForm?: ActivateInvitedUserBodyInvitedForm;
+export type PostInvitedBody = {
+  invitedForm?: PostInvitedBodyInvitedForm;
 };
 
-export type ActivateInvitedUser200 = {
+export type PostInvited200 = {
   /** URL to redirect after successful activation. */
   redirectTo?: string;
 };
@@ -2404,11 +2437,11 @@ export type GetMarkdownSetting200 = {
   markdownParams?: MarkdownParams;
 };
 
-export type UpdateLineBreakMarkdownSetting200 = {
+export type PutMarkdownSettingLineBreak200 = {
   lineBreaksParams?: LineBreakParams;
 };
 
-export type UpdateIndentMarkdownSetting200 = {
+export type PutMarkdownSettingIndent200 = {
   /** indent params */
   indentParams?: IndentParams;
 };
@@ -2536,38 +2569,38 @@ export type GetPageParams = {
   /**
    * page id
    */
-  pageId?: _Id;
+  pageId?: ObjectId;
   /**
    * page path
    */
-  path?: Path;
+  path?: PagePath;
 };
 
-export type CreatePageBody = {
+export type PostPageBody = {
   /** Text of page */
   body: string;
-  path: Path;
-  grant?: Grant;
+  path: PagePath;
+  grant?: PageGrant;
   /** UserGroup ID */
   grantUserGroupIds?: string;
   pageTags?: string[];
 };
 
-export type CreatePage201Data = {
+export type PostPage201Data = {
   page?: Page;
   tags?: Tags[];
   revision?: Revision;
 };
 
-export type CreatePage201 = {
-  data?: CreatePage201Data;
+export type PostPage201 = {
+  data?: PostPage201Data;
 };
 
-export type UpdatePageBody = {
-  body: Body;
-  pageId: _Id;
-  revisionId: _Id;
-  grant?: Grant;
+export type PutPageBody = {
+  body: RevisionBody;
+  pageId: ObjectId;
+  revisionId: ObjectId;
+  grant?: PageGrant;
   userRelatedGrantUserGroupIds?: string[];
   /** Determine whether the scopes of descendants should be overwritten */
   overwriteScopesOfDescendants?: boolean;
@@ -2581,13 +2614,13 @@ export type UpdatePageBody = {
   wip?: boolean;
 };
 
-export type UpdatePage200Data = {
+export type PutPage200Data = {
   page?: Page;
   revision?: Revision;
 };
 
-export type UpdatePage200 = {
-  data?: UpdatePage200Data;
+export type PutPage200 = {
+  data?: PutPage200Data;
 };
 
 export type GetPageExistParams = {
@@ -2605,7 +2638,7 @@ export type GetPageGrantDataParams = {
   /**
    * page id
    */
-  pageId?: _Id;
+  pageId?: ObjectId;
 };
 
 export type GetPageGrantData200 = {
@@ -2643,7 +2676,7 @@ export type PutPageIdGrantBody = {
   userRelatedGrantedGroups?: string[];
 };
 
-export type GetAlreadyExistPathsParams = {
+export type GetPageExistPathsParams = {
   /**
    * old parent path
    */
@@ -2657,15 +2690,15 @@ export type GetAlreadyExistPathsParams = {
 /**
  * Paths are already exist in DB
  */
-export type GetAlreadyExistPaths200ExistPaths = { [key: string]: unknown };
+export type GetPageExistPaths200ExistPaths = { [key: string]: unknown };
 
-export type GetAlreadyExistPaths200 = {
+export type GetPageExistPaths200 = {
   /** Paths are already exist in DB */
-  existPaths?: GetAlreadyExistPaths200ExistPaths;
+  existPaths?: GetPageExistPaths200ExistPaths;
 };
 
-export type UpdateSubscriptionStatusBody = {
-  pageId?: _Id;
+export type PutPageSubscribeBody = {
+  pageId?: ObjectId;
 };
 
 export type PutPageIdContentWidthBody = {
@@ -2719,9 +2752,9 @@ export type GetPagesRecentParams = {
   includeWipPage?: string;
 };
 
-export type RenamePageBody = {
-  pageId: _Id;
-  path?: Path;
+export type PostPagesRenameBody = {
+  pageId: ObjectId;
+  path?: PagePath;
   /** revision ID */
   revisionId: string;
   /** new path */
@@ -2734,21 +2767,21 @@ export type RenamePageBody = {
   isRecursively?: boolean;
 };
 
-export type RenamePage200 = {
+export type PostPagesRename200 = {
   page?: Page;
 };
 
-export type ResumeRenamePageBody = {
-  pageId: _Id;
+export type PostPagesResumeRenameBody = {
+  pageId: ObjectId;
 };
 
-export type ResumeRenamePage200 = { [key: string]: unknown };
+export type PostPagesResumeRename200 = { [key: string]: unknown };
 
 export type DeletePagesEmptyTrash200 = {
   deletablePages?: Page[];
 };
 
-export type GetListParams = {
+export type GetPagesListParams = {
   /**
    * Path to search
    */
@@ -2763,36 +2796,36 @@ export type GetListParams = {
   page?: number;
 };
 
-export type GetList200PagesItemAllOf = {
+export type GetPagesList200PagesItemAllOf = {
   lastUpdateUser?: User;
 };
 
-export type GetList200PagesItem = Page & GetList200PagesItemAllOf;
+export type GetPagesList200PagesItem = Page & GetPagesList200PagesItemAllOf;
 
-export type GetList200 = {
+export type GetPagesList200 = {
   /** Total count of pages */
   totalCount?: number;
   /** Offset of pages */
   offset?: number;
   /** Limit of pages */
   limit?: number;
-  pages?: GetList200PagesItem[];
+  pages?: GetPagesList200PagesItem[];
 };
 
-export type DuplicatePageBody = {
-  pageId: _Id;
-  pageNameInput?: Path;
+export type PostPagesDuplicateBody = {
+  pageId: ObjectId;
+  pageNameInput?: PagePath;
   /** whether duplicate page with descendants */
   isRecursively?: boolean;
   /** whether duplicate only user related resources */
   onlyDuplicateUserRelatedResources?: boolean;
 };
 
-export type DuplicatePage200 = {
+export type PostPagesDuplicate200 = {
   page?: Page;
 };
 
-export type SubordinatedListParams = {
+export type GetPagesSubordinatedListParams = {
   /**
    * Parent path of search
    */
@@ -2803,18 +2836,18 @@ export type SubordinatedListParams = {
   limit?: number;
 };
 
-export type SubordinatedList200 = {
+export type GetPagesSubordinatedList200 = {
   subordinatedPages?: Page[];
 };
 
 /**
  * Map of page IDs to revision IDs
  */
-export type DeletePagesBodyPageIdToRevisionIdMap = { [key: string]: unknown };
+export type PostPagesDeleteBodyPageIdToRevisionIdMap = { [key: string]: unknown };
 
-export type DeletePagesBody = {
+export type PostPagesDeleteBody = {
   /** Map of page IDs to revision IDs */
-  pageIdToRevisionIdMap?: DeletePagesBodyPageIdToRevisionIdMap;
+  pageIdToRevisionIdMap?: PostPagesDeleteBodyPageIdToRevisionIdMap;
   /** Whether to delete pages completely */
   isCompletely?: boolean;
   /** Whether to delete pages recursively */
@@ -2823,7 +2856,7 @@ export type DeletePagesBody = {
   isAnyoneWithTheLink?: boolean;
 };
 
-export type DeletePages200 = {
+export type PostPagesDelete200 = {
   /** List of deleted page paths */
   paths?: string[];
   /** Whether pages were deleted recursively */
@@ -2832,7 +2865,7 @@ export type DeletePages200 = {
   isCompletely?: boolean;
 };
 
-export type ConvertPagesByPathBody = {
+export type PostPagesConvertPagesByPathBody = {
   /** Path to convert */
   convertPath?: string;
 };
@@ -2840,9 +2873,9 @@ export type ConvertPagesByPathBody = {
 /**
  * Empty object
  */
-export type ConvertPagesByPath200 = { [key: string]: unknown };
+export type PostPagesConvertPagesByPath200 = { [key: string]: unknown };
 
-export type LegacyPagesMigrationBody = {
+export type PostPagesLegacyPagesMigrationBody = {
   /** List of page IDs to migrate */
   pageIds?: string[];
   /** Whether to migrate pages recursively */
@@ -2852,7 +2885,7 @@ export type LegacyPagesMigrationBody = {
 /**
  * Empty object
  */
-export type LegacyPagesMigration200 = { [key: string]: unknown };
+export type PostPagesLegacyPagesMigration200 = { [key: string]: unknown };
 
 export type GetPagesV5MigrationStatus200 = {
   /** Whether the app is V5 compatible */
@@ -2874,45 +2907,45 @@ export type GetPersonalSetting200 = {
 /**
  * personal params
  */
-export type UpdatePersonalSetting200UpdatedUser = { [key: string]: unknown };
+export type PutPersonalSetting200UpdatedUser = { [key: string]: unknown };
 
-export type UpdatePersonalSetting200 = {
+export type PutPersonalSetting200 = {
   /** personal params */
-  updatedUser?: UpdatePersonalSetting200UpdatedUser;
+  updatedUser?: PutPersonalSetting200UpdatedUser;
 };
 
-export type GetIsPasswordSet200 = {
+export type GetPersonalSettingIsPasswordSet200 = {
   /** Whether a password has been set */
   isPasswordSet?: boolean;
   /** Minimum password length */
   minPasswordLength?: number;
 };
 
-export type PutUserImageTypeBody = {
+export type PutPersonalSettingImageTypeBody = {
   isGravatarEnabled?: boolean;
 };
 
 /**
  * user data
  */
-export type PutUserImageType200UserData = { [key: string]: unknown };
+export type PutPersonalSettingImageType200UserData = { [key: string]: unknown };
 
-export type PutUserImageType200 = {
+export type PutPersonalSettingImageType200 = {
   /** user data */
-  userData?: PutUserImageType200UserData;
+  userData?: PutPersonalSettingImageType200UserData;
 };
 
 /**
  * array of external accounts
  */
-export type GetExternalAccounts200ExternalAccounts = { [key: string]: unknown };
+export type GetPersonalSettingExternalAccounts200ExternalAccounts = { [key: string]: unknown };
 
-export type GetExternalAccounts200 = {
+export type GetPersonalSettingExternalAccounts200 = {
   /** array of external accounts */
-  externalAccounts?: GetExternalAccounts200ExternalAccounts;
+  externalAccounts?: GetPersonalSettingExternalAccounts200ExternalAccounts;
 };
 
-export type PutUserPasswordBody = {
+export type PutPersonalSettingPasswordBody = {
   oldPassword?: string;
   newPassword?: string;
 };
@@ -2920,48 +2953,48 @@ export type PutUserPasswordBody = {
 /**
  * user data updated
  */
-export type PutUserPassword200UserData = { [key: string]: unknown };
+export type PutPersonalSettingPassword200UserData = { [key: string]: unknown };
 
-export type PutUserPassword200 = {
+export type PutPersonalSettingPassword200 = {
   /** user data updated */
-  userData?: PutUserPassword200UserData;
+  userData?: PutPersonalSettingPassword200UserData;
 };
 
 /**
  * user data
  */
-export type PutUserApiToken200UserData = { [key: string]: unknown };
+export type PutPersonalSettingApiToken200UserData = { [key: string]: unknown };
 
-export type PutUserApiToken200 = {
+export type PutPersonalSettingApiToken200 = {
   /** user data */
-  userData?: PutUserApiToken200UserData;
+  userData?: PutPersonalSettingApiToken200UserData;
 };
 
-export type AssociateLdapAccountBody = {
+export type PutPersonalSettingAssociateLdapBody = {
   username?: string;
 };
 
 /**
  * Ldap account associate to me
  */
-export type AssociateLdapAccount200AssociateUser = { [key: string]: unknown };
+export type PutPersonalSettingAssociateLdap200AssociateUser = { [key: string]: unknown };
 
-export type AssociateLdapAccount200 = {
+export type PutPersonalSettingAssociateLdap200 = {
   /** Ldap account associate to me */
-  associateUser?: AssociateLdapAccount200AssociateUser;
+  associateUser?: PutPersonalSettingAssociateLdap200AssociateUser;
 };
 
 /**
  * Ldap account disassociate to me
  */
-export type DisassociateLdapAccount200DisassociateUser = { [key: string]: unknown };
+export type PutPersonalSettingDisassociateLdap200DisassociateUser = { [key: string]: unknown };
 
-export type DisassociateLdapAccount200 = {
+export type PutPersonalSettingDisassociateLdap200 = {
   /** Ldap account disassociate to me */
-  disassociateUser?: DisassociateLdapAccount200DisassociateUser;
+  disassociateUser?: PutPersonalSettingDisassociateLdap200DisassociateUser;
 };
 
-export type PutEditorSettingsBody = {
+export type PutPersonalSettingEditorSettingsBody = {
   theme?: string;
   keymapMode?: string;
   styleActiveLine?: boolean;
@@ -2971,39 +3004,39 @@ export type PutEditorSettingsBody = {
 /**
  * editor settings
  */
-export type PutEditorSettings200 = { [key: string]: unknown };
+export type PutPersonalSettingEditorSettings200 = { [key: string]: unknown };
 
 /**
  * editor settings
  */
-export type GetEditorSettings200 = { [key: string]: unknown };
+export type GetPersonalSettingEditorSettings200 = { [key: string]: unknown };
 
-export type PutInAppNotificationSettingsBodySubscribeRulesItem = {
+export type PutPersonalSettingInAppNotificationSettingsBodySubscribeRulesItem = {
   name?: string;
   isEnabled?: boolean;
 };
 
-export type PutInAppNotificationSettingsBody = {
-  subscribeRules?: PutInAppNotificationSettingsBodySubscribeRulesItem[];
+export type PutPersonalSettingInAppNotificationSettingsBody = {
+  subscribeRules?: PutPersonalSettingInAppNotificationSettingsBodySubscribeRulesItem[];
 };
 
-export type PutInAppNotificationSettings200 = { [key: string]: unknown };
+export type PutPersonalSettingInAppNotificationSettings200 = { [key: string]: unknown };
 
 /**
  * InAppNotificationSettings
  */
-export type GetInAppNotificationSettings200CurrentUser = { [key: string]: unknown };
+export type GetPersonalSettingInAppNotificationSettings200CurrentUser = { [key: string]: unknown };
 
-export type GetInAppNotificationSettings200 = {
+export type GetPersonalSettingInAppNotificationSettings200 = {
   /** InAppNotificationSettings */
-  currentUser?: GetInAppNotificationSettings200CurrentUser;
+  currentUser?: GetPersonalSettingInAppNotificationSettings200CurrentUser;
 };
 
-export type PutQuestionnaireSettingBody = {
+export type PutPersonalSettingQuestionnaireSettingsBody = {
   isQuestionnaireEnabled?: boolean;
 };
 
-export type PutQuestionnaireSetting200 = {
+export type PutPersonalSettingQuestionnaireSettings200 = {
   message?: string;
   isQuestionnaireEnabled?: boolean;
 };
@@ -3206,92 +3239,92 @@ export type PutSlackIntegrationLegacySetting200 = {
   responseParams?: SlackConfigurationParams;
 };
 
-export type GetSlackBotSettingParams200SettingsCommandPermission = { [key: string]: unknown };
+export type GetSlackIntegrationSettings200SettingsCommandPermission = { [key: string]: unknown };
 
-export type GetSlackBotSettingParams200SettingsEventActionsPermission = { [key: string]: unknown };
+export type GetSlackIntegrationSettings200SettingsEventActionsPermission = { [key: string]: unknown };
 
-export type GetSlackBotSettingParams200Settings = {
+export type GetSlackIntegrationSettings200Settings = {
   slackSigningSecretEnvVars?: string;
   slackBotTokenEnvVars?: string;
   slackSigningSecret?: string;
   slackBotToken?: string;
-  commandPermission?: GetSlackBotSettingParams200SettingsCommandPermission;
-  eventActionsPermission?: GetSlackBotSettingParams200SettingsEventActionsPermission;
+  commandPermission?: GetSlackIntegrationSettings200SettingsCommandPermission;
+  eventActionsPermission?: GetSlackIntegrationSettings200SettingsEventActionsPermission;
   proxyServerUri?: string;
 };
 
-export type GetSlackBotSettingParams200ConnectionStatuses = { [key: string]: unknown };
+export type GetSlackIntegrationSettings200ConnectionStatuses = { [key: string]: unknown };
 
-export type GetSlackBotSettingParams200 = {
+export type GetSlackIntegrationSettings200 = {
   currentBotType?: string;
-  settings?: GetSlackBotSettingParams200Settings;
-  connectionStatuses?: GetSlackBotSettingParams200ConnectionStatuses;
+  settings?: GetSlackIntegrationSettings200Settings;
+  connectionStatuses?: GetSlackIntegrationSettings200ConnectionStatuses;
   errorMsg?: string;
   errorCode?: string;
 };
 
-export type PutWithoutProxySettingsBody = {
+export type PutSlackIntegrationSettingsWithoutProxyUpdateSettingsBody = {
   slackSigningSecret?: string;
   slackBotToken?: string;
 };
 
-export type PutWithoutProxyPermissionsBodyCommandPermission = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsBodyCommandPermission = { [key: string]: unknown };
 
-export type PutWithoutProxyPermissionsBodyEventActionsPermission = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsBodyEventActionsPermission = { [key: string]: unknown };
 
-export type PutWithoutProxyPermissionsBody = {
-  commandPermission?: PutWithoutProxyPermissionsBodyCommandPermission;
-  eventActionsPermission?: PutWithoutProxyPermissionsBodyEventActionsPermission;
+export type PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsBody = {
+  commandPermission?: PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsBodyCommandPermission;
+  eventActionsPermission?: PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsBodyEventActionsPermission;
 };
 
-export type PutSlackAppIntegrations200PermissionsForBroadcastUseCommands = { [key: string]: unknown };
+export type PostSlackIntegrationSettingsSlackAppIntegrations200PermissionsForBroadcastUseCommands = { [key: string]: unknown };
 
-export type PutSlackAppIntegrations200PermissionsForSingleUseCommands = { [key: string]: unknown };
+export type PostSlackIntegrationSettingsSlackAppIntegrations200PermissionsForSingleUseCommands = { [key: string]: unknown };
 
-export type PutSlackAppIntegrations200PermissionsForSlackEvents = { [key: string]: unknown };
+export type PostSlackIntegrationSettingsSlackAppIntegrations200PermissionsForSlackEvents = { [key: string]: unknown };
 
-export type PutSlackAppIntegrations200 = {
+export type PostSlackIntegrationSettingsSlackAppIntegrations200 = {
   tokenGtoP?: string;
   tokenPtoG?: string;
-  permissionsForBroadcastUseCommands?: PutSlackAppIntegrations200PermissionsForBroadcastUseCommands;
-  permissionsForSingleUseCommands?: PutSlackAppIntegrations200PermissionsForSingleUseCommands;
-  permissionsForSlackEvents?: PutSlackAppIntegrations200PermissionsForSlackEvents;
+  permissionsForBroadcastUseCommands?: PostSlackIntegrationSettingsSlackAppIntegrations200PermissionsForBroadcastUseCommands;
+  permissionsForSingleUseCommands?: PostSlackIntegrationSettingsSlackAppIntegrations200PermissionsForSingleUseCommands;
+  permissionsForSlackEvents?: PostSlackIntegrationSettingsSlackAppIntegrations200PermissionsForSlackEvents;
   isPrimary?: boolean;
 };
 
-export type DeleteAccessTokens200Response = { [key: string]: unknown };
+export type DeleteSlackIntegrationSettingsSlackAppIntegrationsId200Response = { [key: string]: unknown };
 
-export type DeleteAccessTokens200 = {
-  response?: DeleteAccessTokens200Response;
+export type DeleteSlackIntegrationSettingsSlackAppIntegrationsId200 = {
+  response?: DeleteSlackIntegrationSettingsSlackAppIntegrationsId200Response;
 };
 
-export type PutProxyUriBody = {
+export type PutSlackIntegrationSettingsProxyUriBody = {
   proxyUri?: string;
 };
 
-export type PutProxyUri200 = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsProxyUri200 = { [key: string]: unknown };
 
-export type PutRegenerateTokens200 = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsSlackAppIntegrationsIdRegenerateTokens200 = { [key: string]: unknown };
 
-export type PutSupportedCommandsBodyPermissionsForBroadcastUseCommands = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBodyPermissionsForBroadcastUseCommands = { [key: string]: unknown };
 
-export type PutSupportedCommandsBodyPermissionsForSingleUseCommands = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBodyPermissionsForSingleUseCommands = { [key: string]: unknown };
 
-export type PutSupportedCommandsBodyPermissionsForSlackEventActions = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBodyPermissionsForSlackEventActions = { [key: string]: unknown };
 
-export type PutSupportedCommandsBody = {
-  permissionsForBroadcastUseCommands?: PutSupportedCommandsBodyPermissionsForBroadcastUseCommands;
-  permissionsForSingleUseCommands?: PutSupportedCommandsBodyPermissionsForSingleUseCommands;
-  permissionsForSlackEventActions?: PutSupportedCommandsBodyPermissionsForSlackEventActions;
+export type PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBody = {
+  permissionsForBroadcastUseCommands?: PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBodyPermissionsForBroadcastUseCommands;
+  permissionsForSingleUseCommands?: PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBodyPermissionsForSingleUseCommands;
+  permissionsForSlackEventActions?: PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBodyPermissionsForSlackEventActions;
 };
 
-export type PutSupportedCommands200 = { [key: string]: unknown };
+export type PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissions200 = { [key: string]: unknown };
 
-export type PostRelationTestBody = {
+export type PostSlackIntegrationSettingsSlackAppIntegrationsIdRelationTestBody = {
   channel?: string;
 };
 
-export type PostTestBody = {
+export type PostSlackIntegrationSettingsWithoutProxyTestBody = {
   channel?: string;
 };
 
@@ -3340,7 +3373,7 @@ export type PostSlackIntegrationProxiedEventsBody = {
 
 export type PostSlackIntegrationProxiedEvents200 = { [key: string]: unknown };
 
-export type CompleteRegistrationBodyRegisterForm = {
+export type PostCompleteRegistrationBodyRegisterForm = {
   username?: string;
   name?: string;
   password?: string;
@@ -3348,32 +3381,32 @@ export type CompleteRegistrationBodyRegisterForm = {
   email?: string;
 };
 
-export type CompleteRegistrationBody = {
-  registerForm?: CompleteRegistrationBodyRegisterForm;
+export type PostCompleteRegistrationBody = {
+  registerForm?: PostCompleteRegistrationBodyRegisterForm;
 };
 
-export type CompleteRegistration200 = {
+export type PostCompleteRegistration200 = {
   redirectTo?: string;
 };
 
-export type ListUserGroupRelations200UserGroupRelationsUserGroupRelationsItem = { [key: string]: unknown };
+export type GetUserGroupRelations200UserGroupRelationsUserGroupRelationsItem = { [key: string]: unknown };
 
-export type ListUserGroupRelations200UserGroupRelationsRelationsOfChildGroupsItem = { [key: string]: unknown };
+export type GetUserGroupRelations200UserGroupRelationsRelationsOfChildGroupsItem = { [key: string]: unknown };
 
 /**
  * contains arrays user objects related
  */
-export type ListUserGroupRelations200UserGroupRelations = {
-  userGroupRelations?: ListUserGroupRelations200UserGroupRelationsUserGroupRelationsItem[];
-  relationsOfChildGroups?: ListUserGroupRelations200UserGroupRelationsRelationsOfChildGroupsItem[];
+export type GetUserGroupRelations200UserGroupRelations = {
+  userGroupRelations?: GetUserGroupRelations200UserGroupRelationsUserGroupRelationsItem[];
+  relationsOfChildGroups?: GetUserGroupRelations200UserGroupRelationsRelationsOfChildGroupsItem[];
 };
 
-export type ListUserGroupRelations200 = {
+export type GetUserGroupRelations200 = {
   /** contains arrays user objects related */
-  userGroupRelations?: ListUserGroupRelations200UserGroupRelations;
+  userGroupRelations?: GetUserGroupRelations200UserGroupRelations;
 };
 
-export type GetUserGroupParams = {
+export type GetUserGroupsParams = {
   /**
    * page number
    */
@@ -3395,18 +3428,18 @@ export type GetUserGroupParams = {
 /**
  * a result of `UserGroup.find`
  */
-export type GetUserGroup200UserGroups = { [key: string]: unknown };
+export type GetUserGroups200UserGroups = { [key: string]: unknown };
 
-export type GetUserGroup200 = {
+export type GetUserGroups200 = {
   /** a result of `UserGroup.find` */
-  userGroups?: GetUserGroup200UserGroups;
+  userGroups?: GetUserGroups200UserGroups;
   /** the number of userGroups */
   totalUserGroups?: number;
   /** the number of items per page */
   pagingLimit?: number;
 };
 
-export type CreateUserGroupBody = {
+export type PostUserGroupsBody = {
   /** name of the userGroup trying to be added */
   name?: string;
   /** description of the userGroup trying to be added */
@@ -3418,28 +3451,28 @@ export type CreateUserGroupBody = {
 /**
  * A result of `UserGroup.createGroupByName`
  */
-export type CreateUserGroup200UserGroup = { [key: string]: unknown };
+export type PostUserGroups200UserGroup = { [key: string]: unknown };
 
-export type CreateUserGroup200 = {
+export type PostUserGroups200 = {
   /** A result of `UserGroup.createGroupByName` */
-  userGroup?: CreateUserGroup200UserGroup;
+  userGroup?: PostUserGroups200UserGroup;
 };
 
-export type GetAncestorUserGroupsParams = {
+export type GetUserGroupsAncestorsParams = {
   /**
    * id of userGroup
    */
   groupId: string;
 };
 
-export type GetAncestorUserGroups200AncestorUserGroupsItem = { [key: string]: unknown };
+export type GetUserGroupsAncestors200AncestorUserGroupsItem = { [key: string]: unknown };
 
-export type GetAncestorUserGroups200 = {
+export type GetUserGroupsAncestors200 = {
   /** userGroup objects */
-  ancestorUserGroups?: GetAncestorUserGroups200AncestorUserGroupsItem[];
+  ancestorUserGroups?: GetUserGroupsAncestors200AncestorUserGroupsItem[];
 };
 
-export type GetUserGroupChildrenParams = {
+export type GetUserGroupsChildrenParams = {
   /**
    * IDs of parent user groups
    */
@@ -3450,15 +3483,15 @@ export type GetUserGroupChildrenParams = {
   includeGrandChildren?: boolean;
 };
 
-export type GetUserGroupChildren200ChildUserGroupsItem = { [key: string]: unknown };
+export type GetUserGroupsChildren200ChildUserGroupsItem = { [key: string]: unknown };
 
-export type GetUserGroupChildren200GrandChildUserGroupsItem = { [key: string]: unknown };
+export type GetUserGroupsChildren200GrandChildUserGroupsItem = { [key: string]: unknown };
 
-export type GetUserGroupChildren200 = {
+export type GetUserGroupsChildren200 = {
   /** Child user group objects */
-  childUserGroups?: GetUserGroupChildren200ChildUserGroupsItem[];
+  childUserGroups?: GetUserGroupsChildren200ChildUserGroupsItem[];
   /** Grandchild user group objects */
-  grandChildUserGroups?: GetUserGroupChildren200GrandChildUserGroupsItem[];
+  grandChildUserGroups?: GetUserGroupsChildren200GrandChildUserGroupsItem[];
 };
 
 export type GetSelectableParentGroupsParams = {
@@ -3492,14 +3525,14 @@ export type GetSelectableChildGroups200 = {
 /**
  * userGroup object
  */
-export type GetUserGroupFromGroupId200UserGroup = { [key: string]: unknown };
+export type GetUserGroupsId200UserGroup = { [key: string]: unknown };
 
-export type GetUserGroupFromGroupId200 = {
+export type GetUserGroupsId200 = {
   /** userGroup object */
-  userGroup?: GetUserGroupFromGroupId200UserGroup;
+  userGroup?: GetUserGroupsId200UserGroup;
 };
 
-export type DeleteUserGroupParams = {
+export type DeleteUserGroupsIdParams = {
   /**
    * name of action
    */
@@ -3517,14 +3550,14 @@ export type DeleteUserGroupParams = {
 /**
  * A result of `UserGroup.removeCompletelyById`
  */
-export type DeleteUserGroup200UserGroups = { [key: string]: unknown };
+export type DeleteUserGroupsId200UserGroups = { [key: string]: unknown };
 
-export type DeleteUserGroup200 = {
+export type DeleteUserGroupsId200 = {
   /** A result of `UserGroup.removeCompletelyById` */
-  userGroups?: DeleteUserGroup200UserGroups;
+  userGroups?: DeleteUserGroupsId200UserGroups;
 };
 
-export type UpdateUserGroupsBody = {
+export type PutUserGroupsIdBody = {
   /** name of the userGroup trying to be updated */
   name?: string;
   /** description of the userGroup trying to be updated */
@@ -3538,19 +3571,19 @@ export type UpdateUserGroupsBody = {
 /**
  * A result of `UserGroup.updateName`
  */
-export type UpdateUserGroups200UserGroup = { [key: string]: unknown };
+export type PutUserGroupsId200UserGroup = { [key: string]: unknown };
 
-export type UpdateUserGroups200 = {
+export type PutUserGroupsId200 = {
   /** A result of `UserGroup.updateName` */
-  userGroup?: UpdateUserGroups200UserGroup;
+  userGroup?: PutUserGroupsId200UserGroup;
 };
 
-export type GetUsersUserGroups200 = {
+export type GetUserGroupsIdUsers200 = {
   /** user objects */
   users?: User[];
 };
 
-export type GetUnrelatedUsersUserGroupsParams = {
+export type GetUserGroupsIdUnrelatedUsersParams = {
   /**
    * search word
    */
@@ -3569,37 +3602,37 @@ export type GetUnrelatedUsersUserGroupsParams = {
   isAlsoMailSearched?: boolean;
 };
 
-export type GetUnrelatedUsersUserGroups200 = {
+export type GetUserGroupsIdUnrelatedUsers200 = {
   /** user objects */
   users?: User[];
 };
 
-export type AddUserUserGroups200 = {
+export type PostUserGroupsIdUsersUsername200 = {
   /** the user added to the group */
   user?: User;
   /** the number of relations created */
   createdRelationCount?: number;
 };
 
-export type DeleteUsersUserGroups200 = {
+export type DeleteUserGroupsIdUsersUsername200 = {
   /** the user removed from the group */
   user?: User;
   /** the number of groups from which the user was removed */
   deletedGroupsCount?: number;
 };
 
-export type GetUserGroupRelationsUserGroups200UserGroupRelationsItem = { [key: string]: unknown };
+export type GetUserGroupsIdUserGroupRelations200UserGroupRelationsItem = { [key: string]: unknown };
 
-export type GetUserGroupRelationsUserGroups200 = {
+export type GetUserGroupsIdUserGroupRelations200 = {
   /** userGroupRelation objects */
-  userGroupRelations?: GetUserGroupRelationsUserGroups200UserGroupRelationsItem[];
+  userGroupRelations?: GetUserGroupsIdUserGroupRelations200UserGroupRelationsItem[];
 };
 
-export type GetPagesUserGroups200PagesItem = { [key: string]: unknown };
+export type GetUserGroupsIdPages200PagesItem = { [key: string]: unknown };
 
-export type GetPagesUserGroups200 = {
+export type GetUserGroupsIdPages200 = {
   /** page objects */
-  pages?: GetPagesUserGroups200PagesItem[];
+  pages?: GetUserGroupsIdPages200PagesItem[];
 };
 
 export type PutUserUiSettingsBodySettings = {
@@ -3620,7 +3653,7 @@ export type PutUserUiSettings200 = {
   preferCollapsedModeByUser?: boolean;
 };
 
-export type ListUsersParams = {
+export type GetUsersParams = {
   /**
    * page number
    */
@@ -3647,15 +3680,15 @@ export type ListUsersParams = {
   forceIncludeAttributes?: string;
 };
 
-export type ListUsers200 = {
+export type GetUsers200 = {
   paginateResult?: PaginateResult;
 };
 
-export type RecentCreatedPageOfUserId200 = {
+export type GetIdRecent200 = {
   paginateResult?: PaginateResult;
 };
 
-export type InviteUserParams = {
+export type PostUsersInviteParams = {
   /**
    * Invitation emailList
    */
@@ -3669,23 +3702,23 @@ export type InviteUserParams = {
 /**
  * Users email that failed to create or send email
  */
-export type InviteUser200FailedEmailList = {
+export type PostUsersInvite200FailedEmailList = {
   /** email address */
   email?: string;
   /** reason for failure */
   reason?: string;
 };
 
-export type InviteUser200 = {
+export type PostUsersInvite200 = {
   /** Users successfully created */
   createdUserList?: User;
   /** Users email that already exists */
   existingEmailList?: string[];
   /** Users email that failed to create or send email */
-  failedEmailList?: InviteUser200FailedEmailList;
+  failedEmailList?: PostUsersInvite200FailedEmailList;
 };
 
-export type GrantAdminUser200 = {
+export type PutUsersIdGrantAdmin200 = {
   /** data of admin user */
   userData?: User;
 };
@@ -3693,60 +3726,60 @@ export type GrantAdminUser200 = {
 /**
  * data of revoked admin user
  */
-export type RevokeAdminUser200UserData = { [key: string]: unknown };
+export type PutUsersIdRevokeAdmin200UserData = { [key: string]: unknown };
 
-export type RevokeAdminUser200 = {
+export type PutUsersIdRevokeAdmin200 = {
   /** data of revoked admin user */
-  userData?: RevokeAdminUser200UserData;
+  userData?: PutUsersIdRevokeAdmin200UserData;
 };
 
-export type ReadOnly200 = {
+export type PutUsersIdGrantReadOnly200 = {
   /** data of grant read only */
   userData?: User;
 };
 
-export type RevokeReadOnly200 = {
+export type PutUsersIdRevokeReadOnly200 = {
   /** data of revoke read only */
   userData?: User;
 };
 
-export type ActivateUser200 = {
+export type PutUsersIdActivate200 = {
   /** data of activate user */
   userData?: User;
 };
 
-export type DeactivateUser200 = {
+export type PutUsersIdDeactivate200 = {
   /** data of deactivate user */
   userData?: User;
 };
 
-export type RemoveUser200 = {
+export type DeleteUsersIdRemove200 = {
   /** data of deleted user */
   user?: User;
 };
 
-export type ListExternalAccountsUsersParams = {
+export type GetUsersExternalAccountsParams = {
   /**
    * page number
    */
   page?: number;
 };
 
-export type ListExternalAccountsUsers200 = {
+export type GetUsersExternalAccounts200 = {
   paginateResult?: PaginateResult;
 };
 
 /**
  * A result of `ExtenralAccount.findByIdAndRemove`
  */
-export type RemoveExternalAccountUser200ExternalAccount = { [key: string]: unknown };
+export type DeleteUsersExternalAccountsIdRemove200ExternalAccount = { [key: string]: unknown };
 
-export type RemoveExternalAccountUser200 = {
+export type DeleteUsersExternalAccountsIdRemove200 = {
   /** A result of `ExtenralAccount.findByIdAndRemove` */
-  externalAccount?: RemoveExternalAccountUser200ExternalAccount;
+  externalAccount?: DeleteUsersExternalAccountsIdRemove200ExternalAccount;
 };
 
-export type UpdateImageUrlCacheBody = {
+export type PutUsersUpdateImageUrlCacheBody = {
   /** user id list */
   userIds?: string[];
 };
@@ -3754,26 +3787,26 @@ export type UpdateImageUrlCacheBody = {
 /**
  * success creating imageUrlCached
  */
-export type UpdateImageUrlCache200 = { [key: string]: unknown };
+export type PutUsersUpdateImageUrlCache200 = { [key: string]: unknown };
 
-export type ResetPasswordBody = {
+export type PutUsersResetPasswordBody = {
   /** user id for reset password */
   id?: string;
 };
 
-export type ResetPassword200 = {
+export type PutUsersResetPassword200 = {
   /** new password */
   newPassword?: string;
   user?: User;
 };
 
-export type ResetPasswordEmailBody = {
+export type PutUsersResetPasswordEmailBody = {
   /** user id for send new password email */
   id?: string;
   newPassword?: string;
 };
 
-export type SendInvitationEmailBody = {
+export type PutUsersSendInvitationEmailBody = {
   /** user id for send invitation email */
   id?: string;
 };
@@ -3781,14 +3814,14 @@ export type SendInvitationEmailBody = {
 /**
  * email and reasons for email sending failure
  */
-export type SendInvitationEmail200FailedToSendEmail = {
+export type PutUsersSendInvitationEmail200FailedToSendEmail = {
   email?: string;
   reason?: string;
 };
 
-export type SendInvitationEmail200 = {
+export type PutUsersSendInvitationEmail200 = {
   /** email and reasons for email sending failure */
-  failedToSendEmail?: SendInvitationEmail200FailedToSendEmail;
+  failedToSendEmail?: PutUsersSendInvitationEmail200FailedToSendEmail;
 };
 
 export type GetUsersListParams = {
@@ -3800,32 +3833,32 @@ export type GetUsersList200 = {
   users?: User[];
 };
 
-export type GetUsernamesParams = {
+export type GetUsersUsernamesParams = {
   q?: string;
   offset?: number;
   limit?: number;
   options?: string;
 };
 
-export type GetUsernames200ActiveUser = {
+export type GetUsersUsernames200ActiveUser = {
   usernames?: string[];
   totalCount?: number;
 };
 
-export type GetUsernames200InactiveUser = {
+export type GetUsersUsernames200InactiveUser = {
   usernames?: string[];
   totalCount?: number;
 };
 
-export type GetUsernames200ActivitySnapshotUser = {
+export type GetUsersUsernames200ActivitySnapshotUser = {
   usernames?: string[];
   totalCount?: number;
 };
 
-export type GetUsernames200 = {
-  activeUser?: GetUsernames200ActiveUser;
-  inactiveUser?: GetUsernames200InactiveUser;
-  activitySnapshotUser?: GetUsernames200ActivitySnapshotUser;
+export type GetUsersUsernames200 = {
+  activeUser?: GetUsersUsernames200ActiveUser;
+  inactiveUser?: GetUsersUsernames200InactiveUser;
+  activitySnapshotUser?: GetUsersUsernames200ActivitySnapshotUser;
   mixedUsernames?: string[];
 };
 
