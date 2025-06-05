@@ -57,44 +57,51 @@ AXIOS_INSTANCE.defaults.headers.common['Authorization'] = `Bearer ${your-api-tok
 ### API v3 Usage Example
 
 ```typescript
-import { getPagesV3 } from '@growilabs/growi-sdk-typescript/apiv3';
+import apiv3 from '@growilabs/growi-sdk-typescript/v3';
 
 // Get page list
 try {
-  const pages = await getPagesV3();
+  const pages = await apiv3.getPagesList();
   console.log(pages);
 } catch (error) {
   console.error('Failed to fetch pages:', error);
 }
+
+// Get recent pages
+try {
+  const recentPages = await apiv3.getPagesRecent();
+  console.log(recentPages);
+} catch (error) {
+  console.error('Failed to fetch recent pages:', error);
+}
+
+// Using with parameters
+const pagesWithParams = await apiv3.getPagesList({
+  limit: 20,
+  offset: 0
+});
 ```
 
 ### API v1 Usage Example
 
 ```typescript
-import { getPagesV1 } from '@growilabs/growi-sdk-typescript/apiv1';
+import apiv1 from '@growilabs/growi-sdk-typescript/v1';
 
-// Get pages using v1 API
+// Search pages
 try {
-  const pages = await getPagesV1();
-  console.log(pages);
+  const searchResult = await apiv1.searchPages({ q: 'search term' });
+  console.log(searchResult);
 } catch (error) {
-  console.error('Failed to fetch pages:', error);
+  console.error('Failed to search pages:', error);
 }
-```
 
-### Using Type Definitions
-
-```typescript
-import type { Page, PageCreateRequest } from '@growilabs/growi-sdk-typescript/apiv3';
-
-// Type-safe page creation
-const createPageData: PageCreateRequest = {
-  title: 'New Page',
-  body: 'Page content',
-  path: '/new-page'
-};
-
-const newPage: Page = await createPageV3(createPageData);
+// Get comments
+try {
+  const comments = await apiv1.getComments({ page_id: 'your-page-id' });
+  console.log(comments);
+} catch (error) {
+  console.error('Failed to fetch comments:', error);
+}
 ```
 
 ## API Client Details
@@ -118,28 +125,6 @@ src/
 
 - **API v3**: Contains new features and improved API endpoints. We recommend using v3 whenever possible.
 - **API v1**: Use when you need features not available in v3 or for legacy compatibility.
-
-## Type Definitions
-
-All API requests and responses are type-safe:
-
-```typescript
-// Using auto-generated type definitions
-import type { 
-  Page, 
-  User, 
-  Comment,
-  PageCreateRequest,
-  PageUpdateRequest 
-} from '@growilabs/growi-sdk-typescript/apiv3';
-
-// TypeScript type checking detects errors at compile time
-const pageData: PageCreateRequest = {
-  title: 'Test Page',
-  body: '# Hello GROWI',
-  // path: '/test' // ← Commenting out this line will cause a TypeScript error
-};
-```
 
 ## Code Generation and Supported GROWI Versions
 

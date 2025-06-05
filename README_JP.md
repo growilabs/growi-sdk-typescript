@@ -57,44 +57,51 @@ AXIOS_INSTANCE.defaults.headers.common['Authorization'] = `Bearer ${your-api-tok
 ### API v3 の使用例
 
 ```typescript
-import { getPagesV3 } from '@growilabs/growi-sdk-typescript/apiv3';
+import apiv3 from '@growilabs/growi-sdk-typescript/v3';
 
 // ページ一覧を取得
 try {
-  const pages = await getPagesV3();
+  const pages = await apiv3.getPagesList();
   console.log(pages);
 } catch (error) {
-  console.error('ページの取得に失敗しました:', error);
+  console.error('ページ一覧の取得に失敗しました:', error);
 }
+
+// 最近更新されたページの取得
+try {
+  const recentPages = await apiv3.getPagesRecent();
+  console.log(recentPages);
+} catch (error) {
+  console.error('最近更新されたページの取得に失敗しました:', error);
+}
+
+// パラメーターの指定
+const pagesWithParams = await apiv3.getPagesList({
+  limit: 20,
+  offset: 0
+});
 ```
 
 ### API v1 の使用例
 
 ```typescript
-import { getPagesV1 } from '@growilabs/growi-sdk-typescript/apiv1';
+import apiv1 from '@growilabs/growi-sdk-typescript/v1';
 
-// v1 API を使用してページを取得
+// ページの検索
 try {
-  const pages = await getPagesV1();
-  console.log(pages);
+  const searchResult = await apiv1.searchPages({ q: 'search term' });
+  console.log(searchResult);
 } catch (error) {
-  console.error('ページの取得に失敗しました:', error);
+  console.error('ページの検索に失敗しました:', error);
 }
-```
 
-### 型定義の利用
-
-```typescript
-import type { Page, PageCreateRequest } from '@growilabs/growi-sdk-typescript/apiv3';
-
-// 型安全なページ作成
-const createPageData: PageCreateRequest = {
-  title: '新しいページ',
-  body: 'ページの内容',
-  path: '/new-page'
-};
-
-const newPage: Page = await createPageV3(createPageData);
+// コメントの取得
+try {
+  const comments = await apiv1.getComments({ page_id: 'your-page-id' });
+  console.log(comments);
+} catch (error) {
+  console.error('コメントの取得に失敗しました:', error);
+}
 ```
 
 ## API クライアント詳細

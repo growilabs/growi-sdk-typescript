@@ -8,6 +8,20 @@
   "keywords": ["sdk", "growi", "typescript", "api"],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./v1": {
+      "types": "./dist/apiv1/index.d.ts",
+      "import": "./dist/apiv1/index.js"
+    },
+    "./v3": {
+      "types": "./dist/apiv3/index.d.ts",
+      "import": "./dist/apiv3/index.js"
+    }
+  },
   "files": ["dist", "src", "README.md", "README_JP.md", "CHANGELOG.md", "LICENSE"],
   "repository": {
     "type": "git",
