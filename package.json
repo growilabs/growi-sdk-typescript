@@ -19,6 +19,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "prebuild": "pnpm clean",
+    "clean": "pnpm dlx shx rm -rf dist",
     "lint": "biome check",
     "generate:api": "orval --biome",
     "test": "echo \"Error: no test specified\" && exit 1",
