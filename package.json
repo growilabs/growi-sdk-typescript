@@ -8,7 +8,7 @@
   "keywords": ["sdk", "growi", "typescript", "api"],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "src", "README.md", "CHANGELOG.md", "LICENSE"],
+  "files": ["dist", "src", "README.md", "README_JP.md", "CHANGELOG.md", "LICENSE"],
   "repository": {
     "type": "git",
     "url": "https://github.com/weseek/growi-sdk-typescript.git"
