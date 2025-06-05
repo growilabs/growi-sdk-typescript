@@ -368,7 +368,7 @@ import type {
   XssParams,
 } from './gROWIRESTAPIV3.schemas';
 
-import { customInstance } from '../../api/axios-instance';
+import { customInstance } from '../../utils/axios-instance';
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 

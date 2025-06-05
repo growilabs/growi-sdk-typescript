@@ -12,7 +12,7 @@ export default defineConfig({
       prettier: false, // Disable because we're using Biome
       override: {
         mutator: {
-          path: './src/api/axios-instance.ts',
+          path: './src/utils/axios-instance.ts',
           name: 'customInstance',
         },
       },
@@ -29,7 +29,7 @@ export default defineConfig({
       prettier: false, // Disable because we're using Biome
       override: {
         mutator: {
-          path: './src/api/axios-instance.ts',
+          path: './src/utils/axios-instance.ts',
           name: 'customInstance',
         },
       },
