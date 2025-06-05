@@ -36,7 +36,7 @@ import type {
   UploadProfileImage200,
   UploadProfileImageBodyOne,
   UploadProfileImageBodyTwo,
-} from './gROWIRESTAPIV1.schemas';
+} from './index.schemas';
 
 import { customInstance } from '../../utils/axios-instance';
 

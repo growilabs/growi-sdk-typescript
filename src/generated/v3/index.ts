@@ -366,7 +366,7 @@ import type {
   UserNotification,
   UserNotificationParams,
   XssParams,
-} from './gROWIRESTAPIV3.schemas';
+} from './index.schemas';
 
 import { customInstance } from '../../utils/axios-instance';
 

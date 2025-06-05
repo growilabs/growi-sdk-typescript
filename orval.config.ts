@@ -7,7 +7,7 @@ export default defineConfig({
     },
     output: {
       mode: 'split',
-      target: './src/generated/v1/',
+      target: './src/generated/v1/index.ts',
       client: 'axios',
       prettier: false, // Disable because we're using Biome
       override: {
@@ -24,7 +24,7 @@ export default defineConfig({
     },
     output: {
       mode: 'split',
-      target: './src/generated/v3/',
+      target: './src/generated/v3/index.ts',
       client: 'axios',
       prettier: false, // Disable because we're using Biome
       override: {
