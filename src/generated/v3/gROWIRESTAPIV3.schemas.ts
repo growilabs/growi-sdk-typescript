@@ -2141,7 +2141,7 @@ export type PutCustomizeSettingCustomizeLogo200 = {
 };
 
 export type PutCustomizeSettingUploadBrandLogoBody = {
-  file?: unknown;
+  file?: Blob;
 };
 
 export type PutCustomizeSettingUploadBrandLogo200AttachmentAllOf = {
@@ -2216,7 +2216,7 @@ export type PostG2gTransferBodyUploadConfigs = { [key: string]: unknown };
 
 export type PostG2gTransferBody = {
   /** The zip file of the data to be transferred */
-  file?: unknown;
+  file?: Blob;
   /** The list of MongoDB collections to be transferred */
   collections?: string[];
   /** The map of options for each collection */
@@ -2239,7 +2239,7 @@ export type PostG2gTransferAttachmentBodyAttachmentMetadata = { [key: string]: u
 
 export type PostG2gTransferAttachmentBody = {
   /** The zip file of the data to be transferred */
-  file?: unknown;
+  file?: Blob;
   /** Metadata of the attachment */
   attachmentMetadata?: PostG2gTransferAttachmentBodyAttachmentMetadata;
 };
@@ -2368,7 +2368,7 @@ export type GetImportStatus200 = {
 };
 
 export type PostImportUploadBody = {
-  file?: unknown;
+  file?: Blob;
 };
 
 export type GetInAppNotificationListParams = {
