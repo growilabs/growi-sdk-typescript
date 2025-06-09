@@ -1,6 +1,6 @@
 {
   "name": "@growi/sdk-typescript",
-  "version": "1.0.0-RC.0",
+  "version": "1.0.0-RC.1",
   "description": "GROWI SDK for TypeScript, providing utilities and types for building applications that interact with GROWI.",
   "type": "module",
   "license": "MIT",
@@ -25,9 +25,9 @@
   "files": ["dist", "src", "README.md", "README_JP.md", "CHANGELOG.md", "LICENSE"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/weseek/growi-sdk-typescript.git"
+    "url": "https://github.com/growilabs/growi-sdk-typescript.git"
   },
-  "homepage": "https://github.com/weseek/growi-sdk-typescript#readme",
+  "homepage": "https://github.com/growilabs/growi-sdk-typescript",
   "engines": {
     "node": ">=18.0.0"
   },
