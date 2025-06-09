@@ -111,7 +111,7 @@ try {
 ```
 src/
 ├── utils/
-│   └── axios-instance.ts      # カスタム axios インスタンス
+│   └── axios-instance.ts      # Axios インスタンスファクトリー
 ├── generated/                  # Orval で生成されるソースコード群
 │   ├── v1/                      # API v1 クライアント
 │   │   ├── index.ts
