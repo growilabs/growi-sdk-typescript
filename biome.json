@@ -4,13 +4,16 @@
     "enabled": true
   },
   "files": {
-    "ignore": ["docs/*", ".pnpm-store", ".openapi-cache"]
+    "ignore": ["dist", "docs", ".pnpm-store", ".openapi-cache"]
   },
   "linter": {
     "enabled": true,
     "ignore": ["src/generated"],
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "correctness": {
+        "useImportExtensions": "error"
+      }
     }
   },
   "formatter": {
