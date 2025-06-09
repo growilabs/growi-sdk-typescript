@@ -368,7 +368,7 @@ import type {
   XssParams,
 } from './index.schemas.js';
 
-import { customInstance } from '../../utils/axios-instance.js';
+import { customInstance } from '../../utils/v3/axios-instance.js';
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 

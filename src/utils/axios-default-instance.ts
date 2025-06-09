@@ -21,19 +21,3 @@ export const AXIOS_DEFAULT = {
     DEFAULT_AXIOS_INSTANCE.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
 };
-
-export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
-  const source = Axios.CancelToken.source();
-  const promise = DEFAULT_AXIOS_INSTANCE({
-    ...config,
-    ...options,
-    cancelToken: source.token,
-  }).then(({ data }) => data);
-
-  // @ts-ignore
-  promise.cancel = () => {
-    source.cancel('Query cancelled');
-  };
-
-  return promise;
-};
