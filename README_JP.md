@@ -45,13 +45,13 @@ pnpm add @growi/sdk-typescript
 ### クライアントの初期化
 
 ```typescript
-import { DEFAULT_AXIOS_INSTANCE } from '@growi/sdk-typescript';
+import { AXIOS_DEFAULT } from '@growi/sdk-typescript';
 
 // GROWI インスタンスのベース URL を設定
-DEFAULT_AXIOS_INSTANCE.defaults.baseURL = 'https://your-growi-instance.com';
+AXIOS_DEFAULT.setBaseURL('https://your-growi-instance.com');
 
 // 認証トークンを設定（必要に応じて）
-DEFAULT_AXIOS_INSTANCE.defaults.headers.common['Authorization'] = `Bearer ${your-api-token}`;
+AXIOS_DEFAULT.setAuthorizationHeader('your-api-token');
 ```
 
 ### API v3 の使用例
