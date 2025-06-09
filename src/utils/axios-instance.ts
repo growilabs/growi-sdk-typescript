@@ -1,12 +1,12 @@
 import Axios, { type AxiosRequestConfig } from 'axios';
 
-export const AXIOS_INSTANCE = Axios.create({
-  baseURL: '', // set baseURL if you need
+export const DEFAULT_AXIOS_INSTANCE = Axios.create({
+  baseURL: 'http://localhost', // set baseURL if you need
 });
 
 export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
   const source = Axios.CancelToken.source();
-  const promise = AXIOS_INSTANCE({
+  const promise = DEFAULT_AXIOS_INSTANCE({
     ...config,
     ...options,
     cancelToken: source.token,
@@ -19,5 +19,3 @@ export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosReq
 
   return promise;
 };
-
-export default customInstance;
