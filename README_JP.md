@@ -110,15 +110,15 @@ try {
 
 ```
 src/
-├── api/
+├── utils/
 │   └── axios-instance.ts      # カスタム axios インスタンス
-├── generated/
-│   ├── v1/                    # API v1 クライアント
-│   │   ├── gROWIRESTAPIV1.ts
-│   │   └── gROWIRESTAPIV1.schemas.ts
-│   └── v3/                    # API v3 クライアント
-│       ├── gROWIRESTAPIV3.ts
-│       └── gROWIRESTAPIV3.schemas.ts
+├── generated/                  # Orval で生成されるソースコード群
+│   ├── v1/                      # API v1 クライアント
+│   │   ├── index.ts
+│   │   └── index.schemas.ts
+│   └── v3/                      # API v3 クライアント
+│       ├── index.ts
+│       └── index.schemas.ts
 ```
 
 ### API バージョンの使い分け
@@ -134,17 +134,15 @@ src/
 // 自動生成された型定義を利用
 import type { 
   Page, 
-  User, 
+  PageInfo,
   Comment,
-  PageCreateRequest,
-  PageUpdateRequest 
-} from '@growilabs/growi-sdk-typescript/apiv3';
+  SyncStatus
+} from '@growilabs/growi-sdk-typescript/v3';
 
 // TypeScript の型チェックにより、コンパイル時にエラーを検出
-const pageData: PageCreateRequest = {
-  title: 'テストページ',
-  body: '# Hello GROWI',
-  // path: '/test' // ← この行をコメントアウトすると TypeScript エラー
+const pageInfo: PageInfo = {
+  path: '/test',
+  // 他の必要なプロパティ...
 };
 ```
 
