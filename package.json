@@ -1,5 +1,5 @@
 {
-  "name": "@growilabs/growi-sdk-typescript",
+  "name": "@growi/sdk-typescript",
   "version": "1.0.0-RC.0",
   "description": "GROWI SDK for TypeScript, providing utilities and types for building applications that interact with GROWI.",
   "type": "module",

@@ -1,11 +1,11 @@
 - [日本語 🇯🇵](./README_JP.md)
 
-# @growilabs/growi-sdk-typescript
+# @growi/sdk-typescript
 
 [![npm version](https://badge.fury.io/js/%40growilabs%2Fgrowi-sdk-typescript.svg)](https://badge.fury.io/js/%40growilabs%2Fgrowi-sdk-typescript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-`@growilabs/growi-sdk-typescript` is a TypeScript SDK automatically generated from the official [GROWI](https://growi.org/) OpenAPI specifications using [orval](https://orval.dev/). It supports both GROWI API v1 and v3, enabling type-safe API operations.
+`@growi/sdk-typescript` is a TypeScript SDK automatically generated from the official [GROWI](https://growi.org/) OpenAPI specifications using [orval](https://orval.dev/). It supports both GROWI API v1 and v3, enabling type-safe API operations.
 
 ### Key Features
 
@@ -31,13 +31,13 @@ You can install it using npm, yarn, or pnpm:
 
 ```bash
 # npm
-npm install @growilabs/growi-sdk-typescript
+npm install @growi/sdk-typescript
 
 # yarn
-yarn add @growilabs/growi-sdk-typescript
+yarn add @growi/sdk-typescript
 
 # pnpm
-pnpm add @growilabs/growi-sdk-typescript
+pnpm add @growi/sdk-typescript
 ```
 
 ## Basic Usage
@@ -45,7 +45,7 @@ pnpm add @growilabs/growi-sdk-typescript
 ### Client Initialization
 
 ```typescript
-import { AXIOS_INSTANCE } from '@growilabs/growi-sdk-typescript';
+import { AXIOS_INSTANCE } from '@growi/sdk-typescript';
 
 // Set the base URL of your GROWI instance
 AXIOS_INSTANCE.defaults.baseURL = 'https://your-growi-instance.com';
@@ -57,7 +57,7 @@ AXIOS_INSTANCE.defaults.headers.common['Authorization'] = `Bearer ${your-api-tok
 ### API v3 Usage Example
 
 ```typescript
-import apiv3 from '@growilabs/growi-sdk-typescript/v3';
+import apiv3 from '@growi/sdk-typescript/v3';
 
 // Get page list
 try {
@@ -85,7 +85,7 @@ const pagesWithParams = await apiv3.getPagesList({
 ### API v1 Usage Example
 
 ```typescript
-import apiv1 from '@growilabs/growi-sdk-typescript/v1';
+import apiv1 from '@growi/sdk-typescript/v1';
 
 // Search pages
 try {
@@ -137,7 +137,7 @@ import type {
   PageInfo,
   Comment,
   SyncStatus
-} from '@growilabs/growi-sdk-typescript/v3';
+} from '@growi/sdk-typescript/v3';
 
 // TypeScript's type checking detects errors at compile time
 const pageInfo: PageInfo = {

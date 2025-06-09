@@ -1,11 +1,11 @@
 - [English 🇺🇸](./README.md)
 
-# @growilabs/growi-sdk-typescript
+# @growi/sdk-typescript
 
 [![npm version](https://badge.fury.io/js/%40growilabs%2Fgrowi-sdk-typescript.svg)](https://badge.fury.io/js/%40growilabs%2Fgrowi-sdk-typescript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-`@growilabs/growi-sdk-typescript` は、[GROWI](https://growi.org/) の公式 OpenAPI 仕様書から [orval](https://orval.dev/) を使用して自動生成された TypeScript SDK です。GROWI API v1 および v3 の両方をサポートし、型安全な API 操作を可能にします。
+`@growi/sdk-typescript` は、[GROWI](https://growi.org/) の公式 OpenAPI 仕様書から [orval](https://orval.dev/) を使用して自動生成された TypeScript SDK です。GROWI API v1 および v3 の両方をサポートし、型安全な API 操作を可能にします。
 
 ### 主な特徴
 
@@ -31,13 +31,13 @@ npm、yarn、または pnpm を使用してインストールできます：
 
 ```bash
 # npm
-npm install @growilabs/growi-sdk-typescript
+npm install @growi/sdk-typescript
 
 # yarn
-yarn add @growilabs/growi-sdk-typescript
+yarn add @growi/sdk-typescript
 
 # pnpm
-pnpm add @growilabs/growi-sdk-typescript
+pnpm add @growi/sdk-typescript
 ```
 
 ## 基本的な使用方法
@@ -45,7 +45,7 @@ pnpm add @growilabs/growi-sdk-typescript
 ### クライアントの初期化
 
 ```typescript
-import { AXIOS_INSTANCE } from '@growilabs/growi-sdk-typescript';
+import { AXIOS_INSTANCE } from '@growi/sdk-typescript';
 
 // GROWI インスタンスのベース URL を設定
 AXIOS_INSTANCE.defaults.baseURL = 'https://your-growi-instance.com';
@@ -57,7 +57,7 @@ AXIOS_INSTANCE.defaults.headers.common['Authorization'] = `Bearer ${your-api-tok
 ### API v3 の使用例
 
 ```typescript
-import apiv3 from '@growilabs/growi-sdk-typescript/v3';
+import apiv3 from '@growi/sdk-typescript/v3';
 
 // ページ一覧を取得
 try {
@@ -85,7 +85,7 @@ const pagesWithParams = await apiv3.getPagesList({
 ### API v1 の使用例
 
 ```typescript
-import apiv1 from '@growilabs/growi-sdk-typescript/v1';
+import apiv1 from '@growi/sdk-typescript/v1';
 
 // ページの検索
 try {
@@ -137,7 +137,7 @@ import type {
   PageInfo,
   Comment,
   SyncStatus
-} from '@growilabs/growi-sdk-typescript/v3';
+} from '@growi/sdk-typescript/v3';
 
 // TypeScript の型チェックにより、コンパイル時にエラーを検出
 const pageInfo: PageInfo = {
