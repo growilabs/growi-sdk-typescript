@@ -366,9 +366,9 @@ import type {
   UserNotification,
   UserNotificationParams,
   XssParams,
-} from './index.schemas';
+} from './index.schemas.js';
 
-import { customInstance } from '../../utils/axios-instance';
+import { customInstance } from '../../utils/axios-instance.js';
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
