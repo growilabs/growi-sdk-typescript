@@ -37,6 +37,7 @@
     "clean": "pnpm dlx shx rm -rf dist",
     "lint": "biome check",
     "generate:api": "orval --biome",
+    "postgenerate:api": "pnpm run fix-esm-imports",
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodets": "node --experimental-strip-types --experimental-transform-types --no-warnings=ExperimentalWarning"
   },
