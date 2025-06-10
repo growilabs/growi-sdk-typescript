@@ -24,17 +24,17 @@ jobs:
         run: |
           echo "openapi_spec_has_changed=$(pnpm run nodets .github/scripts/check-openapi-changes.ts)" >> $GITHUB_OUTPUT
 
+      - uses: pnpm/action-setup@v2
+        if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
+        with:
+          version: 10.11.0
+
       - name: Setup Node.js
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
-
-      - uses: pnpm/action-setup@v2
-        if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
-        with:
-          version: 10.11.0
 
       - name: Install dependencies
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
