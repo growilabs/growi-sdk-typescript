@@ -3,7 +3,7 @@ name: Release SDK with Changesets
 on:
   push:
     branches:
-      - main # またはリポジトリのメインブランチ名
+      - main
   workflow_dispatch:
 
 jobs:
@@ -13,19 +13,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          # 'changeset version' がコミットとタグをプッシュするために必要
+            # Required for 'changeset version' to push commits and tags
           fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # プロジェクトに合わせて調整
+          node-version: '22'
           cache: 'pnpm'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 10.11.0 # プロジェクトに合わせて調整
+          version: 10.11.0
 
       - name: Install Dependencies
         run: pnpm install
