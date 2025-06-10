@@ -42,7 +42,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm changeset version
+          version: pnpm changeset version && pnpm biome format --fix package.json
           publish: pnpm changeset publish
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
