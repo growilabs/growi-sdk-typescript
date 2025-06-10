@@ -44,18 +44,19 @@ jobs:
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         run: pnpm run generate:api
 
-      - name: Extract OpenAPI versions and Update CHANGELOG
+      - name: Create Changeset for SDK update
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
-        run: pnpm run nodets .github/scripts/update-changelog.ts
+        run: |
+          echo -e "---\n\"@growi/sdk-typescript\": patch\n---\n\nSDK generated from OpenAPI spec update." > .changeset/sdk-update-$(date +%s).md
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: 'feat(sdk): update generated SDK code'
-          title: '⚡️ Update SDK from latest OpenAPI specs'
+          commit-message: 'feat(sdk): generate SDK and add changeset'
+          title: '⚡️ Generate SDK and add changeset for OpenAPI updates'
           body: |
-            Updated SDK code based on OpenAPI specification updates.
+            A changeset file has been added for this SDK update.
 
             ## Changes
             - Reflected the latest version of OpenAPI specifications
@@ -73,4 +74,4 @@ jobs:
           add-paths: |
             src/generated/**/*
             .openapi-cache/**/*
-            CHANGELOG.md
+            .changeset/

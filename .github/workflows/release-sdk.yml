@@ -1,0 +1,51 @@
+name: Release SDK with Changesets
+
+on:
+  push:
+    branches:
+      - main # またはリポジトリのメインブランチ名
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # 'changeset version' がコミットとタグをプッシュするために必要
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # プロジェクトに合わせて調整
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.11.0 # プロジェクトに合わせて調整
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Initialize Changesets if needed
+        run: |
+          if [ ! -d ".changeset" ]; then
+            pnpm changeset init
+          else
+            echo ".changeset directory already exists."
+          fi
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset version
+          publish: pnpm changeset publish
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
