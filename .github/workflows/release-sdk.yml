@@ -44,8 +44,7 @@ jobs:
         with:
           version: pnpm release-sdk:version
           publish: pnpm release-sdk:publish
-          commit: "chore(release): version packages"
-          title: "chore(release): version packages"
+          title: "chore(release): Publish SDK packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
