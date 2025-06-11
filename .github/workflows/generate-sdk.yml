@@ -78,4 +78,3 @@ jobs:
           delete-branch: true
           labels: |
             sdk-update
-            automated-pr
