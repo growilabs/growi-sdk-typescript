@@ -17,13 +17,17 @@ vi.mock('../axios-default-instance.js');
 const mockedAxios = vi.mocked(Axios);
 const mockedAXIOS_DEFAULT = vi.mocked(AXIOS_DEFAULT);
 
+// Type for the promise returned by customInstance with cancel functionality
+type CancellablePromise<T> = Promise<T> & {
+  cancel: () => void;
+};
+
 describe('v3 customInstance', () => {
   let mockCancelTokenSource: {
     token: string;
-    cancel: MockedFunction<any>;
+    cancel: MockedFunction<() => void>;
   };
-  let mockAxiosInstance: MockedFunction<any>;
-
+  let mockAxiosInstance: MockedFunction<(config: AxiosRequestConfig) => Promise<AxiosResponse<unknown>>>;
   beforeEach(() => {
     vi.clearAllMocks();
 
@@ -36,18 +40,35 @@ describe('v3 customInstance', () => {
     // Mock for Axios.CancelToken.source
     mockedAxios.CancelToken = {
       source: vi.fn().mockReturnValue(mockCancelTokenSource),
-    } as any;
+    } as unknown as typeof Axios.CancelToken;
 
     // Mock for Axios instance
     mockAxiosInstance = vi.fn().mockResolvedValue({
       data: { result: 'success' },
-    } as AxiosResponse);
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      config: {},
+    } as AxiosResponse<{ result: string }>);
 
     // Mock for AXIOS_DEFAULT
-    mockedAXIOS_DEFAULT.instance = mockAxiosInstance;
-    mockedAXIOS_DEFAULT.instance.defaults = {
-      baseURL: 'http://localhost',
-    };
+    mockedAXIOS_DEFAULT.instance = mockAxiosInstance as unknown as typeof AXIOS_DEFAULT.instance;
+    Object.defineProperty(mockedAXIOS_DEFAULT.instance, 'defaults', {
+      value: {
+        baseURL: 'http://localhost',
+        headers: {
+          common: {},
+          delete: {},
+          get: {},
+          head: {},
+          post: {},
+          put: {},
+          patch: {},
+        },
+      },
+      writable: true,
+      configurable: true,
+    });
   });
 
   afterEach(() => {
@@ -191,7 +212,11 @@ describe('v3 customInstance', () => {
         data: expectedData,
         status: 200,
         statusText: 'OK',
-      } as AxiosResponse);
+        headers: {},
+        config: {},
+      } as AxiosResponse<{
+        pages: Array<{ id: string; title: string; body: string }>;
+      }>);
 
       const config: AxiosRequestConfig = { method: 'GET', url: '/pages' };
 
@@ -209,7 +234,9 @@ describe('v3 customInstance', () => {
         data: expectedData,
         status: 204,
         statusText: 'No Content',
-      } as AxiosResponse);
+        headers: {},
+        config: {},
+      } as AxiosResponse<null>);
 
       const config: AxiosRequestConfig = { method: 'DELETE', url: '/pages/1' };
 
@@ -227,11 +254,11 @@ describe('v3 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
 
       // Act
-      const promise = customInstance(config);
+      const promise = customInstance(config) as CancellablePromise<unknown>;
 
       // Assert
       expect(promise).toHaveProperty('cancel');
-      expect(typeof (promise as any).cancel).toBe('function');
+      expect(typeof promise.cancel).toBe('function');
 
       // cleanup
       await promise;
@@ -242,8 +269,8 @@ describe('v3 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
 
       // Act
-      const promise = customInstance(config);
-      (promise as any).cancel();
+      const promise = customInstance(config) as CancellablePromise<unknown>;
+      promise.cancel();
 
       // Assert
       expect(mockCancelTokenSource.cancel).toHaveBeenCalledWith('Query cancelled');
@@ -254,7 +281,7 @@ describe('v3 customInstance', () => {
 
     it('should allow cancellation during request execution', async () => {
       // Arrange
-      let resolveRequest: (value: any) => void = () => {};
+      let resolveRequest: (value: unknown) => void = () => {};
       const requestPromise = new Promise((resolve) => {
         resolveRequest = resolve;
       });
@@ -264,8 +291,8 @@ describe('v3 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/long-request' };
 
       // Act
-      const promise = customInstance(config);
-      (promise as any).cancel();
+      const promise = customInstance(config) as CancellablePromise<unknown>;
+      promise.cancel();
 
       // Assert
       expect(mockCancelTokenSource.cancel).toHaveBeenCalledWith('Query cancelled');
@@ -321,7 +348,10 @@ describe('v3 customInstance', () => {
       mockAxiosInstance.mockResolvedValue({
         data: expectedUser,
         status: 200,
-      } as AxiosResponse);
+        statusText: 'OK',
+        headers: {},
+        config: {},
+      } as AxiosResponse<User>);
 
       const config: AxiosRequestConfig = { method: 'GET', url: '/user/1' };
 

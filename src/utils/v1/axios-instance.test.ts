@@ -1,14 +1,14 @@
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import Axios from 'axios';
 /**
  * Tests for v1/axios-instance.ts
- * 
+ *
  * This file provides custom Axios instance creation functionality for GROWI API v1,
  * including automatic base URL configuration, cancellation capability, and request configuration merging.
  */
-import { describe, it, expect, beforeEach, afterEach, vi, type MockedFunction } from 'vitest';
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
-import Axios from 'axios';
-import { customInstance } from './axios-instance.js';
+import { type MockedFunction, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AXIOS_DEFAULT } from '../axios-default-instance.js';
+import { customInstance } from './axios-instance.js';
 
 // Mock Axios
 vi.mock('axios');
@@ -17,37 +17,59 @@ vi.mock('../axios-default-instance.js');
 const mockedAxios = vi.mocked(Axios);
 const mockedAXIOS_DEFAULT = vi.mocked(AXIOS_DEFAULT);
 
+// Type for the promise returned by customInstance with cancel functionality
+type CancellablePromise<T> = Promise<T> & {
+  cancel: () => void;
+};
+
 describe('v1 customInstance', () => {
   let mockCancelTokenSource: {
     token: string;
-    cancel: MockedFunction<any>;
+    cancel: MockedFunction<() => void>;
   };
-  let mockAxiosInstance: MockedFunction<any>;
+  let mockAxiosInstance: MockedFunction<(config: AxiosRequestConfig) => Promise<AxiosResponse<unknown>>>;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    
+
     // Mock for CancelTokenSource
     mockCancelTokenSource = {
       token: 'mock-cancel-token',
       cancel: vi.fn(),
     };
-    
+
     // Mock for Axios.CancelToken.source
     mockedAxios.CancelToken = {
       source: vi.fn().mockReturnValue(mockCancelTokenSource),
-    } as any;
+    } as unknown as typeof Axios.CancelToken;
 
     // Mock for Axios instance
     mockAxiosInstance = vi.fn().mockResolvedValue({
       data: { result: 'success' },
-    } as AxiosResponse);
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      config: {},
+    } as AxiosResponse<{ result: string }>);
 
     // Mock for AXIOS_DEFAULT
-    mockedAXIOS_DEFAULT.instance = mockAxiosInstance;
-    mockedAXIOS_DEFAULT.instance.defaults = {
-      baseURL: 'http://localhost',
-    };
+    mockedAXIOS_DEFAULT.instance = mockAxiosInstance as unknown as typeof AXIOS_DEFAULT.instance;
+    Object.defineProperty(mockedAXIOS_DEFAULT.instance, 'defaults', {
+      value: {
+        baseURL: 'http://localhost',
+        headers: {
+          common: {},
+          delete: {},
+          get: {},
+          head: {},
+          post: {},
+          put: {},
+          patch: {},
+        },
+      },
+      writable: true,
+      configurable: true,
+    });
   });
 
   afterEach(() => {
@@ -58,16 +80,16 @@ describe('v1 customInstance', () => {
     it('should append _api suffix to default base URL', async () => {
       // Arrange
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
-      
+
       // Act
       await customInstance(config);
-      
+
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
         expect.objectContaining({
           baseURL: 'http://localhost/_api',
           cancelToken: 'mock-cancel-token',
-        })
+        }),
       );
     });
 
@@ -75,34 +97,34 @@ describe('v1 customInstance', () => {
       // Arrange
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
       const options: AxiosRequestConfig = { baseURL: 'https://custom.example.com' };
-      
+
       // Act
       await customInstance(config, options);
-      
+
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
         expect.objectContaining({
           baseURL: 'https://custom.example.com/_api',
-        })
+        }),
       );
     });
 
     it('should use baseURL specified in config when provided', async () => {
       // Arrange
-      const config: AxiosRequestConfig = { 
-        method: 'GET', 
+      const config: AxiosRequestConfig = {
+        method: 'GET',
         url: '/test',
-        baseURL: 'https://config.example.com'
+        baseURL: 'https://config.example.com',
       };
-      
+
       // Act
       await customInstance(config);
-      
+
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
         expect.objectContaining({
           baseURL: 'https://config.example.com/_api',
-        })
+        }),
       );
     });
   });
@@ -119,10 +141,10 @@ describe('v1 customInstance', () => {
         headers: { 'Custom-Header': 'value' },
         timeout: 5000,
       };
-      
+
       // Act
       await customInstance(config, options);
-      
+
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -133,7 +155,7 @@ describe('v1 customInstance', () => {
           timeout: 5000,
           baseURL: 'http://localhost/_api',
           cancelToken: 'mock-cancel-token',
-        })
+        }),
       );
     });
 
@@ -146,15 +168,15 @@ describe('v1 customInstance', () => {
       const options: AxiosRequestConfig = {
         timeout: 3000,
       };
-      
+
       // Act
       await customInstance(config, options);
-      
+
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
         expect.objectContaining({
           timeout: 3000,
-        })
+        }),
       );
     });
   });
@@ -167,13 +189,15 @@ describe('v1 customInstance', () => {
         data: expectedData,
         status: 200,
         statusText: 'OK',
-      } as AxiosResponse);
-      
+        headers: {},
+        config: {},
+      } as AxiosResponse<{ users: Array<{ id: number; name: string }> }>);
+
       const config: AxiosRequestConfig = { method: 'GET', url: '/users' };
-      
+
       // Act
       const result = await customInstance(config);
-      
+
       // Assert
       expect(result).toEqual(expectedData);
     });
@@ -183,14 +207,14 @@ describe('v1 customInstance', () => {
     it('should add cancel function to returned Promise', async () => {
       // Arrange
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
-      
+
       // Act
-      const promise = customInstance(config);
-      
+      const promise = customInstance(config) as CancellablePromise<unknown>;
+
       // Assert
       expect(promise).toHaveProperty('cancel');
-      expect(typeof (promise as any).cancel).toBe('function');
-      
+      expect(typeof promise.cancel).toBe('function');
+
       // cleanup
       await promise;
     });
@@ -198,14 +222,14 @@ describe('v1 customInstance', () => {
     it('should call CancelTokenSource cancel when cancel function is invoked', async () => {
       // Arrange
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
-      
+
       // Act
-      const promise = customInstance(config);
-      (promise as any).cancel();
-      
+      const promise = customInstance(config) as CancellablePromise<unknown>;
+      promise.cancel();
+
       // Assert
       expect(mockCancelTokenSource.cancel).toHaveBeenCalledWith('Query cancelled');
-      
+
       // cleanup
       await promise;
     });
@@ -216,9 +240,9 @@ describe('v1 customInstance', () => {
       // Arrange
       const error = new Error('Network error');
       mockAxiosInstance.mockRejectedValue(error);
-      
+
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
-      
+
       // Act & Assert
       await expect(customInstance(config)).rejects.toThrow('Network error');
     });
