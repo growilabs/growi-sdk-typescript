@@ -9,6 +9,9 @@ on:
 jobs:
   generate-sdk:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     
     steps:
       - uses: actions/checkout@v4
@@ -76,7 +79,3 @@ jobs:
           labels: |
             sdk-update
             automated-pr
-          add-paths: |
-            src/generated/**/*
-            .openapi-cache/**/*
-            .changeset/
