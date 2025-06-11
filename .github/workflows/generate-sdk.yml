@@ -55,7 +55,7 @@ jobs:
       - name: Create Changeset for SDK update
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         run: |
-          echo -e "---\n\"@growi/sdk-typescript\": patch\n---\n\nSDK generated from OpenAPI spec update." > .changeset/sdk-update-$(date +%s).md
+          echo -e "---\n\"@growi/sdk-typescript\": minor\n---\n\nSDK generated from OpenAPI spec update." > .changeset/sdk-update-$(date +%s).md
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
