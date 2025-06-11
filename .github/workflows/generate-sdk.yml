@@ -32,7 +32,8 @@ jobs:
       - name: Check for changes in OpenAPI specs
         id: check_changes
         run: |
-          echo "openapi_spec_has_changed=$(pnpm run nodets .github/scripts/check-openapi-changes.ts)" >> $GITHUB_OUTPUT
+          HAS_CHANGED=$(pnpm run nodets .github/scripts/check-openapi-changes.ts | tail -n 1)
+          echo "openapi_spec_has_changed=${HAS_CHANGED}" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
