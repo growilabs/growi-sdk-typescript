@@ -19,22 +19,20 @@ jobs:
           curl -o tmp/openapi-v1.json https://docs.growi.org/openapi-spec-apiv1.json
           curl -o tmp/openapi-v3.json https://docs.growi.org/openapi-spec-apiv3.json
 
-      - name: Check for changes in OpenAPI specs
-        id: check_changes
-        run: |
-          echo "openapi_spec_has_changed=$(pnpm run nodets .github/scripts/check-openapi-changes.ts)" >> $GITHUB_OUTPUT
-
       - uses: pnpm/action-setup@v2
-        if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         with:
           version: 10.11.0
 
       - name: Setup Node.js
-        if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
+
+      - name: Check for changes in OpenAPI specs
+        id: check_changes
+        run: |
+          echo "openapi_spec_has_changed=$(pnpm run nodets .github/scripts/check-openapi-changes.ts)" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
