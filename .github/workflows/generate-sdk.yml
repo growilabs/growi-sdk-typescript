@@ -35,6 +35,12 @@ jobs:
           HAS_CHANGED=$(pnpm run nodets .github/scripts/check-openapi-changes.ts | tail -n 1)
           echo "openapi_spec_has_changed=${HAS_CHANGED}" >> $GITHUB_OUTPUT
 
+      - name: Overwrite OpenAPI cache
+        if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
+        run: |
+          mv tmp/openapi-v1.json .openapi-cache/
+          mv tmp/openapi-v3.json .openapi-cache/
+
       - name: Install dependencies
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         run: pnpm install
