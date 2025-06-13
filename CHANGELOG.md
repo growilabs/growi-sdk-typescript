@@ -1,5 +1,13 @@
 ## [2025-06-02] - SDK Update
 
+## 1.2.0
+
+### Minor Changes
+
+- [#6](https://github.com/growilabs/growi-sdk-typescript/pull/6) [`bced8a0`](https://github.com/growilabs/growi-sdk-typescript/commit/bced8a0bc63855de059fa98ea49330ab00155445) Thanks [@github-actions](https://github.com/apps/github-actions)! - SDK generated from OpenAPI spec update.
+
+- [#8](https://github.com/growilabs/growi-sdk-typescript/pull/8) [`e60d215`](https://github.com/growilabs/growi-sdk-typescript/commit/e60d215c6f8fca3e389aeb58f05c7d04daba24c7) Thanks [@github-actions](https://github.com/apps/github-actions)! - SDK generated from OpenAPI spec update.
+
 ## 1.1.0
 
 ### Minor Changes
