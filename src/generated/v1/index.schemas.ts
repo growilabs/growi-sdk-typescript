@@ -42,7 +42,7 @@ export interface UpdatePostData {
 
 export interface PageRemoveData {
   /** Path of the deleted page */
-  path?: string;
+  path: string;
   /** Whether deletion was recursive */
   isRecursively?: boolean;
   /** Whether deletion was complete */
