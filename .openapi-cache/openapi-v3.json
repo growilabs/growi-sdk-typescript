@@ -9598,7 +9598,7 @@
       }
     },
     "/pages/rename": {
-      "post": {
+      "put": {
         "tags": [
           "Pages"
         ],
@@ -9667,7 +9667,7 @@
             "description": "page path is already existed"
           }
         },
-        "operationId": "postRenameForPages"
+        "operationId": "putRenameForPages"
       }
     },
     "/pages/resume-rename": {

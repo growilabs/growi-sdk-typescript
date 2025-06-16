@@ -227,8 +227,6 @@ import type {
   PostRegister200,
   PostRegisterBody,
   PostRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
-  PostRenameForPages200,
-  PostRenameForPagesBody,
   PostResumeRenameForPages200,
   PostResumeRenameForPagesBody,
   PostShareLinksParams,
@@ -314,6 +312,8 @@ import type {
   PutQuestionnaireSettingsForPersonalSetting200,
   PutQuestionnaireSettingsForPersonalSettingBody,
   PutRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations200,
+  PutRenameForPages200,
+  PutRenameForPagesBody,
   PutResetPasswordEmailForUsersBody,
   PutResetPasswordForUsers200,
   PutResetPasswordForUsersBody,
@@ -1673,9 +1673,9 @@ export const getGrowirestapiv3 = () => {
   /**
    * Rename page
    */
-  const postRenameForPages = (postRenameForPagesBody: PostRenameForPagesBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostRenameForPages200>(
-      { url: `/pages/rename`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postRenameForPagesBody },
+  const putRenameForPages = (putRenameForPagesBody: PutRenameForPagesBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutRenameForPages200>(
+      { url: `/pages/rename`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putRenameForPagesBody },
       options,
     );
   };
@@ -2965,7 +2965,7 @@ export const getGrowirestapiv3 = () => {
     getYjsDataByPageId,
     putSyncLatestRevisionBodyToYjsDraftByPageId,
     getRecentForPages,
-    postRenameForPages,
+    putRenameForPages,
     postResumeRenameForPages,
     deleteEmptyTrashForPages,
     getListForPages,
@@ -3285,7 +3285,7 @@ export type PutSyncLatestRevisionBodyToYjsDraftByPageIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSyncLatestRevisionBodyToYjsDraftByPageId']>>
 >;
 export type GetRecentForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRecentForPages']>>>;
-export type PostRenameForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postRenameForPages']>>>;
+export type PutRenameForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putRenameForPages']>>>;
 export type PostResumeRenameForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postResumeRenameForPages']>>>;
 export type DeleteEmptyTrashForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteEmptyTrashForPages']>>>;
 export type GetListForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getListForPages']>>>;
