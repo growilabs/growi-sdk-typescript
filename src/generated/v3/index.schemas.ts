@@ -2792,7 +2792,7 @@ export type GetRecentForPagesParams = {
   includeWipPage?: string;
 };
 
-export type PostRenameForPagesBody = {
+export type PutRenameForPagesBody = {
   pageId: ObjectId;
   path?: PagePath;
   /** revision ID */
@@ -2807,7 +2807,7 @@ export type PostRenameForPagesBody = {
   isRecursively?: boolean;
 };
 
-export type PostRenameForPages200 = {
+export type PutRenameForPages200 = {
   page?: Page;
 };
 
