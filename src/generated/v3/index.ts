@@ -91,6 +91,7 @@ import type {
   GetInfoForBookmarksParams,
   GetInfoForPageListing200,
   GetInfoForPageListingParams,
+  GetInfoForPageParams,
   GetIsEnabledForQuestionnaire200,
   GetIsPasswordSetForPersonalSetting200,
   GetLimitForAttachment200,
@@ -166,8 +167,7 @@ import type {
   NotifyForPageGrant,
   OidcAuthSetting,
   Page,
-  PageInfo,
-  PageParams,
+  PageInfoAll,
   PersonalSettings,
   PostAddBookmarkToFolderForBookmarkFolder200,
   PostAddBookmarkToFolderForBookmarkFolderBody,
@@ -1489,7 +1489,7 @@ export const getGrowirestapiv3 = () => {
   };
 
   /**
-   * Get the information of a page
+   * Get summary information of pages
    * @summary /page-listing/info
    */
   const getInfoForPageListing = (params?: GetInfoForPageListingParams, options?: SecondParameter<typeof customInstance>) => {
@@ -1536,11 +1536,11 @@ export const getGrowirestapiv3 = () => {
   };
 
   /**
-   * Retrieve current page info
-   * @summary Get page info
+   * Get summary informations for a page
+   * @summary /page/info
    */
-  const getInfoForPage = (pageParams: PageParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PageInfo>({ url: `/page/info`, method: 'GET', headers: { 'Content-Type': 'application/json' } }, options);
+  const getInfoForPage = (params: GetInfoForPageParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PageInfoAll>({ url: `/page/info`, method: 'GET', params }, options);
   };
 
   /**

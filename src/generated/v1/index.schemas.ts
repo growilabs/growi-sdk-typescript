@@ -197,6 +197,89 @@ export type PagePath = string;
 export type PageGrant = number;
 
 /**
+ * Basic page information
+ */
+export interface PageInfo {
+  /** Whether the page is compatible with v5 */
+  isV5Compatible?: boolean;
+  /** Whether the page is empty */
+  isEmpty?: boolean;
+  /** Whether the page is movable */
+  isMovable?: boolean;
+  /** Whether the page is deletable */
+  isDeletable?: boolean;
+  /** Whether the page is able to delete completely */
+  isAbleToDeleteCompletely?: boolean;
+  /** Whether the page is revertible */
+  isRevertible?: boolean;
+}
+
+export type PageInfoForEntityAllOf = {
+  /** Number of bookmarks */
+  bookmarkCount?: number;
+  /** Number of users who have liked the page */
+  sumOfLikers?: number;
+  /** Ids of users who have liked the page */
+  likerIds?: string[];
+  /** Number of users who have seen the page */
+  sumOfSeenUsers?: number;
+  /** Ids of users who have seen the page */
+  seenUserIds?: string[];
+  /** Content age */
+  contentAge?: number;
+  /** Number of descendant pages */
+  descendantCount?: number;
+  /** Number of comments */
+  commentCount?: number;
+};
+
+/**
+ * Page information for entity (extends IPageInfo)
+ */
+export type PageInfoForEntity = PageInfo & PageInfoForEntityAllOf;
+
+/**
+ * Subscription status
+ */
+export type PageInfoForOperationAllOfSubscriptionStatus =
+  (typeof PageInfoForOperationAllOfSubscriptionStatus)[keyof typeof PageInfoForOperationAllOfSubscriptionStatus];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const PageInfoForOperationAllOfSubscriptionStatus = {
+  SUBSCRIBE: 'SUBSCRIBE',
+  UNSUBSCRIBE: 'UNSUBSCRIBE',
+} as const;
+
+export type PageInfoForOperationAllOf = {
+  /** Whether the page is bookmarked by the logged in user */
+  isBookmarked?: boolean;
+  /** Whether the page is liked by the logged in user */
+  isLiked?: boolean;
+  /** Subscription status */
+  subscriptionStatus?: PageInfoForOperationAllOfSubscriptionStatus;
+};
+
+/**
+ * Page information for operation (extends IPageInfoForEntity)
+ */
+export type PageInfoForOperation = PageInfoForEntity & PageInfoForOperationAllOf;
+
+export type PageInfoForListingAllOf = {
+  /** Short body of the revision */
+  revisionShortBody?: string;
+};
+
+/**
+ * Page information for listing (extends IPageInfoForEntity with revision short body)
+ */
+export type PageInfoForListing = PageInfoForEntity & PageInfoForListingAllOf;
+
+/**
+ * Page information (union of all page info types)
+ */
+export type PageInfoAll = PageInfo | PageInfoForEntity | PageInfoForOperation | PageInfoForListing;
+
+/**
  * extend data
  */
 export type PageExtended = { [key: string]: unknown };

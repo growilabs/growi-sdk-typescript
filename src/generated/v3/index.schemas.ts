@@ -989,30 +989,6 @@ export interface LikeParams {
 }
 
 /**
- * PageInfo
- */
-export interface PageInfo {
-  /** Whether the page is liked by the logged in user */
-  isLiked?: boolean;
-  /** Number of users who have liked the page */
-  sumOfLikers: number;
-  /** Ids of users who have liked the page */
-  likerIds: string[];
-  /** Number of users who have seen the page */
-  sumOfSeenUsers: number;
-  /** Ids of users who have seen the page */
-  seenUserIds: string[];
-}
-
-/**
- * PageParams
- */
-export interface PageParams {
-  /** page ID */
-  pageId: string;
-}
-
-/**
  * personal settings
  */
 export interface PersonalSettings {
@@ -1475,6 +1451,89 @@ export type PagePath = string;
  * Grant for page
  */
 export type PageGrant = number;
+
+/**
+ * Basic page information
+ */
+export interface PageInfo {
+  /** Whether the page is compatible with v5 */
+  isV5Compatible?: boolean;
+  /** Whether the page is empty */
+  isEmpty?: boolean;
+  /** Whether the page is movable */
+  isMovable?: boolean;
+  /** Whether the page is deletable */
+  isDeletable?: boolean;
+  /** Whether the page is able to delete completely */
+  isAbleToDeleteCompletely?: boolean;
+  /** Whether the page is revertible */
+  isRevertible?: boolean;
+}
+
+export type PageInfoForEntityAllOf = {
+  /** Number of bookmarks */
+  bookmarkCount?: number;
+  /** Number of users who have liked the page */
+  sumOfLikers?: number;
+  /** Ids of users who have liked the page */
+  likerIds?: string[];
+  /** Number of users who have seen the page */
+  sumOfSeenUsers?: number;
+  /** Ids of users who have seen the page */
+  seenUserIds?: string[];
+  /** Content age */
+  contentAge?: number;
+  /** Number of descendant pages */
+  descendantCount?: number;
+  /** Number of comments */
+  commentCount?: number;
+};
+
+/**
+ * Page information for entity (extends IPageInfo)
+ */
+export type PageInfoForEntity = PageInfo & PageInfoForEntityAllOf;
+
+/**
+ * Subscription status
+ */
+export type PageInfoForOperationAllOfSubscriptionStatus =
+  (typeof PageInfoForOperationAllOfSubscriptionStatus)[keyof typeof PageInfoForOperationAllOfSubscriptionStatus];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const PageInfoForOperationAllOfSubscriptionStatus = {
+  SUBSCRIBE: 'SUBSCRIBE',
+  UNSUBSCRIBE: 'UNSUBSCRIBE',
+} as const;
+
+export type PageInfoForOperationAllOf = {
+  /** Whether the page is bookmarked by the logged in user */
+  isBookmarked?: boolean;
+  /** Whether the page is liked by the logged in user */
+  isLiked?: boolean;
+  /** Subscription status */
+  subscriptionStatus?: PageInfoForOperationAllOfSubscriptionStatus;
+};
+
+/**
+ * Page information for operation (extends IPageInfoForEntity)
+ */
+export type PageInfoForOperation = PageInfoForEntity & PageInfoForOperationAllOf;
+
+export type PageInfoForListingAllOf = {
+  /** Short body of the revision */
+  revisionShortBody?: string;
+};
+
+/**
+ * Page information for listing (extends IPageInfoForEntity with revision short body)
+ */
+export type PageInfoForListing = PageInfoForEntity & PageInfoForListingAllOf;
+
+/**
+ * Page information (union of all page info types)
+ */
+export type PageInfoAll = PageInfo | PageInfoForEntity | PageInfoForOperation | PageInfoForListing;
 
 /**
  * extend data
@@ -2577,33 +2636,19 @@ export type GetChildrenForPageListing200 = {
 };
 
 export type GetInfoForPageListingParams = {
+  /**
+   * Array of page IDs to retrieve information for (One of pageIds or path is required)
+   */
   pageIds?: string[];
+  /**
+   * Path of the page to retrieve information for (One of pageIds or path is required)
+   */
   path?: string;
   attachBookmarkCount?: boolean;
   attachShortBody?: boolean;
 };
 
-export type GetInfoForPageListing200IdToPageInfoMap = {
-  [key: string]: {
-    commentCount?: number;
-    contentAge?: number;
-    descendantCount?: number;
-    isAbleToDeleteCompletely?: boolean;
-    isDeletable?: boolean;
-    isEmpty?: boolean;
-    isMovable?: boolean;
-    isRevertible?: boolean;
-    isV5Compatible?: boolean;
-    likerIds?: string[];
-    seenUserIds?: string[];
-    sumOfLikers?: number;
-    sumOfSeenUsers?: number;
-  };
-};
-
-export type GetInfoForPageListing200 = {
-  idToPageInfoMap?: GetInfoForPageListing200IdToPageInfoMap;
-};
+export type GetInfoForPageListing200 = { [key: string]: PageInfoAll };
 
 export type GetPageParams = {
   /**
@@ -2672,6 +2717,13 @@ export type GetExistForPageParams = {
 
 export type GetExistForPage200 = {
   isExist?: boolean;
+};
+
+export type GetInfoForPageParams = {
+  /**
+   * page id
+   */
+  pageId: ObjectId;
 };
 
 export type GetGrantDataForPageParams = {
