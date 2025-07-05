@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v1",
-    "version": "7.2.8-RC.0"
+    "version": "7.3.0-RC.0"
   },
   "servers": [
     {
