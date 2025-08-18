@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v3",
-    "version": "7.2.8-RC.0"
+    "version": "7.3.0-RC.0"
   },
   "servers": [
     {
@@ -159,10 +159,6 @@
                           "type": "boolean",
                           "example": false
                         },
-                        "isQuestionnaireEnabled": {
-                          "type": "boolean",
-                          "example": true
-                        },
                         "name": {
                           "type": "string",
                           "example": "Taro"
@@ -284,8 +280,7 @@
               "ELASTICSEARCH_URI": "http://elasticsearch:9200/growi",
               "ELASTICSEARCH_REQUEST_TIMEOUT": 15000,
               "ELASTICSEARCH_REJECT_UNAUTHORIZED": true,
-              "OGP_URI": "http://ogp:8088",
-              "QUESTIONNAIRE_SERVER_ORIGIN": "http://host.docker.internal:3003"
+              "OGP_URI": "http://ogp:8088"
             }
           },
           "isV5Compatible": {
@@ -409,10 +404,6 @@
           "isMaintenanceMode": {
             "type": "boolean",
             "example": false
-          },
-          "isQuestionnaireEnabled": {
-            "type": "boolean",
-            "example": true
           },
           "isV5Compatible": {
             "type": "boolean",
@@ -692,21 +683,6 @@
           "azureReferenceFileWithRelayMode": {
             "type": "boolean",
             "description": "is enable internal stream system for azure file request"
-          }
-        }
-      },
-      "QuestionnaireSettingParams": {
-        "description": "QuestionnaireSettingParams",
-        "type": "object",
-        "properties": {
-          "isQuestionnaireEnabled": {
-            "type": "boolean",
-            "description": "is questionnaire enabled, or not",
-            "example": true
-          },
-          "isAppSiteUrlHashed": {
-            "type": "boolean",
-            "description": "is app site url hashed, or not"
           }
         }
       },
@@ -2927,11 +2903,6 @@
             "description": "whether the invitation email is sent",
             "example": false
           },
-          "isQuestionnaireEnabled": {
-            "type": "boolean",
-            "description": "whether the questionnaire is enabled",
-            "example": false
-          },
           "lastLoginAt": {
             "type": "string",
             "description": "datetime last login at",
@@ -3605,8 +3576,6 @@
         "MongoDB",
         "NotificationSetting",
         "Plugins",
-        "Questionnaire",
-        "QuestionnaireSetting",
         "SlackIntegration",
         "SlackIntegrationSettings",
         "SlackIntegrationSettings (with proxy)",
@@ -4395,278 +4364,6 @@
         "operationId": "getSyncStatusForExternalUserGroupsLdap"
       }
     },
-    "/questionnaire/orders": {
-      "get": {
-        "tags": [
-          "Questionnaire"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/questionnaire/orders",
-        "description": "Get questionnaire orders",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "questionnaireOrders": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getOrdersForQuestionnaire"
-      }
-    },
-    "/questionnaire/is-enabled": {
-      "get": {
-        "tags": [
-          "Questionnaire"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/questionnaire/is-enabled",
-        "description": "Get questionnaire is enabled",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isEnabled": {
-                      "type": "boolean"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getIsEnabledForQuestionnaire"
-      }
-    },
-    "/questionnaire/proactive/answer": {
-      "post": {
-        "tags": [
-          "Questionnaire"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/questionnaire/proactive/answer",
-        "description": "Post proactive questionnaire answer",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "postAnswerForQuestionnaireProactive"
-      }
-    },
-    "/questionnaire/answer": {
-      "put": {
-        "tags": [
-          "Questionnaire"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/questionnaire/answer",
-        "description": "Post questionnaire answer",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "operationId": "putAnswerForQuestionnaire"
-      }
-    },
-    "/questionnaire/skip": {
-      "put": {
-        "tags": [
-          "Questionnaire"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/questionnaire/skip",
-        "description": "Skip questionnaire",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "operationId": "putSkipForQuestionnaire"
-      }
-    },
-    "/questionnaire/deny": {
-      "put": {
-        "tags": [
-          "Questionnaire"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/questionnaire/deny",
-        "description": "Deny questionnaire",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "operationId": "putDenyForQuestionnaire"
-      }
-    },
     "/templates": {
       "get": {
         "summary": "/templates",
@@ -5359,49 +5056,6 @@
           }
         },
         "operationId": "putFileUploadSettingsForAppSettings"
-      }
-    },
-    "/app-settings/questionnaire-settings": {
-      "put": {
-        "tags": [
-          "AppSettings"
-        ],
-        "security": [
-          {
-            "cookieAuth": []
-          }
-        ],
-        "summary": "/app-settings/questionnaire-settings",
-        "description": "Update QuestionnaireSetting",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/QuestionnaireSettingParams"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Succeeded to update QuestionnaireSetting",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "responseParams": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/QuestionnaireSettingParams"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "putQuestionnaireSettingsForAppSettings"
       }
     },
     "/app-settings/v5-schema-migration": {
@@ -8792,9 +8446,22 @@
                     "$ref": "#/components/schemas/PageGrant"
                   },
                   "grantUserGroupIds": {
-                    "type": "string",
-                    "description": "UserGroup ID",
-                    "example": "5ae5fccfc5577b0004dbd8ab"
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Group type",
+                          "example": "UserGroup"
+                        },
+                        "item": {
+                          "type": "string",
+                          "description": "UserGroup ID",
+                          "example": "5ae5fccfc5577b0004dbd8ab"
+                        }
+                      }
+                    }
                   },
                   "pageTags": {
                     "type": "array",
@@ -10379,6 +10046,107 @@
         "operationId": "putApiTokenForPersonalSetting"
       }
     },
+    "/personal-setting/access-token": {
+      "get": {
+        "tags": [
+          "GeneralSetting"
+        ],
+        "operationId": "getAccessTokenForPersonalSetting",
+        "summary": "/personal-setting/access-token",
+        "description": "Get access token",
+        "responses": {
+          "200": {
+            "description": "succded to get access token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accessTokens": {
+                      "type": "object",
+                      "description": "array of access tokens"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GeneralSetting"
+        ],
+        "operationId": "postAccessTokenForPersonalSetting",
+        "summary": "/personal-setting/access-token",
+        "description": "Generate access token",
+        "responses": {
+          "200": {
+            "description": "succeded to create access token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "id of access token"
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "access token"
+                    },
+                    "expiredAt": {
+                      "type": "string",
+                      "description": "expired date"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "description of access token"
+                    },
+                    "scope": {
+                      "type": "array",
+                      "description": "scope of access token",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/personal-setting/access-token/": {
+      "delete": {
+        "tags": [
+          "GeneralSetting"
+        ],
+        "operationId": "deleteAccessTokenForPersonalSetting",
+        "summary": "/personal-setting/access-token",
+        "description": "Delete access token",
+        "responses": {
+          "200": {
+            "description": "succeded to delete access token"
+          }
+        }
+      }
+    },
+    "/personal-setting/access-token/all": {
+      "delete": {
+        "tags": [
+          "GeneralSetting"
+        ],
+        "operationId": "deleteAllForPersonalSettingAccessToken",
+        "summary": "/personal-setting/access-token/all",
+        "description": "Delete all access tokens",
+        "responses": {
+          "200": {
+            "description": "succeded to delete all access tokens"
+          }
+        }
+      }
+    },
     "/personal-setting/associate-ldap": {
       "put": {
         "tags": [
@@ -10595,49 +10363,6 @@
           }
         },
         "operationId": "getInAppNotificationSettingsForPersonalSetting"
-      }
-    },
-    "/personal-setting/questionnaire-settings": {
-      "put": {
-        "tags": [
-          "QuestionnaireSetting"
-        ],
-        "summary": "/personal-setting/questionnaire-settings",
-        "description": "Update the questionnaire settings for the current user",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "isQuestionnaireEnabled": {
-                    "type": "boolean"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully updated questionnaire settings",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "isQuestionnaireEnabled": {
-                      "type": "boolean"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "putQuestionnaireSettingsForPersonalSetting"
       }
     },
     "/revisions/list": {
