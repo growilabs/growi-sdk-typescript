@@ -8484,23 +8484,19 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
                   "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "page": {
-                          "$ref": "#/components/schemas/Page"
-                        },
-                        "tags": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "#/components/schemas/Tags"
-                          }
-                        },
-                        "revision": {
-                          "$ref": "#/components/schemas/Revision"
-                        }
+                    "page": {
+                      "$ref": "#/components/schemas/Page"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Tags"
                       }
+                    },
+                    "revision": {
+                      "$ref": "#/components/schemas/Revision"
                     }
                   }
                 }
