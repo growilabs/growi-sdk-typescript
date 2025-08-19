@@ -2627,14 +2627,10 @@ export type PostPageBody = {
   pageTags?: string[];
 };
 
-export type PostPage201Data = {
+export type PostPage201 = {
   page?: Page;
   tags?: Tags[];
   revision?: Revision;
-};
-
-export type PostPage201 = {
-  data?: PostPage201Data;
 };
 
 export type PutPageBody = {
