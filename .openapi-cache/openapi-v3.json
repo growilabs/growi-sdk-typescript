@@ -8534,8 +8534,19 @@
                   "userRelatedGrantUserGroupIds": {
                     "type": "array",
                     "items": {
-                      "type": "string",
-                      "description": "UserGroup ID"
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Group type",
+                          "example": "UserGroup"
+                        },
+                        "item": {
+                          "type": "string",
+                          "description": "UserGroup ID",
+                          "example": "5ae5fccfc5577b0004dbd8ab"
+                        }
+                      }
                     }
                   },
                   "overwriteScopesOfDescendants": {
@@ -8574,17 +8585,13 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
                   "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "page": {
-                          "$ref": "#/components/schemas/Page"
-                        },
-                        "revision": {
-                          "$ref": "#/components/schemas/Revision"
-                        }
-                      }
+                    "page": {
+                      "$ref": "#/components/schemas/Page"
+                    },
+                    "revision": {
+                      "$ref": "#/components/schemas/Revision"
                     }
                   }
                 }
@@ -9090,7 +9097,7 @@
         "operationId": "putContentWidthByPageId"
       }
     },
-    "/{pageId}/publish": {
+    "/page/{pageId}/publish": {
       "put": {
         "tags": [
           "Page"
@@ -9120,10 +9127,10 @@
             }
           }
         },
-        "operationId": "putPublishByPageId"
+        "operationId": "putPublishByPageIdForPage"
       }
     },
-    "/{pageId}/unpublish": {
+    "/page/{pageId}/unpublish": {
       "put": {
         "tags": [
           "Page"
@@ -9153,7 +9160,7 @@
             }
           }
         },
-        "operationId": "putUnpublishByPageId"
+        "operationId": "putUnpublishByPageIdForPage"
       }
     },
     "/{pageId}/yjs-data": {
@@ -11128,33 +11135,31 @@
           }
         ],
         "description": "Create new share link",
-        "parameters": [
-          {
-            "name": "relatedPage",
-            "in": "query",
-            "required": true,
-            "description": "page id of share link",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "expiredAt",
-            "in": "query",
-            "description": "expiration date of share link",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "description",
-            "in": "query",
-            "description": "description of share link",
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "relatedPage"
+                ],
+                "properties": {
+                  "relatedPage": {
+                    "description": "page id of share link",
+                    "type": "string"
+                  },
+                  "expiredAt": {
+                    "description": "expiration date of share link",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "description of share link",
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Succeeded to create one share link",
@@ -13310,7 +13315,7 @@
         "operationId": "getUsers"
       }
     },
-    "/{id}/recent": {
+    "/users/{id}/recent": {
       "get": {
         "tags": [
           "Users"
@@ -13343,7 +13348,7 @@
             }
           }
         },
-        "operationId": "getRecentById"
+        "operationId": "getRecentByIdForUsers"
       }
     },
     "/users/invite": {
