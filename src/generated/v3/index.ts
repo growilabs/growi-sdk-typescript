@@ -114,7 +114,7 @@ import type {
   GetPersonalSetting200,
   GetPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates200,
   GetPresetTemplatesByLocaleByTemplateIdForTemplates200,
-  GetRecentById200,
+  GetRecentByIdForUsers200,
   GetRecentForPagesParams,
   GetRevisionsById200,
   GetRevisionsByIdParams,
@@ -227,7 +227,7 @@ import type {
   PostRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
   PostResumeRenameForPages200,
   PostResumeRenameForPagesBody,
-  PostShareLinksParams,
+  PostShareLinksBody,
   PostSlackAppIntegrationsForSlackIntegrationSettings200,
   PostSmtpTestForAppSettings200,
   PostTestForSlackIntegrationSettingsWithoutProxyBody,
@@ -1529,16 +1529,16 @@ export const getGrowirestapiv3 = () => {
    * Publish a specific page
    * @summary Publish page
    */
-  const putPublishByPageId = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<Page>({ url: `/${pageId}/publish`, method: 'PUT' }, options);
+  const putPublishByPageIdForPage = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<Page>({ url: `/page/${pageId}/publish`, method: 'PUT' }, options);
   };
 
   /**
    * Unpublish a specific page
    * @summary Unpublish page
    */
-  const putUnpublishByPageId = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<Page>({ url: `/${pageId}/unpublish`, method: 'PUT' }, options);
+  const putUnpublishByPageIdForPage = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<Page>({ url: `/page/${pageId}/unpublish`, method: 'PUT' }, options);
   };
 
   /**
@@ -2040,8 +2040,11 @@ export const getGrowirestapiv3 = () => {
   /**
    * Create new share link
    */
-  const postShareLinks = (params: PostShareLinksParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<ShareLinkSimple>({ url: `/share-links/`, method: 'POST', params }, options);
+  const postShareLinks = (postShareLinksBody: PostShareLinksBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<ShareLinkSimple>(
+      { url: `/share-links/`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postShareLinksBody },
+      options,
+    );
   };
 
   /**
@@ -2583,8 +2586,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /usersIdReacent
    */
-  const getRecentById = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetRecentById200>({ url: `/${id}/recent`, method: 'GET' }, options);
+  const getRecentByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetRecentByIdForUsers200>({ url: `/users/${id}/recent`, method: 'GET' }, options);
   };
 
   /**
@@ -2872,8 +2875,8 @@ export const getGrowirestapiv3 = () => {
     getExistPathsForPage,
     putSubscribeForPage,
     putContentWidthByPageId,
-    putPublishByPageId,
-    putUnpublishByPageId,
+    putPublishByPageIdForPage,
+    putUnpublishByPageIdForPage,
     getYjsDataByPageId,
     putSyncLatestRevisionBodyToYjsDraftByPageId,
     getRecentForPages,
@@ -2970,7 +2973,7 @@ export const getGrowirestapiv3 = () => {
     getPagesByIdForUserGroups,
     putUserUiSettings,
     getUsers,
-    getRecentById,
+    getRecentByIdForUsers,
     postInviteForUsers,
     putGrantAdminByIdForUsers,
     putRevokeAdminByIdForUsers,
@@ -3182,8 +3185,8 @@ export type GetExportByPageIdForPageResult = NonNullable<Awaited<ReturnType<Retu
 export type GetExistPathsForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExistPathsForPage']>>>;
 export type PutSubscribeForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSubscribeForPage']>>>;
 export type PutContentWidthByPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putContentWidthByPageId']>>>;
-export type PutPublishByPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPublishByPageId']>>>;
-export type PutUnpublishByPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUnpublishByPageId']>>>;
+export type PutPublishByPageIdForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPublishByPageIdForPage']>>>;
+export type PutUnpublishByPageIdForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUnpublishByPageIdForPage']>>>;
 export type GetYjsDataByPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getYjsDataByPageId']>>>;
 export type PutSyncLatestRevisionBodyToYjsDraftByPageIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSyncLatestRevisionBodyToYjsDraftByPageId']>>
@@ -3360,7 +3363,7 @@ export type GetUserGroupRelationsByIdForUserGroupsResult = NonNullable<
 export type GetPagesByIdForUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPagesByIdForUserGroups']>>>;
 export type PutUserUiSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUserUiSettings']>>>;
 export type GetUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsers']>>>;
-export type GetRecentByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRecentById']>>>;
+export type GetRecentByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRecentByIdForUsers']>>>;
 export type PostInviteForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postInviteForUsers']>>>;
 export type PutGrantAdminByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGrantAdminByIdForUsers']>>>;
 export type PutRevokeAdminByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putRevokeAdminByIdForUsers']>>>;

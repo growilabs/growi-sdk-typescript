@@ -2633,12 +2633,19 @@ export type PostPage201 = {
   revision?: Revision;
 };
 
+export type PutPageBodyUserRelatedGrantUserGroupIdsItem = {
+  /** Group type */
+  type?: string;
+  /** UserGroup ID */
+  item?: string;
+};
+
 export type PutPageBody = {
   body: RevisionBody;
   pageId: ObjectId;
   revisionId: ObjectId;
   grant?: PageGrant;
-  userRelatedGrantUserGroupIds?: string[];
+  userRelatedGrantUserGroupIds?: PutPageBodyUserRelatedGrantUserGroupIdsItem[];
   /** Determine whether the scopes of descendants should be overwritten */
   overwriteScopesOfDescendants?: boolean;
   /** Determine whether the page is enabled to be posted to Slack */
@@ -2651,13 +2658,9 @@ export type PutPageBody = {
   wip?: boolean;
 };
 
-export type PutPage200Data = {
+export type PutPage200 = {
   page?: Page;
   revision?: Revision;
-};
-
-export type PutPage200 = {
-  data?: PutPage200Data;
 };
 
 export type GetExistForPageParams = {
@@ -3245,18 +3248,12 @@ export type GetShareLinks200 = {
   shareLinksResult?: ShareLink[];
 };
 
-export type PostShareLinksParams = {
-  /**
-   * page id of share link
-   */
+export type PostShareLinksBody = {
+  /** page id of share link */
   relatedPage: string;
-  /**
-   * expiration date of share link
-   */
+  /** expiration date of share link */
   expiredAt?: string;
-  /**
-   * description of share link
-   */
+  /** description of share link */
   description?: string;
 };
 
@@ -3742,7 +3739,7 @@ export type GetUsers200 = {
   paginateResult?: PaginateResult;
 };
 
-export type GetRecentById200 = {
+export type GetRecentByIdForUsers200 = {
   paginateResult?: PaginateResult;
 };
 
