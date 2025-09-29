@@ -1,23 +1,22 @@
-import Axios, { type AxiosRequestConfig } from 'axios';
-import { AXIOS_DEFAULT } from '../axios-default-instance.js';
+import Axios, { type AxiosRequestConfig, type AxiosInstance } from 'axios';
 
-export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
-  const source = Axios.CancelToken.source();
+export function createV1CustomInstance(axiosInstance: AxiosInstance) {
+  return <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
+    const source = Axios.CancelToken.source();
+    const baseURL = `${axiosInstance.defaults.baseURL}/_api`;
 
-  const defaultInstance = AXIOS_DEFAULT.instance;
-  const baseURL = `${options?.baseURL ?? config?.baseURL ?? defaultInstance.defaults.baseURL ?? ''}/_api`;
+    const promise = axiosInstance({
+      ...config,
+      ...options,
+      baseURL,
+      cancelToken: source.token,
+    }).then(({ data }) => data);
 
-  const promise = AXIOS_DEFAULT.instance({
-    ...config,
-    ...options,
-    baseURL,
-    cancelToken: source.token,
-  }).then(({ data }) => data);
+    // @ts-ignore
+    promise.cancel = () => {
+      source.cancel('Query cancelled');
+    };
 
-  // @ts-ignore
-  promise.cancel = () => {
-    source.cancel('Query cancelled');
+    return promise;
   };
-
-  return promise;
-};
+}

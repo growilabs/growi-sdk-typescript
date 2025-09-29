@@ -3,7 +3,7 @@ import { getGrowirestapiv1 } from './generated/v1/index.js';
 import { getGrowirestapiv3 } from './generated/v3/index.js';
 
 export interface GrowiClientConfig {
-  baseUrl: string;
+  baseURL: string;
   token: string;
   axiosConfig?: AxiosRequestConfig;
 }
@@ -14,20 +14,21 @@ export class GrowiClient {
   public readonly v3: ReturnType<typeof getGrowirestapiv3>;
 
   constructor(config: GrowiClientConfig) {
-    // Create a dedicated axios instance for this GROWI app
     this.axiosInstance = Axios.create({
-      baseURL: config.baseUrl,
+      baseURL: config.baseURL,
       ...config.axiosConfig,
     });
 
-    // Set authorization header if token is provided
-    if (config.token) {
-      this.axiosInstance.defaults.headers.common.Authorization = `Bearer ${config.token}`;
-    }
+    // Set authorization header
+    this.axiosInstance.defaults.headers.common.Authorization = `Bearer ${config.token}`;
 
     // Create API instances with this client's axios instance
     this.v1 = getGrowirestapiv1(this.axiosInstance);
     this.v3 = getGrowirestapiv3(this.axiosInstance);
+  }
+
+  getAxiosInstance(): AxiosInstance {
+    return this.axiosInstance;
   }
 }
 

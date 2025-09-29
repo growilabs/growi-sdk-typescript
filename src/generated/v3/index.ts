@@ -353,14 +353,13 @@ import type {
   XssParams,
 } from './index.schemas.js';
 
-import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { createV3CustomInstance } from '../../utils/instance-factory.js';
-import { customInstance as defaultCustomInstance } from '../../utils/v3/axios-instance.js';
+import type { AxiosInstance } from 'axios';
+import { createV3CustomInstance } from '../../utils/v3/axios-instance.js';
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
-export const getGrowirestapiv3 = (axiosInstance?: AxiosInstance) => {
-  const customInstance = axiosInstance ? createV3CustomInstance(axiosInstance) : defaultCustomInstance;
+export const getGrowirestapiv3 = (axiosInstance: AxiosInstance) => {
+  const customInstance = createV3CustomInstance(axiosInstance);
   /**
    * Get user group relations
    * @summary /external-user-group-relations

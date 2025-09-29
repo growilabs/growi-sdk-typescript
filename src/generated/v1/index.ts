@@ -42,14 +42,13 @@ import type {
   UploadProfileImageBodyTwo,
 } from './index.schemas.js';
 
-import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { createV1CustomInstance } from '../../utils/instance-factory.js';
-import { customInstance as defaultCustomInstance } from '../../utils/v1/axios-instance.js';
+import type { AxiosInstance } from 'axios';
+import { createV1CustomInstance } from '../../utils/v1/axios-instance.js';
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
-export const getGrowirestapiv1 = (axiosInstance?: AxiosInstance) => {
-  const customInstance = axiosInstance ? createV1CustomInstance(axiosInstance) : defaultCustomInstance;
+export const getGrowirestapiv1 = (axiosInstance: AxiosInstance) => {
+  const customInstance = createV1CustomInstance(axiosInstance);
   /**
    * Get comments of the page of the revision
    * @summary /comments.get
