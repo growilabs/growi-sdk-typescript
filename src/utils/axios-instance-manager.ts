@@ -10,21 +10,23 @@ class AxiosInstanceManager {
    * Add or update a named Axios instance.
    * @param appName The name/key for the instance.
    * @param config The configuration for the Axios instance.
-   * @returns The created AxiosInstance.
    */
-  addAxiosInstance(appName: string, config: { baseURL: string; token: string }): AxiosInstance {
+  addAxiosInstance(config: { appName: string; baseURL: string; token: string }) {
     const axiosInstance = Axios.create({
       baseURL: config.baseURL,
     });
+
+    // Set the Authorization header
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${config.token}`;
-    this.instances.set(appName, axiosInstance);
-    return axiosInstance;
+
+    this.instances.set(config.appName, axiosInstance);
   }
 
   /**
    * Get a named Axios instance.
    * @param appName The name/key of the instance.
-   * @returns The AxiosInstance if it exists, undefined otherwise.
+   * @returns The AxiosInstance.
+   * @throws Error if no instance is found for the given appName.
    */
   getAxiosInstance(appName: string): AxiosInstance {
     const instance = this.instances.get(appName);
