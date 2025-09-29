@@ -14,12 +14,10 @@ export class GrowiClient {
   public readonly v3: ReturnType<typeof getGrowirestapiv3>;
 
   constructor(config: GrowiClientConfig) {
-    this.axiosInstance = Axios.create({
-      baseURL: config.baseURL,
-      ...config.axiosConfig,
-    });
+    this.axiosInstance = Axios.create({});
 
-    // Set authorization header
+    // Apply user-provided axios config
+    this.axiosInstance.defaults.baseURL = config.baseURL;
     this.axiosInstance.defaults.headers.common.Authorization = `Bearer ${config.token}`;
 
     // Create API instances with this client's axios instance
