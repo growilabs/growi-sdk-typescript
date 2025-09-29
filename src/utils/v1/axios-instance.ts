@@ -1,9 +1,10 @@
 import Axios, { type AxiosRequestConfig } from 'axios';
 import { AXIOS_DEFAULT } from '../axios-default-instance.js';
 import { axiosInstanceManager } from '../axios-instance-manager.js';
+import type { CustomInstanceOptions } from '../types/custom-instance.js';
 
-export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig & { appName?: string }): Promise<T> => {
-  const { appName, ...axiosOptions } = options ?? {};
+export const customInstance = <T>(config: AxiosRequestConfig, options?: CustomInstanceOptions): Promise<T> => {
+  const { appName, axiosOptions } = options ?? {};
 
   const source = Axios.CancelToken.source();
 
