@@ -1,4 +1,4 @@
-import Axios, { type AxiosRequestConfig } from 'axios';
+import Axios from 'axios';
 
 const DEFAULT_AXIOS_INSTANCE = Axios.create({
   baseURL: 'http://localhost', // set baseURL if you need
