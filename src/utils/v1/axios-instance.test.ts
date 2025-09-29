@@ -99,7 +99,7 @@ describe('v1 customInstance', () => {
       const options: AxiosRequestConfig = { baseURL: 'https://custom.example.com' };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -143,7 +143,7 @@ describe('v1 customInstance', () => {
       };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -170,7 +170,7 @@ describe('v1 customInstance', () => {
       };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(

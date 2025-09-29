@@ -98,7 +98,7 @@ describe('v3 customInstance', () => {
       const options: AxiosRequestConfig = { baseURL: 'https://custom.example.com' };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -158,7 +158,7 @@ describe('v3 customInstance', () => {
       };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -187,7 +187,7 @@ describe('v3 customInstance', () => {
       };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -281,8 +281,8 @@ describe('v3 customInstance', () => {
 
     it('should allow cancellation during request execution', async () => {
       // Arrange
-      let resolveRequest: (value: unknown) => void = () => {};
-      const requestPromise = new Promise((resolve) => {
+      let resolveRequest: (value: AxiosResponse<unknown>) => void = () => {};
+      const requestPromise = new Promise<AxiosResponse<unknown>>((resolve) => {
         resolveRequest = resolve;
       });
 
