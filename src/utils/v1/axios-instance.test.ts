@@ -7,15 +7,15 @@ import Axios from 'axios';
  * including automatic base URL configuration, cancellation capability, and request configuration merging.
  */
 import { type MockedFunction, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { AXIOS_DEFAULT } from '../axios-default-instance.js';
+import { axiosInstanceManager } from '../axios-instance-manager.js';
 import { customInstance } from './axios-instance.js';
 
 // Mock Axios
 vi.mock('axios');
-vi.mock('../axios-default-instance.js');
+vi.mock('../axios-instance-manager.js');
 
 const mockedAxios = vi.mocked(Axios);
-const mockedAXIOS_DEFAULT = vi.mocked(AXIOS_DEFAULT);
+const mockedAxiosInstanceManager = vi.mocked(axiosInstanceManager);
 
 // Type for the promise returned by customInstance with cancel functionality
 type CancellablePromise<T> = Promise<T> & {
@@ -52,9 +52,9 @@ describe('v1 customInstance', () => {
       config: {},
     } as AxiosResponse<{ result: string }>);
 
-    // Mock for AXIOS_DEFAULT
-    mockedAXIOS_DEFAULT.instance = mockAxiosInstance as unknown as typeof AXIOS_DEFAULT.instance;
-    Object.defineProperty(mockedAXIOS_DEFAULT.instance, 'defaults', {
+    // Create a mock AxiosInstance with defaults
+    const mockInstance = mockAxiosInstance as unknown as AxiosInstance;
+    Object.defineProperty(mockInstance, 'defaults', {
       value: {
         baseURL: 'http://localhost',
         headers: {
@@ -70,6 +70,9 @@ describe('v1 customInstance', () => {
       writable: true,
       configurable: true,
     });
+
+    // Mock for axiosInstanceManager
+    mockedAxiosInstanceManager.getAxiosInstance.mockReturnValue(mockInstance);
   });
 
   afterEach(() => {
@@ -82,7 +85,7 @@ describe('v1 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
 
       // Act
-      await customInstance(config);
+      await customInstance(config, { appName: 'testApp' });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -99,7 +102,7 @@ describe('v1 customInstance', () => {
       const options: AxiosRequestConfig = { baseURL: 'https://custom.example.com' };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { appName: 'testApp', axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -118,7 +121,7 @@ describe('v1 customInstance', () => {
       };
 
       // Act
-      await customInstance(config);
+      await customInstance(config, { appName: 'testApp' });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -143,7 +146,7 @@ describe('v1 customInstance', () => {
       };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { appName: 'testApp', axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -170,7 +173,7 @@ describe('v1 customInstance', () => {
       };
 
       // Act
-      await customInstance(config, options);
+      await customInstance(config, { appName: 'testApp', axiosOptions: options });
 
       // Assert
       expect(mockAxiosInstance).toHaveBeenCalledWith(
@@ -196,7 +199,7 @@ describe('v1 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/users' };
 
       // Act
-      const result = await customInstance(config);
+      const result = await customInstance(config, { appName: 'testApp' });
 
       // Assert
       expect(result).toEqual(expectedData);
@@ -209,7 +212,7 @@ describe('v1 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
 
       // Act
-      const promise = customInstance(config) as CancellablePromise<unknown>;
+      const promise = customInstance(config, { appName: 'testApp' }) as CancellablePromise<unknown>;
 
       // Assert
       expect(promise).toHaveProperty('cancel');
@@ -224,7 +227,7 @@ describe('v1 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
 
       // Act
-      const promise = customInstance(config) as CancellablePromise<unknown>;
+      const promise = customInstance(config, { appName: 'testApp' }) as CancellablePromise<unknown>;
       promise.cancel();
 
       // Assert
@@ -244,7 +247,15 @@ describe('v1 customInstance', () => {
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
 
       // Act & Assert
-      await expect(customInstance(config)).rejects.toThrow('Network error');
+      await expect(customInstance(config, { appName: 'testApp' })).rejects.toThrow('Network error');
+    });
+
+    it('should throw error when appName is not provided', () => {
+      // Arrange
+      const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
+
+      // Act & Assert
+      expect(() => customInstance(config)).toThrow('appName is required');
     });
   });
 });

@@ -1,15 +1,22 @@
 import Axios, { type AxiosRequestConfig } from 'axios';
-import { AXIOS_DEFAULT } from '../axios-default-instance.js';
+import { axiosInstanceManager } from '../axios-instance-manager.js';
+import type { CustomInstanceOptions } from '../types/custom-instance.js';
 
-export const customInstance = <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
+export const customInstance = <T>(config: AxiosRequestConfig, options?: CustomInstanceOptions): Promise<T> => {
+  const { appName, axiosOptions } = options ?? {};
+
+  if (appName == null) {
+    throw new Error('appName is required');
+  }
+
   const source = Axios.CancelToken.source();
 
-  const defaultInstance = AXIOS_DEFAULT.instance;
-  const baseURL = `${options?.baseURL ?? config?.baseURL ?? defaultInstance.defaults.baseURL ?? ''}/_api`;
+  const instance = axiosInstanceManager.getAxiosInstance(appName);
+  const baseURL = `${axiosOptions?.baseURL ?? config?.baseURL ?? instance.defaults.baseURL ?? ''}/_api`;
 
-  const promise = AXIOS_DEFAULT.instance({
+  const promise = instance({
     ...config,
-    ...options,
+    ...axiosOptions,
     baseURL,
     cancelToken: source.token,
   }).then(({ data }) => data);
