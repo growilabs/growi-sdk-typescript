@@ -25,10 +25,14 @@ class AxiosInstanceManager {
   /**
    * Get a named Axios instance.
    * @param appName The name/key of the instance.
-   * @return The Axios instance, or undefined if not found.
+   * @returns The AxiosInstance.
+   * @throws Error if no instance is found for the given appName.
    */
-  getAxiosInstance(appName: string): AxiosInstance | undefined {
+  getAxiosInstance(appName: string): AxiosInstance {
     const instance = this.instances.get(appName);
+    if (!instance) {
+      throw new Error(`No Axios instance found for appName: ${appName}`);
+    }
     return instance;
   }
 }
