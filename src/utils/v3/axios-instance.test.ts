@@ -138,7 +138,6 @@ describe('v3 customInstance', () => {
         writable: true,
         configurable: true,
       });
-      console.log(mockInstance);
       mockedAxiosInstanceManager.getAxiosInstance.mockReturnValue(mockInstance);
 
       const config: AxiosRequestConfig = { method: 'GET', url: '/test' };
