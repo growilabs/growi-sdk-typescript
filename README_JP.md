@@ -68,8 +68,8 @@ import apiv3 from '@growi/sdk-typescript/v3';
 
 // ページの内容を取得
 try {
-  const pages = await apiv3.getPage({ pageId: "your-page-id" }, { appName: 'app-1' });
-  console.log(pages);
+  const page = await apiv3.getPage({ pageId: "your-page-id" }, { appName: 'app-1' });
+  console.log(page);
 } catch (error) {
   console.error('ページの取得に失敗しました:', error);
 }
@@ -86,7 +86,7 @@ try {
 ### API v1 の使用例
 
 ```typescript
-import apiv1 from '@growi/sdk-typescript/v1'; 
+import apiv1 from '@growi/sdk-typescript/v1';
 
 // ページの検索
 try {
