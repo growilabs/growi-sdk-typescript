@@ -68,8 +68,8 @@ import apiv3 from '@growi/sdk-typescript/v3';
 
 // Get page content
 try {
-  const pages = await apiv3.getPage({ pageId: "your-page-id" }, { appName: 'app-1' });
-  console.log(pages);
+  const page = await apiv3.getPage({ pageId: "your-page-id" }, { appName: 'app-1' });
+  console.log(page);
 } catch (error) {
   console.error('Failed to fetch page:', error);
 }
