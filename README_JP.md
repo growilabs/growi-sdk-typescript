@@ -45,13 +45,20 @@ pnpm add @growi/sdk-typescript
 ### クライアントの初期化
 
 ```typescript
-import { AXIOS_DEFAULT } from '@growi/sdk-typescript';
+import { axiosInstanceManager } from '@growi/sdk-typescript';
 
-// GROWI インスタンスのベース URL を設定
-AXIOS_DEFAULT.setBaseURL('https://your-growi-instance.com');
+axiosInstanceManager.addAxiosInstance({  
+  name: 'app-1',　// 識別用の名前
+  baseURL: 'https://your-growi-instance-1.com', // GROWI インスタンスの URL
+  token: 'your-api-token-1', // 認証トークン（必要に応じて)
+})
 
-// 認証トークンを設定（必要に応じて）
-AXIOS_DEFAULT.setAuthorizationHeader('your-api-token');
+// 2つ目のインスタンスを追加する例
+axiosInstanceManager.addAxiosInstance({  
+  name: 'app-2',
+  baseURL: 'https://your-growi-instance-2.com',
+  token: 'your-api-token-2',
+})
 ```
 
 ### API v3 の使用例
@@ -59,27 +66,21 @@ AXIOS_DEFAULT.setAuthorizationHeader('your-api-token');
 ```typescript
 import apiv3 from '@growi/sdk-typescript/v3';
 
-// ページ一覧を取得
+// ページの内容を取得
 try {
-  const pages = await apiv3.getPagesList();
-  console.log(pages);
+  const page = await apiv3.getPage({ pageId: "your-page-id" }, { appName: 'app-1' });
+  console.log(page);
 } catch (error) {
-  console.error('ページ一覧の取得に失敗しました:', error);
+  console.error('ページの取得に失敗しました:', error);
 }
 
-// 最近更新されたページの取得
+// ページの作成
 try {
-  const recentPages = await apiv3.getPagesRecent();
-  console.log(recentPages);
+  const createdPage = await apiv3.postPage({ path: 'your-page-path', body: "# 新しいページ" }, { appName: 'app-2' });
+  console.log(createdPage);
 } catch (error) {
-  console.error('最近更新されたページの取得に失敗しました:', error);
+  console.error('ページの作成に失敗しました:', error);
 }
-
-// パラメーターの指定
-const pagesWithParams = await apiv3.getPagesList({
-  limit: 20,
-  offset: 0
-});
 ```
 
 ### API v1 の使用例
@@ -89,7 +90,7 @@ import apiv1 from '@growi/sdk-typescript/v1';
 
 // ページの検索
 try {
-  const searchResult = await apiv1.searchPages({ q: 'search term' });
+  const searchResult = await apiv1.searchPages({ q: 'search term' }, { appName: 'app-1' });
   console.log(searchResult);
 } catch (error) {
   console.error('ページの検索に失敗しました:', error);
@@ -97,7 +98,7 @@ try {
 
 // コメントの取得
 try {
-  const comments = await apiv1.getComments({ page_id: 'your-page-id' });
+  const comments = await apiv1.getComments({ page_id: 'your-page-id' }, { appName: 'app-2' });
   console.log(comments);
 } catch (error) {
   console.error('コメントの取得に失敗しました:', error);
@@ -111,12 +112,12 @@ try {
 ```
 src/
 ├── utils/
-│   └── axios-instance.ts      # Axios インスタンスファクトリー
-├── generated/                  # Orval で生成されるソースコード群
-│   ├── v1/                      # API v1 クライアント
+│   └── axios-instance-manager.ts     # Axios インスタンス管理
+├── generated/                        # Orval で生成されるソースコード群
+│   ├── v1/                           # API v1 クライアント
 │   │   ├── index.ts
 │   │   └── index.schemas.ts
-│   └── v3/                      # API v3 クライアント
+│   └── v3/                           # API v3 クライアント
 │       ├── index.ts
 │       └── index.schemas.ts
 ```
@@ -162,7 +163,7 @@ const pageInfo: PageInfo = {
 
 1. リポジトリをクローン：
 ```bash
-git clone https://github.com/weseek/growi-sdk-typescript.git
+git clone https://github.com/growilabs/growi-sdk-typescript.git
 cd growi-sdk-typescript
 ```
 
@@ -193,7 +194,7 @@ GitHub Actions により、以下のワークフローが定期実行される
 
 ### 貢献方法
 
-1. **Issue の報告**: バグや機能要求は [GitHub Issues](https://github.com/weseek/growi-sdk-typescript/issues) で報告してください
+1. **Issue の報告**: バグや機能要求は [GitHub Issues](https://github.com/growilabs/growi-sdk-typescript/issues) で報告してください
 2. **プルリクエスト**: 
    - フォークしてブランチを作成
    - 変更を実装
