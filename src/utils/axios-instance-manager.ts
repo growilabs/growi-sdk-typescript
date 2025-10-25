@@ -11,7 +11,7 @@ class AxiosInstanceManager {
    * @param appName The name/key for the instance.
    * @param config The configuration for the Axios instance.
    */
-  addAxiosInstance(config: { appName: string; baseURL: string; token: string; authorizationHeader: string | undefined }) {
+  addAxiosInstance(config: { appName: string; baseURL: string; token: string; authorizationHeader?: string | undefined }) {
     if (config.appName.length === 0) throw new Error('appName must be a non-empty string');
     if (config.baseURL.length === 0) throw new Error('baseURL must be a non-empty string');
     if (config.token.length === 0) throw new Error('token must be a non-empty string');
