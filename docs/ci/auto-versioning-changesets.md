@@ -169,7 +169,6 @@ jobs:
           # createGithubReleases: true # デフォルトでtrue。GitHub Releasesを作成する
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # npm publish に必要
 
       # - name: Output published packages (Optional)
       #   if: steps.changesets.outputs.published == 'true'
@@ -181,14 +180,12 @@ jobs:
     *   `publish` 入力: `pnpm changeset publish` を直接指定するか、ビルドステップを含むリリーススクリプト（例: `pnpm run release` で内部的に `pnpm build && pnpm changeset publish` を実行）を指定します。
     *   `version` 入力: `pnpm changeset version` を指定します。
     *   `commit` と `title`: バージョンアップ時のコミットメッセージとPRのタイトルを指定します。
-*   **`NPM_TOKEN`:**
-    *   npmに公開するために必要な認証トークンです。
-    *   事前にnpmでアクセストークンを作成し、リポジトリの `Settings > Secrets and variables > Actions` で `NPM_TOKEN` という名前のシークレットとして登録しておく必要があります。
-    *   トークンには適切な公開権限が必要です。
 
 ## 6. `npm publish` との連携
 
 *   `pnpm changeset publish` コマンドは、内部的に各パッケージディレクトリで `npm publish` (または `yarn publish`, `pnpm publish`) を実行します。
+*   npmjs.com への認証は OIDC を利用します
+    * 事前に Trusted Publisher への登録が必要です
 *   `.changeset/config.json` の `access` プロパティで公開範囲（`public` または `restricted`）を指定できます。
 *   **公開前のビルドステップ:**
     *   多くのプロジェクトでは、公開前にトランスパイルやバンドルなどのビルド処理が必要です。

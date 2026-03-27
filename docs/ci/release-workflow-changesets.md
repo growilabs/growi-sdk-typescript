@@ -43,11 +43,10 @@
     *   **title:** プルリクエストのタイトルを設定します (例: `Release new version(s)`)。
     *   **環境変数:**
         *   `GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`
-        *   `NPM_TOKEN: ${{ secrets.NPM_TOKEN }}`
 
 ## 前提条件
 
-*   `NPM_TOKEN` がリポジトリのシークレットに正しく設定されていること。
+*   npmjs.com で Trusted Publisher の設定が済んでいること
 
 ## 補足事項
 
