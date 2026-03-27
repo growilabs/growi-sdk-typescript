@@ -11,13 +11,22 @@ class AxiosInstanceManager {
    * @param appName The name/key for the instance.
    * @param config The configuration for the Axios instance.
    */
-  addAxiosInstance(config: { appName: string; baseURL: string; token: string }) {
+  addAxiosInstance(config: { appName: string; baseURL: string; token: string; authorizationHeader?: string | undefined }) {
+    if (config.appName.length === 0) throw new Error('appName must be a non-empty string');
+    if (config.baseURL.length === 0) throw new Error('baseURL must be a non-empty string');
+    if (config.token.length === 0) throw new Error('token must be a non-empty string');
+
     const axiosInstance = Axios.create({
       baseURL: config.baseURL,
     });
 
     // Set the Authorization header
-    axiosInstance.defaults.headers.common.Authorization = `Bearer ${config.token}`;
+    if (config.authorizationHeader) {
+      axiosInstance.defaults.headers.common.Authorization = config.authorizationHeader;
+      axiosInstance.defaults.headers['X-GROWI-ACCESS-TOKEN'] = config.token;
+    } else {
+      axiosInstance.defaults.headers.common.Authorization = `Bearer ${config.token}`;
+    }
 
     this.instances.set(config.appName, axiosInstance);
   }
