@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v1",
-    "version": "7.3.3-RC.0"
+    "version": "7.5.2-RC.0"
   },
   "servers": [
     {
@@ -415,10 +415,80 @@
         "description": "Object ID",
         "example": "5ae5fccfc5577b0004dbd8ab"
       },
+      "PageForTreeItem": {
+        "description": "Page",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/ObjectId"
+          },
+          "path": {
+            "$ref": "#/components/schemas/PagePath"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/PagePath"
+          },
+          "grant": {
+            "$ref": "#/components/schemas/PageGrant"
+          },
+          "lastUpdateUser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "descendantCount": {
+            "type": "number"
+          },
+          "isEmpty": {
+            "type": "boolean"
+          },
+          "wip": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "date created at",
+            "example": "2010-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "date updated at",
+            "example": "2010-01-01T00:00:00.000Z"
+          }
+        }
+      },
       "PagePath": {
         "description": "Page path",
         "type": "string",
         "example": "/path/to/page"
+      },
+      "GetPageResponse": {
+        "description": "Response for GET /page endpoint",
+        "type": "object",
+        "properties": {
+          "page": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Page"
+              },
+              {
+                "description": "The requested page. Null if pages array is returned instead."
+              }
+            ],
+            "nullable": true
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Page"
+            },
+            "description": "Array of pages when findAll parameter is used. Null otherwise.",
+            "nullable": true
+          },
+          "meta": {
+            "type": "object",
+            "description": "Metadata about the page request",
+            "nullable": true
+          }
+        }
       },
       "PageGrant": {
         "description": "Grant for page",
@@ -558,7 +628,7 @@
           }
         ]
       },
-      "PageInfoAll": {
+      "PageInfoExt": {
         "description": "Page information (union of all page info types)",
         "oneOf": [
           {
