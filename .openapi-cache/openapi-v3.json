@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v3",
-    "version": "7.3.3-RC.0"
+    "version": "7.5.2-RC.0"
   },
   "servers": [
     {
@@ -48,6 +48,18 @@
         "name": "x-growi-transfer-key"
       }
     },
+    "parameters": {
+      "MimeTypePathParam": {
+        "name": "mimeType",
+        "in": "path",
+        "required": true,
+        "description": "The MIME type to configure.",
+        "schema": {
+          "type": "string",
+          "example": "image/png"
+        }
+      }
+    },
     "schemas": {
       "SyncStatus": {
         "type": "object",
@@ -60,6 +72,63 @@
           },
           "count": {
             "type": "number"
+          }
+        }
+      },
+      "PathSuggestion": {
+        "type": "object",
+        "required": [
+          "type",
+          "path",
+          "label",
+          "description",
+          "grant"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "memo",
+              "search",
+              "category"
+            ],
+            "description": "The type of suggestion"
+          },
+          "path": {
+            "type": "string",
+            "description": "Suggested page path",
+            "example": "/user/alice/2026/04/01/meeting-notes"
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable label for the suggestion"
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of why this path is suggested"
+          },
+          "grant": {
+            "type": "integer",
+            "description": "Page grant (1=public, 4=owner_only, 5=user_group)"
+          },
+          "informationType": {
+            "type": "string",
+            "enum": [
+              "flow",
+              "stock"
+            ],
+            "description": "Whether the content is flow (time-based) or stock (reference)"
+          }
+        }
+      },
+      "SuggestPathResponse": {
+        "type": "object",
+        "properties": {
+          "suggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PathSuggestion"
+            }
           }
         }
       },
@@ -100,7 +169,7 @@
                     },
                     "action": {
                       "type": "string",
-                      "example": "PAGE_DELETE_COMPLETELY"
+                      "example": "PAGE_UPDATE"
                     },
                     "snapshot": {
                       "type": "object",
@@ -165,7 +234,7 @@
                         },
                         "username": {
                           "type": "string",
-                          "example": "grow"
+                          "example": "growi"
                         },
                         "createdAt": {
                           "type": "string",
@@ -1211,10 +1280,6 @@
           "isSidebarCollapsedMode": {
             "type": "boolean",
             "description": "The flag whether sidebar is collapsed mode or not."
-          },
-          "isSidebarClosedAtDockMode": {
-            "type": "boolean",
-            "description": "The flag whether sidebar is closed at dock mode or not."
           }
         }
       },
@@ -2324,6 +2389,10 @@
             "type": "string",
             "description": "type of pageDeletionAuthority"
           },
+          "disableUserPages": {
+            "type": "boolean",
+            "description": "hide all user pages from general users"
+          },
           "hideRestrictedByOwner": {
             "type": "boolean",
             "description": "enable hide by owner"
@@ -2478,99 +2547,6 @@
           }
         }
       },
-      "SamlAuthSetting": {
-        "type": "object",
-        "properties": {
-          "missingMandatoryConfigKeys": {
-            "type": "array",
-            "description": "array of missing mandatory config keys",
-            "items": {
-              "type": "string",
-              "description": "missing mandatory config key"
-            }
-          },
-          "useOnlyEnvVarsForSomeOptions": {
-            "type": "boolean",
-            "description": "use only env vars for some options"
-          },
-          "samlEntryPoint": {
-            "type": "string",
-            "description": "entry point for saml"
-          },
-          "samlIssuer": {
-            "type": "string",
-            "description": "issuer for saml"
-          },
-          "samlEnvVarIssuer": {
-            "type": "string",
-            "description": "issuer for saml"
-          },
-          "samlCert": {
-            "type": "string",
-            "description": "certificate for saml"
-          },
-          "samlEnvVarCert": {
-            "type": "string",
-            "description": "certificate for saml"
-          },
-          "samlAttrMapId": {
-            "type": "string",
-            "description": "attribute mapping id for saml"
-          },
-          "samlAttrMapUserName": {
-            "type": "string",
-            "description": "attribute mapping user name for saml"
-          },
-          "samlAttrMapMail": {
-            "type": "string",
-            "description": "attribute mapping mail for saml"
-          },
-          "samlEnvVarAttrMapId": {
-            "type": "string",
-            "description": "attribute mapping id for saml"
-          },
-          "samlEnvVarAttrMapUserName": {
-            "type": "string",
-            "description": "attribute mapping user name for saml"
-          },
-          "samlEnvVarAttrMapMail": {
-            "type": "string",
-            "description": "attribute mapping mail for saml"
-          },
-          "samlAttrMapFirstName": {
-            "type": "string",
-            "description": "attribute mapping first name for saml"
-          },
-          "samlAttrMapLastName": {
-            "type": "string",
-            "description": "attribute mapping last name for saml"
-          },
-          "samlEnvVarAttrMapFirstName": {
-            "type": "string",
-            "description": "attribute mapping first name for saml"
-          },
-          "samlEnvVarAttrMapLastName": {
-            "type": "string",
-            "description": "attribute mapping last name for saml"
-          },
-          "isSameUsernameTreatedAsIdenticalUser": {
-            "type": "boolean",
-            "description": "local account automatically linked the user name matched"
-          },
-          "isSameEmailTreatedAsIdenticalUser": {
-            "type": "boolean",
-            "description": "local account automatically linked the email matched"
-          },
-          "samlABLCRule": {
-            "type": "string",
-            "description": "ABLCRule for saml"
-          },
-          "samlEnvVarABLCRule": {
-            "type": "string",
-            "description": "ABLCRule for saml"
-          }
-        }
-      },
       "OidcAuthSetting": {
         "type": "object",
         "properties": {
@@ -2679,6 +2655,99 @@
           "isSameUsernameTreatedAsIdenticalUser": {
             "type": "boolean",
             "description": "local account automatically linked the email matched"
+          }
+        }
+      },
+      "SamlAuthSetting": {
+        "type": "object",
+        "properties": {
+          "missingMandatoryConfigKeys": {
+            "type": "array",
+            "description": "array of missing mandatory config keys",
+            "items": {
+              "type": "string",
+              "description": "missing mandatory config key"
+            }
+          },
+          "useOnlyEnvVarsForSomeOptions": {
+            "type": "boolean",
+            "description": "use only env vars for some options"
+          },
+          "samlEntryPoint": {
+            "type": "string",
+            "description": "entry point for saml"
+          },
+          "samlIssuer": {
+            "type": "string",
+            "description": "issuer for saml"
+          },
+          "samlEnvVarIssuer": {
+            "type": "string",
+            "description": "issuer for saml"
+          },
+          "samlCert": {
+            "type": "string",
+            "description": "certificate for saml"
+          },
+          "samlEnvVarCert": {
+            "type": "string",
+            "description": "certificate for saml"
+          },
+          "samlAttrMapId": {
+            "type": "string",
+            "description": "attribute mapping id for saml"
+          },
+          "samlAttrMapUserName": {
+            "type": "string",
+            "description": "attribute mapping user name for saml"
+          },
+          "samlAttrMapMail": {
+            "type": "string",
+            "description": "attribute mapping mail for saml"
+          },
+          "samlEnvVarAttrMapId": {
+            "type": "string",
+            "description": "attribute mapping id for saml"
+          },
+          "samlEnvVarAttrMapUserName": {
+            "type": "string",
+            "description": "attribute mapping user name for saml"
+          },
+          "samlEnvVarAttrMapMail": {
+            "type": "string",
+            "description": "attribute mapping mail for saml"
+          },
+          "samlAttrMapFirstName": {
+            "type": "string",
+            "description": "attribute mapping first name for saml"
+          },
+          "samlAttrMapLastName": {
+            "type": "string",
+            "description": "attribute mapping last name for saml"
+          },
+          "samlEnvVarAttrMapFirstName": {
+            "type": "string",
+            "description": "attribute mapping first name for saml"
+          },
+          "samlEnvVarAttrMapLastName": {
+            "type": "string",
+            "description": "attribute mapping last name for saml"
+          },
+          "isSameUsernameTreatedAsIdenticalUser": {
+            "type": "boolean",
+            "description": "local account automatically linked the user name matched"
+          },
+          "isSameEmailTreatedAsIdenticalUser": {
+            "type": "boolean",
+            "description": "local account automatically linked the email matched"
+          },
+          "samlABLCRule": {
+            "type": "string",
+            "description": "ABLCRule for saml"
+          },
+          "samlEnvVarABLCRule": {
+            "type": "string",
+            "description": "ABLCRule for saml"
           }
         }
       },
@@ -2954,10 +3023,80 @@
         "description": "Object ID",
         "example": "5ae5fccfc5577b0004dbd8ab"
       },
+      "PageForTreeItem": {
+        "description": "Page",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/ObjectId"
+          },
+          "path": {
+            "$ref": "#/components/schemas/PagePath"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/PagePath"
+          },
+          "grant": {
+            "$ref": "#/components/schemas/PageGrant"
+          },
+          "lastUpdateUser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "descendantCount": {
+            "type": "number"
+          },
+          "isEmpty": {
+            "type": "boolean"
+          },
+          "wip": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "date created at",
+            "example": "2010-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "date updated at",
+            "example": "2010-01-01T00:00:00.000Z"
+          }
+        }
+      },
       "PagePath": {
         "description": "Page path",
         "type": "string",
         "example": "/path/to/page"
+      },
+      "GetPageResponse": {
+        "description": "Response for GET /page endpoint",
+        "type": "object",
+        "properties": {
+          "page": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Page"
+              },
+              {
+                "description": "The requested page. Null if pages array is returned instead."
+              }
+            ],
+            "nullable": true
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Page"
+            },
+            "description": "Array of pages when findAll parameter is used. Null otherwise.",
+            "nullable": true
+          },
+          "meta": {
+            "type": "object",
+            "description": "Metadata about the page request",
+            "nullable": true
+          }
+        }
       },
       "PageGrant": {
         "description": "Grant for page",
@@ -3097,7 +3236,7 @@
           }
         ]
       },
-      "PageInfoAll": {
+      "PageInfoExt": {
         "description": "Page information (union of all page info types)",
         "oneOf": [
           {
@@ -3542,8 +3681,7 @@
         "Revisions",
         "ShareLinks",
         "Users",
-        "UserUISettings",
-        ""
+        "UserUISettings"
       ]
     },
     {
@@ -3551,12 +3689,7 @@
       "tags": [
         "GeneralSetting",
         "EditorSetting",
-        "InAppNotificationSettings",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "InAppNotificationSettings"
       ]
     },
     {
@@ -3589,6 +3722,12 @@
         "Users Management",
         "FullTextSearch Management",
         "Install"
+      ]
+    },
+    {
+      "name": "AI API",
+      "tags": [
+        "AI Tools"
       ]
     },
     {
@@ -4549,6 +4688,59 @@
         "operationId": "getPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates"
       }
     },
+    "/ai-tools/suggest-path": {
+      "post": {
+        "summary": "Suggest page paths based on content",
+        "description": "Analyzes the given content and suggests appropriate page paths using keyword extraction, search, and AI evaluation.",
+        "tags": [
+          "AI Tools"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "body"
+                ],
+                "properties": {
+                  "body": {
+                    "type": "string",
+                    "description": "The page content to analyze for path suggestions",
+                    "maxLength": 50000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Path suggestions generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuggestPathResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to generate path suggestions"
+          }
+        },
+        "operationId": "postSuggestPathForAiTools"
+      }
+    },
     "/plugins": {
       "post": {
         "tags": [
@@ -4702,6 +4894,11 @@
         ],
         "security": [
           {
+            "bearer": [],
+            "cookieAuth": []
+          },
+          {
+            "accessTokenInQuery": [],
             "bearer": []
           },
           {
@@ -4778,6 +4975,49 @@
           }
         },
         "operationId": "getAdminHome"
+      }
+    },
+    "/app-settings/file-upload-settings": {
+      "put": {
+        "tags": [
+          "AppSettings"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "/app-settings/file-upload-setting",
+        "description": "Update fileUploadSetting",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileUploadSettingParams"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded to update fileUploadSetting",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseParams": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/FileUploadSettingParams"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putFileUploadSettingsForAppSettings"
       }
     },
     "/app-settings": {
@@ -5015,7 +5255,7 @@
         "operationId": "putSesSettingForAppSettings"
       }
     },
-    "/app-settings/file-upload-settings": {
+    "/app-settings/oauth2-setting": {
       "put": {
         "tags": [
           "AppSettings"
@@ -5025,29 +5265,56 @@
             "cookieAuth": []
           }
         ],
-        "summary": "/app-settings/file-upload-setting",
-        "description": "Update fileUploadSetting",
+        "summary": "/app-settings/oauth2-setting",
+        "description": "Update OAuth 2.0 setting for email",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FileUploadSettingParams"
+                "type": "object",
+                "properties": {
+                  "fromAddress": {
+                    "type": "string",
+                    "description": "e-mail address used as from address",
+                    "example": "info@growi.org"
+                  },
+                  "transmissionMethod": {
+                    "type": "string",
+                    "description": "transmission method",
+                    "example": "oauth2"
+                  },
+                  "oauth2ClientId": {
+                    "type": "string",
+                    "description": "OAuth 2.0 Client ID"
+                  },
+                  "oauth2ClientSecret": {
+                    "type": "string",
+                    "description": "OAuth 2.0 Client Secret"
+                  },
+                  "oauth2RefreshToken": {
+                    "type": "string",
+                    "description": "OAuth 2.0 Refresh Token"
+                  },
+                  "oauth2User": {
+                    "type": "string",
+                    "description": "Email address of the authorized account"
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Succeeded to update fileUploadSetting",
+            "description": "Succeeded to update OAuth 2.0 setting",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "responseParams": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/FileUploadSettingParams"
+                    "mailSettingParams": {
+                      "type": "object"
                     }
                   }
                 }
@@ -5055,7 +5322,7 @@
             }
           }
         },
-        "operationId": "putFileUploadSettingsForAppSettings"
+        "operationId": "putOauth2SettingForAppSettings"
       }
     },
     "/app-settings/v5-schema-migration": {
@@ -5787,6 +6054,100 @@
           }
         },
         "operationId": "putBookmarks"
+      }
+    },
+    "/content-disposition-settings/": {
+      "put": {
+        "tags": [
+          "Content-Disposition Settings"
+        ],
+        "summary": "Replace content disposition settings for configurable MIME types with recieved lists.",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set content disposition settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "currentDispositionSettings": {
+                      "type": "object",
+                      "properties": {
+                        "inlineMimeTypes": {
+                          "type": "array",
+                          "description": "The list of MIME types set to inline.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "attachmentMimeTypes": {
+                          "type": "array",
+                          "description": "The list of MIME types set to attachment.",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putContentDispositionSettings"
+      }
+    },
+    "/content-disposition-settings": {
+      "get": {
+        "tags": [
+          "Content-Disposition Settings"
+        ],
+        "summary": "Get content disposition settings for configurable MIME types",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved content disposition settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "currentDispositionSettings": {
+                      "type": "object",
+                      "properties": {
+                        "inlineMimeTypes": {
+                          "type": "array",
+                          "description": "The list of MIME types set to inline.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "attachmentMimeTypes": {
+                          "type": "array",
+                          "description": "The list of MIME types set to attachment.",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getContentDispositionSettings"
       }
     },
     "/customize-setting": {
@@ -7070,7 +7431,7 @@
         "operationId": "getHealthcheck"
       }
     },
-    "/import": {
+    "/import/status": {
       "get": {
         "tags": [
           "Import"
@@ -7083,36 +7444,17 @@
             "accessTokenInQuery": []
           }
         ],
-        "summary": "/import",
-        "description": "Get import settings params",
+        "summary": "/import/status",
+        "description": "Get properties of stored zip files for import",
         "responses": {
           "200": {
-            "description": "import settings params",
+            "description": "the zip file statuses",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "importSettingsParams": {
-                      "type": "object",
-                      "description": "import settings params",
-                      "properties": {
-                        "esaTeamName": {
-                          "type": "string",
-                          "description": "the team name of esa.io"
-                        },
-                        "esaAccessToken": {
-                          "type": "string",
-                          "description": "the access token of esa.io"
-                        },
-                        "qiitaTeamName": {
-                          "type": "string",
-                          "description": "the team name of qiita.com"
-                        },
-                        "qiitaAccessToken": {
-                          "type": "string",
-                          "description": "the access token of qiita.com"
-                        }
-                      }
+                    "status": {
+                      "$ref": "#/components/schemas/ImportStatus"
                     }
                   }
                 }
@@ -7120,8 +7462,10 @@
             }
           }
         },
-        "operationId": "getImport"
-      },
+        "operationId": "getStatusForImport"
+      }
+    },
+    "/import": {
       "post": {
         "tags": [
           "Import"
@@ -7174,40 +7518,6 @@
           }
         },
         "operationId": "postImport"
-      }
-    },
-    "/import/status": {
-      "get": {
-        "tags": [
-          "Import"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/import/status",
-        "description": "Get properties of stored zip files for import",
-        "responses": {
-          "200": {
-            "description": "the zip file statuses",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/ImportStatus"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getStatusForImport"
       }
     },
     "/import/upload": {
@@ -8177,7 +8487,7 @@
                   "type": "object",
                   "properties": {
                     "rootPage": {
-                      "$ref": "#/components/schemas/Page"
+                      "$ref": "#/components/schemas/PageForTreeItem"
                     }
                   }
                 }
@@ -8186,81 +8496,6 @@
           }
         },
         "operationId": "getRootForPageListing"
-      }
-    },
-    "/page-listing/ancestors-children": {
-      "get": {
-        "tags": [
-          "PageListing"
-        ],
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "accessTokenInQuery": []
-          }
-        ],
-        "summary": "/page-listing/ancestors-children",
-        "description": "Get the ancestors and children of a page",
-        "parameters": [
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get the ancestors and children of a page",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "ancestorsChildren": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string",
-                            "description": "Document ID"
-                          },
-                          "descendantCount": {
-                            "type": "integer",
-                            "description": "Number of descendants"
-                          },
-                          "isEmpty": {
-                            "type": "boolean",
-                            "description": "Indicates if the node is empty"
-                          },
-                          "grant": {
-                            "type": "integer",
-                            "description": "Access level"
-                          },
-                          "path": {
-                            "type": "string",
-                            "description": "Path string"
-                          },
-                          "revision": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "Revision ID (nullable)"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getAncestorsChildrenForPageListing"
       }
     },
     "/page-listing/children": {
@@ -8305,7 +8540,7 @@
                     "children": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Page"
+                        "$ref": "#/components/schemas/PageForTreeItem"
                       }
                     }
                   }
@@ -8375,7 +8610,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/PageInfoAll"
+                    "$ref": "#/components/schemas/PageInfoExt"
                   }
                 }
               }
@@ -8385,13 +8620,156 @@
         "operationId": "getInfoForPageListing"
       }
     },
+    "/page-listing/item": {
+      "get": {
+        "tags": [
+          "PageListing"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          }
+        ],
+        "summary": "/page-listing/item",
+        "description": "Get a single page item for tree display",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page item data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "item": {
+                      "$ref": "#/components/schemas/PageForTreeItem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getItemForPageListing"
+      }
+    },
+    "/page/shared": {
+      "get": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "Get page by share link",
+        "description": "Get page data via a valid share link (public endpoint, no authentication required)",
+        "parameters": [
+          {
+            "name": "shareLinkId",
+            "in": "query",
+            "required": true,
+            "description": "share link ID",
+            "schema": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": true,
+            "description": "page ID",
+            "schema": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved page via share link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameters"
+          },
+          "403": {
+            "description": "Link sharing disabled, link expired, or forbidden page"
+          },
+          "404": {
+            "description": "Share link not found or page not found"
+          }
+        },
+        "operationId": "getSharedForPage"
+      }
+    },
+    "/page/info": {
+      "get": {
+        "tags": [
+          "Page"
+        ],
+        "summary": "/page/info",
+        "description": "Get summary informations for a page",
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": true,
+            "description": "page id",
+            "schema": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          {
+            "name": "shareLinkId",
+            "in": "query",
+            "description": "share link id for shared page access",
+            "schema": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved current page info.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageInfoExt"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Page is forbidden."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "operationId": "getInfoForPage"
+      }
+    },
     "/page": {
       "get": {
         "tags": [
           "Page"
         ],
         "summary": "Get page",
-        "description": "get page by pagePath or pageId",
+        "description": "Get page by pagePath or pageId. Returns a single page or multiple pages based on parameters.",
         "parameters": [
           {
             "name": "pageId",
@@ -8408,6 +8786,30 @@
             "schema": {
               "$ref": "#/components/schemas/PagePath"
             }
+          },
+          {
+            "name": "findAll",
+            "in": "query",
+            "description": "If set, returns all pages matching the path (returns pages array instead of single page)",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "revisionId",
+            "in": "query",
+            "description": "Specific revision ID to retrieve",
+            "schema": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          {
+            "name": "includeEmpty",
+            "in": "query",
+            "description": "Include empty pages in results when using findAll",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -8416,7 +8818,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Page"
+                  "$ref": "#/components/schemas/GetPageResponse"
                 }
               }
             }
@@ -8677,42 +9079,6 @@
         "operationId": "putLikesForPage"
       }
     },
-    "/page/info": {
-      "get": {
-        "tags": [
-          "Page"
-        ],
-        "summary": "/page/info",
-        "description": "Get summary informations for a page",
-        "parameters": [
-          {
-            "name": "pageId",
-            "in": "query",
-            "required": true,
-            "description": "page id",
-            "schema": {
-              "$ref": "#/components/schemas/ObjectId"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved current page info.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageInfoAll"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        },
-        "operationId": "getInfoForPage"
-      }
-    },
     "/page/grant-data": {
       "get": {
         "tags": [
@@ -8747,7 +9113,7 @@
             }
           },
           "400": {
-            "description": "Bad request. Page is unreachable or empty."
+            "description": "Bad request. Page is unreachable."
           },
           "500": {
             "description": "Internal server error."
@@ -8857,7 +9223,7 @@
             }
           },
           "400": {
-            "description": "Bad request. Page is unreachable or empty."
+            "description": "Bad request. Page is unreachable."
           },
           "500": {
             "description": "Internal server error."
@@ -9327,11 +9693,6 @@
                   },
                   "path": {
                     "$ref": "#/components/schemas/PagePath"
-                  },
-                  "revisionId": {
-                    "type": "string",
-                    "description": "revision ID",
-                    "example": "5e07345972560e001761fa63"
                   },
                   "newPagePath": {
                     "type": "string",
