@@ -1,5 +1,18 @@
 ## [2025-06-02] - SDK Update
 
+## 1.9.0
+
+### Minor Changes
+
+- [#25](https://github.com/growilabs/growi-sdk-typescript/pull/25) [`933bb27`](https://github.com/growilabs/growi-sdk-typescript/commit/933bb2795c24ed391715347c765aceef8bc5103c) Thanks [@ryu-sato](https://github.com/ryu-sato)! - Add authorization header override functionality
+
+  - Add `authorizationHeader` option to `AxiosInstanceManager.addAxiosInstance()`
+  - Allow custom authorization headers instead of default Bearer token authentication
+  - When `authorizationHeader` is specified, GROWI access token is sent via `X-GROWI-ACCESS-TOKEN` header
+  - Support for Digest authentication, Basic authentication, and custom proxy authentication
+  - Add detailed usage examples and documentation to README
+  - Add comprehensive test cases covering error handling and edge cases
+
 ## 1.8.0
 
 ### Minor Changes
