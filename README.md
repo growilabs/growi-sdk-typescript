@@ -47,22 +47,22 @@ pnpm add @growi/sdk-typescript
 ```typescript
 import { axiosInstanceManager } from '@growi/sdk-typescript';
 
-axiosInstanceManager.addAxiosInstance({  
-  name: 'app-1', // Identifier name
+axiosInstanceManager.addAxiosInstance({
+  appName: 'app-1', // Identifier name
   baseURL: 'https://your-growi-instance-1.com', // GROWI instance URL
   token: 'your-api-token-1', // Authentication token (optional)
 })
 
 // Example of adding a second instance
-axiosInstanceManager.addAxiosInstance({  
-  name: 'app-2',
+axiosInstanceManager.addAxiosInstance({
+  appName: 'app-2',
   baseURL: 'https://your-growi-instance-2.com',
   token: 'your-api-token-2',
 })
 
 // Example with Digest authentication when GROWI is behind Digest auth protection
-axiosInstanceManager.addAxiosInstance({  
-  name: 'app-3',
+axiosInstanceManager.addAxiosInstance({
+  appName: 'app-3',
   baseURL: 'https://your-growi-instance-3.com',
   token: 'your-growi-access-token',
   authorizationHeader: 'Digest username="user", realm="Protected Area", nonce="abc123", uri="/", response="xyz789"', // Digest auth header
@@ -147,7 +147,7 @@ This feature is particularly useful when GROWI is behind authentication systems 
 **Default behavior (Bearer token):**
 ```typescript
 axiosInstanceManager.addAxiosInstance({
-  name: 'default-auth',
+  appName: 'default-auth',
   baseURL: 'https://growi.example.com',
   token: 'your-growi-api-token',
   // Authorization header will be: "Bearer your-growi-api-token"
@@ -157,7 +157,7 @@ axiosInstanceManager.addAxiosInstance({
 **Digest authentication example:**
 ```typescript
 axiosInstanceManager.addAxiosInstance({
-  name: 'digest-auth',
+  appName: 'digest-auth',
   baseURL: 'https://growi.example.com',
   token: 'growi-api-token',
   authorizationHeader: 'Digest username="admin", realm="GROWI Protected", nonce="abc123def456", uri="/", response="calculated-response-hash"',
@@ -169,7 +169,7 @@ axiosInstanceManager.addAxiosInstance({
 **Basic authentication example:**
 ```typescript
 axiosInstanceManager.addAxiosInstance({
-  name: 'basic-auth',
+  appName: 'basic-auth',
   baseURL: 'https://growi.example.com',
   token: 'growi-api-token',
   authorizationHeader: 'Basic ' + btoa('username:password'),
