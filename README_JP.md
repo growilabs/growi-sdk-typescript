@@ -59,6 +59,14 @@ axiosInstanceManager.addAxiosInstance({
   baseURL: 'https://your-growi-instance-2.com',
   token: 'your-api-token-2',
 })
+
+// GROWIがDigest認証で保護されている場合の例
+axiosInstanceManager.addAxiosInstance({  
+  name: 'app-3',
+  baseURL: 'https://your-growi-instance-3.com',
+  token: 'your-growi-access-token',
+  authorizationHeader: 'Digest username="user", realm="Protected Area", nonce="abc123", uri="/", response="xyz789"', // Digest認証ヘッダー
+})
 ```
 
 ### API v3 の使用例
@@ -126,6 +134,49 @@ src/
 
 - **API v3**: 新機能や改良された API エンドポイントが含まれています。可能な限り v3 の使用を推奨します。
 - **API v1**: v3 で提供されていない機能や、レガシー対応が必要な場合に使用してください。
+
+### 認証ヘッダーの上書き
+
+SDK は、デフォルトの Bearer トークン認証方法を上書きする機能をサポートしています。`authorizationHeader` オプションが提供された場合：
+
+- `Authorization` ヘッダーは提供されたカスタム値に設定されます
+- GROWI アクセストークンは `X-GROWI-ACCESS-TOKEN` ヘッダー経由で送信されます
+
+この機能は、特に GROWI が Digest認証、Basic認証、またはカスタムプロキシ認証などの認証システムの背後にある場合に、特定の認証ヘッダー形式が必要な時に便利です。
+
+**デフォルトの動作（Bearer トークン）:**
+```typescript
+axiosInstanceManager.addAxiosInstance({
+  name: 'default-auth',
+  baseURL: 'https://growi.example.com',
+  token: 'your-growi-api-token',
+  // Authorization ヘッダーは: "Bearer your-growi-api-token" に設定されます
+});
+```
+
+**Digest認証の例:**
+```typescript
+axiosInstanceManager.addAxiosInstance({
+  name: 'digest-auth',
+  baseURL: 'https://growi.example.com',
+  token: 'growi-api-token',
+  authorizationHeader: 'Digest username="admin", realm="GROWI Protected", nonce="abc123def456", uri="/", response="calculated-response-hash"',
+  // Authorization ヘッダーは Digest認証文字列に設定されます
+  // X-GROWI-ACCESS-TOKEN ヘッダーは: "growi-api-token" に設定されます
+});
+```
+
+**Basic認証の例:**
+```typescript
+axiosInstanceManager.addAxiosInstance({
+  name: 'basic-auth',
+  baseURL: 'https://growi.example.com',
+  token: 'growi-api-token',
+  authorizationHeader: 'Basic ' + btoa('username:password'),
+  // Authorization ヘッダーは: "Basic base64エンコードされた認証情報" に設定されます
+  // X-GROWI-ACCESS-TOKEN ヘッダーは: "growi-api-token" に設定されます
+});
+```
 
 ## 型定義
 

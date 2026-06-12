@@ -59,6 +59,14 @@ axiosInstanceManager.addAxiosInstance({
   baseURL: 'https://your-growi-instance-2.com',
   token: 'your-api-token-2',
 })
+
+// Example with Digest authentication when GROWI is behind Digest auth protection
+axiosInstanceManager.addAxiosInstance({  
+  name: 'app-3',
+  baseURL: 'https://your-growi-instance-3.com',
+  token: 'your-growi-access-token',
+  authorizationHeader: 'Digest username="user", realm="Protected Area", nonce="abc123", uri="/", response="xyz789"', // Digest auth header
+})
 ```
 
 ### API v3 Usage Example
@@ -126,6 +134,49 @@ src/
 
 - **API v3**: Contains new features and improved API endpoints. We recommend using v3 whenever possible.
 - **API v1**: Use when you need features not available in v3 or for legacy compatibility.
+
+### Authentication Header Override
+
+The SDK now supports overriding the default Bearer token authorization method. When the `authorizationHeader` option is provided:
+
+- The `Authorization` header will be set to the provided custom value
+- The GROWI access token will be sent via the `X-GROWI-ACCESS-TOKEN` header
+
+This feature is particularly useful when GROWI is behind authentication systems such as Digest authentication, Basic authentication, or custom proxy authentication that require specific authorization header formats.
+
+**Default behavior (Bearer token):**
+```typescript
+axiosInstanceManager.addAxiosInstance({
+  name: 'default-auth',
+  baseURL: 'https://growi.example.com',
+  token: 'your-growi-api-token',
+  // Authorization header will be: "Bearer your-growi-api-token"
+});
+```
+
+**Digest authentication example:**
+```typescript
+axiosInstanceManager.addAxiosInstance({
+  name: 'digest-auth',
+  baseURL: 'https://growi.example.com',
+  token: 'growi-api-token',
+  authorizationHeader: 'Digest username="admin", realm="GROWI Protected", nonce="abc123def456", uri="/", response="calculated-response-hash"',
+  // Authorization header will be set to the Digest auth string
+  // X-GROWI-ACCESS-TOKEN header will be: "growi-api-token"
+});
+```
+
+**Basic authentication example:**
+```typescript
+axiosInstanceManager.addAxiosInstance({
+  name: 'basic-auth',
+  baseURL: 'https://growi.example.com',
+  token: 'growi-api-token',
+  authorizationHeader: 'Basic ' + btoa('username:password'),
+  // Authorization header will be: "Basic base64-encoded-credentials"
+  // X-GROWI-ACCESS-TOKEN header will be: "growi-api-token"
+});
+```
 
 ## Type Definition
 
