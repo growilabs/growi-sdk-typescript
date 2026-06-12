@@ -48,7 +48,7 @@ pnpm add @growi/sdk-typescript
 import { axiosInstanceManager } from '@growi/sdk-typescript';
 
 axiosInstanceManager.addAxiosInstance({
-  appName: 'app-1',　// 識別用の名前
+  appName: 'app-1', // 識別用の名前
   baseURL: 'https://your-growi-instance-1.com', // GROWI インスタンスの URL
   token: 'your-api-token-1', // 認証トークン（必要に応じて)
 })

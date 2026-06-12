@@ -12,14 +12,19 @@ class AxiosInstanceManager {
    * @param config.appName The name/key for the instance.
    * @param config.baseURL The base URL of the GROWI instance.
    * @param config.token The GROWI API token.
-   * @param config.authorizationHeader Optional custom `Authorization` header value. When provided, it overrides the default
-   *   Bearer scheme and the token is sent via the `X-GROWI-ACCESS-TOKEN` header instead. Useful when GROWI sits behind
-   *   Digest, Basic, or custom proxy authentication.
+   * @param config.authorizationHeader Optional custom `Authorization` header value. When provided, it must be a non-empty
+   *   string; it overrides the default Bearer scheme and the token is sent via the `X-GROWI-ACCESS-TOKEN` header instead.
+   *   Useful when GROWI sits behind Digest, Basic, or custom proxy authentication.
    */
   addAxiosInstance(config: { appName: string; baseURL: string; token: string; authorizationHeader?: string }) {
     if (typeof config.appName !== 'string' || config.appName.length === 0) throw new Error('appName must be a non-empty string');
     if (typeof config.baseURL !== 'string' || config.baseURL.length === 0) throw new Error('baseURL must be a non-empty string');
     if (typeof config.token !== 'string' || config.token.length === 0) throw new Error('token must be a non-empty string');
+    // Validate authorizationHeader for parity with the required fields: when present it must be a usable header value,
+    // so an empty/non-string value fails loudly instead of silently falling back to the default Bearer scheme.
+    if (config.authorizationHeader !== undefined && (typeof config.authorizationHeader !== 'string' || config.authorizationHeader.length === 0)) {
+      throw new Error('authorizationHeader must be a non-empty string when provided');
+    }
 
     const axiosInstance = Axios.create({
       baseURL: config.baseURL,

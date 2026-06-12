@@ -137,6 +137,17 @@ describe('AxiosInstanceManager', () => {
         axiosInstanceManager.addAxiosInstance({ appName: 'app-name', baseURL: 'https://api.example.com', token: '' });
       }).toThrow('token must be a non-empty string');
     });
+
+    it('throws when authorizationHeader is provided but empty, instead of silently falling back to Bearer', () => {
+      expect(() => {
+        axiosInstanceManager.addAxiosInstance({
+          appName: 'empty-auth-header',
+          baseURL: 'https://api.example.com',
+          token: 'token',
+          authorizationHeader: '',
+        });
+      }).toThrow('authorizationHeader must be a non-empty string when provided');
+    });
   });
 
   describe('getAxiosInstance', () => {
