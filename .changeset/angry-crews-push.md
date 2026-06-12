@@ -1,5 +1,5 @@
 ---
-"@growi/sdk-typescript": patch
+"@growi/sdk-typescript": minor
 ---
 
 Add authorization header override functionality
