@@ -145,9 +145,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20.x' # プロジェクトのNode.jsバージョンに合わせる
+          node-version: '24' # プロジェクトのNode.jsバージョンに合わせる
           # cache: 'pnpm' # pnpm を使用する場合
 
       - name: Install Dependencies
