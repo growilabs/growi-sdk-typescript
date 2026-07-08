@@ -55,6 +55,8 @@ import type {
   GetApplicableGrantForPageParams,
   GetAttachmentById200,
   GetAuthenticationForSecuritySetting200,
+  GetChangesForRevisions200,
+  GetChangesForRevisionsParams,
   GetChildrenForExternalUserGroups200,
   GetChildrenForExternalUserGroupsParams,
   GetChildrenForPageListing200,
@@ -188,6 +190,8 @@ import type {
   PostConvertPagesByPathForPagesBody,
   PostDeleteForPages200,
   PostDeleteForPagesBody,
+  PostDiffForRevisions200,
+  PostDiffForRevisionsBody,
   PostDuplicateForPages200,
   PostDuplicateForPagesBody,
   PostEventsForSlackIntegration200,
@@ -572,6 +576,27 @@ export const getGrowirestapiv3 = () => {
    */
   const deleteRemoveByIdForPlugins = (id: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<DeleteRemoveByIdForPlugins200>({ url: `/plugins/${id}/remove`, method: 'DELETE' }, options);
+  };
+
+  /**
+ * Returns a paginated list of "runs" — maximal sequences of the authenticated user's consecutive edits on individual pages, not interrupted by another author. Each entry includes the baseline revision (from) and the final revision (to) of the run, along with page accessibility flags. The response is ordered by (latestUpdatedAt asc, toRevisionId asc) for stable incremental sync. Authentication requires a Personal Access Token with scope `read:features:page`.
+
+ * @summary Get the authenticated user's consecutive-edit runs across all pages
+ */
+  const getChangesForRevisions = (params?: GetChangesForRevisionsParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetChangesForRevisions200>({ url: `/revisions/changes`, method: 'GET', params }, options);
+  };
+
+  /**
+ * Accepts a list of revision pairs (up to MAX_PAIRS) and returns a per-pair unified diff result. Authorization is performed independently per pair: pairs the authenticated user cannot view return status "forbidden"; structurally invalid pairs (revision not found, wrong page) return status "invalid". Authentication requires a Personal Access Token with scope `read:features:page`.
+
+ * @summary Compute unified diffs for a batch of revision pairs
+ */
+  const postDiffForRevisions = (postDiffForRevisionsBody: PostDiffForRevisionsBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostDiffForRevisions200>(
+      { url: `/revisions/diff`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postDiffForRevisionsBody },
+      options,
+    );
   };
 
   /**
@@ -2825,6 +2850,8 @@ export const getGrowirestapiv3 = () => {
     postPlugins,
     putActivateByIdForPlugins,
     deleteRemoveByIdForPlugins,
+    getChangesForRevisions,
+    postDiffForRevisions,
     getActivity,
     getAdminHome,
     putFileUploadSettingsForAppSettings,
@@ -3091,6 +3118,8 @@ export type PostSuggestPathForAiToolsResult = NonNullable<Awaited<ReturnType<Ret
 export type PostPluginsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPlugins']>>>;
 export type PutActivateByIdForPluginsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putActivateByIdForPlugins']>>>;
 export type DeleteRemoveByIdForPluginsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteRemoveByIdForPlugins']>>>;
+export type GetChangesForRevisionsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getChangesForRevisions']>>>;
+export type PostDiffForRevisionsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postDiffForRevisions']>>>;
 export type GetActivityResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getActivity']>>>;
 export type GetAdminHomeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAdminHome']>>>;
 export type PutFileUploadSettingsForAppSettingsResult = NonNullable<

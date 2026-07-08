@@ -4896,6 +4896,239 @@
         "operationId": "deleteRemoveByIdForPlugins"
       }
     },
+    "/revisions/changes": {
+      "get": {
+        "tags": [
+          "Revisions"
+        ],
+        "summary": "Get the authenticated user's consecutive-edit runs across all pages",
+        "description": "Returns a paginated list of \"runs\" — maximal sequences of the authenticated user's consecutive edits on individual pages, not interrupted by another author. Each entry includes the baseline revision (from) and the final revision (to) of the run, along with page accessibility flags. The response is ordered by (latestUpdatedAt asc, toRevisionId asc) for stable incremental sync. Authentication requires a Personal Access Token with scope `read:features:page`.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "since",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Inclusive lower bound on revision createdAt (ISO 8601)."
+          },
+          {
+            "in": "query",
+            "name": "fromDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start of the date range (inclusive). Combined with `since`: the effective lower bound is the later of the two values.\n"
+          },
+          {
+            "in": "query",
+            "name": "toDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End of the date range (inclusive). Must not be earlier than `fromDate`; violating this constraint returns 400.\n"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "Maximum number of run entries to return."
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Opaque pagination cursor returned in the `next` field of a prior response. An invalid cursor token returns 400.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of change-index entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "changes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pageId": {
+                            "type": "string"
+                          },
+                          "path": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "null when accessible is false"
+                          },
+                          "fromRevisionId": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "null when the run starts from page creation"
+                          },
+                          "toRevisionId": {
+                            "type": "string"
+                          },
+                          "authorId": {
+                            "type": "string"
+                          },
+                          "latestUpdatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "accessible": {
+                            "type": "boolean"
+                          },
+                          "deleted": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "Cursor token for the next page, or null when all results have been returned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query parameters: invalid date range, malformed cursor, or a `since`/`fromDate` older than the configured lookback limit (error code `lookback-limit-exceeded`). When no lower bound is given, the lookback limit is applied as the window's lower bound instead of erroring.\n"
+          },
+          "401": {
+            "description": "Not authenticated"
+          },
+          "403": {
+            "description": "Insufficient scope (requires read:features:page)"
+          }
+        },
+        "operationId": "getChangesForRevisions"
+      }
+    },
+    "/revisions/diff": {
+      "post": {
+        "tags": [
+          "Revisions"
+        ],
+        "summary": "Compute unified diffs for a batch of revision pairs",
+        "description": "Accepts a list of revision pairs (up to MAX_PAIRS) and returns a per-pair unified diff result. Authorization is performed independently per pair: pairs the authenticated user cannot view return status \"forbidden\"; structurally invalid pairs (revision not found, wrong page) return status \"invalid\". Authentication requires a Personal Access Token with scope `read:features:page`.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "pairs"
+                ],
+                "properties": {
+                  "pairs": {
+                    "type": "array",
+                    "maxItems": 20,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "pageId",
+                        "toRevisionId"
+                      ],
+                      "properties": {
+                        "pageId": {
+                          "type": "string",
+                          "description": "MongoDB ObjectId of the target page"
+                        },
+                        "toRevisionId": {
+                          "type": "string",
+                          "description": "MongoDB ObjectId of the \"to\" revision"
+                        },
+                        "fromRevisionId": {
+                          "type": "string",
+                          "nullable": true,
+                          "description": "MongoDB ObjectId of the \"from\" revision, or null for page-creation baseline"
+                        }
+                      }
+                    }
+                  },
+                  "contextLines": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 20,
+                    "default": 3,
+                    "description": "Number of context lines in the unified diff output"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Per-pair diff results in the same order as the request pairs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "pageId",
+                          "toRevisionId",
+                          "status"
+                        ],
+                        "properties": {
+                          "pageId": {
+                            "type": "string"
+                          },
+                          "toRevisionId": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "ok",
+                              "forbidden",
+                              "invalid"
+                            ]
+                          },
+                          "diff": {
+                            "type": "string",
+                            "description": "Unified diff string (present only when status is \"ok\")"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body (too many pairs, invalid ObjectId, malformed body)"
+          },
+          "401": {
+            "description": "Not authenticated"
+          },
+          "403": {
+            "description": "Insufficient scope (requires read:features:page)"
+          }
+        },
+        "operationId": "postDiffForRevisions"
+      }
+    },
     "/activity": {
       "get": {
         "summary": "/activity",
