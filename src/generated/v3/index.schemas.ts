@@ -2047,6 +2047,104 @@ export type DeleteRemoveByIdForPlugins200 = {
   pluginName?: string;
 };
 
+export type GetChangesForRevisionsParams = {
+  /**
+   * Inclusive lower bound on revision createdAt (ISO 8601).
+   */
+  since?: string;
+  /**
+ * Start of the date range (inclusive). Combined with `since`: the effective lower bound is the later of the two values.
+
+ */
+  fromDate?: string;
+  /**
+ * End of the date range (inclusive). Must not be earlier than `fromDate`; violating this constraint returns 400.
+
+ */
+  toDate?: string;
+  /**
+   * Maximum number of run entries to return.
+   */
+  limit?: number;
+  /**
+ * Opaque pagination cursor returned in the `next` field of a prior response. An invalid cursor token returns 400.
+
+ */
+  cursor?: string;
+};
+
+export type GetChangesForRevisions200ChangesItem = {
+  pageId?: string;
+  /**
+   * null when accessible is false
+   * @nullable
+   */
+  path?: string | null;
+  /**
+   * null when the run starts from page creation
+   * @nullable
+   */
+  fromRevisionId?: string | null;
+  toRevisionId?: string;
+  authorId?: string;
+  latestUpdatedAt?: string;
+  accessible?: boolean;
+  deleted?: boolean;
+};
+
+export type GetChangesForRevisions200 = {
+  changes?: GetChangesForRevisions200ChangesItem[];
+  /**
+   * Cursor token for the next page, or null when all results have been returned
+   * @nullable
+   */
+  next?: string | null;
+};
+
+export type PostDiffForRevisionsBodyPairsItem = {
+  /** MongoDB ObjectId of the target page */
+  pageId: string;
+  /** MongoDB ObjectId of the "to" revision */
+  toRevisionId: string;
+  /**
+   * MongoDB ObjectId of the "from" revision, or null for page-creation baseline
+   * @nullable
+   */
+  fromRevisionId?: string | null;
+};
+
+export type PostDiffForRevisionsBody = {
+  /** @maxItems 20 */
+  pairs: PostDiffForRevisionsBodyPairsItem[];
+  /**
+   * Number of context lines in the unified diff output
+   * @minimum 0
+   * @maximum 20
+   */
+  contextLines?: number;
+};
+
+export type PostDiffForRevisions200ResultsItemStatus = (typeof PostDiffForRevisions200ResultsItemStatus)[keyof typeof PostDiffForRevisions200ResultsItemStatus];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const PostDiffForRevisions200ResultsItemStatus = {
+  ok: 'ok',
+  forbidden: 'forbidden',
+  invalid: 'invalid',
+} as const;
+
+export type PostDiffForRevisions200ResultsItem = {
+  pageId: string;
+  toRevisionId: string;
+  status: PostDiffForRevisions200ResultsItemStatus;
+  /** Unified diff string (present only when status is "ok") */
+  diff?: string;
+};
+
+export type PostDiffForRevisions200 = {
+  results?: PostDiffForRevisions200ResultsItem[];
+};
+
 export type GetActivityParams = {
   limit?: number;
   offset?: number;
