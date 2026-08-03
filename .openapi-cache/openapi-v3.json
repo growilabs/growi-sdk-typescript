@@ -4082,7 +4082,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getExternalUserGroupRelations"
       }
     },
     "/external-user-groups": {
@@ -4155,7 +4156,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getExternalUserGroups"
       }
     },
     "/external-user-groups/ancestors": {
@@ -4199,7 +4201,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getAncestorsForExternalUserGroups"
       }
     },
     "/external-user-groups/children": {
@@ -4259,7 +4262,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getChildrenForExternalUserGroups"
       }
     },
     "/external-user-groups/{id}": {
@@ -4300,7 +4304,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getExternalUserGroupsById"
       },
       "delete": {
         "tags": [
@@ -4367,7 +4372,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteExternalUserGroupsById"
       },
       "put": {
         "tags": [
@@ -4421,7 +4427,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putExternalUserGroupsById"
       }
     },
     "/external-user-groups/{id}/external-user-group-relations": {
@@ -4465,7 +4472,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getExternalUserGroupRelationsByIdForExternalUserGroups"
       }
     },
     "/external-user-groups/ldap/sync-settings": {
@@ -4516,7 +4524,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSyncSettingsForExternalUserGroupsLdap"
       },
       "put": {
         "tags": [
@@ -4575,7 +4584,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSyncSettingsForExternalUserGroupsLdap"
       }
     },
     "/external-user-groups/keycloak/sync-settings": {
@@ -4626,7 +4636,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSyncSettingsForExternalUserGroupsKeycloak"
       },
       "put": {
         "tags": [
@@ -4685,7 +4696,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSyncSettingsForExternalUserGroupsKeycloak"
       }
     },
     "/external-user-groups/ldap/sync": {
@@ -4710,7 +4722,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSyncForExternalUserGroupsLdap"
       }
     },
     "/external-user-groups/keycloak/sync": {
@@ -4735,7 +4748,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSyncForExternalUserGroupsKeycloak"
       }
     },
     "/external-user-groups/ldap/sync-status": {
@@ -4760,7 +4774,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSyncStatusForExternalUserGroupsLdap"
       }
     },
     "/templates": {
@@ -4822,7 +4837,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getTemplates"
       }
     },
     "/templates/preset-templates/{templateId}/{locale}": {
@@ -4873,7 +4889,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getPresetTemplatesByLocaleByTemplateIdForTemplates"
       }
     },
     "/templates/plugin-templates/{organizationId}/{reposId}/{templateId}/{locale}": {
@@ -4942,7 +4959,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates"
       }
     },
     "/ai-tools/suggest-path": {
@@ -4997,7 +5015,8 @@
           "500": {
             "description": "Failed to generate path suggestions"
           }
-        }
+        },
+        "operationId": "postSuggestPathForAiTools"
       }
     },
     "/ai-settings": {
@@ -5032,7 +5051,8 @@
           "500": {
             "description": "Failed to get AI settings."
           }
-        }
+        },
+        "operationId": "getAiSettings"
       },
       "put": {
         "tags": [
@@ -5071,7 +5091,8 @@
           "500": {
             "description": "Failed to update AI settings."
           }
-        }
+        },
+        "operationId": "putAiSettings"
       }
     },
     "/ai-settings/available-models": {
@@ -5126,7 +5147,8 @@
           "500": {
             "description": "Failed to get available models."
           }
-        }
+        },
+        "operationId": "getAvailableModelsForAiSettings"
       }
     },
     "/ai-settings/refresh-model-catalog": {
@@ -5161,7 +5183,8 @@
           "500": {
             "description": "The refresh failed (network / upstream schema drift); the last-good catalog is preserved."
           }
-        }
+        },
+        "operationId": "postRefreshModelCatalogForAiSettings"
       }
     },
     "/plugins": {
@@ -5219,7 +5242,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postPlugins"
       }
     },
     "/plugins/{id}/activate": {
@@ -5261,7 +5285,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putActivateByIdForPlugins"
       }
     },
     "/plugins/{id}/remove": {
@@ -5303,7 +5328,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteRemoveByIdForPlugins"
       }
     },
     "/revisions/changes": {
@@ -5424,7 +5450,8 @@
           "403": {
             "description": "Insufficient scope (requires read:features:page)"
           }
-        }
+        },
+        "operationId": "getChangesForRevisions"
       }
     },
     "/revisions/diff": {
@@ -5534,7 +5561,8 @@
           "403": {
             "description": "Insufficient scope (requires read:features:page)"
           }
-        }
+        },
+        "operationId": "postDiffForRevisions"
       }
     },
     "/activity": {
@@ -5597,7 +5625,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getActivity"
       }
     },
     "/activity/list": {
@@ -5678,7 +5707,59 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postListForActivity"
+      }
+    },
+    "/activity/suggestions": {
+      "get": {
+        "summary": "/activity/suggestions",
+        "tags": [
+          "Activity"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "field",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "username"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Suggestions fetched successfully"
+          }
+        },
+        "operationId": "getSuggestionsForActivity"
       }
     },
     "/admin-home/": {
@@ -5708,7 +5789,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getAdminHome"
       }
     },
     "/app-settings/file-upload-settings": {
@@ -5750,7 +5832,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putFileUploadSettingsForAppSettings"
       }
     },
     "/app-settings": {
@@ -5787,7 +5870,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getAppSettings"
       }
     },
     "/app-settings/app-setting": {
@@ -5829,7 +5913,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putAppSettingForAppSettings"
       }
     },
     "/app-settings/site-url-setting": {
@@ -5877,7 +5962,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSiteUrlSettingForAppSettings"
       }
     },
     "/app-settings/smtp-setting": {
@@ -5919,7 +6005,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSmtpSettingForAppSettings"
       }
     },
     "/app-settings/smtp-test": {
@@ -5946,7 +6033,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postSmtpTestForAppSettings"
       }
     },
     "/app-settings/ses-setting": {
@@ -5982,7 +6070,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSesSettingForAppSettings"
       }
     },
     "/app-settings/oauth2-setting": {
@@ -6051,7 +6140,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putOauth2SettingForAppSettings"
       }
     },
     "/app-settings/v5-schema-migration": {
@@ -6090,7 +6180,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postV5SchemaMigrationForAppSettings"
       }
     },
     "/app-settings/maintenance-mode": {
@@ -6144,7 +6235,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postMaintenanceModeForAppSettings"
       }
     },
     "/attachment/list": {
@@ -6196,7 +6288,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getListForAttachment"
       }
     },
     "/attachment/limit": {
@@ -6241,7 +6334,8 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        }
+        },
+        "operationId": "getLimitForAttachment"
       }
     },
     "/attachment": {
@@ -6322,7 +6416,8 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        }
+        },
+        "operationId": "postAttachment"
       }
     },
     "/attachment/{id}": {
@@ -6358,7 +6453,8 @@
               "type": "string"
             }
           }
-        ]
+        ],
+        "operationId": "getAttachmentById"
       }
     },
     "/bookmark-folder": {
@@ -6414,7 +6510,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postBookmarkFolder"
       },
       "put": {
         "tags": [
@@ -6480,7 +6577,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putBookmarkFolder"
       }
     },
     "/bookmark-folder/list/{userId}": {
@@ -6531,7 +6629,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getListByUserIdForBookmarkFolder"
       }
     },
     "/bookmark-folder/{id}": {
@@ -6580,7 +6679,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteBookmarkFolderById"
       }
     },
     "/bookmark-folder/add-bookmark-to-folder": {
@@ -6637,7 +6737,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postAddBookmarkToFolderForBookmarkFolder"
       }
     },
     "/bookmark-folder/update-bookmark": {
@@ -6693,7 +6794,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putUpdateBookmarkForBookmarkFolder"
       }
     },
     "/bookmarks/info": {
@@ -6724,7 +6826,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getInfoForBookmarks"
       }
     },
     "/bookmarks/{userId}": {
@@ -6756,7 +6859,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getBookmarksByUserId"
       }
     },
     "/bookmarks": {
@@ -6791,7 +6895,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putBookmarks"
       }
     },
     "/content-disposition-settings/": {
@@ -6837,7 +6942,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putContentDispositionSettings"
       }
     },
     "/content-disposition-settings": {
@@ -6883,7 +6989,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getContentDispositionSettings"
       }
     },
     "/customize-setting": {
@@ -6915,7 +7022,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getCustomizeSetting"
       }
     },
     "/customize-setting/layout": {
@@ -6941,7 +7049,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getLayoutForCustomizeSetting"
       },
       "put": {
         "tags": [
@@ -6977,7 +7086,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putLayoutForCustomizeSetting"
       }
     },
     "/customize-setting/theme": {
@@ -7016,7 +7126,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getThemeForCustomizeSetting"
       },
       "put": {
         "tags": [
@@ -7055,7 +7166,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putThemeForCustomizeSetting"
       }
     },
     "/customize-setting/sidebar": {
@@ -7081,7 +7193,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSidebarForCustomizeSetting"
       },
       "put": {
         "tags": [
@@ -7120,7 +7233,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSidebarForCustomizeSetting"
       }
     },
     "/customize-setting/function": {
@@ -7161,7 +7275,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putFunctionForCustomizeSetting"
       }
     },
     "/customize-setting/presentation": {
@@ -7202,7 +7317,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putPresentationForCustomizeSetting"
       }
     },
     "/customize-setting/highlight": {
@@ -7243,7 +7359,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putHighlightForCustomizeSetting"
       }
     },
     "/customize-setting/customizeTitle": {
@@ -7284,7 +7401,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putCustomizeTitleForCustomizeSetting"
       }
     },
     "/customize-setting/customize-noscript": {
@@ -7325,7 +7443,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putCustomizeNoscriptForCustomizeSetting"
       }
     },
     "/customize-setting/customize-css": {
@@ -7366,7 +7485,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putCustomizeCssForCustomizeSetting"
       }
     },
     "/customize-setting/customize-script": {
@@ -7407,7 +7527,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putCustomizeScriptForCustomizeSetting"
       }
     },
     "/customize-setting/customize-logo": {
@@ -7448,7 +7569,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putCustomizeLogoForCustomizeSetting"
       }
     },
     "/customize-setting/upload-brand-logo": {
@@ -7510,7 +7632,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putUploadBrandLogoForCustomizeSetting"
       }
     },
     "/customize-setting/delete-brand-logo": {
@@ -7536,7 +7659,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteDeleteBrandLogoForCustomizeSetting"
       }
     },
     "/export/status": {
@@ -7565,7 +7689,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getStatusForExport"
       }
     },
     "/export": {
@@ -7612,7 +7737,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postExport"
       }
     },
     "/export/{fileName}": {
@@ -7650,7 +7776,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteExportByFileName"
       }
     },
     "/forgot-password": {
@@ -7692,7 +7819,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postForgotPassword"
       },
       "put": {
         "summary": "Reset password",
@@ -7737,7 +7865,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putForgotPassword"
       }
     },
     "/g2g-transfer/files": {
@@ -7780,7 +7909,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getFilesForG2gTransfer"
       }
     },
     "/g2g-transfer": {
@@ -7847,7 +7977,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postG2gTransfer"
       }
     },
     "/g2g-transfer/attachment": {
@@ -7899,7 +8030,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postAttachmentForG2gTransfer"
       }
     },
     "/g2g-transfer/growi-info": {
@@ -7929,7 +8061,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getGrowiInfoForG2gTransfer"
       }
     },
     "/g2g-transfer/generate-key": {
@@ -7982,7 +8115,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postGenerateKeyForG2gTransfer"
       }
     },
     "/g2g-transfer/transfer": {
@@ -8046,7 +8180,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postTransferForG2gTransfer"
       }
     },
     "/healthcheck": {
@@ -8141,7 +8276,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getHealthcheck"
       }
     },
     "/import/status": {
@@ -8177,7 +8313,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getStatusForImport"
       }
     },
     "/import": {
@@ -8234,7 +8371,8 @@
           "200": {
             "description": "Import process has requested"
           }
-        }
+        },
+        "operationId": "postImport"
       }
     },
     "/import/upload": {
@@ -8281,7 +8419,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postUploadForImport"
       }
     },
     "/import/all": {
@@ -8306,7 +8445,8 @@
           "200": {
             "description": "all files are deleted"
           }
-        }
+        },
+        "operationId": "deleteAllForImport"
       }
     },
     "/in-app-notification/list": {
@@ -8364,7 +8504,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getListForInAppNotification"
       }
     },
     "/in-app-notification/status": {
@@ -8401,7 +8542,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getStatusForInAppNotification"
       }
     },
     "/in-app-notification/open": {
@@ -8450,7 +8592,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postOpenForInAppNotification"
       }
     },
     "/in-app-notification/all-statuses-open": {
@@ -8475,7 +8618,8 @@
           "200": {
             "description": "All notifications opened successfully"
           }
-        }
+        },
+        "operationId": "putAllStatusesOpenForInAppNotification"
       }
     },
     "/installer": {
@@ -8535,7 +8679,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postInstaller"
       }
     },
     "/invited": {
@@ -8596,7 +8741,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postInvited"
       }
     },
     "/logout": {
@@ -8618,7 +8764,8 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "operationId": "postLogout"
       }
     },
     "/markdown-setting": {
@@ -8649,7 +8796,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getMarkdownSetting"
       }
     },
     "/markdown-setting/lineBreak": {
@@ -8690,7 +8838,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putLineBreakForMarkdownSetting"
       }
     },
     "/markdown-setting/indent": {
@@ -8732,7 +8881,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putIndentForMarkdownSetting"
       }
     },
     "/markdown-setting/xss": {
@@ -8768,7 +8918,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putXssForMarkdownSetting"
       }
     },
     "/mongo/collections": {
@@ -8800,7 +8951,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getCollectionsForMongo"
       }
     },
     "/notification-setting/": {
@@ -8831,7 +8983,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getNotificationSetting"
       }
     },
     "/notification-setting/user-notification": {
@@ -8884,7 +9037,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postUserNotificationForNotificationSetting"
       }
     },
     "/notification-setting/user-notification/{id}": {
@@ -8920,7 +9074,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteUserNotificationByIdForNotificationSetting"
       }
     },
     "/notification-setting/global-notification/{id}": {
@@ -8960,7 +9115,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getGlobalNotificationByIdForNotificationSetting"
       },
       "put": {
         "tags": [
@@ -9005,7 +9161,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putGlobalNotificationByIdForNotificationSetting"
       },
       "delete": {
         "tags": [
@@ -9040,7 +9197,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteGlobalNotificationByIdForNotificationSetting"
       }
     },
     "/notification-setting/global-notification": {
@@ -9081,7 +9239,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postGlobalNotificationForNotificationSetting"
       }
     },
     "/notification-setting/notify-for-page-grant": {
@@ -9116,7 +9275,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putNotifyForPageGrantForNotificationSetting"
       }
     },
     "/notification-setting/global-notification/{id}/enabled": {
@@ -9172,7 +9332,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putEnabledByIdForNotificationSettingGlobalNotification"
       }
     },
     "/page-listing/root": {
@@ -9209,7 +9370,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getRootForPageListing"
       }
     },
     "/page-listing/children": {
@@ -9265,7 +9427,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getChildrenForPageListing"
       }
     },
     "/page-listing/info": {
@@ -9335,7 +9498,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getInfoForPageListing"
       }
     },
     "/page-listing/item": {
@@ -9382,7 +9546,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getItemForPageListing"
       }
     },
     "/page/shared": {
@@ -9432,7 +9597,8 @@
           "404": {
             "description": "Share link not found or page not found"
           }
-        }
+        },
+        "operationId": "getSharedForPage"
       }
     },
     "/page/info": {
@@ -9478,7 +9644,8 @@
           "500": {
             "description": "Internal server error."
           }
-        }
+        },
+        "operationId": "getInfoForPage"
       }
     },
     "/page": {
@@ -9541,7 +9708,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getPage"
       },
       "post": {
         "tags": [
@@ -9625,7 +9793,8 @@
           "409": {
             "description": "page path is already existed"
           }
-        }
+        },
+        "operationId": "postPage"
       },
       "put": {
         "tags": [
@@ -9722,7 +9891,8 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        }
+        },
+        "operationId": "putPage"
       }
     },
     "/page/exist": {
@@ -9759,7 +9929,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getExistForPage"
       }
     },
     "/page/likes": {
@@ -9789,7 +9960,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putLikesForPage"
       }
     },
     "/page/grant-data": {
@@ -9831,7 +10003,8 @@
           "500": {
             "description": "Internal server error."
           }
-        }
+        },
+        "operationId": "getGrantDataForPage"
       }
     },
     "/page/non-user-related-groups-granted": {
@@ -9879,7 +10052,8 @@
           "500": {
             "description": "Internal server error."
           }
-        }
+        },
+        "operationId": "getNonUserRelatedGroupsGrantedForPage"
       }
     },
     "/page/applicable-grant": {
@@ -9939,7 +10113,8 @@
           "500": {
             "description": "Internal server error."
           }
-        }
+        },
+        "operationId": "getApplicableGrantForPage"
       }
     },
     "/{pageId}/grant": {
@@ -9997,7 +10172,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putGrantByPageId"
       }
     },
     "/page/export/{pageId}": {
@@ -10026,7 +10202,8 @@
           "200": {
             "description": "Return page's markdown"
           }
-        }
+        },
+        "operationId": "getExportByPageIdForPage"
       }
     },
     "/page/exist-paths": {
@@ -10078,7 +10255,8 @@
           "500": {
             "description": "Internal server error."
           }
-        }
+        },
+        "operationId": "getExistPathsForPage"
       }
     },
     "/page/subscribe": {
@@ -10115,7 +10293,8 @@
           "500": {
             "description": "Internal server error."
           }
-        }
+        },
+        "operationId": "putSubscribeForPage"
       }
     },
     "/{pageId}/content-width": {
@@ -10165,7 +10344,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putContentWidthByPageId"
       }
     },
     "/page/{pageId}/publish": {
@@ -10197,7 +10377,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putPublishByPageIdForPage"
       }
     },
     "/page/{pageId}/unpublish": {
@@ -10229,7 +10410,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putUnpublishByPageIdForPage"
       }
     },
     "/{pageId}/yjs-data": {
@@ -10277,7 +10459,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getYjsDataByPageId"
       }
     },
     "/{pageId}/sync-latest-revision-body-to-yjs-draft": {
@@ -10333,7 +10516,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSyncLatestRevisionBodyToYjsDraftByPageId"
       }
     },
     "/pages/recent": {
@@ -10374,7 +10558,8 @@
           "200": {
             "description": "Return pages recently updated"
           }
-        }
+        },
+        "operationId": "getRecentForPages"
       }
     },
     "/pages/rename": {
@@ -10441,7 +10626,8 @@
           "409": {
             "description": "page path is already existed"
           }
-        }
+        },
+        "operationId": "putRenameForPages"
       }
     },
     "/pages/resume-rename": {
@@ -10477,7 +10663,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postResumeRenameForPages"
       }
     },
     "/pages/empty-trash": {
@@ -10504,7 +10691,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteEmptyTrashForPages"
       }
     },
     "/pages/list": {
@@ -10584,7 +10772,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getListForPages"
       }
     },
     "/pages/duplicate": {
@@ -10641,7 +10830,8 @@
           "500": {
             "description": "Internal server error."
           }
-        }
+        },
+        "operationId": "postDuplicateForPages"
       }
     },
     "/pages/subordinated-list": {
@@ -10686,7 +10876,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSubordinatedListForPages"
       }
     },
     "/pages/delete": {
@@ -10751,7 +10942,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postDeleteForPages"
       }
     },
     "/pages/convert-pages-by-path": {
@@ -10787,7 +10979,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postConvertPagesByPathForPages"
       }
     },
     "/pages/legacy-pages-migration": {
@@ -10829,7 +11022,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postLegacyPagesMigrationForPages"
       }
     },
     "/pages/v5-migration-status": {
@@ -10858,7 +11052,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getV5MigrationStatusForPages"
       }
     },
     "/personal-setting": {
@@ -10884,7 +11079,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getPersonalSetting"
       },
       "put": {
         "tags": [
@@ -10918,7 +11114,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putPersonalSetting"
       }
     },
     "/personal-setting/is-password-set": {
@@ -10948,7 +11145,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getIsPasswordSetForPersonalSetting"
       }
     },
     "/personal-setting/image-type": {
@@ -10989,7 +11187,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putImageTypeForPersonalSetting"
       }
     },
     "/personal-setting/external-accounts": {
@@ -11015,7 +11214,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getExternalAccountsForPersonalSetting"
       }
     },
     "/personal-setting/password": {
@@ -11059,7 +11259,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putPasswordForPersonalSetting"
       }
     },
     "/personal-setting/api-token": {
@@ -11090,7 +11291,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putApiTokenForPersonalSetting"
       }
     },
     "/personal-setting/access-token": {
@@ -11098,7 +11300,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "getAccessToken",
+        "operationId": "getAccessTokenForPersonalSetting",
         "summary": "/personal-setting/access-token",
         "description": "Get access token",
         "responses": {
@@ -11123,7 +11325,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "generateccessToken",
+        "operationId": "postAccessTokenForPersonalSetting",
         "summary": "/personal-setting/access-token",
         "description": "Generate access token",
         "responses": {
@@ -11169,7 +11371,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "deleteAccessToken",
+        "operationId": "deleteAccessTokenForPersonalSetting",
         "summary": "/personal-setting/access-token",
         "description": "Delete access token",
         "responses": {
@@ -11184,7 +11386,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "deleteAllAccessToken",
+        "operationId": "deleteAllForPersonalSettingAccessToken",
         "summary": "/personal-setting/access-token/all",
         "description": "Delete all access tokens",
         "responses": {
@@ -11232,7 +11434,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putAssociateLdapForPersonalSetting"
       }
     },
     "/personal-setting/disassociate-ldap": {
@@ -11268,7 +11471,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putDisassociateLdapForPersonalSetting"
       }
     },
     "/personal-setting/editor-settings": {
@@ -11313,7 +11517,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putEditorSettingsForPersonalSetting"
       },
       "get": {
         "tags": [
@@ -11333,7 +11538,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getEditorSettingsForPersonalSetting"
       }
     },
     "/personal-setting/in-app-notification-settings": {
@@ -11379,7 +11585,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putInAppNotificationSettingsForPersonalSetting"
       },
       "get": {
         "tags": [
@@ -11403,7 +11610,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getInAppNotificationSettingsForPersonalSetting"
       }
     },
     "/revisions/list": {
@@ -11464,7 +11672,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getListForRevisions"
       }
     },
     "/revisions/{id}": {
@@ -11508,7 +11717,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getRevisionsById"
       }
     },
     "/search/indices": {
@@ -11535,7 +11745,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getIndicesForSearch"
       },
       "put": {
         "tags": [
@@ -11578,7 +11789,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putIndicesForSearch"
       }
     },
     "/search/connection": {
@@ -11592,7 +11804,82 @@
           "200": {
             "description": "Successfully connected"
           }
-        }
+        },
+        "operationId": "postConnectionForSearch"
+      }
+    },
+    "/search/auditlog-indices": {
+      "get": {
+        "tags": [
+          "FullTextSearch Management"
+        ],
+        "summary": "Get auditlog indices status",
+        "responses": {
+          "200": {
+            "description": "Status of auditlog indices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "info": {
+                      "type": "object",
+                      "description": "Status of auditlog indices"
+                    },
+                    "auditlogHasUnsyncedEvents": {
+                      "type": "boolean",
+                      "description": "Whether auditlog events failed to sync to Elasticsearch (rebuild needed)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAuditlogIndicesForSearch"
+      },
+      "put": {
+        "tags": [
+          "FullTextSearch Management"
+        ],
+        "summary": "/search/auditlog-indices",
+        "description": "Operate auditlog indices",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "description": "Operation type against to auditlog indices > * `normalize` - Normalize auditlog indices * `rebuild` - Rebuild auditlog indices",
+                    "enum": [
+                      "normalize",
+                      "rebuild"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Operation is successfully processed, or requested"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putAuditlogIndicesForSearch"
       }
     },
     "/security-setting/": {
@@ -11646,7 +11933,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSecuritySetting"
       }
     },
     "/security-setting/authentication/enabled": {
@@ -11685,7 +11973,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putEnabledForSecuritySettingAuthentication"
       }
     },
     "/security-setting/authentication": {
@@ -11723,7 +12012,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getAuthenticationForSecuritySetting"
       }
     },
     "/security-setting/general-setting": {
@@ -11759,7 +12049,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putGeneralSettingForSecuritySetting"
       }
     },
     "/security-setting/share-link-setting": {
@@ -11799,7 +12090,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putShareLinkSettingForSecuritySetting"
       }
     },
     "/security-setting/all-share-links": {
@@ -11830,7 +12122,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getAllShareLinksForSecuritySetting"
       },
       "delete": {
         "tags": [
@@ -11859,7 +12152,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteAllShareLinksForSecuritySetting"
       }
     },
     "/security-setting/local-setting": {
@@ -11899,7 +12193,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putLocalSettingForSecuritySetting"
       }
     },
     "/security-setting/ldap": {
@@ -11939,7 +12234,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putLdapForSecuritySetting"
       }
     },
     "/security-setting/saml": {
@@ -11979,7 +12275,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSamlForSecuritySetting"
       }
     },
     "/security-setting/oidc": {
@@ -12019,7 +12316,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putOidcForSecuritySetting"
       }
     },
     "/security-setting/google-oauth": {
@@ -12059,7 +12357,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putGoogleOauthForSecuritySetting"
       }
     },
     "/security-setting/github-oauth": {
@@ -12099,7 +12398,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putGithubOauthForSecuritySetting"
       }
     },
     "/share-links/": {
@@ -12142,7 +12442,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getShareLinks"
       },
       "post": {
         "tags": [
@@ -12190,7 +12491,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postShareLinks"
       },
       "delete": {
         "tags": [
@@ -12225,7 +12527,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteShareLinks"
       }
     },
     "/share-links/all": {
@@ -12256,7 +12559,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteAllForShareLinks"
       }
     },
     "/share-links/{id}": {
@@ -12285,7 +12589,8 @@
           "200": {
             "description": "Succeeded to delete one share link"
           }
-        }
+        },
+        "operationId": "deleteShareLinksById"
       }
     },
     "/slack-integration-legacy-setting/": {
@@ -12328,7 +12633,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSlackIntegrationLegacySetting"
       },
       "put": {
         "tags": [
@@ -12379,7 +12685,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSlackIntegrationLegacySetting"
       }
     },
     "/slack-integration-settings/": {
@@ -12440,7 +12747,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSlackIntegrationSettings"
       }
     },
     "/slack-integration-settings/bot-type/": {
@@ -12464,7 +12772,8 @@
           "200": {
             "description": "Succeeded to put botType setting."
           }
-        }
+        },
+        "operationId": "putBotTypeForSlackIntegrationSettings"
       }
     },
     "/slack-integration/bot-type/": {
@@ -12487,7 +12796,8 @@
           "200": {
             "description": "Succeeded to delete botType setting."
           }
-        }
+        },
+        "operationId": "deleteBotTypeForSlackIntegration"
       }
     },
     "/slack-integration-settings/without-proxy/update-settings/": {
@@ -12524,7 +12834,8 @@
           "200": {
             "description": "Succeeded to put CustomBotWithoutProxy setting."
           }
-        }
+        },
+        "operationId": "putUpdateSettingsForSlackIntegrationSettingsWithoutProxy"
       }
     },
     "/slack-integration-settings/without-proxy/update-permissions/": {
@@ -12561,7 +12872,8 @@
           "200": {
             "description": "Succeeded to put CustomBotWithoutProxy permissions."
           }
-        }
+        },
+        "operationId": "putUpdatePermissionsForSlackIntegrationSettingsWithoutProxy"
       }
     },
     "/slack-integration-settings/slack-app-integrations": {
@@ -12607,7 +12919,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postSlackAppIntegrationsForSlackIntegrationSettings"
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}": {
@@ -12648,7 +12961,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteSlackAppIntegrationsByIdForSlackIntegrationSettings"
       }
     },
     "/slack-integration-settings/proxy-uri": {
@@ -12688,7 +13002,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putProxyUriForSlackIntegrationSettings"
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/makeprimary": {
@@ -12717,7 +13032,8 @@
           "200": {
             "description": "Succeeded to make it primary"
           }
-        }
+        },
+        "operationId": "putMakeprimaryByIdForSlackIntegrationSettingsSlackAppIntegrations"
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/regenerate-tokens": {
@@ -12753,7 +13069,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations"
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/permissions": {
@@ -12809,7 +13126,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrations"
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/relation-test": {
@@ -12852,7 +13170,8 @@
           "200": {
             "description": "Succeeded to delete botType setting."
           }
-        }
+        },
+        "operationId": "postRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrations"
       }
     },
     "/slack-integration-settings/without-proxy/test": {
@@ -12884,7 +13203,8 @@
           "200": {
             "description": "Succeeded to connect to slack work space."
           }
-        }
+        },
+        "operationId": "postTestForSlackIntegrationSettingsWithoutProxy"
       }
     },
     "/slack-integration/commands": {
@@ -12921,7 +13241,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postCommandsForSlackIntegration"
       }
     },
     "/slack-integration/proxied/verify": {
@@ -12970,7 +13291,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postVerifyForSlackIntegrationProxied"
       }
     },
     "/slack-integration/proxied/commands": {
@@ -13007,7 +13329,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postCommandsForSlackIntegrationProxied"
       }
     },
     "/slack-integration/interactions": {
@@ -13036,7 +13359,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "operationId": "postInteractionsForSlackIntegration"
       }
     },
     "/slack-integration/proxied/interactions": {
@@ -13065,7 +13389,8 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "operationId": "postInteractionsForSlackIntegrationProxied"
       }
     },
     "/slack-integration/supported-commands": {
@@ -13105,7 +13430,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSupportedCommandsForSlackIntegration"
       }
     },
     "/slack-integration/events": {
@@ -13146,7 +13472,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postEventsForSlackIntegration"
       }
     },
     "/slack-integration/proxied/events": {
@@ -13190,7 +13517,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postEventsForSlackIntegrationProxied"
       }
     },
     "/statistics/user": {
@@ -13213,7 +13541,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUserForStatistics"
       }
     },
     "/complete-registration": {
@@ -13271,7 +13600,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postCompleteRegistration"
       }
     },
     "/user-group-relations": {
@@ -13316,7 +13646,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUserGroupRelations"
       }
     },
     "/user-groups": {
@@ -13393,7 +13724,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUserGroups"
       },
       "post": {
         "tags": [
@@ -13445,7 +13777,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postUserGroups"
       }
     },
     "/user-groups/ancestors": {
@@ -13490,7 +13823,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getAncestorsForUserGroups"
       }
     },
     "/user-groups/children": {
@@ -13554,7 +13888,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getChildrenForUserGroups"
       }
     },
     "/selectable-parent-groups": {
@@ -13599,7 +13934,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSelectableParentGroups"
       }
     },
     "/selectable-child-groups": {
@@ -13644,7 +13980,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getSelectableChildGroups"
       }
     },
     "/user-groups/{id}": {
@@ -13686,7 +14023,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUserGroupsById"
       },
       "delete": {
         "tags": [
@@ -13750,7 +14088,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteUserGroupsById"
       },
       "put": {
         "tags": [
@@ -13817,7 +14156,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putUserGroupsById"
       }
     },
     "/user-groups/{id}/users": {
@@ -13862,7 +14202,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUsersByIdForUserGroups"
       }
     },
     "/user-groups/{id}/unrelated-users": {
@@ -13939,7 +14280,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUnrelatedUsersByIdForUserGroups"
       }
     },
     "/user-groups/{id}/users/{username}": {
@@ -13995,7 +14337,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postUsersByUsernameByIdForUserGroups"
       },
       "delete": {
         "tags": [
@@ -14050,7 +14393,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteUsersByUsernameByIdForUserGroups"
       }
     },
     "/user-groups/{id}/user-group-relations": {
@@ -14095,7 +14439,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUserGroupRelationsByIdForUserGroups"
       }
     },
     "/user-groups/{id}/pages": {
@@ -14140,7 +14485,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getPagesByIdForUserGroups"
       }
     },
     "/user-ui-settings": {
@@ -14215,7 +14561,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putUserUiSettings"
       }
     },
     "/users": {
@@ -14290,7 +14637,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUsers"
       }
     },
     "/users/{id}/recent": {
@@ -14325,7 +14673,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getRecentByIdForUsers"
       }
     },
     "/users/invite": {
@@ -14395,7 +14744,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postInviteForUsers"
       }
     },
     "/users/{id}/grant-admin": {
@@ -14437,7 +14787,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putGrantAdminByIdForUsers"
       }
     },
     "/users/{id}/revoke-admin": {
@@ -14479,7 +14830,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putRevokeAdminByIdForUsers"
       }
     },
     "/users/{id}/grant-read-only": {
@@ -14521,7 +14873,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putGrantReadOnlyByIdForUsers"
       }
     },
     "/users/{id}/revoke-read-only": {
@@ -14563,7 +14916,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putRevokeReadOnlyByIdForUsers"
       }
     },
     "/users/{id}/activate": {
@@ -14605,7 +14959,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putActivateByIdForUsers"
       }
     },
     "/users/{id}/deactivate": {
@@ -14647,7 +15002,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putDeactivateByIdForUsers"
       }
     },
     "/users/{id}/remove": {
@@ -14689,7 +15045,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteRemoveByIdForUsers"
       }
     },
     "/users/external-accounts": {
@@ -14729,7 +15086,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getExternalAccountsForUsers"
       }
     },
     "/users/external-accounts/{id}/remove": {
@@ -14771,7 +15129,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "deleteRemoveByIdForUsersExternalAccounts"
       }
     },
     "/users/update.imageUrlCache": {
@@ -14815,7 +15174,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putUpdate.imageUrlCacheForUsers"
       }
     },
     "/users/reset-password": {
@@ -14863,7 +15223,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putResetPasswordForUsers"
       }
     },
     "/users/reset-password-email": {
@@ -14899,7 +15260,8 @@
           "200": {
             "description": "success send new password email"
           }
-        }
+        },
+        "operationId": "putResetPasswordEmailForUsers"
       }
     },
     "/users/send-invitation-email": {
@@ -14952,7 +15314,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "putSendInvitationEmailForUsers"
       }
     },
     "/users/list": {
@@ -14998,7 +15361,8 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        }
+        },
+        "operationId": "getListForUsers"
       }
     },
     "/users/usernames": {
@@ -15007,7 +15371,7 @@
           "Users"
         ],
         "summary": "/users/usernames",
-        "description": "Get list of usernames",
+        "description": "Get list of usernames. The query matches usernames by case-insensitive substring.",
         "parameters": [
           {
             "in": "query",
@@ -15106,7 +15470,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "getUsernamesForUsers"
       }
     },
     "/login": {
@@ -15154,7 +15519,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postLogin"
       }
     },
     "/register": {
@@ -15208,7 +15574,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "postRegister"
       }
     }
   },
