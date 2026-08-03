@@ -25,142 +25,143 @@ import type {
   CustomizeSidebar,
   CustomizeTheme,
   CustomizeTitle,
-  DeleteBookmarkFolderId200,
-  DeleteExportFileName200,
-  DeleteExternalUserGroupsId200,
-  DeleteExternalUserGroupsIdParams,
-  DeletePagesEmptyTrash200,
-  DeletePluginsIdRemove200,
-  DeleteSecuritySettingAllShareLinks200,
-  DeleteShareLinksAll200,
+  DeleteAllForShareLinks200,
+  DeleteAllShareLinksForSecuritySetting200,
+  DeleteBookmarkFolderById200,
+  DeleteEmptyTrashForPages200,
+  DeleteExportByFileName200,
+  DeleteExternalUserGroupsById200,
+  DeleteExternalUserGroupsByIdParams,
+  DeleteRemoveByIdForPlugins200,
+  DeleteRemoveByIdForUsers200,
+  DeleteRemoveByIdForUsersExternalAccounts200,
   DeleteShareLinksParams,
-  DeleteSlackIntegrationSettingsSlackAppIntegrationsId200,
-  DeleteUserGroupsId200,
-  DeleteUserGroupsIdParams,
-  DeleteUserGroupsIdUsersUsername200,
-  DeleteUsersExternalAccountsIdRemove200,
-  DeleteUsersIdRemove200,
+  DeleteSlackAppIntegrationsByIdForSlackIntegrationSettings200,
+  DeleteUserGroupsById200,
+  DeleteUserGroupsByIdParams,
+  DeleteUsersByUsernameByIdForUserGroups200,
   DisassociateUser,
   FileImportResponse,
   FileUploadSettingParams,
   GeneralSetting,
-  GenerateccessToken200,
-  GetAccessToken200,
+  GetAccessTokenForPersonalSetting200,
   GetActivityParams,
   GetAdminHome200,
-  GetAiSettingsAvailableModelsParams,
+  GetAllShareLinksForSecuritySetting200,
+  GetAncestorsForExternalUserGroups200,
+  GetAncestorsForExternalUserGroupsParams,
+  GetAncestorsForUserGroups200,
+  GetAncestorsForUserGroupsParams,
   GetAppSettings200,
-  GetAttachmentId200,
-  GetAttachmentLimit200,
-  GetAttachmentLimitParams,
-  GetAttachmentListParams,
-  GetBookmarkFolderListUserId200,
-  GetBookmarksInfoParams,
+  GetApplicableGrantForPage200,
+  GetApplicableGrantForPageParams,
+  GetAttachmentById200,
+  GetAuditlogIndicesForSearch200,
+  GetAuthenticationForSecuritySetting200,
+  GetAvailableModelsForAiSettingsParams,
+  GetChangesForRevisions200,
+  GetChangesForRevisionsParams,
+  GetChildrenForExternalUserGroups200,
+  GetChildrenForExternalUserGroupsParams,
+  GetChildrenForPageListing200,
+  GetChildrenForPageListingParams,
+  GetChildrenForUserGroups200,
+  GetChildrenForUserGroupsParams,
+  GetCollectionsForMongo200,
   GetContentDispositionSettings200,
   GetCustomizeSetting200,
-  GetCustomizeSettingTheme200,
-  GetExportStatus200,
+  GetEditorSettingsForPersonalSetting200,
+  GetExistForPage200,
+  GetExistForPageParams,
+  GetExistPathsForPage200,
+  GetExistPathsForPageParams,
+  GetExternalAccountsForPersonalSetting200,
+  GetExternalAccountsForUsers200,
+  GetExternalAccountsForUsersParams,
   GetExternalUserGroupRelations200,
+  GetExternalUserGroupRelationsByIdForExternalUserGroups200,
   GetExternalUserGroupRelationsParams,
   GetExternalUserGroups200,
-  GetExternalUserGroupsAncestors200,
-  GetExternalUserGroupsAncestorsParams,
-  GetExternalUserGroupsChildren200,
-  GetExternalUserGroupsChildrenParams,
-  GetExternalUserGroupsId200,
-  GetExternalUserGroupsIdExternalUserGroupRelations200,
-  GetExternalUserGroupsKeycloakSyncSettings200,
-  GetExternalUserGroupsLdapSyncSettings200,
+  GetExternalUserGroupsById200,
   GetExternalUserGroupsParams,
-  GetG2gTransferFiles200,
-  GetG2gTransferGrowiInfo200,
+  GetFilesForG2gTransfer200,
+  GetGlobalNotificationByIdForNotificationSetting200,
+  GetGrantDataForPage200,
+  GetGrantDataForPageParams,
+  GetGrowiInfoForG2gTransfer200,
   GetHealthcheck200,
   GetHealthcheckParams,
-  GetImportStatus200,
-  GetInAppNotificationListParams,
-  GetInAppNotificationStatus200,
+  GetInAppNotificationSettingsForPersonalSetting200,
+  GetIndicesForSearch200,
+  GetInfoForBookmarksParams,
+  GetInfoForPageListing200,
+  GetInfoForPageListingParams,
+  GetInfoForPageParams,
+  GetIsPasswordSetForPersonalSetting200,
+  GetItemForPageListing200,
+  GetItemForPageListingParams,
+  GetLimitForAttachment200,
+  GetLimitForAttachmentParams,
+  GetListByUserIdForBookmarkFolder200,
+  GetListForAttachmentParams,
+  GetListForInAppNotificationParams,
+  GetListForPages200,
+  GetListForPagesParams,
+  GetListForRevisions200,
+  GetListForRevisionsParams,
+  GetListForUsers200,
+  GetListForUsersParams,
   GetMarkdownSetting200,
-  GetMongoCollections200,
+  GetNonUserRelatedGroupsGrantedForPage200,
+  GetNonUserRelatedGroupsGrantedForPageParams,
   GetNotificationSetting200,
-  GetNotificationSettingGlobalNotificationId200,
-  GetPageApplicableGrant200,
-  GetPageApplicableGrantParams,
-  GetPageExist200,
-  GetPageExistParams,
-  GetPageExistPaths200,
-  GetPageExistPathsParams,
-  GetPageGrantData200,
-  GetPageGrantDataParams,
-  GetPageIdYjsData200,
-  GetPageInfoParams,
-  GetPageListingChildren200,
-  GetPageListingChildrenParams,
-  GetPageListingInfo200,
-  GetPageListingInfoParams,
-  GetPageListingItem200,
-  GetPageListingItemParams,
-  GetPageListingRoot200,
-  GetPageNonUserRelatedGroupsGranted200,
-  GetPageNonUserRelatedGroupsGrantedParams,
   GetPageParams,
   GetPageResponse,
-  GetPageSharedParams,
-  GetPagesList200,
-  GetPagesListParams,
-  GetPagesRecentParams,
-  GetPagesSubordinatedList200,
-  GetPagesSubordinatedListParams,
-  GetPagesV5MigrationStatus200,
+  GetPagesByIdForUserGroups200,
   GetPersonalSetting200,
-  GetPersonalSettingEditorSettings200,
-  GetPersonalSettingExternalAccounts200,
-  GetPersonalSettingInAppNotificationSettings200,
-  GetPersonalSettingIsPasswordSet200,
-  GetRevisionsChanges200,
-  GetRevisionsChangesParams,
-  GetRevisionsId200,
-  GetRevisionsIdParams,
-  GetRevisionsList200,
-  GetRevisionsListParams,
-  GetSearchIndices200,
+  GetPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates200,
+  GetPresetTemplatesByLocaleByTemplateIdForTemplates200,
+  GetRecentByIdForUsers200,
+  GetRecentForPagesParams,
+  GetRevisionsById200,
+  GetRevisionsByIdParams,
+  GetRootForPageListing200,
   GetSecuritySetting200,
-  GetSecuritySettingAllShareLinks200,
-  GetSecuritySettingAuthentication200,
   GetSelectableChildGroups200,
   GetSelectableChildGroupsParams,
   GetSelectableParentGroups200,
   GetSelectableParentGroupsParams,
   GetShareLinks200,
   GetShareLinksParams,
+  GetSharedForPageParams,
   GetSlackIntegrationLegacySetting200,
   GetSlackIntegrationSettings200,
-  GetSlackIntegrationSupportedCommands200,
+  GetStatusForExport200,
+  GetStatusForImport200,
+  GetStatusForInAppNotification200,
+  GetSubordinatedListForPages200,
+  GetSubordinatedListForPagesParams,
+  GetSuggestionsForActivityParams,
+  GetSupportedCommandsForSlackIntegration200,
+  GetSyncSettingsForExternalUserGroupsKeycloak200,
+  GetSyncSettingsForExternalUserGroupsLdap200,
   GetTemplates200,
   GetTemplatesParams,
-  GetTemplatesPluginTemplatesOrganizationIdReposIdTemplateIdLocale200,
-  GetTemplatesPresetTemplatesTemplateIdLocale200,
+  GetThemeForCustomizeSetting200,
+  GetUnrelatedUsersByIdForUserGroups200,
+  GetUnrelatedUsersByIdForUserGroupsParams,
   GetUserGroupRelations200,
+  GetUserGroupRelationsByIdForUserGroups200,
   GetUserGroups200,
-  GetUserGroupsAncestors200,
-  GetUserGroupsAncestorsParams,
-  GetUserGroupsChildren200,
-  GetUserGroupsChildrenParams,
-  GetUserGroupsId200,
-  GetUserGroupsIdPages200,
-  GetUserGroupsIdUnrelatedUsers200,
-  GetUserGroupsIdUnrelatedUsersParams,
-  GetUserGroupsIdUserGroupRelations200,
-  GetUserGroupsIdUsers200,
+  GetUserGroupsById200,
   GetUserGroupsParams,
+  GetUsernamesForUsers200,
+  GetUsernamesForUsersParams,
   GetUsers200,
-  GetUsersExternalAccounts200,
-  GetUsersExternalAccountsParams,
-  GetUsersIdRecent200,
-  GetUsersList200,
-  GetUsersListParams,
+  GetUsersByIdForUserGroups200,
   GetUsersParams,
-  GetUsersUsernames200,
-  GetUsersUsernamesParams,
+  GetV5MigrationStatusForPages200,
+  GetYjsDataByPageId200,
   GitHubOAuthSetting,
   GlobalNotification,
   GlobalNotificationParams,
@@ -176,183 +177,186 @@ import type {
   Page,
   PageInfoExt,
   PersonalSettings,
-  PostActivityListBody,
-  PostAiToolsSuggestPathBody,
-  PostAppSettingsMaintenanceMode200,
-  PostAppSettingsMaintenanceModeBody,
-  PostAppSettingsSmtpTest200,
-  PostAppSettingsV5SchemaMigration200,
+  PostAccessTokenForPersonalSetting200,
+  PostAddBookmarkToFolderForBookmarkFolder200,
+  PostAddBookmarkToFolderForBookmarkFolderBody,
   PostAttachment200,
   PostAttachmentBodyOne,
   PostAttachmentBodyTwo,
+  PostAttachmentForG2gTransfer200,
+  PostAttachmentForG2gTransferBody,
   PostBookmarkFolder200,
-  PostBookmarkFolderAddBookmarkToFolder200,
-  PostBookmarkFolderAddBookmarkToFolderBody,
   PostBookmarkFolderBody,
+  PostCommandsForSlackIntegrationBody,
+  PostCommandsForSlackIntegrationProxiedBody,
   PostCompleteRegistration200,
   PostCompleteRegistrationBody,
+  PostConvertPagesByPathForPages200,
+  PostConvertPagesByPathForPagesBody,
+  PostDeleteForPages200,
+  PostDeleteForPagesBody,
+  PostDiffForRevisions200,
+  PostDiffForRevisionsBody,
+  PostDuplicateForPages200,
+  PostDuplicateForPagesBody,
+  PostEventsForSlackIntegration200,
+  PostEventsForSlackIntegrationBody,
+  PostEventsForSlackIntegrationProxied200,
+  PostEventsForSlackIntegrationProxiedBody,
   PostExport200,
   PostExportBody,
   PostForgotPassword200,
   PostForgotPasswordBody,
   PostG2gTransfer200,
-  PostG2gTransferAttachment200,
-  PostG2gTransferAttachmentBody,
   PostG2gTransferBody,
-  PostG2gTransferGenerateKey200,
-  PostG2gTransferGenerateKeyBody,
-  PostG2gTransferTransfer200,
-  PostG2gTransferTransferBody,
+  PostGenerateKeyForG2gTransfer200,
+  PostGenerateKeyForG2gTransferBody,
+  PostGlobalNotificationForNotificationSetting200,
   PostImportBody,
-  PostImportUploadBody,
-  PostInAppNotificationOpen200,
-  PostInAppNotificationOpenBody,
   PostInstaller200,
   PostInstallerBody,
+  PostInteractionsForSlackIntegrationBody,
+  PostInteractionsForSlackIntegrationProxiedBody,
+  PostInviteForUsers200,
+  PostInviteForUsersParams,
   PostInvited200,
   PostInvitedBody,
+  PostLegacyPagesMigrationForPages200,
+  PostLegacyPagesMigrationForPagesBody,
+  PostListForActivityBody,
   PostLogin200,
   PostLoginBody,
-  PostNotificationSettingGlobalNotification200,
-  PostNotificationSettingUserNotification200,
+  PostMaintenanceModeForAppSettings200,
+  PostMaintenanceModeForAppSettingsBody,
+  PostOpenForInAppNotification200,
+  PostOpenForInAppNotificationBody,
   PostPage201,
   PostPageBody,
-  PostPagesConvertPagesByPath200,
-  PostPagesConvertPagesByPathBody,
-  PostPagesDelete200,
-  PostPagesDeleteBody,
-  PostPagesDuplicate200,
-  PostPagesDuplicateBody,
-  PostPagesLegacyPagesMigration200,
-  PostPagesLegacyPagesMigrationBody,
-  PostPagesResumeRename200,
-  PostPagesResumeRenameBody,
   PostPlugins200,
   PostPluginsBody,
   PostRegister200,
   PostRegisterBody,
-  PostRevisionsDiff200,
-  PostRevisionsDiffBody,
+  PostRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
+  PostResumeRenameForPages200,
+  PostResumeRenameForPagesBody,
   PostShareLinksBody,
-  PostSlackIntegrationCommandsBody,
-  PostSlackIntegrationEvents200,
-  PostSlackIntegrationEventsBody,
-  PostSlackIntegrationInteractionsBody,
-  PostSlackIntegrationProxiedCommandsBody,
-  PostSlackIntegrationProxiedEvents200,
-  PostSlackIntegrationProxiedEventsBody,
-  PostSlackIntegrationProxiedInteractionsBody,
-  PostSlackIntegrationProxiedVerify200,
-  PostSlackIntegrationProxiedVerifyBody,
-  PostSlackIntegrationSettingsSlackAppIntegrations200,
-  PostSlackIntegrationSettingsSlackAppIntegrationsIdRelationTestBody,
-  PostSlackIntegrationSettingsWithoutProxyTestBody,
+  PostSlackAppIntegrationsForSlackIntegrationSettings200,
+  PostSmtpTestForAppSettings200,
+  PostSuggestPathForAiToolsBody,
+  PostTestForSlackIntegrationSettingsWithoutProxyBody,
+  PostTransferForG2gTransfer200,
+  PostTransferForG2gTransferBody,
+  PostUploadForImportBody,
   PostUserGroups200,
   PostUserGroupsBody,
-  PostUserGroupsIdUsersUsername200,
-  PostUsersInvite200,
-  PostUsersInviteParams,
-  PutAppSettingsAppSetting200,
-  PutAppSettingsFileUploadSettings200,
-  PutAppSettingsOauth2Setting200,
-  PutAppSettingsOauth2SettingBody,
-  PutAppSettingsSiteUrlSetting200,
-  PutAppSettingsSmtpSetting200,
+  PostUserNotificationForNotificationSetting200,
+  PostUsersByUsernameByIdForUserGroups200,
+  PostV5SchemaMigrationForAppSettings200,
+  PostVerifyForSlackIntegrationProxied200,
+  PostVerifyForSlackIntegrationProxiedBody,
+  PutActivateByIdForPlugins200,
+  PutActivateByIdForUsers200,
+  PutApiTokenForPersonalSetting200,
+  PutAppSettingForAppSettings200,
+  PutAssociateLdapForPersonalSetting200,
+  PutAssociateLdapForPersonalSettingBody,
+  PutAuditlogIndicesForSearch200,
+  PutAuditlogIndicesForSearchBody,
   PutBookmarkFolder200,
   PutBookmarkFolderBody,
-  PutBookmarkFolderUpdateBookmark200,
-  PutBookmarkFolderUpdateBookmarkBody,
   PutBookmarks200,
   PutContentDispositionSettings200,
-  PutCustomizeSettingCustomizeCss200,
-  PutCustomizeSettingCustomizeLogo200,
-  PutCustomizeSettingCustomizeNoscript200,
-  PutCustomizeSettingCustomizeScript200,
-  PutCustomizeSettingCustomizeTitle200,
-  PutCustomizeSettingFunction200,
-  PutCustomizeSettingHighlight200,
-  PutCustomizeSettingLayout200,
-  PutCustomizeSettingPresentation200,
-  PutCustomizeSettingSidebar200,
-  PutCustomizeSettingTheme200,
-  PutCustomizeSettingUploadBrandLogo200,
-  PutCustomizeSettingUploadBrandLogoBody,
-  PutExternalUserGroupsId200,
-  PutExternalUserGroupsIdBody,
-  PutExternalUserGroupsKeycloakSync202,
-  PutExternalUserGroupsKeycloakSyncSettings204,
-  PutExternalUserGroupsKeycloakSyncSettingsBody,
-  PutExternalUserGroupsLdapSync202,
-  PutExternalUserGroupsLdapSyncSettings204,
-  PutExternalUserGroupsLdapSyncSettingsBody,
+  PutContentWidthByPageId200,
+  PutContentWidthByPageIdBody,
+  PutCustomizeCssForCustomizeSetting200,
+  PutCustomizeLogoForCustomizeSetting200,
+  PutCustomizeNoscriptForCustomizeSetting200,
+  PutCustomizeScriptForCustomizeSetting200,
+  PutCustomizeTitleForCustomizeSetting200,
+  PutDeactivateByIdForUsers200,
+  PutDisassociateLdapForPersonalSetting200,
+  PutEditorSettingsForPersonalSetting200,
+  PutEditorSettingsForPersonalSettingBody,
+  PutEnabledByIdForNotificationSettingGlobalNotification200,
+  PutEnabledByIdForNotificationSettingGlobalNotificationBody,
+  PutEnabledForSecuritySettingAuthentication200,
+  PutEnabledForSecuritySettingAuthenticationBody,
+  PutExternalUserGroupsById200,
+  PutExternalUserGroupsByIdBody,
+  PutFileUploadSettingsForAppSettings200,
   PutForgotPassword200,
   PutForgotPasswordBody,
-  PutMarkdownSettingIndent200,
-  PutMarkdownSettingLineBreak200,
-  PutNotificationSettingGlobalNotificationId200,
-  PutNotificationSettingGlobalNotificationIdEnabled200,
-  PutNotificationSettingGlobalNotificationIdEnabledBody,
+  PutFunctionForCustomizeSetting200,
+  PutGithubOauthForSecuritySetting200,
+  PutGlobalNotificationByIdForNotificationSetting200,
+  PutGoogleOauthForSecuritySetting200,
+  PutGrantAdminByIdForUsers200,
+  PutGrantByPageIdBody,
+  PutGrantReadOnlyByIdForUsers200,
+  PutHighlightForCustomizeSetting200,
+  PutImageTypeForPersonalSetting200,
+  PutImageTypeForPersonalSettingBody,
+  PutInAppNotificationSettingsForPersonalSetting200,
+  PutInAppNotificationSettingsForPersonalSettingBody,
+  PutIndentForMarkdownSetting200,
+  PutIndicesForSearch200,
+  PutIndicesForSearchBody,
+  PutLayoutForCustomizeSetting200,
+  PutLdapForSecuritySetting200,
+  PutLineBreakForMarkdownSetting200,
+  PutLocalSettingForSecuritySetting200,
+  PutOauth2SettingForAppSettings200,
+  PutOauth2SettingForAppSettingsBody,
+  PutOidcForSecuritySetting200,
   PutPage200,
   PutPageBody,
-  PutPageIdContentWidth200,
-  PutPageIdContentWidthBody,
-  PutPageIdGrantBody,
-  PutPageIdSyncLatestRevisionBodyToYjsDraft200,
-  PutPageIdSyncLatestRevisionBodyToYjsDraftBody,
-  PutPageSubscribeBody,
-  PutPagesRename200,
-  PutPagesRenameBody,
+  PutPasswordForPersonalSetting200,
+  PutPasswordForPersonalSettingBody,
+  PutPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrations200,
+  PutPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
   PutPersonalSetting200,
-  PutPersonalSettingApiToken200,
-  PutPersonalSettingAssociateLdap200,
-  PutPersonalSettingAssociateLdapBody,
-  PutPersonalSettingDisassociateLdap200,
-  PutPersonalSettingEditorSettings200,
-  PutPersonalSettingEditorSettingsBody,
-  PutPersonalSettingImageType200,
-  PutPersonalSettingImageTypeBody,
-  PutPersonalSettingInAppNotificationSettings200,
-  PutPersonalSettingInAppNotificationSettingsBody,
-  PutPersonalSettingPassword200,
-  PutPersonalSettingPasswordBody,
-  PutPluginsIdActivate200,
-  PutSearchIndices200,
-  PutSearchIndicesBody,
-  PutSecuritySettingAuthenticationEnabled200,
-  PutSecuritySettingAuthenticationEnabledBody,
-  PutSecuritySettingGithubOauth200,
-  PutSecuritySettingGoogleOauth200,
-  PutSecuritySettingLdap200,
-  PutSecuritySettingLocalSetting200,
-  PutSecuritySettingOidc200,
-  PutSecuritySettingSaml200,
-  PutSecuritySettingShareLinkSetting200,
+  PutPresentationForCustomizeSetting200,
+  PutProxyUriForSlackIntegrationSettings200,
+  PutProxyUriForSlackIntegrationSettingsBody,
+  PutRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations200,
+  PutRenameForPages200,
+  PutRenameForPagesBody,
+  PutResetPasswordEmailForUsersBody,
+  PutResetPasswordForUsers200,
+  PutResetPasswordForUsersBody,
+  PutRevokeAdminByIdForUsers200,
+  PutRevokeReadOnlyByIdForUsers200,
+  PutSamlForSecuritySetting200,
+  PutSendInvitationEmailForUsers200,
+  PutSendInvitationEmailForUsersBody,
+  PutShareLinkSettingForSecuritySetting200,
+  PutSidebarForCustomizeSetting200,
+  PutSiteUrlSettingForAppSettings200,
   PutSlackIntegrationLegacySetting200,
   PutSlackIntegrationLegacySettingBody,
-  PutSlackIntegrationSettingsProxyUri200,
-  PutSlackIntegrationSettingsProxyUriBody,
-  PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissions200,
-  PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBody,
-  PutSlackIntegrationSettingsSlackAppIntegrationsIdRegenerateTokens200,
-  PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsBody,
-  PutSlackIntegrationSettingsWithoutProxyUpdateSettingsBody,
-  PutUserGroupsId200,
-  PutUserGroupsIdBody,
+  PutSmtpSettingForAppSettings200,
+  PutSubscribeForPageBody,
+  PutSyncForExternalUserGroupsKeycloak202,
+  PutSyncForExternalUserGroupsLdap202,
+  PutSyncLatestRevisionBodyToYjsDraftByPageId200,
+  PutSyncLatestRevisionBodyToYjsDraftByPageIdBody,
+  PutSyncSettingsForExternalUserGroupsKeycloak204,
+  PutSyncSettingsForExternalUserGroupsKeycloakBody,
+  PutSyncSettingsForExternalUserGroupsLdap204,
+  PutSyncSettingsForExternalUserGroupsLdapBody,
+  PutThemeForCustomizeSetting200,
+  PutUpdateBookmarkForBookmarkFolder200,
+  PutUpdateBookmarkForBookmarkFolderBody,
+  PutUpdateImageUrlCacheForUsers200,
+  PutUpdateImageUrlCacheForUsersBody,
+  PutUpdatePermissionsForSlackIntegrationSettingsWithoutProxyBody,
+  PutUpdateSettingsForSlackIntegrationSettingsWithoutProxyBody,
+  PutUploadBrandLogoForCustomizeSetting200,
+  PutUploadBrandLogoForCustomizeSettingBody,
+  PutUserGroupsById200,
+  PutUserGroupsByIdBody,
   PutUserUiSettings200,
   PutUserUiSettingsBody,
-  PutUsersIdActivate200,
-  PutUsersIdDeactivate200,
-  PutUsersIdGrantAdmin200,
-  PutUsersIdGrantReadOnly200,
-  PutUsersIdRevokeAdmin200,
-  PutUsersIdRevokeReadOnly200,
-  PutUsersResetPassword200,
-  PutUsersResetPasswordBody,
-  PutUsersResetPasswordEmailBody,
-  PutUsersSendInvitationEmail200,
-  PutUsersSendInvitationEmailBody,
-  PutUsersUpdateImageUrlCache200,
-  PutUsersUpdateImageUrlCacheBody,
   RefreshModelCatalogResponse,
   SamlAuthSetting,
   SelectableModelsResponse,
@@ -393,37 +397,41 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /external-user-groups/ancestors
    */
-  const getExternalUserGroupsAncestors = (params: GetExternalUserGroupsAncestorsParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetExternalUserGroupsAncestors200>({ url: `/external-user-groups/ancestors`, method: 'GET', params }, options);
+  const getAncestorsForExternalUserGroups = (params: GetAncestorsForExternalUserGroupsParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetAncestorsForExternalUserGroups200>({ url: `/external-user-groups/ancestors`, method: 'GET', params }, options);
   };
 
   /**
    * @summary /external-user-groups/children
    */
-  const getExternalUserGroupsChildren = (params?: GetExternalUserGroupsChildrenParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetExternalUserGroupsChildren200>({ url: `/external-user-groups/children`, method: 'GET', params }, options);
+  const getChildrenForExternalUserGroups = (params?: GetChildrenForExternalUserGroupsParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetChildrenForExternalUserGroups200>({ url: `/external-user-groups/children`, method: 'GET', params }, options);
   };
 
   /**
    * @summary /external-user-groups/{id}
    */
-  const getExternalUserGroupsId = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetExternalUserGroupsId200>({ url: `/external-user-groups/${id}`, method: 'GET' }, options);
+  const getExternalUserGroupsById = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetExternalUserGroupsById200>({ url: `/external-user-groups/${id}`, method: 'GET' }, options);
   };
 
   /**
    * @summary /external-user-groups/{id}
    */
-  const deleteExternalUserGroupsId = (id: string, params: DeleteExternalUserGroupsIdParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteExternalUserGroupsId200>({ url: `/external-user-groups/${id}`, method: 'DELETE', params }, options);
+  const deleteExternalUserGroupsById = (id: string, params: DeleteExternalUserGroupsByIdParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteExternalUserGroupsById200>({ url: `/external-user-groups/${id}`, method: 'DELETE', params }, options);
   };
 
   /**
    * @summary /external-user-groups/{id}
    */
-  const putExternalUserGroupsId = (id: string, putExternalUserGroupsIdBody: PutExternalUserGroupsIdBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutExternalUserGroupsId200>(
-      { url: `/external-user-groups/${id}`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putExternalUserGroupsIdBody },
+  const putExternalUserGroupsById = (
+    id: string,
+    putExternalUserGroupsByIdBody: PutExternalUserGroupsByIdBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PutExternalUserGroupsById200>(
+      { url: `/external-user-groups/${id}`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putExternalUserGroupsByIdBody },
       options,
     );
   };
@@ -431,8 +439,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /external-user-groups/{id}/external-user-group-relations
    */
-  const getExternalUserGroupsIdExternalUserGroupRelations = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetExternalUserGroupsIdExternalUserGroupRelations200>(
+  const getExternalUserGroupRelationsByIdForExternalUserGroups = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetExternalUserGroupRelationsByIdForExternalUserGroups200>(
       { url: `/external-user-groups/${id}/external-user-group-relations`, method: 'GET' },
       options,
     );
@@ -441,23 +449,23 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary Get LDAP sync settings
    */
-  const getExternalUserGroupsLdapSyncSettings = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetExternalUserGroupsLdapSyncSettings200>({ url: `/external-user-groups/ldap/sync-settings`, method: 'GET' }, options);
+  const getSyncSettingsForExternalUserGroupsLdap = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetSyncSettingsForExternalUserGroupsLdap200>({ url: `/external-user-groups/ldap/sync-settings`, method: 'GET' }, options);
   };
 
   /**
    * @summary Update LDAP sync settings
    */
-  const putExternalUserGroupsLdapSyncSettings = (
-    putExternalUserGroupsLdapSyncSettingsBody: PutExternalUserGroupsLdapSyncSettingsBody,
+  const putSyncSettingsForExternalUserGroupsLdap = (
+    putSyncSettingsForExternalUserGroupsLdapBody: PutSyncSettingsForExternalUserGroupsLdapBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutExternalUserGroupsLdapSyncSettings204>(
+    return customInstance<PutSyncSettingsForExternalUserGroupsLdap204>(
       {
         url: `/external-user-groups/ldap/sync-settings`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putExternalUserGroupsLdapSyncSettingsBody,
+        data: putSyncSettingsForExternalUserGroupsLdapBody,
       },
       options,
     );
@@ -466,23 +474,23 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary Get Keycloak sync settings
    */
-  const getExternalUserGroupsKeycloakSyncSettings = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetExternalUserGroupsKeycloakSyncSettings200>({ url: `/external-user-groups/keycloak/sync-settings`, method: 'GET' }, options);
+  const getSyncSettingsForExternalUserGroupsKeycloak = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetSyncSettingsForExternalUserGroupsKeycloak200>({ url: `/external-user-groups/keycloak/sync-settings`, method: 'GET' }, options);
   };
 
   /**
    * @summary /external-user-groups/keycloak/sync-settings
    */
-  const putExternalUserGroupsKeycloakSyncSettings = (
-    putExternalUserGroupsKeycloakSyncSettingsBody: PutExternalUserGroupsKeycloakSyncSettingsBody,
+  const putSyncSettingsForExternalUserGroupsKeycloak = (
+    putSyncSettingsForExternalUserGroupsKeycloakBody: PutSyncSettingsForExternalUserGroupsKeycloakBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutExternalUserGroupsKeycloakSyncSettings204>(
+    return customInstance<PutSyncSettingsForExternalUserGroupsKeycloak204>(
       {
         url: `/external-user-groups/keycloak/sync-settings`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putExternalUserGroupsKeycloakSyncSettingsBody,
+        data: putSyncSettingsForExternalUserGroupsKeycloakBody,
       },
       options,
     );
@@ -491,21 +499,21 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary Start LDAP sync process
    */
-  const putExternalUserGroupsLdapSync = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutExternalUserGroupsLdapSync202>({ url: `/external-user-groups/ldap/sync`, method: 'PUT' }, options);
+  const putSyncForExternalUserGroupsLdap = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutSyncForExternalUserGroupsLdap202>({ url: `/external-user-groups/ldap/sync`, method: 'PUT' }, options);
   };
 
   /**
    * @summary /external-user-groups/keycloak/sync
    */
-  const putExternalUserGroupsKeycloakSync = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutExternalUserGroupsKeycloakSync202>({ url: `/external-user-groups/keycloak/sync`, method: 'PUT' }, options);
+  const putSyncForExternalUserGroupsKeycloak = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutSyncForExternalUserGroupsKeycloak202>({ url: `/external-user-groups/keycloak/sync`, method: 'PUT' }, options);
   };
 
   /**
    * @summary /external-user-groups/ldap/sync-status
    */
-  const getExternalUserGroupsLdapSyncStatus = (options?: SecondParameter<typeof customInstance>) => {
+  const getSyncStatusForExternalUserGroupsLdap = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<SyncStatus>({ url: `/external-user-groups/ldap/sync-status`, method: 'GET' }, options);
   };
 
@@ -521,8 +529,8 @@ export const getGrowirestapiv3 = () => {
    * Get a preset template
    * @summary /templates/preset-templates/{templateId}/{locale}
    */
-  const getTemplatesPresetTemplatesTemplateIdLocale = (templateId: string, locale: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetTemplatesPresetTemplatesTemplateIdLocale200>(
+  const getPresetTemplatesByLocaleByTemplateIdForTemplates = (templateId: string, locale: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetPresetTemplatesByLocaleByTemplateIdForTemplates200>(
       { url: `/templates/preset-templates/${templateId}/${locale}`, method: 'GET' },
       options,
     );
@@ -532,14 +540,14 @@ export const getGrowirestapiv3 = () => {
    * Get a plugin template
    * @summary /templates/plugin-templates/{organizationId}/{reposId}/{templateId}/{locale}
    */
-  const getTemplatesPluginTemplatesOrganizationIdReposIdTemplateIdLocale = (
+  const getPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates = (
     organizationId: string,
     reposId: string,
     templateId: string,
     locale: string,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<GetTemplatesPluginTemplatesOrganizationIdReposIdTemplateIdLocale200>(
+    return customInstance<GetPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates200>(
       { url: `/templates/plugin-templates/${organizationId}/${reposId}/${templateId}/${locale}`, method: 'GET' },
       options,
     );
@@ -549,9 +557,9 @@ export const getGrowirestapiv3 = () => {
    * Analyzes the given content and suggests appropriate page paths using an agentic search over the wiki.
    * @summary Suggest page paths based on content
    */
-  const postAiToolsSuggestPath = (postAiToolsSuggestPathBody: PostAiToolsSuggestPathBody, options?: SecondParameter<typeof customInstance>) => {
+  const postSuggestPathForAiTools = (postSuggestPathForAiToolsBody: PostSuggestPathForAiToolsBody, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<SuggestPathResponse>(
-      { url: `/ai-tools/suggest-path`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postAiToolsSuggestPathBody },
+      { url: `/ai-tools/suggest-path`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postSuggestPathForAiToolsBody },
       options,
     );
   };
@@ -579,7 +587,7 @@ export const getGrowirestapiv3 = () => {
    * Get the selectable models (id + display name) for a provider from the effective catalog (the runtime-refreshed snapshot when newer, otherwise the committed offline catalog). The response carries model id/display-name information only (no secrets).
    * @summary /ai-settings/available-models
    */
-  const getAiSettingsAvailableModels = (params: GetAiSettingsAvailableModelsParams, options?: SecondParameter<typeof customInstance>) => {
+  const getAvailableModelsForAiSettings = (params: GetAvailableModelsForAiSettingsParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<SelectableModelsResponse>({ url: `/ai-settings/available-models`, method: 'GET', params }, options);
   };
 
@@ -587,7 +595,7 @@ export const getGrowirestapiv3 = () => {
    * Refresh the selectable-model catalog from models.dev (the fixed built-in source) and persist it for subsequent available-models lookups. Admin-only. On failure the last-good catalog stays in effect.
    * @summary /ai-settings/refresh-model-catalog
    */
-  const postAiSettingsRefreshModelCatalog = (options?: SecondParameter<typeof customInstance>) => {
+  const postRefreshModelCatalogForAiSettings = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<RefreshModelCatalogResponse>({ url: `/ai-settings/refresh-model-catalog`, method: 'POST' }, options);
   };
 
@@ -603,16 +611,16 @@ export const getGrowirestapiv3 = () => {
    * Activate a plugin
    * @summary /plugins/{id}/activate
    */
-  const putPluginsIdActivate = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutPluginsIdActivate200>({ url: `/plugins/${id}/activate`, method: 'PUT' }, options);
+  const putActivateByIdForPlugins = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutActivateByIdForPlugins200>({ url: `/plugins/${id}/activate`, method: 'PUT' }, options);
   };
 
   /**
    * Remove a plugin
    * @summary /plugins/{id}/remove
    */
-  const deletePluginsIdRemove = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeletePluginsIdRemove200>({ url: `/plugins/${id}/remove`, method: 'DELETE' }, options);
+  const deleteRemoveByIdForPlugins = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteRemoveByIdForPlugins200>({ url: `/plugins/${id}/remove`, method: 'DELETE' }, options);
   };
 
   /**
@@ -620,8 +628,8 @@ export const getGrowirestapiv3 = () => {
 
  * @summary Get the authenticated user's consecutive-edit runs across all pages
  */
-  const getRevisionsChanges = (params?: GetRevisionsChangesParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetRevisionsChanges200>({ url: `/revisions/changes`, method: 'GET', params }, options);
+  const getChangesForRevisions = (params?: GetChangesForRevisionsParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetChangesForRevisions200>({ url: `/revisions/changes`, method: 'GET', params }, options);
   };
 
   /**
@@ -629,9 +637,9 @@ export const getGrowirestapiv3 = () => {
 
  * @summary Compute unified diffs for a batch of revision pairs
  */
-  const postRevisionsDiff = (postRevisionsDiffBody: PostRevisionsDiffBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostRevisionsDiff200>(
-      { url: `/revisions/diff`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postRevisionsDiffBody },
+  const postDiffForRevisions = (postDiffForRevisionsBody: PostDiffForRevisionsBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostDiffForRevisions200>(
+      { url: `/revisions/diff`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postDiffForRevisionsBody },
       options,
     );
   };
@@ -647,11 +655,18 @@ export const getGrowirestapiv3 = () => {
    * Same as `GET /activity` but takes limit / offset / searchFilter in the request body. The audit-log UI uses this so the searchFilter (which lists every selected action) never bloats the query string and hits a URL-length limit for large action-group configurations.
    * @summary /activity/list
    */
-  const postActivityList = (postActivityListBody?: PostActivityListBody, options?: SecondParameter<typeof customInstance>) => {
+  const postListForActivity = (postListForActivityBody?: PostListForActivityBody, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<ActivityResponse>(
-      { url: `/activity/list`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postActivityListBody },
+      { url: `/activity/list`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postListForActivityBody },
       options,
     );
+  };
+
+  /**
+   * @summary /activity/suggestions
+   */
+  const getSuggestionsForActivity = (params?: GetSuggestionsForActivityParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/activity/suggestions`, method: 'GET', params }, options);
   };
 
   /**
@@ -666,8 +681,8 @@ export const getGrowirestapiv3 = () => {
    * Update fileUploadSetting
    * @summary /app-settings/file-upload-setting
    */
-  const putAppSettingsFileUploadSettings = (fileUploadSettingParams: FileUploadSettingParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutAppSettingsFileUploadSettings200>(
+  const putFileUploadSettingsForAppSettings = (fileUploadSettingParams: FileUploadSettingParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutFileUploadSettingsForAppSettings200>(
       { url: `/app-settings/file-upload-settings`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: fileUploadSettingParams },
       options,
     );
@@ -685,8 +700,8 @@ export const getGrowirestapiv3 = () => {
    * Update app setting
    * @summary /app-settings/app-setting
    */
-  const putAppSettingsAppSetting = (appSettingPutParams: AppSettingPutParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutAppSettingsAppSetting200>(
+  const putAppSettingForAppSettings = (appSettingPutParams: AppSettingPutParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutAppSettingForAppSettings200>(
       { url: `/app-settings/app-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: appSettingPutParams },
       options,
     );
@@ -696,8 +711,8 @@ export const getGrowirestapiv3 = () => {
    * Update site url setting
    * @summary /app-settings/site-url-setting
    */
-  const putAppSettingsSiteUrlSetting = (siteUrlSettingParams: SiteUrlSettingParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutAppSettingsSiteUrlSetting200>(
+  const putSiteUrlSettingForAppSettings = (siteUrlSettingParams: SiteUrlSettingParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutSiteUrlSettingForAppSettings200>(
       { url: `/app-settings/site-url-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: siteUrlSettingParams },
       options,
     );
@@ -707,8 +722,8 @@ export const getGrowirestapiv3 = () => {
    * Update smtp setting
    * @summary /app-settings/smtp-setting
    */
-  const putAppSettingsSmtpSetting = (smtpSettingParams: SmtpSettingParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutAppSettingsSmtpSetting200>(
+  const putSmtpSettingForAppSettings = (smtpSettingParams: SmtpSettingParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutSmtpSettingForAppSettings200>(
       { url: `/app-settings/smtp-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: smtpSettingParams },
       options,
     );
@@ -718,15 +733,15 @@ export const getGrowirestapiv3 = () => {
    * Send test mail for smtp
    * @summary /app-settings/smtp-setting
    */
-  const postAppSettingsSmtpTest = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostAppSettingsSmtpTest200>({ url: `/app-settings/smtp-test`, method: 'POST' }, options);
+  const postSmtpTestForAppSettings = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostSmtpTestForAppSettings200>({ url: `/app-settings/smtp-test`, method: 'POST' }, options);
   };
 
   /**
    * Update ses setting
    * @summary /app-settings/ses-setting
    */
-  const putAppSettingsSesSetting = (sesSettingParams: SesSettingParams, options?: SecondParameter<typeof customInstance>) => {
+  const putSesSettingForAppSettings = (sesSettingParams: SesSettingParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<SesSettingResponseParams>(
       { url: `/app-settings/ses-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: sesSettingParams },
       options,
@@ -737,9 +752,12 @@ export const getGrowirestapiv3 = () => {
    * Update OAuth 2.0 setting for email
    * @summary /app-settings/oauth2-setting
    */
-  const putAppSettingsOauth2Setting = (putAppSettingsOauth2SettingBody: PutAppSettingsOauth2SettingBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutAppSettingsOauth2Setting200>(
-      { url: `/app-settings/oauth2-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putAppSettingsOauth2SettingBody },
+  const putOauth2SettingForAppSettings = (
+    putOauth2SettingForAppSettingsBody: PutOauth2SettingForAppSettingsBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PutOauth2SettingForAppSettings200>(
+      { url: `/app-settings/oauth2-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putOauth2SettingForAppSettingsBody },
       options,
     );
   };
@@ -748,20 +766,20 @@ export const getGrowirestapiv3 = () => {
    * Update V5SchemaMigration
    * @summary AccessToken supported.
    */
-  const postAppSettingsV5SchemaMigration = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostAppSettingsV5SchemaMigration200>({ url: `/app-settings/v5-schema-migration`, method: 'POST' }, options);
+  const postV5SchemaMigrationForAppSettings = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostV5SchemaMigrationForAppSettings200>({ url: `/app-settings/v5-schema-migration`, method: 'POST' }, options);
   };
 
   /**
    * Update MaintenanceMode
    * @summary AccessToken supported.
    */
-  const postAppSettingsMaintenanceMode = (
-    postAppSettingsMaintenanceModeBody: PostAppSettingsMaintenanceModeBody,
+  const postMaintenanceModeForAppSettings = (
+    postMaintenanceModeForAppSettingsBody: PostMaintenanceModeForAppSettingsBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PostAppSettingsMaintenanceMode200>(
-      { url: `/app-settings/maintenance-mode`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postAppSettingsMaintenanceModeBody },
+    return customInstance<PostMaintenanceModeForAppSettings200>(
+      { url: `/app-settings/maintenance-mode`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postMaintenanceModeForAppSettingsBody },
       options,
     );
   };
@@ -769,7 +787,7 @@ export const getGrowirestapiv3 = () => {
   /**
    * Get attachment list
    */
-  const getAttachmentList = (params: GetAttachmentListParams, options?: SecondParameter<typeof customInstance>) => {
+  const getListForAttachment = (params: GetListForAttachmentParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<AttachmentPaginateResult>({ url: `/attachment/list`, method: 'GET', params }, options);
   };
 
@@ -777,8 +795,8 @@ export const getGrowirestapiv3 = () => {
    * Get available capacity of uploaded file with GridFS
    * @summary /attachment/limit
    */
-  const getAttachmentLimit = (params: GetAttachmentLimitParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetAttachmentLimit200>({ url: `/attachment/limit`, method: 'GET', params }, options);
+  const getLimitForAttachment = (params: GetLimitForAttachmentParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetLimitForAttachment200>({ url: `/attachment/limit`, method: 'GET', params }, options);
   };
 
   /**
@@ -792,8 +810,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * Get attachment
    */
-  const getAttachmentId = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetAttachmentId200>({ url: `/attachment/${id}`, method: 'GET' }, options);
+  const getAttachmentById = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetAttachmentById200>({ url: `/attachment/${id}`, method: 'GET' }, options);
   };
 
   /**
@@ -822,32 +840,32 @@ export const getGrowirestapiv3 = () => {
    * List bookmark folders of a user
    * @summary List bookmark folders of a user
    */
-  const getBookmarkFolderListUserId = (userId: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetBookmarkFolderListUserId200>({ url: `/bookmark-folder/list/${userId}`, method: 'GET' }, options);
+  const getListByUserIdForBookmarkFolder = (userId: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetListByUserIdForBookmarkFolder200>({ url: `/bookmark-folder/list/${userId}`, method: 'GET' }, options);
   };
 
   /**
    * Delete a bookmark folder and its children
    * @summary Delete bookmark folder
    */
-  const deleteBookmarkFolderId = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteBookmarkFolderId200>({ url: `/bookmark-folder/${id}`, method: 'DELETE' }, options);
+  const deleteBookmarkFolderById = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteBookmarkFolderById200>({ url: `/bookmark-folder/${id}`, method: 'DELETE' }, options);
   };
 
   /**
    * Update a bookmark folder
    * @summary Update bookmark folder
    */
-  const postBookmarkFolderAddBookmarkToFolder = (
-    postBookmarkFolderAddBookmarkToFolderBody: PostBookmarkFolderAddBookmarkToFolderBody,
+  const postAddBookmarkToFolderForBookmarkFolder = (
+    postAddBookmarkToFolderForBookmarkFolderBody: PostAddBookmarkToFolderForBookmarkFolderBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PostBookmarkFolderAddBookmarkToFolder200>(
+    return customInstance<PostAddBookmarkToFolderForBookmarkFolder200>(
       {
         url: `/bookmark-folder/add-bookmark-to-folder`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postBookmarkFolderAddBookmarkToFolderBody,
+        data: postAddBookmarkToFolderForBookmarkFolderBody,
       },
       options,
     );
@@ -857,12 +875,12 @@ export const getGrowirestapiv3 = () => {
    * Update a bookmark in a folder
    * @summary Update bookmark in folder
    */
-  const putBookmarkFolderUpdateBookmark = (
-    putBookmarkFolderUpdateBookmarkBody: PutBookmarkFolderUpdateBookmarkBody,
+  const putUpdateBookmarkForBookmarkFolder = (
+    putUpdateBookmarkForBookmarkFolderBody: PutUpdateBookmarkForBookmarkFolderBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutBookmarkFolderUpdateBookmark200>(
-      { url: `/bookmark-folder/update-bookmark`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putBookmarkFolderUpdateBookmarkBody },
+    return customInstance<PutUpdateBookmarkForBookmarkFolder200>(
+      { url: `/bookmark-folder/update-bookmark`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUpdateBookmarkForBookmarkFolderBody },
       options,
     );
   };
@@ -871,7 +889,7 @@ export const getGrowirestapiv3 = () => {
    * Get bookmarked info
    * @summary /bookmarks/info
    */
-  const getBookmarksInfo = (params?: GetBookmarksInfoParams, options?: SecondParameter<typeof customInstance>) => {
+  const getInfoForBookmarks = (params?: GetInfoForBookmarksParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<BookmarkInfo>({ url: `/bookmarks/info`, method: 'GET', params }, options);
   };
 
@@ -879,7 +897,7 @@ export const getGrowirestapiv3 = () => {
    * Get my bookmarked status
    * @summary /bookmarks/{userId}
    */
-  const getBookmarksUserId = (userId: string, options?: SecondParameter<typeof customInstance>) => {
+  const getBookmarksByUserId = (userId: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<Bookmarks>({ url: `/bookmarks/${userId}`, method: 'GET' }, options);
   };
 
@@ -920,7 +938,7 @@ export const getGrowirestapiv3 = () => {
    * Get layout
    * @summary /customize-setting/layout
    */
-  const getCustomizeSettingLayout = (options?: SecondParameter<typeof customInstance>) => {
+  const getLayoutForCustomizeSetting = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<CustomizeLayout>({ url: `/customize-setting/layout`, method: 'GET' }, options);
   };
 
@@ -928,8 +946,8 @@ export const getGrowirestapiv3 = () => {
    * Update layout
    * @summary /customize-setting/layout
    */
-  const putCustomizeSettingLayout = (customizeLayout: CustomizeLayout, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingLayout200>(
+  const putLayoutForCustomizeSetting = (customizeLayout: CustomizeLayout, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutLayoutForCustomizeSetting200>(
       { url: `/customize-setting/layout`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeLayout },
       options,
     );
@@ -939,16 +957,16 @@ export const getGrowirestapiv3 = () => {
    * Get theme
    * @summary /customize-setting/theme
    */
-  const getCustomizeSettingTheme = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetCustomizeSettingTheme200>({ url: `/customize-setting/theme`, method: 'GET' }, options);
+  const getThemeForCustomizeSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetThemeForCustomizeSetting200>({ url: `/customize-setting/theme`, method: 'GET' }, options);
   };
 
   /**
    * Update theme
    * @summary /customize-setting/theme
    */
-  const putCustomizeSettingTheme = (customizeTheme: CustomizeTheme, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingTheme200>(
+  const putThemeForCustomizeSetting = (customizeTheme: CustomizeTheme, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutThemeForCustomizeSetting200>(
       { url: `/customize-setting/theme`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeTheme },
       options,
     );
@@ -958,7 +976,7 @@ export const getGrowirestapiv3 = () => {
    * Get sidebar
    * @summary /customize-setting/sidebar
    */
-  const getCustomizeSettingSidebar = (options?: SecondParameter<typeof customInstance>) => {
+  const getSidebarForCustomizeSetting = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<CustomizeSidebar>({ url: `/customize-setting/sidebar`, method: 'GET' }, options);
   };
 
@@ -966,8 +984,8 @@ export const getGrowirestapiv3 = () => {
    * Update sidebar
    * @summary /customize-setting/sidebar
    */
-  const putCustomizeSettingSidebar = (customizeSidebar: CustomizeSidebar, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingSidebar200>(
+  const putSidebarForCustomizeSetting = (customizeSidebar: CustomizeSidebar, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutSidebarForCustomizeSetting200>(
       { url: `/customize-setting/sidebar`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeSidebar },
       options,
     );
@@ -977,8 +995,8 @@ export const getGrowirestapiv3 = () => {
    * Update function
    * @summary /customize-setting/function
    */
-  const putCustomizeSettingFunction = (customizeFunction: CustomizeFunction, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingFunction200>(
+  const putFunctionForCustomizeSetting = (customizeFunction: CustomizeFunction, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutFunctionForCustomizeSetting200>(
       { url: `/customize-setting/function`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeFunction },
       options,
     );
@@ -988,8 +1006,8 @@ export const getGrowirestapiv3 = () => {
    * Update presentation
    * @summary /customize-setting/presentation
    */
-  const putCustomizeSettingPresentation = (customizePresentation: CustomizePresentation, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingPresentation200>(
+  const putPresentationForCustomizeSetting = (customizePresentation: CustomizePresentation, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutPresentationForCustomizeSetting200>(
       { url: `/customize-setting/presentation`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizePresentation },
       options,
     );
@@ -999,8 +1017,8 @@ export const getGrowirestapiv3 = () => {
    * Update highlight
    * @summary /customize-setting/highlight
    */
-  const putCustomizeSettingHighlight = (customizeHighlight: CustomizeHighlight, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingHighlight200>(
+  const putHighlightForCustomizeSetting = (customizeHighlight: CustomizeHighlight, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutHighlightForCustomizeSetting200>(
       { url: `/customize-setting/highlight`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeHighlight },
       options,
     );
@@ -1010,8 +1028,8 @@ export const getGrowirestapiv3 = () => {
    * Update title
    * @summary /customize-setting/customizeTitle
    */
-  const putCustomizeSettingCustomizeTitle = (customizeTitle: CustomizeTitle, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingCustomizeTitle200>(
+  const putCustomizeTitleForCustomizeSetting = (customizeTitle: CustomizeTitle, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutCustomizeTitleForCustomizeSetting200>(
       { url: `/customize-setting/customizeTitle`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeTitle },
       options,
     );
@@ -1021,8 +1039,8 @@ export const getGrowirestapiv3 = () => {
    * Update noscript
    * @summary /customize-setting/customize-noscript
    */
-  const putCustomizeSettingCustomizeNoscript = (customizeNoscript: CustomizeNoscript, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingCustomizeNoscript200>(
+  const putCustomizeNoscriptForCustomizeSetting = (customizeNoscript: CustomizeNoscript, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutCustomizeNoscriptForCustomizeSetting200>(
       { url: `/customize-setting/customize-noscript`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeNoscript },
       options,
     );
@@ -1032,8 +1050,8 @@ export const getGrowirestapiv3 = () => {
    * Update customize css
    * @summary /customize-setting/customize-css
    */
-  const putCustomizeSettingCustomizeCss = (customizeCss: CustomizeCss, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingCustomizeCss200>(
+  const putCustomizeCssForCustomizeSetting = (customizeCss: CustomizeCss, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutCustomizeCssForCustomizeSetting200>(
       { url: `/customize-setting/customize-css`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeCss },
       options,
     );
@@ -1043,8 +1061,8 @@ export const getGrowirestapiv3 = () => {
    * Update customize script
    * @summary /customize-setting/customize-script
    */
-  const putCustomizeSettingCustomizeScript = (customizeScript: CustomizeScript, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingCustomizeScript200>(
+  const putCustomizeScriptForCustomizeSetting = (customizeScript: CustomizeScript, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutCustomizeScriptForCustomizeSetting200>(
       { url: `/customize-setting/customize-script`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeScript },
       options,
     );
@@ -1054,8 +1072,8 @@ export const getGrowirestapiv3 = () => {
    * Update customize logo
    * @summary /customize-setting/customize-logo
    */
-  const putCustomizeSettingCustomizeLogo = (customizeLogo: CustomizeLogo, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutCustomizeSettingCustomizeLogo200>(
+  const putCustomizeLogoForCustomizeSetting = (customizeLogo: CustomizeLogo, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutCustomizeLogoForCustomizeSetting200>(
       { url: `/customize-setting/customize-logo`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: customizeLogo },
       options,
     );
@@ -1065,16 +1083,16 @@ export const getGrowirestapiv3 = () => {
    * Upload brand logo
    * @summary /customize-setting/upload-brand-logo
    */
-  const putCustomizeSettingUploadBrandLogo = (
-    putCustomizeSettingUploadBrandLogoBody: PutCustomizeSettingUploadBrandLogoBody,
+  const putUploadBrandLogoForCustomizeSetting = (
+    putUploadBrandLogoForCustomizeSettingBody: PutUploadBrandLogoForCustomizeSettingBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     const formData = new FormData();
-    if (putCustomizeSettingUploadBrandLogoBody.file !== undefined) {
-      formData.append(`file`, putCustomizeSettingUploadBrandLogoBody.file);
+    if (putUploadBrandLogoForCustomizeSettingBody.file !== undefined) {
+      formData.append(`file`, putUploadBrandLogoForCustomizeSettingBody.file);
     }
 
-    return customInstance<PutCustomizeSettingUploadBrandLogo200>(
+    return customInstance<PutUploadBrandLogoForCustomizeSetting200>(
       { url: `/customize-setting/upload-brand-logo`, method: 'PUT', headers: { 'Content-Type': 'multipart/form-data' }, data: formData },
       options,
     );
@@ -1084,7 +1102,7 @@ export const getGrowirestapiv3 = () => {
    * Delete brand logo
    * @summary /customize-setting/delete-brand-logo
    */
-  const deleteCustomizeSettingDeleteBrandLogo = (options?: SecondParameter<typeof customInstance>) => {
+  const deleteDeleteBrandLogoForCustomizeSetting = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<unknown>({ url: `/customize-setting/delete-brand-logo`, method: 'DELETE' }, options);
   };
 
@@ -1092,8 +1110,8 @@ export const getGrowirestapiv3 = () => {
    * get properties of stored zip files for export
    * @summary /export/status
    */
-  const getExportStatus = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetExportStatus200>({ url: `/export/status`, method: 'GET' }, options);
+  const getStatusForExport = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetStatusForExport200>({ url: `/export/status`, method: 'GET' }, options);
   };
 
   /**
@@ -1108,8 +1126,8 @@ export const getGrowirestapiv3 = () => {
    * delete the file
    * @summary /export/{fileName}
    */
-  const deleteExportFileName = (fileName: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteExportFileName200>({ url: `/export/${fileName}`, method: 'DELETE' }, options);
+  const deleteExportByFileName = (fileName: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteExportByFileName200>({ url: `/export/${fileName}`, method: 'DELETE' }, options);
   };
 
   /**
@@ -1135,8 +1153,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /g2g-transfer/files
    */
-  const getG2gTransferFiles = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetG2gTransferFiles200>({ url: `/g2g-transfer/files`, method: 'GET' }, options);
+  const getFilesForG2gTransfer = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetFilesForG2gTransfer200>({ url: `/g2g-transfer/files`, method: 'GET' }, options);
   };
 
   /**
@@ -1169,16 +1187,19 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /g2g-transfer/attachment
    */
-  const postG2gTransferAttachment = (postG2gTransferAttachmentBody: PostG2gTransferAttachmentBody, options?: SecondParameter<typeof customInstance>) => {
+  const postAttachmentForG2gTransfer = (
+    postAttachmentForG2gTransferBody: PostAttachmentForG2gTransferBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
     const formData = new FormData();
-    if (postG2gTransferAttachmentBody.file !== undefined) {
-      formData.append(`file`, postG2gTransferAttachmentBody.file);
+    if (postAttachmentForG2gTransferBody.file !== undefined) {
+      formData.append(`file`, postAttachmentForG2gTransferBody.file);
     }
-    if (postG2gTransferAttachmentBody.attachmentMetadata !== undefined) {
-      formData.append(`attachmentMetadata`, JSON.stringify(postG2gTransferAttachmentBody.attachmentMetadata));
+    if (postAttachmentForG2gTransferBody.attachmentMetadata !== undefined) {
+      formData.append(`attachmentMetadata`, JSON.stringify(postAttachmentForG2gTransferBody.attachmentMetadata));
     }
 
-    return customInstance<PostG2gTransferAttachment200>(
+    return customInstance<PostAttachmentForG2gTransfer200>(
       { url: `/g2g-transfer/attachment`, method: 'POST', headers: { 'Content-Type': 'multipart/form-data' }, data: formData },
       options,
     );
@@ -1187,16 +1208,19 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /g2g-transfer/growi-info
    */
-  const getG2gTransferGrowiInfo = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetG2gTransferGrowiInfo200>({ url: `/g2g-transfer/growi-info`, method: 'GET' }, options);
+  const getGrowiInfoForG2gTransfer = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetGrowiInfoForG2gTransfer200>({ url: `/g2g-transfer/growi-info`, method: 'GET' }, options);
   };
 
   /**
    * @summary /g2g-transfer/generate-key
    */
-  const postG2gTransferGenerateKey = (postG2gTransferGenerateKeyBody: PostG2gTransferGenerateKeyBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostG2gTransferGenerateKey200>(
-      { url: `/g2g-transfer/generate-key`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postG2gTransferGenerateKeyBody },
+  const postGenerateKeyForG2gTransfer = (
+    postGenerateKeyForG2gTransferBody: PostGenerateKeyForG2gTransferBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PostGenerateKeyForG2gTransfer200>(
+      { url: `/g2g-transfer/generate-key`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postGenerateKeyForG2gTransferBody },
       options,
     );
   };
@@ -1204,9 +1228,9 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /g2g-transfer/transfer
    */
-  const postG2gTransferTransfer = (postG2gTransferTransferBody: PostG2gTransferTransferBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostG2gTransferTransfer200>(
-      { url: `/g2g-transfer/transfer`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postG2gTransferTransferBody },
+  const postTransferForG2gTransfer = (postTransferForG2gTransferBody: PostTransferForG2gTransferBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostTransferForG2gTransfer200>(
+      { url: `/g2g-transfer/transfer`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postTransferForG2gTransferBody },
       options,
     );
   };
@@ -1223,8 +1247,8 @@ export const getGrowirestapiv3 = () => {
    * Get properties of stored zip files for import
    * @summary /import/status
    */
-  const getImportStatus = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetImportStatus200>({ url: `/import/status`, method: 'GET' }, options);
+  const getStatusForImport = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetStatusForImport200>({ url: `/import/status`, method: 'GET' }, options);
   };
 
   /**
@@ -1239,10 +1263,10 @@ export const getGrowirestapiv3 = () => {
    * upload a zip file
    * @summary /import/upload
    */
-  const postImportUpload = (postImportUploadBody: PostImportUploadBody, options?: SecondParameter<typeof customInstance>) => {
+  const postUploadForImport = (postUploadForImportBody: PostUploadForImportBody, options?: SecondParameter<typeof customInstance>) => {
     const formData = new FormData();
-    if (postImportUploadBody.file !== undefined) {
-      formData.append(`file`, postImportUploadBody.file);
+    if (postUploadForImportBody.file !== undefined) {
+      formData.append(`file`, postUploadForImportBody.file);
     }
 
     return customInstance<FileImportResponse>(
@@ -1255,7 +1279,7 @@ export const getGrowirestapiv3 = () => {
    * Delete all zip files
    * @summary /import/all
    */
-  const deleteImportAll = (options?: SecondParameter<typeof customInstance>) => {
+  const deleteAllForImport = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/import/all`, method: 'DELETE' }, options);
   };
 
@@ -1263,7 +1287,7 @@ export const getGrowirestapiv3 = () => {
    * Get the list of in-app notifications
    * @summary /in-app-notification/list
    */
-  const getInAppNotificationList = (params?: GetInAppNotificationListParams, options?: SecondParameter<typeof customInstance>) => {
+  const getListForInAppNotification = (params?: GetListForInAppNotificationParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<InAppNotificationListResponse>({ url: `/in-app-notification/list`, method: 'GET', params }, options);
   };
 
@@ -1271,17 +1295,20 @@ export const getGrowirestapiv3 = () => {
    * Get the status of in-app notifications
    * @summary /in-app-notification/status
    */
-  const getInAppNotificationStatus = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetInAppNotificationStatus200>({ url: `/in-app-notification/status`, method: 'GET' }, options);
+  const getStatusForInAppNotification = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetStatusForInAppNotification200>({ url: `/in-app-notification/status`, method: 'GET' }, options);
   };
 
   /**
    * Open the in-app notification
    * @summary /in-app-notification/open
    */
-  const postInAppNotificationOpen = (postInAppNotificationOpenBody: PostInAppNotificationOpenBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostInAppNotificationOpen200>(
-      { url: `/in-app-notification/open`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postInAppNotificationOpenBody },
+  const postOpenForInAppNotification = (
+    postOpenForInAppNotificationBody: PostOpenForInAppNotificationBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PostOpenForInAppNotification200>(
+      { url: `/in-app-notification/open`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postOpenForInAppNotificationBody },
       options,
     );
   };
@@ -1290,7 +1317,7 @@ export const getGrowirestapiv3 = () => {
    * Open all in-app notifications
    * @summary /in-app-notification/all-statuses-open
    */
-  const putInAppNotificationAllStatusesOpen = (options?: SecondParameter<typeof customInstance>) => {
+  const putAllStatusesOpenForInAppNotification = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/in-app-notification/all-statuses-open`, method: 'PUT' }, options);
   };
 
@@ -1331,8 +1358,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary Update lineBreak setting
    */
-  const putMarkdownSettingLineBreak = (lineBreakParams: LineBreakParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutMarkdownSettingLineBreak200>(
+  const putLineBreakForMarkdownSetting = (lineBreakParams: LineBreakParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutLineBreakForMarkdownSetting200>(
       { url: `/markdown-setting/lineBreak`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: lineBreakParams },
       options,
     );
@@ -1341,8 +1368,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary Update indent setting
    */
-  const putMarkdownSettingIndent = (indentParams: IndentParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutMarkdownSettingIndent200>(
+  const putIndentForMarkdownSetting = (indentParams: IndentParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutIndentForMarkdownSetting200>(
       { url: `/markdown-setting/indent`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: indentParams },
       options,
     );
@@ -1352,7 +1379,7 @@ export const getGrowirestapiv3 = () => {
    * Update xss
    * @summary Update XSS setting
    */
-  const putMarkdownSettingXss = (xssParams: XssParams, options?: SecondParameter<typeof customInstance>) => {
+  const putXssForMarkdownSetting = (xssParams: XssParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<XssParams>(
       { url: `/markdown-setting/xss`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: xssParams },
       options,
@@ -1363,8 +1390,8 @@ export const getGrowirestapiv3 = () => {
    * get mongodb collections names
    * @summary /mongo/collections
    */
-  const getMongoCollections = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetMongoCollections200>({ url: `/mongo/collections`, method: 'GET' }, options);
+  const getCollectionsForMongo = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetCollectionsForMongo200>({ url: `/mongo/collections`, method: 'GET' }, options);
   };
 
   /**
@@ -1377,8 +1404,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * add user notification setting
    */
-  const postNotificationSettingUserNotification = (userNotificationParams: UserNotificationParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostNotificationSettingUserNotification200>(
+  const postUserNotificationForNotificationSetting = (userNotificationParams: UserNotificationParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostUserNotificationForNotificationSetting200>(
       { url: `/notification-setting/user-notification`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: userNotificationParams },
       options,
     );
@@ -1387,26 +1414,29 @@ export const getGrowirestapiv3 = () => {
   /**
    * delete user trigger notification pattern
    */
-  const deleteNotificationSettingUserNotificationId = (id: string, options?: SecondParameter<typeof customInstance>) => {
+  const deleteUserNotificationByIdForNotificationSetting = (id: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<UserNotification>({ url: `/notification-setting/user-notification/${id}`, method: 'DELETE' }, options);
   };
 
   /**
    * get global notification setting
    */
-  const getNotificationSettingGlobalNotificationId = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetNotificationSettingGlobalNotificationId200>({ url: `/notification-setting/global-notification/${id}`, method: 'GET' }, options);
+  const getGlobalNotificationByIdForNotificationSetting = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetGlobalNotificationByIdForNotificationSetting200>(
+      { url: `/notification-setting/global-notification/${id}`, method: 'GET' },
+      options,
+    );
   };
 
   /**
    * update global notification
    */
-  const putNotificationSettingGlobalNotificationId = (
+  const putGlobalNotificationByIdForNotificationSetting = (
     id: string,
     globalNotificationParams: GlobalNotificationParams,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutNotificationSettingGlobalNotificationId200>(
+    return customInstance<PutGlobalNotificationByIdForNotificationSetting200>(
       {
         url: `/notification-setting/global-notification/${id}`,
         method: 'PUT',
@@ -1420,15 +1450,18 @@ export const getGrowirestapiv3 = () => {
   /**
    * delete global notification pattern
    */
-  const deleteNotificationSettingGlobalNotificationId = (id: string, options?: SecondParameter<typeof customInstance>) => {
+  const deleteGlobalNotificationByIdForNotificationSetting = (id: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<GlobalNotification>({ url: `/notification-setting/global-notification/${id}`, method: 'DELETE' }, options);
   };
 
   /**
    * add global notification
    */
-  const postNotificationSettingGlobalNotification = (globalNotificationParams: GlobalNotificationParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostNotificationSettingGlobalNotification200>(
+  const postGlobalNotificationForNotificationSetting = (
+    globalNotificationParams: GlobalNotificationParams,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PostGlobalNotificationForNotificationSetting200>(
       { url: `/notification-setting/global-notification`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: globalNotificationParams },
       options,
     );
@@ -1437,7 +1470,7 @@ export const getGrowirestapiv3 = () => {
   /**
    * Update settings for notify for page grant
    */
-  const putNotificationSettingNotifyForPageGrant = (notifyForPageGrant: NotifyForPageGrant, options?: SecondParameter<typeof customInstance>) => {
+  const putNotifyForPageGrantForNotificationSetting = (notifyForPageGrant: NotifyForPageGrant, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<NotifyForPageGrant>(
       { url: `/notification-setting/notify-for-page-grant`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: notifyForPageGrant },
       options,
@@ -1447,17 +1480,17 @@ export const getGrowirestapiv3 = () => {
   /**
    * toggle enabled global notification
    */
-  const putNotificationSettingGlobalNotificationIdEnabled = (
+  const putEnabledByIdForNotificationSettingGlobalNotification = (
     id: string,
-    putNotificationSettingGlobalNotificationIdEnabledBody: PutNotificationSettingGlobalNotificationIdEnabledBody,
+    putEnabledByIdForNotificationSettingGlobalNotificationBody: PutEnabledByIdForNotificationSettingGlobalNotificationBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutNotificationSettingGlobalNotificationIdEnabled200>(
+    return customInstance<PutEnabledByIdForNotificationSettingGlobalNotification200>(
       {
         url: `/notification-setting/global-notification/${id}/enabled`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putNotificationSettingGlobalNotificationIdEnabledBody,
+        data: putEnabledByIdForNotificationSettingGlobalNotificationBody,
       },
       options,
     );
@@ -1467,39 +1500,39 @@ export const getGrowirestapiv3 = () => {
    * Get the root page
    * @summary /page-listing/root
    */
-  const getPageListingRoot = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageListingRoot200>({ url: `/page-listing/root`, method: 'GET' }, options);
+  const getRootForPageListing = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetRootForPageListing200>({ url: `/page-listing/root`, method: 'GET' }, options);
   };
 
   /**
    * Get the children of a page
    * @summary /page-listing/children
    */
-  const getPageListingChildren = (params?: GetPageListingChildrenParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageListingChildren200>({ url: `/page-listing/children`, method: 'GET', params }, options);
+  const getChildrenForPageListing = (params?: GetChildrenForPageListingParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetChildrenForPageListing200>({ url: `/page-listing/children`, method: 'GET', params }, options);
   };
 
   /**
    * Get summary information of pages
    * @summary /page-listing/info
    */
-  const getPageListingInfo = (params?: GetPageListingInfoParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageListingInfo200>({ url: `/page-listing/info`, method: 'GET', params }, options);
+  const getInfoForPageListing = (params?: GetInfoForPageListingParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetInfoForPageListing200>({ url: `/page-listing/info`, method: 'GET', params }, options);
   };
 
   /**
    * Get a single page item for tree display
    * @summary /page-listing/item
    */
-  const getPageListingItem = (params: GetPageListingItemParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageListingItem200>({ url: `/page-listing/item`, method: 'GET', params }, options);
+  const getItemForPageListing = (params: GetItemForPageListingParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetItemForPageListing200>({ url: `/page-listing/item`, method: 'GET', params }, options);
   };
 
   /**
    * Get page data via a valid share link (public endpoint, no authentication required)
    * @summary Get page by share link
    */
-  const getPageShared = (params: GetPageSharedParams, options?: SecondParameter<typeof customInstance>) => {
+  const getSharedForPage = (params: GetSharedForPageParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<GetPageResponse>({ url: `/page/shared`, method: 'GET', params }, options);
   };
 
@@ -1507,7 +1540,7 @@ export const getGrowirestapiv3 = () => {
    * Get summary informations for a page
    * @summary /page/info
    */
-  const getPageInfo = (params: GetPageInfoParams, options?: SecondParameter<typeof customInstance>) => {
+  const getInfoForPage = (params: GetInfoForPageParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<PageInfoExt>({ url: `/page/info`, method: 'GET', params }, options);
   };
 
@@ -1538,15 +1571,15 @@ export const getGrowirestapiv3 = () => {
    * Check if a page exists at the specified path
    * @summary Check if page exists
    */
-  const getPageExist = (params: GetPageExistParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageExist200>({ url: `/page/exist`, method: 'GET', params }, options);
+  const getExistForPage = (params: GetExistForPageParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetExistForPage200>({ url: `/page/exist`, method: 'GET', params }, options);
   };
 
   /**
    * Update liked status
    * @summary Get page likes
    */
-  const putPageLikes = (likeParams: LikeParams, options?: SecondParameter<typeof customInstance>) => {
+  const putLikesForPage = (likeParams: LikeParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<Page>({ url: `/page/likes`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: likeParams }, options);
   };
 
@@ -1554,38 +1587,41 @@ export const getGrowirestapiv3 = () => {
    * Retrieve current page's grant data
    * @summary Get page grant data
    */
-  const getPageGrantData = (params?: GetPageGrantDataParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageGrantData200>({ url: `/page/grant-data`, method: 'GET', params }, options);
+  const getGrantDataForPage = (params?: GetGrantDataForPageParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetGrantDataForPage200>({ url: `/page/grant-data`, method: 'GET', params }, options);
   };
 
   /**
    * Check if non-user related groups are granted access to a specific page or its closest ancestor
    * @summary Check if non-user related groups are granted page access
    */
-  const getPageNonUserRelatedGroupsGranted = (params: GetPageNonUserRelatedGroupsGrantedParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageNonUserRelatedGroupsGranted200>({ url: `/page/non-user-related-groups-granted`, method: 'GET', params }, options);
+  const getNonUserRelatedGroupsGrantedForPage = (params: GetNonUserRelatedGroupsGrantedForPageParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetNonUserRelatedGroupsGrantedForPage200>({ url: `/page/non-user-related-groups-granted`, method: 'GET', params }, options);
   };
 
   /**
    * Retrieve applicable grant data for a specific page
    * @summary Get applicable grant data
    */
-  const getPageApplicableGrant = (params: GetPageApplicableGrantParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageApplicableGrant200>({ url: `/page/applicable-grant`, method: 'GET', params }, options);
+  const getApplicableGrantForPage = (params: GetApplicableGrantForPageParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetApplicableGrantForPage200>({ url: `/page/applicable-grant`, method: 'GET', params }, options);
   };
 
   /**
    * Update the grant of a specific page
    * @summary Update page grant
    */
-  const putPageIdGrant = (pageId: string, putPageIdGrantBody: PutPageIdGrantBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<Page>({ url: `/${pageId}/grant`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPageIdGrantBody }, options);
+  const putGrantByPageId = (pageId: string, putGrantByPageIdBody: PutGrantByPageIdBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<Page>(
+      { url: `/${pageId}/grant`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putGrantByPageIdBody },
+      options,
+    );
   };
 
   /**
    * return page's markdown
    */
-  const getPageExportPageId = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
+  const getExportByPageIdForPage = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/page/export/${pageId}`, method: 'GET' }, options);
   };
 
@@ -1593,17 +1629,17 @@ export const getGrowirestapiv3 = () => {
    * Get already exist paths
    * @summary Get already exist paths
    */
-  const getPageExistPaths = (params?: GetPageExistPathsParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageExistPaths200>({ url: `/page/exist-paths`, method: 'GET', params }, options);
+  const getExistPathsForPage = (params?: GetExistPathsForPageParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetExistPathsForPage200>({ url: `/page/exist-paths`, method: 'GET', params }, options);
   };
 
   /**
    * Update subscription status
    * @summary Update subscription status
    */
-  const putPageSubscribe = (putPageSubscribeBody: PutPageSubscribeBody, options?: SecondParameter<typeof customInstance>) => {
+  const putSubscribeForPage = (putSubscribeForPageBody: PutSubscribeForPageBody, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<Page>(
-      { url: `/page/subscribe`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPageSubscribeBody },
+      { url: `/page/subscribe`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putSubscribeForPageBody },
       options,
     );
   };
@@ -1612,9 +1648,13 @@ export const getGrowirestapiv3 = () => {
    * Update the content width setting for a specific page
    * @summary Update content width
    */
-  const putPageIdContentWidth = (pageId: string, putPageIdContentWidthBody: PutPageIdContentWidthBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutPageIdContentWidth200>(
-      { url: `/${pageId}/content-width`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPageIdContentWidthBody },
+  const putContentWidthByPageId = (
+    pageId: string,
+    putContentWidthByPageIdBody: PutContentWidthByPageIdBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PutContentWidthByPageId200>(
+      { url: `/${pageId}/content-width`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putContentWidthByPageIdBody },
       options,
     );
   };
@@ -1623,7 +1663,7 @@ export const getGrowirestapiv3 = () => {
    * Publish a specific page
    * @summary Publish page
    */
-  const putPagePageIdPublish = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
+  const putPublishByPageIdForPage = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<Page>({ url: `/page/${pageId}/publish`, method: 'PUT' }, options);
   };
 
@@ -1631,7 +1671,7 @@ export const getGrowirestapiv3 = () => {
    * Unpublish a specific page
    * @summary Unpublish page
    */
-  const putPagePageIdUnpublish = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
+  const putUnpublishByPageIdForPage = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<Page>({ url: `/page/${pageId}/unpublish`, method: 'PUT' }, options);
   };
 
@@ -1639,25 +1679,25 @@ export const getGrowirestapiv3 = () => {
    * Retrieve Yjs data for a specific page
    * @summary Get Yjs data
    */
-  const getPageIdYjsData = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPageIdYjsData200>({ url: `/${pageId}/yjs-data`, method: 'GET' }, options);
+  const getYjsDataByPageId = (pageId: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetYjsDataByPageId200>({ url: `/${pageId}/yjs-data`, method: 'GET' }, options);
   };
 
   /**
    * Sync the latest revision body to the Yjs draft for a specific page
    * @summary Sync latest revision body to Yjs draft
    */
-  const putPageIdSyncLatestRevisionBodyToYjsDraft = (
+  const putSyncLatestRevisionBodyToYjsDraftByPageId = (
     pageId: string,
-    putPageIdSyncLatestRevisionBodyToYjsDraftBody: PutPageIdSyncLatestRevisionBodyToYjsDraftBody,
+    putSyncLatestRevisionBodyToYjsDraftByPageIdBody: PutSyncLatestRevisionBodyToYjsDraftByPageIdBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutPageIdSyncLatestRevisionBodyToYjsDraft200>(
+    return customInstance<PutSyncLatestRevisionBodyToYjsDraftByPageId200>(
       {
         url: `/${pageId}/sync-latest-revision-body-to-yjs-draft`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putPageIdSyncLatestRevisionBodyToYjsDraftBody,
+        data: putSyncLatestRevisionBodyToYjsDraftByPageIdBody,
       },
       options,
     );
@@ -1666,16 +1706,16 @@ export const getGrowirestapiv3 = () => {
   /**
    * Get recently updated pages
    */
-  const getPagesRecent = (params?: GetPagesRecentParams, options?: SecondParameter<typeof customInstance>) => {
+  const getRecentForPages = (params?: GetRecentForPagesParams, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/pages/recent`, method: 'GET', params }, options);
   };
 
   /**
    * Rename page
    */
-  const putPagesRename = (putPagesRenameBody: PutPagesRenameBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutPagesRename200>(
-      { url: `/pages/rename`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPagesRenameBody },
+  const putRenameForPages = (putRenameForPagesBody: PutRenameForPagesBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutRenameForPages200>(
+      { url: `/pages/rename`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putRenameForPagesBody },
       options,
     );
   };
@@ -1683,9 +1723,9 @@ export const getGrowirestapiv3 = () => {
   /**
    * Resume rename page operation
    */
-  const postPagesResumeRename = (postPagesResumeRenameBody: PostPagesResumeRenameBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostPagesResumeRename200>(
-      { url: `/pages/resume-rename`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postPagesResumeRenameBody },
+  const postResumeRenameForPages = (postResumeRenameForPagesBody: PostResumeRenameForPagesBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostResumeRenameForPages200>(
+      { url: `/pages/resume-rename`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postResumeRenameForPagesBody },
       options,
     );
   };
@@ -1693,23 +1733,23 @@ export const getGrowirestapiv3 = () => {
   /**
    * empty trash
    */
-  const deletePagesEmptyTrash = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeletePagesEmptyTrash200>({ url: `/pages/empty-trash`, method: 'DELETE' }, options);
+  const deleteEmptyTrashForPages = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteEmptyTrashForPages200>({ url: `/pages/empty-trash`, method: 'DELETE' }, options);
   };
 
   /**
    * Get list of pages
    */
-  const getPagesList = (params?: GetPagesListParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPagesList200>({ url: `/pages/list`, method: 'GET', params }, options);
+  const getListForPages = (params?: GetListForPagesParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetListForPages200>({ url: `/pages/list`, method: 'GET', params }, options);
   };
 
   /**
    * Duplicate page
    */
-  const postPagesDuplicate = (postPagesDuplicateBody: PostPagesDuplicateBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostPagesDuplicate200>(
-      { url: `/pages/duplicate`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postPagesDuplicateBody },
+  const postDuplicateForPages = (postDuplicateForPagesBody: PostDuplicateForPagesBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostDuplicateForPages200>(
+      { url: `/pages/duplicate`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postDuplicateForPagesBody },
       options,
     );
   };
@@ -1717,16 +1757,16 @@ export const getGrowirestapiv3 = () => {
   /**
    * Get subordinated pages
    */
-  const getPagesSubordinatedList = (params?: GetPagesSubordinatedListParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPagesSubordinatedList200>({ url: `/pages/subordinated-list`, method: 'GET', params }, options);
+  const getSubordinatedListForPages = (params?: GetSubordinatedListForPagesParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetSubordinatedListForPages200>({ url: `/pages/subordinated-list`, method: 'GET', params }, options);
   };
 
   /**
    * Delete pages
    */
-  const postPagesDelete = (postPagesDeleteBody: PostPagesDeleteBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostPagesDelete200>(
-      { url: `/pages/delete`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postPagesDeleteBody },
+  const postDeleteForPages = (postDeleteForPagesBody: PostDeleteForPagesBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostDeleteForPages200>(
+      { url: `/pages/delete`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postDeleteForPagesBody },
       options,
     );
   };
@@ -1734,9 +1774,12 @@ export const getGrowirestapiv3 = () => {
   /**
    * Convert pages by path
    */
-  const postPagesConvertPagesByPath = (postPagesConvertPagesByPathBody: PostPagesConvertPagesByPathBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostPagesConvertPagesByPath200>(
-      { url: `/pages/convert-pages-by-path`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postPagesConvertPagesByPathBody },
+  const postConvertPagesByPathForPages = (
+    postConvertPagesByPathForPagesBody: PostConvertPagesByPathForPagesBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PostConvertPagesByPathForPages200>(
+      { url: `/pages/convert-pages-by-path`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postConvertPagesByPathForPagesBody },
       options,
     );
   };
@@ -1744,12 +1787,12 @@ export const getGrowirestapiv3 = () => {
   /**
    * Migrate legacy pages
    */
-  const postPagesLegacyPagesMigration = (
-    postPagesLegacyPagesMigrationBody: PostPagesLegacyPagesMigrationBody,
+  const postLegacyPagesMigrationForPages = (
+    postLegacyPagesMigrationForPagesBody: PostLegacyPagesMigrationForPagesBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PostPagesLegacyPagesMigration200>(
-      { url: `/pages/legacy-pages-migration`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postPagesLegacyPagesMigrationBody },
+    return customInstance<PostLegacyPagesMigrationForPages200>(
+      { url: `/pages/legacy-pages-migration`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postLegacyPagesMigrationForPagesBody },
       options,
     );
   };
@@ -1757,8 +1800,8 @@ export const getGrowirestapiv3 = () => {
   /**
    * Get V5 migration status
    */
-  const getPagesV5MigrationStatus = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPagesV5MigrationStatus200>({ url: `/pages/v5-migration-status`, method: 'GET' }, options);
+  const getV5MigrationStatusForPages = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetV5MigrationStatusForPages200>({ url: `/pages/v5-migration-status`, method: 'GET' }, options);
   };
 
   /**
@@ -1784,17 +1827,20 @@ export const getGrowirestapiv3 = () => {
    * Get whether a password has been set
    * @summary /personal-setting
    */
-  const getPersonalSettingIsPasswordSet = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPersonalSettingIsPasswordSet200>({ url: `/personal-setting/is-password-set`, method: 'GET' }, options);
+  const getIsPasswordSetForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetIsPasswordSetForPersonalSetting200>({ url: `/personal-setting/is-password-set`, method: 'GET' }, options);
   };
 
   /**
    * Update user image type
    * @summary /personal-setting/image-type
    */
-  const putPersonalSettingImageType = (putPersonalSettingImageTypeBody: PutPersonalSettingImageTypeBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutPersonalSettingImageType200>(
-      { url: `/personal-setting/image-type`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPersonalSettingImageTypeBody },
+  const putImageTypeForPersonalSetting = (
+    putImageTypeForPersonalSettingBody: PutImageTypeForPersonalSettingBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PutImageTypeForPersonalSetting200>(
+      { url: `/personal-setting/image-type`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putImageTypeForPersonalSettingBody },
       options,
     );
   };
@@ -1803,17 +1849,20 @@ export const getGrowirestapiv3 = () => {
    * Get external accounts that linked current user
    * @summary /personal-setting/external-accounts
    */
-  const getPersonalSettingExternalAccounts = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPersonalSettingExternalAccounts200>({ url: `/personal-setting/external-accounts`, method: 'GET' }, options);
+  const getExternalAccountsForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetExternalAccountsForPersonalSetting200>({ url: `/personal-setting/external-accounts`, method: 'GET' }, options);
   };
 
   /**
    * Update user password
    * @summary /personal-setting/password
    */
-  const putPersonalSettingPassword = (putPersonalSettingPasswordBody: PutPersonalSettingPasswordBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutPersonalSettingPassword200>(
-      { url: `/personal-setting/password`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPersonalSettingPasswordBody },
+  const putPasswordForPersonalSetting = (
+    putPasswordForPersonalSettingBody: PutPasswordForPersonalSettingBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PutPasswordForPersonalSetting200>(
+      { url: `/personal-setting/password`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPasswordForPersonalSettingBody },
       options,
     );
   };
@@ -1822,31 +1871,31 @@ export const getGrowirestapiv3 = () => {
    * Update user api token
    * @summary /personal-setting/api-token
    */
-  const putPersonalSettingApiToken = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutPersonalSettingApiToken200>({ url: `/personal-setting/api-token`, method: 'PUT' }, options);
+  const putApiTokenForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutApiTokenForPersonalSetting200>({ url: `/personal-setting/api-token`, method: 'PUT' }, options);
   };
 
   /**
    * Get access token
    * @summary /personal-setting/access-token
    */
-  const getAccessToken = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetAccessToken200>({ url: `/personal-setting/access-token`, method: 'GET' }, options);
+  const getAccessTokenForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetAccessTokenForPersonalSetting200>({ url: `/personal-setting/access-token`, method: 'GET' }, options);
   };
 
   /**
    * Generate access token
    * @summary /personal-setting/access-token
    */
-  const generateccessToken = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GenerateccessToken200>({ url: `/personal-setting/access-token`, method: 'POST' }, options);
+  const postAccessTokenForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostAccessTokenForPersonalSetting200>({ url: `/personal-setting/access-token`, method: 'POST' }, options);
   };
 
   /**
    * Delete access token
    * @summary /personal-setting/access-token
    */
-  const deleteAccessToken = (options?: SecondParameter<typeof customInstance>) => {
+  const deleteAccessTokenForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/personal-setting/access-token/`, method: 'DELETE' }, options);
   };
 
@@ -1854,7 +1903,7 @@ export const getGrowirestapiv3 = () => {
    * Delete all access tokens
    * @summary /personal-setting/access-token/all
    */
-  const deleteAllAccessToken = (options?: SecondParameter<typeof customInstance>) => {
+  const deleteAllForPersonalSettingAccessToken = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/personal-setting/access-token/all`, method: 'DELETE' }, options);
   };
 
@@ -1862,12 +1911,12 @@ export const getGrowirestapiv3 = () => {
    * associate Ldap account
    * @summary /personal-setting/associate-ldap
    */
-  const putPersonalSettingAssociateLdap = (
-    putPersonalSettingAssociateLdapBody: PutPersonalSettingAssociateLdapBody,
+  const putAssociateLdapForPersonalSetting = (
+    putAssociateLdapForPersonalSettingBody: PutAssociateLdapForPersonalSettingBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutPersonalSettingAssociateLdap200>(
-      { url: `/personal-setting/associate-ldap`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPersonalSettingAssociateLdapBody },
+    return customInstance<PutAssociateLdapForPersonalSetting200>(
+      { url: `/personal-setting/associate-ldap`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putAssociateLdapForPersonalSettingBody },
       options,
     );
   };
@@ -1876,8 +1925,8 @@ export const getGrowirestapiv3 = () => {
    * disassociate Ldap account
    * @summary /personal-setting/disassociate-ldap
    */
-  const putPersonalSettingDisassociateLdap = (disassociateUser: DisassociateUser, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutPersonalSettingDisassociateLdap200>(
+  const putDisassociateLdapForPersonalSetting = (disassociateUser: DisassociateUser, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutDisassociateLdapForPersonalSetting200>(
       { url: `/personal-setting/disassociate-ldap`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: disassociateUser },
       options,
     );
@@ -1887,12 +1936,17 @@ export const getGrowirestapiv3 = () => {
    * Put editor preferences
    * @summary /personal-setting/editor-settings
    */
-  const putPersonalSettingEditorSettings = (
-    putPersonalSettingEditorSettingsBody: PutPersonalSettingEditorSettingsBody,
+  const putEditorSettingsForPersonalSetting = (
+    putEditorSettingsForPersonalSettingBody: PutEditorSettingsForPersonalSettingBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutPersonalSettingEditorSettings200>(
-      { url: `/personal-setting/editor-settings`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putPersonalSettingEditorSettingsBody },
+    return customInstance<PutEditorSettingsForPersonalSetting200>(
+      {
+        url: `/personal-setting/editor-settings`,
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        data: putEditorSettingsForPersonalSettingBody,
+      },
       options,
     );
   };
@@ -1901,24 +1955,24 @@ export const getGrowirestapiv3 = () => {
    * Get editor preferences
    * @summary /personal-setting/editor-settings
    */
-  const getPersonalSettingEditorSettings = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPersonalSettingEditorSettings200>({ url: `/personal-setting/editor-settings`, method: 'GET' }, options);
+  const getEditorSettingsForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetEditorSettingsForPersonalSetting200>({ url: `/personal-setting/editor-settings`, method: 'GET' }, options);
   };
 
   /**
    * Put InAppNotificationSettings
    * @summary /personal-setting/in-app-notification-settings
    */
-  const putPersonalSettingInAppNotificationSettings = (
-    putPersonalSettingInAppNotificationSettingsBody: PutPersonalSettingInAppNotificationSettingsBody,
+  const putInAppNotificationSettingsForPersonalSetting = (
+    putInAppNotificationSettingsForPersonalSettingBody: PutInAppNotificationSettingsForPersonalSettingBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutPersonalSettingInAppNotificationSettings200>(
+    return customInstance<PutInAppNotificationSettingsForPersonalSetting200>(
       {
         url: `/personal-setting/in-app-notification-settings`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putPersonalSettingInAppNotificationSettingsBody,
+        data: putInAppNotificationSettingsForPersonalSettingBody,
       },
       options,
     );
@@ -1928,39 +1982,39 @@ export const getGrowirestapiv3 = () => {
    * Get InAppNotificationSettings
    * @summary personal-setting/in-app-notification-settings
    */
-  const getPersonalSettingInAppNotificationSettings = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetPersonalSettingInAppNotificationSettings200>({ url: `/personal-setting/in-app-notification-settings`, method: 'GET' }, options);
+  const getInAppNotificationSettingsForPersonalSetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetInAppNotificationSettingsForPersonalSetting200>({ url: `/personal-setting/in-app-notification-settings`, method: 'GET' }, options);
   };
 
   /**
    * Get revisions by page id
    */
-  const getRevisionsList = (params?: GetRevisionsListParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetRevisionsList200>({ url: `/revisions/list`, method: 'GET', params }, options);
+  const getListForRevisions = (params?: GetListForRevisionsParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetListForRevisions200>({ url: `/revisions/list`, method: 'GET', params }, options);
   };
 
   /**
    * Get one revision by id
    */
-  const getRevisionsId = (id: string, params: GetRevisionsIdParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetRevisionsId200>({ url: `/revisions/${id}`, method: 'GET', params }, options);
+  const getRevisionsById = (id: string, params: GetRevisionsByIdParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetRevisionsById200>({ url: `/revisions/${id}`, method: 'GET', params }, options);
   };
 
   /**
    * Get current status of indices
    * @summary /search/indices
    */
-  const getSearchIndices = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetSearchIndices200>({ url: `/search/indices`, method: 'GET' }, options);
+  const getIndicesForSearch = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetIndicesForSearch200>({ url: `/search/indices`, method: 'GET' }, options);
   };
 
   /**
    * Operate indices
    * @summary /search/indices
    */
-  const putSearchIndices = (putSearchIndicesBody: PutSearchIndicesBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSearchIndices200>(
-      { url: `/search/indices`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putSearchIndicesBody },
+  const putIndicesForSearch = (putIndicesForSearchBody: PutIndicesForSearchBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutIndicesForSearch200>(
+      { url: `/search/indices`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putIndicesForSearchBody },
       options,
     );
   };
@@ -1969,8 +2023,26 @@ export const getGrowirestapiv3 = () => {
    * Reconnect to Elasticsearch
    * @summary /search/connection
    */
-  const postSearchConnection = (options?: SecondParameter<typeof customInstance>) => {
+  const postConnectionForSearch = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/search/connection`, method: 'POST' }, options);
+  };
+
+  /**
+   * @summary Get auditlog indices status
+   */
+  const getAuditlogIndicesForSearch = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetAuditlogIndicesForSearch200>({ url: `/search/auditlog-indices`, method: 'GET' }, options);
+  };
+
+  /**
+   * Operate auditlog indices
+   * @summary /search/auditlog-indices
+   */
+  const putAuditlogIndicesForSearch = (putAuditlogIndicesForSearchBody: PutAuditlogIndicesForSearchBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutAuditlogIndicesForSearch200>(
+      { url: `/search/auditlog-indices`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putAuditlogIndicesForSearchBody },
+      options,
+    );
   };
 
   /**
@@ -1983,16 +2055,16 @@ export const getGrowirestapiv3 = () => {
   /**
    * Update authentication isEnabled
    */
-  const putSecuritySettingAuthenticationEnabled = (
-    putSecuritySettingAuthenticationEnabledBody: PutSecuritySettingAuthenticationEnabledBody,
+  const putEnabledForSecuritySettingAuthentication = (
+    putEnabledForSecuritySettingAuthenticationBody: PutEnabledForSecuritySettingAuthenticationBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutSecuritySettingAuthenticationEnabled200>(
+    return customInstance<PutEnabledForSecuritySettingAuthentication200>(
       {
         url: `/security-setting/authentication/enabled`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putSecuritySettingAuthenticationEnabledBody,
+        data: putEnabledForSecuritySettingAuthenticationBody,
       },
       options,
     );
@@ -2002,15 +2074,15 @@ export const getGrowirestapiv3 = () => {
    * Get setup strategies for passport
    * @summary /security-setting/authentication
    */
-  const getSecuritySettingAuthentication = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetSecuritySettingAuthentication200>({ url: `/security-setting/authentication`, method: 'GET' }, options);
+  const getAuthenticationForSecuritySetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetAuthenticationForSecuritySetting200>({ url: `/security-setting/authentication`, method: 'GET' }, options);
   };
 
   /**
    * Update GeneralSetting
    * @summary /security-setting/general-setting
    */
-  const putSecuritySettingGeneralSetting = (generalSetting: GeneralSetting, options?: SecondParameter<typeof customInstance>) => {
+  const putGeneralSettingForSecuritySetting = (generalSetting: GeneralSetting, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<GeneralSetting>(
       { url: `/security-setting/general-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: generalSetting },
       options,
@@ -2021,8 +2093,8 @@ export const getGrowirestapiv3 = () => {
    * Update ShareLink Setting
    * @summary /security-setting/share-link-setting
    */
-  const putSecuritySettingShareLinkSetting = (shareLinkSetting: ShareLinkSetting, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSecuritySettingShareLinkSetting200>(
+  const putShareLinkSettingForSecuritySetting = (shareLinkSetting: ShareLinkSetting, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutShareLinkSettingForSecuritySetting200>(
       { url: `/security-setting/share-link-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: shareLinkSetting },
       options,
     );
@@ -2032,24 +2104,24 @@ export const getGrowirestapiv3 = () => {
    * Get All ShareLinks at Share Link Setting
    * @summary /security-setting/all-share-links
    */
-  const getSecuritySettingAllShareLinks = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetSecuritySettingAllShareLinks200>({ url: `/security-setting/all-share-links`, method: 'GET' }, options);
+  const getAllShareLinksForSecuritySetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetAllShareLinksForSecuritySetting200>({ url: `/security-setting/all-share-links`, method: 'GET' }, options);
   };
 
   /**
    * Delete All ShareLinks at Share Link Setting
    * @summary /security-setting/all-share-links
    */
-  const deleteSecuritySettingAllShareLinks = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteSecuritySettingAllShareLinks200>({ url: `/security-setting/all-share-links`, method: 'DELETE' }, options);
+  const deleteAllShareLinksForSecuritySetting = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteAllShareLinksForSecuritySetting200>({ url: `/security-setting/all-share-links`, method: 'DELETE' }, options);
   };
 
   /**
    * Update LocalSetting
    * @summary /security-setting/local-setting
    */
-  const putSecuritySettingLocalSetting = (localSetting: LocalSetting, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSecuritySettingLocalSetting200>(
+  const putLocalSettingForSecuritySetting = (localSetting: LocalSetting, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutLocalSettingForSecuritySetting200>(
       { url: `/security-setting/local-setting`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: localSetting },
       options,
     );
@@ -2059,8 +2131,8 @@ export const getGrowirestapiv3 = () => {
    * Update LDAP setting
    * @summary /security-setting/ldap
    */
-  const putSecuritySettingLdap = (ldapAuthSetting: LdapAuthSetting, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSecuritySettingLdap200>(
+  const putLdapForSecuritySetting = (ldapAuthSetting: LdapAuthSetting, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutLdapForSecuritySetting200>(
       { url: `/security-setting/ldap`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: ldapAuthSetting },
       options,
     );
@@ -2070,8 +2142,8 @@ export const getGrowirestapiv3 = () => {
    * Update SAML setting
    * @summary /security-setting/saml
    */
-  const putSecuritySettingSaml = (samlAuthSetting: SamlAuthSetting, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSecuritySettingSaml200>(
+  const putSamlForSecuritySetting = (samlAuthSetting: SamlAuthSetting, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutSamlForSecuritySetting200>(
       { url: `/security-setting/saml`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: samlAuthSetting },
       options,
     );
@@ -2081,8 +2153,8 @@ export const getGrowirestapiv3 = () => {
    * Update OpenID Connect setting
    * @summary /security-setting/oidc
    */
-  const putSecuritySettingOidc = (oidcAuthSetting: OidcAuthSetting, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSecuritySettingOidc200>(
+  const putOidcForSecuritySetting = (oidcAuthSetting: OidcAuthSetting, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutOidcForSecuritySetting200>(
       { url: `/security-setting/oidc`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: oidcAuthSetting },
       options,
     );
@@ -2092,8 +2164,8 @@ export const getGrowirestapiv3 = () => {
    * Update google OAuth
    * @summary /security-setting/google-oauth
    */
-  const putSecuritySettingGoogleOauth = (googleOAuthSetting: GoogleOAuthSetting, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSecuritySettingGoogleOauth200>(
+  const putGoogleOauthForSecuritySetting = (googleOAuthSetting: GoogleOAuthSetting, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutGoogleOauthForSecuritySetting200>(
       { url: `/security-setting/google-oauth`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: googleOAuthSetting },
       options,
     );
@@ -2103,8 +2175,8 @@ export const getGrowirestapiv3 = () => {
    * Update github OAuth
    * @summary /security-setting/github-oauth
    */
-  const putSecuritySettingGithubOauth = (gitHubOAuthSetting: GitHubOAuthSetting, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSecuritySettingGithubOauth200>(
+  const putGithubOauthForSecuritySetting = (gitHubOAuthSetting: GitHubOAuthSetting, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutGithubOauthForSecuritySetting200>(
       { url: `/security-setting/github-oauth`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: gitHubOAuthSetting },
       options,
     );
@@ -2139,14 +2211,14 @@ export const getGrowirestapiv3 = () => {
    * delete all share links
    * @summary delete all share links
    */
-  const deleteShareLinksAll = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteShareLinksAll200>({ url: `/share-links/all`, method: 'DELETE' }, options);
+  const deleteAllForShareLinks = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteAllForShareLinks200>({ url: `/share-links/all`, method: 'DELETE' }, options);
   };
 
   /**
    * delete one share link related one page
    */
-  const deleteShareLinksId = (id: string, options?: SecondParameter<typeof customInstance>) => {
+  const deleteShareLinksById = (id: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/share-links/${id}`, method: 'DELETE' }, options);
   };
 
@@ -2182,7 +2254,7 @@ export const getGrowirestapiv3 = () => {
    * Put botType setting.
    * @summary /slack-integration/bot-type
    */
-  const putSlackIntegrationSettingsBotType = (botType: BotType, options?: SecondParameter<typeof customInstance>) => {
+  const putBotTypeForSlackIntegrationSettings = (botType: BotType, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>(
       { url: `/slack-integration-settings/bot-type/`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: botType },
       options,
@@ -2193,7 +2265,7 @@ export const getGrowirestapiv3 = () => {
    * Delete botType setting.
    * @summary /slack-integration/bot-type
    */
-  const deleteSlackIntegrationBotType = (botType: BotType, options?: SecondParameter<typeof customInstance>) => {
+  const deleteBotTypeForSlackIntegration = (botType: BotType, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>(
       { url: `/slack-integration/bot-type/`, method: 'DELETE', headers: { 'Content-Type': 'application/json' }, data: botType },
       options,
@@ -2204,8 +2276,8 @@ export const getGrowirestapiv3 = () => {
    * Update customBotWithoutProxy setting.
    * @summary /slack-integration-settings/without-proxy/update-settings
    */
-  const putSlackIntegrationSettingsWithoutProxyUpdateSettings = (
-    putSlackIntegrationSettingsWithoutProxyUpdateSettingsBody: PutSlackIntegrationSettingsWithoutProxyUpdateSettingsBody,
+  const putUpdateSettingsForSlackIntegrationSettingsWithoutProxy = (
+    putUpdateSettingsForSlackIntegrationSettingsWithoutProxyBody: PutUpdateSettingsForSlackIntegrationSettingsWithoutProxyBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<void>(
@@ -2213,7 +2285,7 @@ export const getGrowirestapiv3 = () => {
         url: `/slack-integration-settings/without-proxy/update-settings/`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putSlackIntegrationSettingsWithoutProxyUpdateSettingsBody,
+        data: putUpdateSettingsForSlackIntegrationSettingsWithoutProxyBody,
       },
       options,
     );
@@ -2223,8 +2295,8 @@ export const getGrowirestapiv3 = () => {
    * Update customBotWithoutProxy permissions.
    * @summary /slack-integration-settings/without-proxy/update-permissions
    */
-  const putSlackIntegrationSettingsWithoutProxyUpdatePermissions = (
-    putSlackIntegrationSettingsWithoutProxyUpdatePermissionsBody: PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsBody,
+  const putUpdatePermissionsForSlackIntegrationSettingsWithoutProxy = (
+    putUpdatePermissionsForSlackIntegrationSettingsWithoutProxyBody: PutUpdatePermissionsForSlackIntegrationSettingsWithoutProxyBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<void>(
@@ -2232,7 +2304,7 @@ export const getGrowirestapiv3 = () => {
         url: `/slack-integration-settings/without-proxy/update-permissions/`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putSlackIntegrationSettingsWithoutProxyUpdatePermissionsBody,
+        data: putUpdatePermissionsForSlackIntegrationSettingsWithoutProxyBody,
       },
       options,
     );
@@ -2242,8 +2314,8 @@ export const getGrowirestapiv3 = () => {
    * Generate SlackAppIntegrations
    * @summary /slack-integration-settings/slack-app-integrations
    */
-  const postSlackIntegrationSettingsSlackAppIntegrations = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostSlackIntegrationSettingsSlackAppIntegrations200>(
+  const postSlackAppIntegrationsForSlackIntegrationSettings = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostSlackAppIntegrationsForSlackIntegrationSettings200>(
       { url: `/slack-integration-settings/slack-app-integrations`, method: 'POST' },
       options,
     );
@@ -2253,8 +2325,8 @@ export const getGrowirestapiv3 = () => {
    * Delete accessTokens
    * @summary /slack-integration-settings/slack-app-integrations/:id
    */
-  const deleteSlackIntegrationSettingsSlackAppIntegrationsId = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteSlackIntegrationSettingsSlackAppIntegrationsId200>(
+  const deleteSlackAppIntegrationsByIdForSlackIntegrationSettings = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteSlackAppIntegrationsByIdForSlackIntegrationSettings200>(
       { url: `/slack-integration-settings/slack-app-integrations/${id}`, method: 'DELETE' },
       options,
     );
@@ -2264,16 +2336,16 @@ export const getGrowirestapiv3 = () => {
    * Update proxy uri
    * @summary /slack-integration-settings/proxy-uri
    */
-  const putSlackIntegrationSettingsProxyUri = (
-    putSlackIntegrationSettingsProxyUriBody: PutSlackIntegrationSettingsProxyUriBody,
+  const putProxyUriForSlackIntegrationSettings = (
+    putProxyUriForSlackIntegrationSettingsBody: PutProxyUriForSlackIntegrationSettingsBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutSlackIntegrationSettingsProxyUri200>(
+    return customInstance<PutProxyUriForSlackIntegrationSettings200>(
       {
         url: `/slack-integration-settings/proxy-uri`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putSlackIntegrationSettingsProxyUriBody,
+        data: putProxyUriForSlackIntegrationSettingsBody,
       },
       options,
     );
@@ -2283,7 +2355,7 @@ export const getGrowirestapiv3 = () => {
    * Make SlackAppTokens primary
    * @summary /slack-integration-settings/slack-app-integrations/:id/makeprimary
    */
-  const putSlackIntegrationSettingsSlackAppIntegrationsIdMakeprimary = (id: string, options?: SecondParameter<typeof customInstance>) => {
+  const putMakeprimaryByIdForSlackIntegrationSettingsSlackAppIntegrations = (id: string, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/slack-integration-settings/slack-app-integrations/${id}/makeprimary`, method: 'PUT' }, options);
   };
 
@@ -2291,8 +2363,8 @@ export const getGrowirestapiv3 = () => {
    * Regenerate SlackAppTokens
    * @summary /slack-integration-settings/slack-app-integrations/:id/regenerate-tokens
    */
-  const putSlackIntegrationSettingsSlackAppIntegrationsIdRegenerateTokens = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutSlackIntegrationSettingsSlackAppIntegrationsIdRegenerateTokens200>(
+  const putRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations200>(
       { url: `/slack-integration-settings/slack-app-integrations/${id}/regenerate-tokens`, method: 'PUT' },
       options,
     );
@@ -2302,17 +2374,17 @@ export const getGrowirestapiv3 = () => {
    * update supported commands
    * @summary /slack-integration-settings/slack-app-integrations/:id/permissions
    */
-  const putSlackIntegrationSettingsSlackAppIntegrationsIdPermissions = (
+  const putPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrations = (
     id: string,
-    putSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBody: PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBody,
+    putPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrationsBody: PutPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissions200>(
+    return customInstance<PutPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrations200>(
       {
         url: `/slack-integration-settings/slack-app-integrations/${id}/permissions`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        data: putSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsBody,
+        data: putPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
       },
       options,
     );
@@ -2322,9 +2394,9 @@ export const getGrowirestapiv3 = () => {
    * Delete botType setting.
    * @summary /slack-integration-settings/slack-app-integrations/:id/relation-test
    */
-  const postSlackIntegrationSettingsSlackAppIntegrationsIdRelationTest = (
+  const postRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrations = (
     id: string,
-    postSlackIntegrationSettingsSlackAppIntegrationsIdRelationTestBody: PostSlackIntegrationSettingsSlackAppIntegrationsIdRelationTestBody,
+    postRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrationsBody: PostRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<void>(
@@ -2332,7 +2404,7 @@ export const getGrowirestapiv3 = () => {
         url: `/slack-integration-settings/slack-app-integrations/${id}/relation-test`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postSlackIntegrationSettingsSlackAppIntegrationsIdRelationTestBody,
+        data: postRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrationsBody,
       },
       options,
     );
@@ -2342,8 +2414,8 @@ export const getGrowirestapiv3 = () => {
    * Test the connection with slack work space.
    * @summary /slack-integration-settings/without-proxy/test
    */
-  const postSlackIntegrationSettingsWithoutProxyTest = (
-    postSlackIntegrationSettingsWithoutProxyTestBody: PostSlackIntegrationSettingsWithoutProxyTestBody,
+  const postTestForSlackIntegrationSettingsWithoutProxy = (
+    postTestForSlackIntegrationSettingsWithoutProxyBody: PostTestForSlackIntegrationSettingsWithoutProxyBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<void>(
@@ -2351,7 +2423,7 @@ export const getGrowirestapiv3 = () => {
         url: `/slack-integration-settings/without-proxy/test`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postSlackIntegrationSettingsWithoutProxyTestBody,
+        data: postTestForSlackIntegrationSettingsWithoutProxyBody,
       },
       options,
     );
@@ -2361,12 +2433,12 @@ export const getGrowirestapiv3 = () => {
    * Handle Slack commands
    * @summary /slack-integration/commands
    */
-  const postSlackIntegrationCommands = (
-    postSlackIntegrationCommandsBody: PostSlackIntegrationCommandsBody,
+  const postCommandsForSlackIntegration = (
+    postCommandsForSlackIntegrationBody: PostCommandsForSlackIntegrationBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<string>(
-      { url: `/slack-integration/commands`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postSlackIntegrationCommandsBody },
+      { url: `/slack-integration/commands`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postCommandsForSlackIntegrationBody },
       options,
     );
   };
@@ -2375,16 +2447,16 @@ export const getGrowirestapiv3 = () => {
    * Verify the access token
    * @summary /slack-integration/proxied/verify
    */
-  const postSlackIntegrationProxiedVerify = (
-    postSlackIntegrationProxiedVerifyBody: PostSlackIntegrationProxiedVerifyBody,
+  const postVerifyForSlackIntegrationProxied = (
+    postVerifyForSlackIntegrationProxiedBody: PostVerifyForSlackIntegrationProxiedBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PostSlackIntegrationProxiedVerify200>(
+    return customInstance<PostVerifyForSlackIntegrationProxied200>(
       {
         url: `/slack-integration/proxied/verify`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postSlackIntegrationProxiedVerifyBody,
+        data: postVerifyForSlackIntegrationProxiedBody,
       },
       options,
     );
@@ -2394,8 +2466,8 @@ export const getGrowirestapiv3 = () => {
    * Handle Slack commands
    * @summary /slack-integration/proxied/commands
    */
-  const postSlackIntegrationProxiedCommands = (
-    postSlackIntegrationProxiedCommandsBody: PostSlackIntegrationProxiedCommandsBody,
+  const postCommandsForSlackIntegrationProxied = (
+    postCommandsForSlackIntegrationProxiedBody: PostCommandsForSlackIntegrationProxiedBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<string>(
@@ -2403,7 +2475,7 @@ export const getGrowirestapiv3 = () => {
         url: `/slack-integration/proxied/commands`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postSlackIntegrationProxiedCommandsBody,
+        data: postCommandsForSlackIntegrationProxiedBody,
       },
       options,
     );
@@ -2413,12 +2485,17 @@ export const getGrowirestapiv3 = () => {
    * Handle Slack interactions
    * @summary /slack-integration/interactions
    */
-  const postSlackIntegrationInteractions = (
-    postSlackIntegrationInteractionsBody: PostSlackIntegrationInteractionsBody,
+  const postInteractionsForSlackIntegration = (
+    postInteractionsForSlackIntegrationBody: PostInteractionsForSlackIntegrationBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<void>(
-      { url: `/slack-integration/interactions`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postSlackIntegrationInteractionsBody },
+      {
+        url: `/slack-integration/interactions`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: postInteractionsForSlackIntegrationBody,
+      },
       options,
     );
   };
@@ -2427,8 +2504,8 @@ export const getGrowirestapiv3 = () => {
    * Handle Slack interactions
    * @summary /slack-integration/proxied/interactions
    */
-  const postSlackIntegrationProxiedInteractions = (
-    postSlackIntegrationProxiedInteractionsBody: PostSlackIntegrationProxiedInteractionsBody,
+  const postInteractionsForSlackIntegrationProxied = (
+    postInteractionsForSlackIntegrationProxiedBody: PostInteractionsForSlackIntegrationProxiedBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
     return customInstance<void>(
@@ -2436,7 +2513,7 @@ export const getGrowirestapiv3 = () => {
         url: `/slack-integration/proxied/interactions`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postSlackIntegrationProxiedInteractionsBody,
+        data: postInteractionsForSlackIntegrationProxiedBody,
       },
       options,
     );
@@ -2446,17 +2523,20 @@ export const getGrowirestapiv3 = () => {
    * Get supported commands
    * @summary /slack-integration/supported-commands
    */
-  const getSlackIntegrationSupportedCommands = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetSlackIntegrationSupportedCommands200>({ url: `/slack-integration/supported-commands`, method: 'GET' }, options);
+  const getSupportedCommandsForSlackIntegration = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetSupportedCommandsForSlackIntegration200>({ url: `/slack-integration/supported-commands`, method: 'GET' }, options);
   };
 
   /**
    * Handle Slack events
    * @summary /slack-integration/events
    */
-  const postSlackIntegrationEvents = (postSlackIntegrationEventsBody: PostSlackIntegrationEventsBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostSlackIntegrationEvents200>(
-      { url: `/slack-integration/events`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postSlackIntegrationEventsBody },
+  const postEventsForSlackIntegration = (
+    postEventsForSlackIntegrationBody: PostEventsForSlackIntegrationBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PostEventsForSlackIntegration200>(
+      { url: `/slack-integration/events`, method: 'POST', headers: { 'Content-Type': 'application/json' }, data: postEventsForSlackIntegrationBody },
       options,
     );
   };
@@ -2465,16 +2545,16 @@ export const getGrowirestapiv3 = () => {
    * Handle Slack events
    * @summary /slack-integration/proxied/events
    */
-  const postSlackIntegrationProxiedEvents = (
-    postSlackIntegrationProxiedEventsBody: PostSlackIntegrationProxiedEventsBody,
+  const postEventsForSlackIntegrationProxied = (
+    postEventsForSlackIntegrationProxiedBody: PostEventsForSlackIntegrationProxiedBody,
     options?: SecondParameter<typeof customInstance>,
   ) => {
-    return customInstance<PostSlackIntegrationProxiedEvents200>(
+    return customInstance<PostEventsForSlackIntegrationProxied200>(
       {
         url: `/slack-integration/proxied/events`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postSlackIntegrationProxiedEventsBody,
+        data: postEventsForSlackIntegrationProxiedBody,
       },
       options,
     );
@@ -2484,7 +2564,7 @@ export const getGrowirestapiv3 = () => {
    * Get statistics for user
    * @summary /statistics/user
    */
-  const getStatisticsUser = (options?: SecondParameter<typeof customInstance>) => {
+  const getUserForStatistics = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<StatisticsUserResponse>({ url: `/statistics/user`, method: 'GET' }, options);
   };
 
@@ -2529,16 +2609,16 @@ export const getGrowirestapiv3 = () => {
    * Get ancestor user groups.
    * @summary /user-groups/ancestors
    */
-  const getUserGroupsAncestors = (params: GetUserGroupsAncestorsParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUserGroupsAncestors200>({ url: `/user-groups/ancestors`, method: 'GET', params }, options);
+  const getAncestorsForUserGroups = (params: GetAncestorsForUserGroupsParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetAncestorsForUserGroups200>({ url: `/user-groups/ancestors`, method: 'GET', params }, options);
   };
 
   /**
    * Get child user groups
    * @summary /user-groups/children
    */
-  const getUserGroupsChildren = (params?: GetUserGroupsChildrenParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUserGroupsChildren200>({ url: `/user-groups/children`, method: 'GET', params }, options);
+  const getChildrenForUserGroups = (params?: GetChildrenForUserGroupsParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetChildrenForUserGroups200>({ url: `/user-groups/children`, method: 'GET', params }, options);
   };
 
   /**
@@ -2561,25 +2641,25 @@ export const getGrowirestapiv3 = () => {
    * Get UserGroup from Group ID
    * @summary /user-groups/{id}
    */
-  const getUserGroupsId = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUserGroupsId200>({ url: `/user-groups/${id}`, method: 'GET' }, options);
+  const getUserGroupsById = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetUserGroupsById200>({ url: `/user-groups/${id}`, method: 'GET' }, options);
   };
 
   /**
    * Deletes userGroup
    * @summary /user-groups/{id}
    */
-  const deleteUserGroupsId = (id: string, params?: DeleteUserGroupsIdParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteUserGroupsId200>({ url: `/user-groups/${id}`, method: 'DELETE', params }, options);
+  const deleteUserGroupsById = (id: string, params?: DeleteUserGroupsByIdParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteUserGroupsById200>({ url: `/user-groups/${id}`, method: 'DELETE', params }, options);
   };
 
   /**
    * Update userGroup
    * @summary /user-groups/{id}
    */
-  const putUserGroupsId = (id: string, putUserGroupsIdBody: PutUserGroupsIdBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUserGroupsId200>(
-      { url: `/user-groups/${id}`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUserGroupsIdBody },
+  const putUserGroupsById = (id: string, putUserGroupsByIdBody: PutUserGroupsByIdBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutUserGroupsById200>(
+      { url: `/user-groups/${id}`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUserGroupsByIdBody },
       options,
     );
   };
@@ -2588,48 +2668,52 @@ export const getGrowirestapiv3 = () => {
    * Get users related to the userGroup
    * @summary /user-groups/{id}/users
    */
-  const getUserGroupsIdUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUserGroupsIdUsers200>({ url: `/user-groups/${id}/users`, method: 'GET' }, options);
+  const getUsersByIdForUserGroups = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetUsersByIdForUserGroups200>({ url: `/user-groups/${id}/users`, method: 'GET' }, options);
   };
 
   /**
    * Get users unrelated to the userGroup
    * @summary /user-groups/{id}/unrelated-users
    */
-  const getUserGroupsIdUnrelatedUsers = (id: string, params?: GetUserGroupsIdUnrelatedUsersParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUserGroupsIdUnrelatedUsers200>({ url: `/user-groups/${id}/unrelated-users`, method: 'GET', params }, options);
+  const getUnrelatedUsersByIdForUserGroups = (
+    id: string,
+    params?: GetUnrelatedUsersByIdForUserGroupsParams,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<GetUnrelatedUsersByIdForUserGroups200>({ url: `/user-groups/${id}/unrelated-users`, method: 'GET', params }, options);
   };
 
   /**
    * Add a user to the userGroup
    * @summary /user-groups/{id}/users/{username}
    */
-  const postUserGroupsIdUsersUsername = (id: string, username: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostUserGroupsIdUsersUsername200>({ url: `/user-groups/${id}/users/${username}`, method: 'POST' }, options);
+  const postUsersByUsernameByIdForUserGroups = (id: string, username: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostUsersByUsernameByIdForUserGroups200>({ url: `/user-groups/${id}/users/${username}`, method: 'POST' }, options);
   };
 
   /**
    * remove a user from the userGroup
    * @summary /user-groups/{id}/users/{username}
    */
-  const deleteUserGroupsIdUsersUsername = (id: string, username: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteUserGroupsIdUsersUsername200>({ url: `/user-groups/${id}/users/${username}`, method: 'DELETE' }, options);
+  const deleteUsersByUsernameByIdForUserGroups = (id: string, username: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteUsersByUsernameByIdForUserGroups200>({ url: `/user-groups/${id}/users/${username}`, method: 'DELETE' }, options);
   };
 
   /**
    * Get the user group relations for the userGroup
    * @summary /user-groups/{id}/user-group-relations
    */
-  const getUserGroupsIdUserGroupRelations = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUserGroupsIdUserGroupRelations200>({ url: `/user-groups/${id}/user-group-relations`, method: 'GET' }, options);
+  const getUserGroupRelationsByIdForUserGroups = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetUserGroupRelationsByIdForUserGroups200>({ url: `/user-groups/${id}/user-group-relations`, method: 'GET' }, options);
   };
 
   /**
    * Get closed pages for the userGroup
    * @summary /user-groups/{id}/pages
    */
-  const getUserGroupsIdPages = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUserGroupsIdPages200>({ url: `/user-groups/${id}/pages`, method: 'GET' }, options);
+  const getPagesByIdForUserGroups = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetPagesByIdForUserGroups200>({ url: `/user-groups/${id}/pages`, method: 'GET' }, options);
   };
 
   /**
@@ -2654,97 +2738,100 @@ export const getGrowirestapiv3 = () => {
   /**
    * @summary /usersIdReacent
    */
-  const getUsersIdRecent = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUsersIdRecent200>({ url: `/users/${id}/recent`, method: 'GET' }, options);
+  const getRecentByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetRecentByIdForUsers200>({ url: `/users/${id}/recent`, method: 'GET' }, options);
   };
 
   /**
    * Create new users and send Emails
    * @summary /users/invite
    */
-  const postUsersInvite = (params?: PostUsersInviteParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PostUsersInvite200>({ url: `/users/invite`, method: 'POST', params }, options);
+  const postInviteForUsers = (params?: PostInviteForUsersParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PostInviteForUsers200>({ url: `/users/invite`, method: 'POST', params }, options);
   };
 
   /**
    * Grant user admin
    * @summary /users/{id}/grant-admin
    */
-  const putUsersIdGrantAdmin = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersIdGrantAdmin200>({ url: `/users/${id}/grant-admin`, method: 'PUT' }, options);
+  const putGrantAdminByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutGrantAdminByIdForUsers200>({ url: `/users/${id}/grant-admin`, method: 'PUT' }, options);
   };
 
   /**
    * Revoke user admin
    * @summary /users/{id}/revoke-admin
    */
-  const putUsersIdRevokeAdmin = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersIdRevokeAdmin200>({ url: `/users/${id}/revoke-admin`, method: 'PUT' }, options);
+  const putRevokeAdminByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutRevokeAdminByIdForUsers200>({ url: `/users/${id}/revoke-admin`, method: 'PUT' }, options);
   };
 
   /**
    * Grant user read only access
    * @summary /users/{id}/grant-read-only
    */
-  const putUsersIdGrantReadOnly = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersIdGrantReadOnly200>({ url: `/users/${id}/grant-read-only`, method: 'PUT' }, options);
+  const putGrantReadOnlyByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutGrantReadOnlyByIdForUsers200>({ url: `/users/${id}/grant-read-only`, method: 'PUT' }, options);
   };
 
   /**
    * Revoke user read only access
    * @summary /users/{id}/revoke-read-only
    */
-  const putUsersIdRevokeReadOnly = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersIdRevokeReadOnly200>({ url: `/users/${id}/revoke-read-only`, method: 'PUT' }, options);
+  const putRevokeReadOnlyByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutRevokeReadOnlyByIdForUsers200>({ url: `/users/${id}/revoke-read-only`, method: 'PUT' }, options);
   };
 
   /**
    * Activate user
    * @summary /users/{id}/activate
    */
-  const putUsersIdActivate = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersIdActivate200>({ url: `/users/${id}/activate`, method: 'PUT' }, options);
+  const putActivateByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutActivateByIdForUsers200>({ url: `/users/${id}/activate`, method: 'PUT' }, options);
   };
 
   /**
    * Deactivate user
    * @summary /users/{id}/deactivate
    */
-  const putUsersIdDeactivate = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersIdDeactivate200>({ url: `/users/${id}/deactivate`, method: 'PUT' }, options);
+  const putDeactivateByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutDeactivateByIdForUsers200>({ url: `/users/${id}/deactivate`, method: 'PUT' }, options);
   };
 
   /**
    * Delete user
    * @summary /users/{id}/remove
    */
-  const deleteUsersIdRemove = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteUsersIdRemove200>({ url: `/users/${id}/remove`, method: 'DELETE' }, options);
+  const deleteRemoveByIdForUsers = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteRemoveByIdForUsers200>({ url: `/users/${id}/remove`, method: 'DELETE' }, options);
   };
 
   /**
    * Get external-account
    * @summary /users/external-accounts
    */
-  const getUsersExternalAccounts = (params?: GetUsersExternalAccountsParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUsersExternalAccounts200>({ url: `/users/external-accounts`, method: 'GET', params }, options);
+  const getExternalAccountsForUsers = (params?: GetExternalAccountsForUsersParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetExternalAccountsForUsers200>({ url: `/users/external-accounts`, method: 'GET', params }, options);
   };
 
   /**
    * Delete ExternalAccount
    * @summary /users/external-accounts/{id}/remove
    */
-  const deleteUsersExternalAccountsIdRemove = (id: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeleteUsersExternalAccountsIdRemove200>({ url: `/users/external-accounts/${id}/remove`, method: 'DELETE' }, options);
+  const deleteRemoveByIdForUsersExternalAccounts = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeleteRemoveByIdForUsersExternalAccounts200>({ url: `/users/external-accounts/${id}/remove`, method: 'DELETE' }, options);
   };
 
   /**
    * update imageUrlCache
    * @summary /users/update.imageUrlCache
    */
-  const putUsersUpdateImageUrlCache = (putUsersUpdateImageUrlCacheBody: PutUsersUpdateImageUrlCacheBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersUpdateImageUrlCache200>(
-      { url: `/users/update.imageUrlCache`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUsersUpdateImageUrlCacheBody },
+  const putUpdateImageUrlCacheForUsers = (
+    putUpdateImageUrlCacheForUsersBody: PutUpdateImageUrlCacheForUsersBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PutUpdateImageUrlCacheForUsers200>(
+      { url: `/users/update.imageUrlCache`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUpdateImageUrlCacheForUsersBody },
       options,
     );
   };
@@ -2753,9 +2840,9 @@ export const getGrowirestapiv3 = () => {
    * update imageUrlCache
    * @summary /users/reset-password
    */
-  const putUsersResetPassword = (putUsersResetPasswordBody: PutUsersResetPasswordBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersResetPassword200>(
-      { url: `/users/reset-password`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUsersResetPasswordBody },
+  const putResetPasswordForUsers = (putResetPasswordForUsersBody: PutResetPasswordForUsersBody, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<PutResetPasswordForUsers200>(
+      { url: `/users/reset-password`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putResetPasswordForUsersBody },
       options,
     );
   };
@@ -2764,9 +2851,12 @@ export const getGrowirestapiv3 = () => {
    * send new password email
    * @summary /users/reset-password-email
    */
-  const putUsersResetPasswordEmail = (putUsersResetPasswordEmailBody: PutUsersResetPasswordEmailBody, options?: SecondParameter<typeof customInstance>) => {
+  const putResetPasswordEmailForUsers = (
+    putResetPasswordEmailForUsersBody: PutResetPasswordEmailForUsersBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
     return customInstance<void>(
-      { url: `/users/reset-password-email`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUsersResetPasswordEmailBody },
+      { url: `/users/reset-password-email`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putResetPasswordEmailForUsersBody },
       options,
     );
   };
@@ -2775,9 +2865,12 @@ export const getGrowirestapiv3 = () => {
    * send invitation email
    * @summary /users/send-invitation-email
    */
-  const putUsersSendInvitationEmail = (putUsersSendInvitationEmailBody: PutUsersSendInvitationEmailBody, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<PutUsersSendInvitationEmail200>(
-      { url: `/users/send-invitation-email`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putUsersSendInvitationEmailBody },
+  const putSendInvitationEmailForUsers = (
+    putSendInvitationEmailForUsersBody: PutSendInvitationEmailForUsersBody,
+    options?: SecondParameter<typeof customInstance>,
+  ) => {
+    return customInstance<PutSendInvitationEmailForUsers200>(
+      { url: `/users/send-invitation-email`, method: 'PUT', headers: { 'Content-Type': 'application/json' }, data: putSendInvitationEmailForUsersBody },
       options,
     );
   };
@@ -2786,16 +2879,16 @@ export const getGrowirestapiv3 = () => {
    * Get list of users
    * @summary /users/list
    */
-  const getUsersList = (params?: GetUsersListParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUsersList200>({ url: `/users/list`, method: 'GET', params }, options);
+  const getListForUsers = (params?: GetListForUsersParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetListForUsers200>({ url: `/users/list`, method: 'GET', params }, options);
   };
 
   /**
-   * Get list of usernames
+   * Get list of usernames. The query matches usernames by case-insensitive substring.
    * @summary /users/usernames
    */
-  const getUsersUsernames = (params?: GetUsersUsernamesParams, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<GetUsersUsernames200>({ url: `/users/usernames`, method: 'GET', params }, options);
+  const getUsernamesForUsers = (params?: GetUsernamesForUsersParams, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<GetUsernamesForUsers200>({ url: `/users/usernames`, method: 'GET', params }, options);
   };
 
   /**
@@ -2818,248 +2911,251 @@ export const getGrowirestapiv3 = () => {
   return {
     getExternalUserGroupRelations,
     getExternalUserGroups,
-    getExternalUserGroupsAncestors,
-    getExternalUserGroupsChildren,
-    getExternalUserGroupsId,
-    deleteExternalUserGroupsId,
-    putExternalUserGroupsId,
-    getExternalUserGroupsIdExternalUserGroupRelations,
-    getExternalUserGroupsLdapSyncSettings,
-    putExternalUserGroupsLdapSyncSettings,
-    getExternalUserGroupsKeycloakSyncSettings,
-    putExternalUserGroupsKeycloakSyncSettings,
-    putExternalUserGroupsLdapSync,
-    putExternalUserGroupsKeycloakSync,
-    getExternalUserGroupsLdapSyncStatus,
+    getAncestorsForExternalUserGroups,
+    getChildrenForExternalUserGroups,
+    getExternalUserGroupsById,
+    deleteExternalUserGroupsById,
+    putExternalUserGroupsById,
+    getExternalUserGroupRelationsByIdForExternalUserGroups,
+    getSyncSettingsForExternalUserGroupsLdap,
+    putSyncSettingsForExternalUserGroupsLdap,
+    getSyncSettingsForExternalUserGroupsKeycloak,
+    putSyncSettingsForExternalUserGroupsKeycloak,
+    putSyncForExternalUserGroupsLdap,
+    putSyncForExternalUserGroupsKeycloak,
+    getSyncStatusForExternalUserGroupsLdap,
     getTemplates,
-    getTemplatesPresetTemplatesTemplateIdLocale,
-    getTemplatesPluginTemplatesOrganizationIdReposIdTemplateIdLocale,
-    postAiToolsSuggestPath,
+    getPresetTemplatesByLocaleByTemplateIdForTemplates,
+    getPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates,
+    postSuggestPathForAiTools,
     getAiSettings,
     putAiSettings,
-    getAiSettingsAvailableModels,
-    postAiSettingsRefreshModelCatalog,
+    getAvailableModelsForAiSettings,
+    postRefreshModelCatalogForAiSettings,
     postPlugins,
-    putPluginsIdActivate,
-    deletePluginsIdRemove,
-    getRevisionsChanges,
-    postRevisionsDiff,
+    putActivateByIdForPlugins,
+    deleteRemoveByIdForPlugins,
+    getChangesForRevisions,
+    postDiffForRevisions,
     getActivity,
-    postActivityList,
+    postListForActivity,
+    getSuggestionsForActivity,
     getAdminHome,
-    putAppSettingsFileUploadSettings,
+    putFileUploadSettingsForAppSettings,
     getAppSettings,
-    putAppSettingsAppSetting,
-    putAppSettingsSiteUrlSetting,
-    putAppSettingsSmtpSetting,
-    postAppSettingsSmtpTest,
-    putAppSettingsSesSetting,
-    putAppSettingsOauth2Setting,
-    postAppSettingsV5SchemaMigration,
-    postAppSettingsMaintenanceMode,
-    getAttachmentList,
-    getAttachmentLimit,
+    putAppSettingForAppSettings,
+    putSiteUrlSettingForAppSettings,
+    putSmtpSettingForAppSettings,
+    postSmtpTestForAppSettings,
+    putSesSettingForAppSettings,
+    putOauth2SettingForAppSettings,
+    postV5SchemaMigrationForAppSettings,
+    postMaintenanceModeForAppSettings,
+    getListForAttachment,
+    getLimitForAttachment,
     postAttachment,
-    getAttachmentId,
+    getAttachmentById,
     postBookmarkFolder,
     putBookmarkFolder,
-    getBookmarkFolderListUserId,
-    deleteBookmarkFolderId,
-    postBookmarkFolderAddBookmarkToFolder,
-    putBookmarkFolderUpdateBookmark,
-    getBookmarksInfo,
-    getBookmarksUserId,
+    getListByUserIdForBookmarkFolder,
+    deleteBookmarkFolderById,
+    postAddBookmarkToFolderForBookmarkFolder,
+    putUpdateBookmarkForBookmarkFolder,
+    getInfoForBookmarks,
+    getBookmarksByUserId,
     putBookmarks,
     putContentDispositionSettings,
     getContentDispositionSettings,
     getCustomizeSetting,
-    getCustomizeSettingLayout,
-    putCustomizeSettingLayout,
-    getCustomizeSettingTheme,
-    putCustomizeSettingTheme,
-    getCustomizeSettingSidebar,
-    putCustomizeSettingSidebar,
-    putCustomizeSettingFunction,
-    putCustomizeSettingPresentation,
-    putCustomizeSettingHighlight,
-    putCustomizeSettingCustomizeTitle,
-    putCustomizeSettingCustomizeNoscript,
-    putCustomizeSettingCustomizeCss,
-    putCustomizeSettingCustomizeScript,
-    putCustomizeSettingCustomizeLogo,
-    putCustomizeSettingUploadBrandLogo,
-    deleteCustomizeSettingDeleteBrandLogo,
-    getExportStatus,
+    getLayoutForCustomizeSetting,
+    putLayoutForCustomizeSetting,
+    getThemeForCustomizeSetting,
+    putThemeForCustomizeSetting,
+    getSidebarForCustomizeSetting,
+    putSidebarForCustomizeSetting,
+    putFunctionForCustomizeSetting,
+    putPresentationForCustomizeSetting,
+    putHighlightForCustomizeSetting,
+    putCustomizeTitleForCustomizeSetting,
+    putCustomizeNoscriptForCustomizeSetting,
+    putCustomizeCssForCustomizeSetting,
+    putCustomizeScriptForCustomizeSetting,
+    putCustomizeLogoForCustomizeSetting,
+    putUploadBrandLogoForCustomizeSetting,
+    deleteDeleteBrandLogoForCustomizeSetting,
+    getStatusForExport,
     postExport,
-    deleteExportFileName,
+    deleteExportByFileName,
     postForgotPassword,
     putForgotPassword,
-    getG2gTransferFiles,
+    getFilesForG2gTransfer,
     postG2gTransfer,
-    postG2gTransferAttachment,
-    getG2gTransferGrowiInfo,
-    postG2gTransferGenerateKey,
-    postG2gTransferTransfer,
+    postAttachmentForG2gTransfer,
+    getGrowiInfoForG2gTransfer,
+    postGenerateKeyForG2gTransfer,
+    postTransferForG2gTransfer,
     getHealthcheck,
-    getImportStatus,
+    getStatusForImport,
     postImport,
-    postImportUpload,
-    deleteImportAll,
-    getInAppNotificationList,
-    getInAppNotificationStatus,
-    postInAppNotificationOpen,
-    putInAppNotificationAllStatusesOpen,
+    postUploadForImport,
+    deleteAllForImport,
+    getListForInAppNotification,
+    getStatusForInAppNotification,
+    postOpenForInAppNotification,
+    putAllStatusesOpenForInAppNotification,
     postInstaller,
     postInvited,
     postLogout,
     getMarkdownSetting,
-    putMarkdownSettingLineBreak,
-    putMarkdownSettingIndent,
-    putMarkdownSettingXss,
-    getMongoCollections,
+    putLineBreakForMarkdownSetting,
+    putIndentForMarkdownSetting,
+    putXssForMarkdownSetting,
+    getCollectionsForMongo,
     getNotificationSetting,
-    postNotificationSettingUserNotification,
-    deleteNotificationSettingUserNotificationId,
-    getNotificationSettingGlobalNotificationId,
-    putNotificationSettingGlobalNotificationId,
-    deleteNotificationSettingGlobalNotificationId,
-    postNotificationSettingGlobalNotification,
-    putNotificationSettingNotifyForPageGrant,
-    putNotificationSettingGlobalNotificationIdEnabled,
-    getPageListingRoot,
-    getPageListingChildren,
-    getPageListingInfo,
-    getPageListingItem,
-    getPageShared,
-    getPageInfo,
+    postUserNotificationForNotificationSetting,
+    deleteUserNotificationByIdForNotificationSetting,
+    getGlobalNotificationByIdForNotificationSetting,
+    putGlobalNotificationByIdForNotificationSetting,
+    deleteGlobalNotificationByIdForNotificationSetting,
+    postGlobalNotificationForNotificationSetting,
+    putNotifyForPageGrantForNotificationSetting,
+    putEnabledByIdForNotificationSettingGlobalNotification,
+    getRootForPageListing,
+    getChildrenForPageListing,
+    getInfoForPageListing,
+    getItemForPageListing,
+    getSharedForPage,
+    getInfoForPage,
     getPage,
     postPage,
     putPage,
-    getPageExist,
-    putPageLikes,
-    getPageGrantData,
-    getPageNonUserRelatedGroupsGranted,
-    getPageApplicableGrant,
-    putPageIdGrant,
-    getPageExportPageId,
-    getPageExistPaths,
-    putPageSubscribe,
-    putPageIdContentWidth,
-    putPagePageIdPublish,
-    putPagePageIdUnpublish,
-    getPageIdYjsData,
-    putPageIdSyncLatestRevisionBodyToYjsDraft,
-    getPagesRecent,
-    putPagesRename,
-    postPagesResumeRename,
-    deletePagesEmptyTrash,
-    getPagesList,
-    postPagesDuplicate,
-    getPagesSubordinatedList,
-    postPagesDelete,
-    postPagesConvertPagesByPath,
-    postPagesLegacyPagesMigration,
-    getPagesV5MigrationStatus,
+    getExistForPage,
+    putLikesForPage,
+    getGrantDataForPage,
+    getNonUserRelatedGroupsGrantedForPage,
+    getApplicableGrantForPage,
+    putGrantByPageId,
+    getExportByPageIdForPage,
+    getExistPathsForPage,
+    putSubscribeForPage,
+    putContentWidthByPageId,
+    putPublishByPageIdForPage,
+    putUnpublishByPageIdForPage,
+    getYjsDataByPageId,
+    putSyncLatestRevisionBodyToYjsDraftByPageId,
+    getRecentForPages,
+    putRenameForPages,
+    postResumeRenameForPages,
+    deleteEmptyTrashForPages,
+    getListForPages,
+    postDuplicateForPages,
+    getSubordinatedListForPages,
+    postDeleteForPages,
+    postConvertPagesByPathForPages,
+    postLegacyPagesMigrationForPages,
+    getV5MigrationStatusForPages,
     getPersonalSetting,
     putPersonalSetting,
-    getPersonalSettingIsPasswordSet,
-    putPersonalSettingImageType,
-    getPersonalSettingExternalAccounts,
-    putPersonalSettingPassword,
-    putPersonalSettingApiToken,
-    getAccessToken,
-    generateccessToken,
-    deleteAccessToken,
-    deleteAllAccessToken,
-    putPersonalSettingAssociateLdap,
-    putPersonalSettingDisassociateLdap,
-    putPersonalSettingEditorSettings,
-    getPersonalSettingEditorSettings,
-    putPersonalSettingInAppNotificationSettings,
-    getPersonalSettingInAppNotificationSettings,
-    getRevisionsList,
-    getRevisionsId,
-    getSearchIndices,
-    putSearchIndices,
-    postSearchConnection,
+    getIsPasswordSetForPersonalSetting,
+    putImageTypeForPersonalSetting,
+    getExternalAccountsForPersonalSetting,
+    putPasswordForPersonalSetting,
+    putApiTokenForPersonalSetting,
+    getAccessTokenForPersonalSetting,
+    postAccessTokenForPersonalSetting,
+    deleteAccessTokenForPersonalSetting,
+    deleteAllForPersonalSettingAccessToken,
+    putAssociateLdapForPersonalSetting,
+    putDisassociateLdapForPersonalSetting,
+    putEditorSettingsForPersonalSetting,
+    getEditorSettingsForPersonalSetting,
+    putInAppNotificationSettingsForPersonalSetting,
+    getInAppNotificationSettingsForPersonalSetting,
+    getListForRevisions,
+    getRevisionsById,
+    getIndicesForSearch,
+    putIndicesForSearch,
+    postConnectionForSearch,
+    getAuditlogIndicesForSearch,
+    putAuditlogIndicesForSearch,
     getSecuritySetting,
-    putSecuritySettingAuthenticationEnabled,
-    getSecuritySettingAuthentication,
-    putSecuritySettingGeneralSetting,
-    putSecuritySettingShareLinkSetting,
-    getSecuritySettingAllShareLinks,
-    deleteSecuritySettingAllShareLinks,
-    putSecuritySettingLocalSetting,
-    putSecuritySettingLdap,
-    putSecuritySettingSaml,
-    putSecuritySettingOidc,
-    putSecuritySettingGoogleOauth,
-    putSecuritySettingGithubOauth,
+    putEnabledForSecuritySettingAuthentication,
+    getAuthenticationForSecuritySetting,
+    putGeneralSettingForSecuritySetting,
+    putShareLinkSettingForSecuritySetting,
+    getAllShareLinksForSecuritySetting,
+    deleteAllShareLinksForSecuritySetting,
+    putLocalSettingForSecuritySetting,
+    putLdapForSecuritySetting,
+    putSamlForSecuritySetting,
+    putOidcForSecuritySetting,
+    putGoogleOauthForSecuritySetting,
+    putGithubOauthForSecuritySetting,
     getShareLinks,
     postShareLinks,
     deleteShareLinks,
-    deleteShareLinksAll,
-    deleteShareLinksId,
+    deleteAllForShareLinks,
+    deleteShareLinksById,
     getSlackIntegrationLegacySetting,
     putSlackIntegrationLegacySetting,
     getSlackIntegrationSettings,
-    putSlackIntegrationSettingsBotType,
-    deleteSlackIntegrationBotType,
-    putSlackIntegrationSettingsWithoutProxyUpdateSettings,
-    putSlackIntegrationSettingsWithoutProxyUpdatePermissions,
-    postSlackIntegrationSettingsSlackAppIntegrations,
-    deleteSlackIntegrationSettingsSlackAppIntegrationsId,
-    putSlackIntegrationSettingsProxyUri,
-    putSlackIntegrationSettingsSlackAppIntegrationsIdMakeprimary,
-    putSlackIntegrationSettingsSlackAppIntegrationsIdRegenerateTokens,
-    putSlackIntegrationSettingsSlackAppIntegrationsIdPermissions,
-    postSlackIntegrationSettingsSlackAppIntegrationsIdRelationTest,
-    postSlackIntegrationSettingsWithoutProxyTest,
-    postSlackIntegrationCommands,
-    postSlackIntegrationProxiedVerify,
-    postSlackIntegrationProxiedCommands,
-    postSlackIntegrationInteractions,
-    postSlackIntegrationProxiedInteractions,
-    getSlackIntegrationSupportedCommands,
-    postSlackIntegrationEvents,
-    postSlackIntegrationProxiedEvents,
-    getStatisticsUser,
+    putBotTypeForSlackIntegrationSettings,
+    deleteBotTypeForSlackIntegration,
+    putUpdateSettingsForSlackIntegrationSettingsWithoutProxy,
+    putUpdatePermissionsForSlackIntegrationSettingsWithoutProxy,
+    postSlackAppIntegrationsForSlackIntegrationSettings,
+    deleteSlackAppIntegrationsByIdForSlackIntegrationSettings,
+    putProxyUriForSlackIntegrationSettings,
+    putMakeprimaryByIdForSlackIntegrationSettingsSlackAppIntegrations,
+    putRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations,
+    putPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrations,
+    postRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrations,
+    postTestForSlackIntegrationSettingsWithoutProxy,
+    postCommandsForSlackIntegration,
+    postVerifyForSlackIntegrationProxied,
+    postCommandsForSlackIntegrationProxied,
+    postInteractionsForSlackIntegration,
+    postInteractionsForSlackIntegrationProxied,
+    getSupportedCommandsForSlackIntegration,
+    postEventsForSlackIntegration,
+    postEventsForSlackIntegrationProxied,
+    getUserForStatistics,
     postCompleteRegistration,
     getUserGroupRelations,
     getUserGroups,
     postUserGroups,
-    getUserGroupsAncestors,
-    getUserGroupsChildren,
+    getAncestorsForUserGroups,
+    getChildrenForUserGroups,
     getSelectableParentGroups,
     getSelectableChildGroups,
-    getUserGroupsId,
-    deleteUserGroupsId,
-    putUserGroupsId,
-    getUserGroupsIdUsers,
-    getUserGroupsIdUnrelatedUsers,
-    postUserGroupsIdUsersUsername,
-    deleteUserGroupsIdUsersUsername,
-    getUserGroupsIdUserGroupRelations,
-    getUserGroupsIdPages,
+    getUserGroupsById,
+    deleteUserGroupsById,
+    putUserGroupsById,
+    getUsersByIdForUserGroups,
+    getUnrelatedUsersByIdForUserGroups,
+    postUsersByUsernameByIdForUserGroups,
+    deleteUsersByUsernameByIdForUserGroups,
+    getUserGroupRelationsByIdForUserGroups,
+    getPagesByIdForUserGroups,
     putUserUiSettings,
     getUsers,
-    getUsersIdRecent,
-    postUsersInvite,
-    putUsersIdGrantAdmin,
-    putUsersIdRevokeAdmin,
-    putUsersIdGrantReadOnly,
-    putUsersIdRevokeReadOnly,
-    putUsersIdActivate,
-    putUsersIdDeactivate,
-    deleteUsersIdRemove,
-    getUsersExternalAccounts,
-    deleteUsersExternalAccountsIdRemove,
-    putUsersUpdateImageUrlCache,
-    putUsersResetPassword,
-    putUsersResetPasswordEmail,
-    putUsersSendInvitationEmail,
-    getUsersList,
-    getUsersUsernames,
+    getRecentByIdForUsers,
+    postInviteForUsers,
+    putGrantAdminByIdForUsers,
+    putRevokeAdminByIdForUsers,
+    putGrantReadOnlyByIdForUsers,
+    putRevokeReadOnlyByIdForUsers,
+    putActivateByIdForUsers,
+    putDeactivateByIdForUsers,
+    deleteRemoveByIdForUsers,
+    getExternalAccountsForUsers,
+    deleteRemoveByIdForUsersExternalAccounts,
+    putUpdateImageUrlCacheForUsers,
+    putResetPasswordForUsers,
+    putResetPasswordEmailForUsers,
+    putSendInvitationEmailForUsers,
+    getListForUsers,
+    getUsernamesForUsers,
     postLogin,
     postRegister,
   };
@@ -3071,351 +3167,400 @@ type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
 
 export type GetExternalUserGroupRelationsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupRelations']>>>;
 export type GetExternalUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroups']>>>;
-export type GetExternalUserGroupsAncestorsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsAncestors']>>>;
-export type GetExternalUserGroupsChildrenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsChildren']>>>;
-export type GetExternalUserGroupsIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsId']>>>;
-export type DeleteExternalUserGroupsIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteExternalUserGroupsId']>>>;
-export type PutExternalUserGroupsIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putExternalUserGroupsId']>>>;
-export type GetExternalUserGroupsIdExternalUserGroupRelationsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsIdExternalUserGroupRelations']>>
+export type GetAncestorsForExternalUserGroupsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAncestorsForExternalUserGroups']>>
 >;
-export type GetExternalUserGroupsLdapSyncSettingsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsLdapSyncSettings']>>
+export type GetChildrenForExternalUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getChildrenForExternalUserGroups']>>>;
+export type GetExternalUserGroupsByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsById']>>>;
+export type DeleteExternalUserGroupsByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteExternalUserGroupsById']>>>;
+export type PutExternalUserGroupsByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putExternalUserGroupsById']>>>;
+export type GetExternalUserGroupRelationsByIdForExternalUserGroupsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupRelationsByIdForExternalUserGroups']>>
 >;
-export type PutExternalUserGroupsLdapSyncSettingsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putExternalUserGroupsLdapSyncSettings']>>
+export type GetSyncSettingsForExternalUserGroupsLdapResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSyncSettingsForExternalUserGroupsLdap']>>
 >;
-export type GetExternalUserGroupsKeycloakSyncSettingsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsKeycloakSyncSettings']>>
+export type PutSyncSettingsForExternalUserGroupsLdapResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSyncSettingsForExternalUserGroupsLdap']>>
 >;
-export type PutExternalUserGroupsKeycloakSyncSettingsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putExternalUserGroupsKeycloakSyncSettings']>>
+export type GetSyncSettingsForExternalUserGroupsKeycloakResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSyncSettingsForExternalUserGroupsKeycloak']>>
 >;
-export type PutExternalUserGroupsLdapSyncResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putExternalUserGroupsLdapSync']>>>;
-export type PutExternalUserGroupsKeycloakSyncResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putExternalUserGroupsKeycloakSync']>>
+export type PutSyncSettingsForExternalUserGroupsKeycloakResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSyncSettingsForExternalUserGroupsKeycloak']>>
 >;
-export type GetExternalUserGroupsLdapSyncStatusResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalUserGroupsLdapSyncStatus']>>
+export type PutSyncForExternalUserGroupsLdapResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSyncForExternalUserGroupsLdap']>>>;
+export type PutSyncForExternalUserGroupsKeycloakResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSyncForExternalUserGroupsKeycloak']>>
+>;
+export type GetSyncStatusForExternalUserGroupsLdapResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSyncStatusForExternalUserGroupsLdap']>>
 >;
 export type GetTemplatesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getTemplates']>>>;
-export type GetTemplatesPresetTemplatesTemplateIdLocaleResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getTemplatesPresetTemplatesTemplateIdLocale']>>
+export type GetPresetTemplatesByLocaleByTemplateIdForTemplatesResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPresetTemplatesByLocaleByTemplateIdForTemplates']>>
 >;
-export type GetTemplatesPluginTemplatesOrganizationIdReposIdTemplateIdLocaleResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getTemplatesPluginTemplatesOrganizationIdReposIdTemplateIdLocale']>>
+export type GetPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplatesResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates']>>
 >;
-export type PostAiToolsSuggestPathResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAiToolsSuggestPath']>>>;
+export type PostSuggestPathForAiToolsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSuggestPathForAiTools']>>>;
 export type GetAiSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAiSettings']>>>;
 export type PutAiSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAiSettings']>>>;
-export type GetAiSettingsAvailableModelsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAiSettingsAvailableModels']>>>;
-export type PostAiSettingsRefreshModelCatalogResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAiSettingsRefreshModelCatalog']>>
+export type GetAvailableModelsForAiSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAvailableModelsForAiSettings']>>>;
+export type PostRefreshModelCatalogForAiSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postRefreshModelCatalogForAiSettings']>>
 >;
 export type PostPluginsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPlugins']>>>;
-export type PutPluginsIdActivateResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPluginsIdActivate']>>>;
-export type DeletePluginsIdRemoveResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deletePluginsIdRemove']>>>;
-export type GetRevisionsChangesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRevisionsChanges']>>>;
-export type PostRevisionsDiffResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postRevisionsDiff']>>>;
+export type PutActivateByIdForPluginsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putActivateByIdForPlugins']>>>;
+export type DeleteRemoveByIdForPluginsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteRemoveByIdForPlugins']>>>;
+export type GetChangesForRevisionsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getChangesForRevisions']>>>;
+export type PostDiffForRevisionsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postDiffForRevisions']>>>;
 export type GetActivityResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getActivity']>>>;
-export type PostActivityListResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postActivityList']>>>;
+export type PostListForActivityResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postListForActivity']>>>;
+export type GetSuggestionsForActivityResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSuggestionsForActivity']>>>;
 export type GetAdminHomeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAdminHome']>>>;
-export type PutAppSettingsFileUploadSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAppSettingsFileUploadSettings']>>>;
+export type PutFileUploadSettingsForAppSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putFileUploadSettingsForAppSettings']>>
+>;
 export type GetAppSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAppSettings']>>>;
-export type PutAppSettingsAppSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAppSettingsAppSetting']>>>;
-export type PutAppSettingsSiteUrlSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAppSettingsSiteUrlSetting']>>>;
-export type PutAppSettingsSmtpSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAppSettingsSmtpSetting']>>>;
-export type PostAppSettingsSmtpTestResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAppSettingsSmtpTest']>>>;
-export type PutAppSettingsSesSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAppSettingsSesSetting']>>>;
-export type PutAppSettingsOauth2SettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAppSettingsOauth2Setting']>>>;
-export type PostAppSettingsV5SchemaMigrationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAppSettingsV5SchemaMigration']>>>;
-export type PostAppSettingsMaintenanceModeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAppSettingsMaintenanceMode']>>>;
-export type GetAttachmentListResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAttachmentList']>>>;
-export type GetAttachmentLimitResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAttachmentLimit']>>>;
+export type PutAppSettingForAppSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAppSettingForAppSettings']>>>;
+export type PutSiteUrlSettingForAppSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSiteUrlSettingForAppSettings']>>>;
+export type PutSmtpSettingForAppSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSmtpSettingForAppSettings']>>>;
+export type PostSmtpTestForAppSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSmtpTestForAppSettings']>>>;
+export type PutSesSettingForAppSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSesSettingForAppSettings']>>>;
+export type PutOauth2SettingForAppSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putOauth2SettingForAppSettings']>>>;
+export type PostV5SchemaMigrationForAppSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postV5SchemaMigrationForAppSettings']>>
+>;
+export type PostMaintenanceModeForAppSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postMaintenanceModeForAppSettings']>>
+>;
+export type GetListForAttachmentResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getListForAttachment']>>>;
+export type GetLimitForAttachmentResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getLimitForAttachment']>>>;
 export type PostAttachmentResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAttachment']>>>;
-export type GetAttachmentIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAttachmentId']>>>;
+export type GetAttachmentByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAttachmentById']>>>;
 export type PostBookmarkFolderResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postBookmarkFolder']>>>;
 export type PutBookmarkFolderResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putBookmarkFolder']>>>;
-export type GetBookmarkFolderListUserIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getBookmarkFolderListUserId']>>>;
-export type DeleteBookmarkFolderIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteBookmarkFolderId']>>>;
-export type PostBookmarkFolderAddBookmarkToFolderResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postBookmarkFolderAddBookmarkToFolder']>>
+export type GetListByUserIdForBookmarkFolderResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getListByUserIdForBookmarkFolder']>>>;
+export type DeleteBookmarkFolderByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteBookmarkFolderById']>>>;
+export type PostAddBookmarkToFolderForBookmarkFolderResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAddBookmarkToFolderForBookmarkFolder']>>
 >;
-export type PutBookmarkFolderUpdateBookmarkResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putBookmarkFolderUpdateBookmark']>>>;
-export type GetBookmarksInfoResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getBookmarksInfo']>>>;
-export type GetBookmarksUserIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getBookmarksUserId']>>>;
+export type PutUpdateBookmarkForBookmarkFolderResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUpdateBookmarkForBookmarkFolder']>>
+>;
+export type GetInfoForBookmarksResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getInfoForBookmarks']>>>;
+export type GetBookmarksByUserIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getBookmarksByUserId']>>>;
 export type PutBookmarksResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putBookmarks']>>>;
 export type PutContentDispositionSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putContentDispositionSettings']>>>;
 export type GetContentDispositionSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getContentDispositionSettings']>>>;
 export type GetCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getCustomizeSetting']>>>;
-export type GetCustomizeSettingLayoutResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getCustomizeSettingLayout']>>>;
-export type PutCustomizeSettingLayoutResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingLayout']>>>;
-export type GetCustomizeSettingThemeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getCustomizeSettingTheme']>>>;
-export type PutCustomizeSettingThemeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingTheme']>>>;
-export type GetCustomizeSettingSidebarResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getCustomizeSettingSidebar']>>>;
-export type PutCustomizeSettingSidebarResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingSidebar']>>>;
-export type PutCustomizeSettingFunctionResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingFunction']>>>;
-export type PutCustomizeSettingPresentationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingPresentation']>>>;
-export type PutCustomizeSettingHighlightResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingHighlight']>>>;
-export type PutCustomizeSettingCustomizeTitleResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingCustomizeTitle']>>
+export type GetLayoutForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getLayoutForCustomizeSetting']>>>;
+export type PutLayoutForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putLayoutForCustomizeSetting']>>>;
+export type GetThemeForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getThemeForCustomizeSetting']>>>;
+export type PutThemeForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putThemeForCustomizeSetting']>>>;
+export type GetSidebarForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSidebarForCustomizeSetting']>>>;
+export type PutSidebarForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSidebarForCustomizeSetting']>>>;
+export type PutFunctionForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putFunctionForCustomizeSetting']>>>;
+export type PutPresentationForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPresentationForCustomizeSetting']>>
 >;
-export type PutCustomizeSettingCustomizeNoscriptResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingCustomizeNoscript']>>
+export type PutHighlightForCustomizeSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putHighlightForCustomizeSetting']>>>;
+export type PutCustomizeTitleForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeTitleForCustomizeSetting']>>
 >;
-export type PutCustomizeSettingCustomizeCssResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingCustomizeCss']>>>;
-export type PutCustomizeSettingCustomizeScriptResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingCustomizeScript']>>
+export type PutCustomizeNoscriptForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeNoscriptForCustomizeSetting']>>
 >;
-export type PutCustomizeSettingCustomizeLogoResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingCustomizeLogo']>>>;
-export type PutCustomizeSettingUploadBrandLogoResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeSettingUploadBrandLogo']>>
+export type PutCustomizeCssForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeCssForCustomizeSetting']>>
 >;
-export type DeleteCustomizeSettingDeleteBrandLogoResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteCustomizeSettingDeleteBrandLogo']>>
+export type PutCustomizeScriptForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeScriptForCustomizeSetting']>>
 >;
-export type GetExportStatusResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExportStatus']>>>;
+export type PutCustomizeLogoForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putCustomizeLogoForCustomizeSetting']>>
+>;
+export type PutUploadBrandLogoForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUploadBrandLogoForCustomizeSetting']>>
+>;
+export type DeleteDeleteBrandLogoForCustomizeSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteDeleteBrandLogoForCustomizeSetting']>>
+>;
+export type GetStatusForExportResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getStatusForExport']>>>;
 export type PostExportResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postExport']>>>;
-export type DeleteExportFileNameResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteExportFileName']>>>;
+export type DeleteExportByFileNameResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteExportByFileName']>>>;
 export type PostForgotPasswordResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postForgotPassword']>>>;
 export type PutForgotPasswordResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putForgotPassword']>>>;
-export type GetG2gTransferFilesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getG2gTransferFiles']>>>;
+export type GetFilesForG2gTransferResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getFilesForG2gTransfer']>>>;
 export type PostG2gTransferResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postG2gTransfer']>>>;
-export type PostG2gTransferAttachmentResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postG2gTransferAttachment']>>>;
-export type GetG2gTransferGrowiInfoResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getG2gTransferGrowiInfo']>>>;
-export type PostG2gTransferGenerateKeyResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postG2gTransferGenerateKey']>>>;
-export type PostG2gTransferTransferResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postG2gTransferTransfer']>>>;
+export type PostAttachmentForG2gTransferResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAttachmentForG2gTransfer']>>>;
+export type GetGrowiInfoForG2gTransferResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getGrowiInfoForG2gTransfer']>>>;
+export type PostGenerateKeyForG2gTransferResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postGenerateKeyForG2gTransfer']>>>;
+export type PostTransferForG2gTransferResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postTransferForG2gTransfer']>>>;
 export type GetHealthcheckResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getHealthcheck']>>>;
-export type GetImportStatusResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getImportStatus']>>>;
+export type GetStatusForImportResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getStatusForImport']>>>;
 export type PostImportResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postImport']>>>;
-export type PostImportUploadResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postImportUpload']>>>;
-export type DeleteImportAllResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteImportAll']>>>;
-export type GetInAppNotificationListResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getInAppNotificationList']>>>;
-export type GetInAppNotificationStatusResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getInAppNotificationStatus']>>>;
-export type PostInAppNotificationOpenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postInAppNotificationOpen']>>>;
-export type PutInAppNotificationAllStatusesOpenResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putInAppNotificationAllStatusesOpen']>>
+export type PostUploadForImportResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postUploadForImport']>>>;
+export type DeleteAllForImportResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteAllForImport']>>>;
+export type GetListForInAppNotificationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getListForInAppNotification']>>>;
+export type GetStatusForInAppNotificationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getStatusForInAppNotification']>>>;
+export type PostOpenForInAppNotificationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postOpenForInAppNotification']>>>;
+export type PutAllStatusesOpenForInAppNotificationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAllStatusesOpenForInAppNotification']>>
 >;
 export type PostInstallerResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postInstaller']>>>;
 export type PostInvitedResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postInvited']>>>;
 export type PostLogoutResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postLogout']>>>;
 export type GetMarkdownSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getMarkdownSetting']>>>;
-export type PutMarkdownSettingLineBreakResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putMarkdownSettingLineBreak']>>>;
-export type PutMarkdownSettingIndentResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putMarkdownSettingIndent']>>>;
-export type PutMarkdownSettingXssResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putMarkdownSettingXss']>>>;
-export type GetMongoCollectionsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getMongoCollections']>>>;
+export type PutLineBreakForMarkdownSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putLineBreakForMarkdownSetting']>>>;
+export type PutIndentForMarkdownSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putIndentForMarkdownSetting']>>>;
+export type PutXssForMarkdownSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putXssForMarkdownSetting']>>>;
+export type GetCollectionsForMongoResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getCollectionsForMongo']>>>;
 export type GetNotificationSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getNotificationSetting']>>>;
-export type PostNotificationSettingUserNotificationResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postNotificationSettingUserNotification']>>
+export type PostUserNotificationForNotificationSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postUserNotificationForNotificationSetting']>>
 >;
-export type DeleteNotificationSettingUserNotificationIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteNotificationSettingUserNotificationId']>>
+export type DeleteUserNotificationByIdForNotificationSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteUserNotificationByIdForNotificationSetting']>>
 >;
-export type GetNotificationSettingGlobalNotificationIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getNotificationSettingGlobalNotificationId']>>
+export type GetGlobalNotificationByIdForNotificationSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getGlobalNotificationByIdForNotificationSetting']>>
 >;
-export type PutNotificationSettingGlobalNotificationIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putNotificationSettingGlobalNotificationId']>>
+export type PutGlobalNotificationByIdForNotificationSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGlobalNotificationByIdForNotificationSetting']>>
 >;
-export type DeleteNotificationSettingGlobalNotificationIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteNotificationSettingGlobalNotificationId']>>
+export type DeleteGlobalNotificationByIdForNotificationSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteGlobalNotificationByIdForNotificationSetting']>>
 >;
-export type PostNotificationSettingGlobalNotificationResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postNotificationSettingGlobalNotification']>>
+export type PostGlobalNotificationForNotificationSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postGlobalNotificationForNotificationSetting']>>
 >;
-export type PutNotificationSettingNotifyForPageGrantResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putNotificationSettingNotifyForPageGrant']>>
+export type PutNotifyForPageGrantForNotificationSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putNotifyForPageGrantForNotificationSetting']>>
 >;
-export type PutNotificationSettingGlobalNotificationIdEnabledResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putNotificationSettingGlobalNotificationIdEnabled']>>
+export type PutEnabledByIdForNotificationSettingGlobalNotificationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putEnabledByIdForNotificationSettingGlobalNotification']>>
 >;
-export type GetPageListingRootResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageListingRoot']>>>;
-export type GetPageListingChildrenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageListingChildren']>>>;
-export type GetPageListingInfoResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageListingInfo']>>>;
-export type GetPageListingItemResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageListingItem']>>>;
-export type GetPageSharedResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageShared']>>>;
-export type GetPageInfoResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageInfo']>>>;
+export type GetRootForPageListingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRootForPageListing']>>>;
+export type GetChildrenForPageListingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getChildrenForPageListing']>>>;
+export type GetInfoForPageListingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getInfoForPageListing']>>>;
+export type GetItemForPageListingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getItemForPageListing']>>>;
+export type GetSharedForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSharedForPage']>>>;
+export type GetInfoForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getInfoForPage']>>>;
 export type GetPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPage']>>>;
 export type PostPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPage']>>>;
 export type PutPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPage']>>>;
-export type GetPageExistResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageExist']>>>;
-export type PutPageLikesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPageLikes']>>>;
-export type GetPageGrantDataResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageGrantData']>>>;
-export type GetPageNonUserRelatedGroupsGrantedResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageNonUserRelatedGroupsGranted']>>
+export type GetExistForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExistForPage']>>>;
+export type PutLikesForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putLikesForPage']>>>;
+export type GetGrantDataForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getGrantDataForPage']>>>;
+export type GetNonUserRelatedGroupsGrantedForPageResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getNonUserRelatedGroupsGrantedForPage']>>
 >;
-export type GetPageApplicableGrantResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageApplicableGrant']>>>;
-export type PutPageIdGrantResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPageIdGrant']>>>;
-export type GetPageExportPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageExportPageId']>>>;
-export type GetPageExistPathsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageExistPaths']>>>;
-export type PutPageSubscribeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPageSubscribe']>>>;
-export type PutPageIdContentWidthResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPageIdContentWidth']>>>;
-export type PutPagePageIdPublishResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPagePageIdPublish']>>>;
-export type PutPagePageIdUnpublishResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPagePageIdUnpublish']>>>;
-export type GetPageIdYjsDataResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPageIdYjsData']>>>;
-export type PutPageIdSyncLatestRevisionBodyToYjsDraftResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPageIdSyncLatestRevisionBodyToYjsDraft']>>
+export type GetApplicableGrantForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getApplicableGrantForPage']>>>;
+export type PutGrantByPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGrantByPageId']>>>;
+export type GetExportByPageIdForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExportByPageIdForPage']>>>;
+export type GetExistPathsForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExistPathsForPage']>>>;
+export type PutSubscribeForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSubscribeForPage']>>>;
+export type PutContentWidthByPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putContentWidthByPageId']>>>;
+export type PutPublishByPageIdForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPublishByPageIdForPage']>>>;
+export type PutUnpublishByPageIdForPageResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUnpublishByPageIdForPage']>>>;
+export type GetYjsDataByPageIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getYjsDataByPageId']>>>;
+export type PutSyncLatestRevisionBodyToYjsDraftByPageIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSyncLatestRevisionBodyToYjsDraftByPageId']>>
 >;
-export type GetPagesRecentResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPagesRecent']>>>;
-export type PutPagesRenameResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPagesRename']>>>;
-export type PostPagesResumeRenameResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPagesResumeRename']>>>;
-export type DeletePagesEmptyTrashResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deletePagesEmptyTrash']>>>;
-export type GetPagesListResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPagesList']>>>;
-export type PostPagesDuplicateResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPagesDuplicate']>>>;
-export type GetPagesSubordinatedListResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPagesSubordinatedList']>>>;
-export type PostPagesDeleteResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPagesDelete']>>>;
-export type PostPagesConvertPagesByPathResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPagesConvertPagesByPath']>>>;
-export type PostPagesLegacyPagesMigrationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postPagesLegacyPagesMigration']>>>;
-export type GetPagesV5MigrationStatusResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPagesV5MigrationStatus']>>>;
+export type GetRecentForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRecentForPages']>>>;
+export type PutRenameForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putRenameForPages']>>>;
+export type PostResumeRenameForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postResumeRenameForPages']>>>;
+export type DeleteEmptyTrashForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteEmptyTrashForPages']>>>;
+export type GetListForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getListForPages']>>>;
+export type PostDuplicateForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postDuplicateForPages']>>>;
+export type GetSubordinatedListForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSubordinatedListForPages']>>>;
+export type PostDeleteForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postDeleteForPages']>>>;
+export type PostConvertPagesByPathForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postConvertPagesByPathForPages']>>>;
+export type PostLegacyPagesMigrationForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postLegacyPagesMigrationForPages']>>>;
+export type GetV5MigrationStatusForPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getV5MigrationStatusForPages']>>>;
 export type GetPersonalSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPersonalSetting']>>>;
 export type PutPersonalSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSetting']>>>;
-export type GetPersonalSettingIsPasswordSetResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPersonalSettingIsPasswordSet']>>>;
-export type PutPersonalSettingImageTypeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSettingImageType']>>>;
-export type GetPersonalSettingExternalAccountsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPersonalSettingExternalAccounts']>>
+export type GetIsPasswordSetForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getIsPasswordSetForPersonalSetting']>>
 >;
-export type PutPersonalSettingPasswordResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSettingPassword']>>>;
-export type PutPersonalSettingApiTokenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSettingApiToken']>>>;
-export type GetAccessTokenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAccessToken']>>>;
-export type GenerateccessTokenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['generateccessToken']>>>;
-export type DeleteAccessTokenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteAccessToken']>>>;
-export type DeleteAllAccessTokenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteAllAccessToken']>>>;
-export type PutPersonalSettingAssociateLdapResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSettingAssociateLdap']>>>;
-export type PutPersonalSettingDisassociateLdapResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSettingDisassociateLdap']>>
+export type PutImageTypeForPersonalSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putImageTypeForPersonalSetting']>>>;
+export type GetExternalAccountsForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalAccountsForPersonalSetting']>>
 >;
-export type PutPersonalSettingEditorSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSettingEditorSettings']>>>;
-export type GetPersonalSettingEditorSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPersonalSettingEditorSettings']>>>;
-export type PutPersonalSettingInAppNotificationSettingsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPersonalSettingInAppNotificationSettings']>>
+export type PutPasswordForPersonalSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPasswordForPersonalSetting']>>>;
+export type PutApiTokenForPersonalSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putApiTokenForPersonalSetting']>>>;
+export type GetAccessTokenForPersonalSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAccessTokenForPersonalSetting']>>>;
+export type PostAccessTokenForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postAccessTokenForPersonalSetting']>>
 >;
-export type GetPersonalSettingInAppNotificationSettingsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPersonalSettingInAppNotificationSettings']>>
+export type DeleteAccessTokenForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteAccessTokenForPersonalSetting']>>
 >;
-export type GetRevisionsListResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRevisionsList']>>>;
-export type GetRevisionsIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRevisionsId']>>>;
-export type GetSearchIndicesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSearchIndices']>>>;
-export type PutSearchIndicesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSearchIndices']>>>;
-export type PostSearchConnectionResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSearchConnection']>>>;
+export type DeleteAllForPersonalSettingAccessTokenResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteAllForPersonalSettingAccessToken']>>
+>;
+export type PutAssociateLdapForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAssociateLdapForPersonalSetting']>>
+>;
+export type PutDisassociateLdapForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putDisassociateLdapForPersonalSetting']>>
+>;
+export type PutEditorSettingsForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putEditorSettingsForPersonalSetting']>>
+>;
+export type GetEditorSettingsForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getEditorSettingsForPersonalSetting']>>
+>;
+export type PutInAppNotificationSettingsForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putInAppNotificationSettingsForPersonalSetting']>>
+>;
+export type GetInAppNotificationSettingsForPersonalSettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getInAppNotificationSettingsForPersonalSetting']>>
+>;
+export type GetListForRevisionsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getListForRevisions']>>>;
+export type GetRevisionsByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRevisionsById']>>>;
+export type GetIndicesForSearchResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getIndicesForSearch']>>>;
+export type PutIndicesForSearchResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putIndicesForSearch']>>>;
+export type PostConnectionForSearchResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postConnectionForSearch']>>>;
+export type GetAuditlogIndicesForSearchResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAuditlogIndicesForSearch']>>>;
+export type PutAuditlogIndicesForSearchResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putAuditlogIndicesForSearch']>>>;
 export type GetSecuritySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSecuritySetting']>>>;
-export type PutSecuritySettingAuthenticationEnabledResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingAuthenticationEnabled']>>
+export type PutEnabledForSecuritySettingAuthenticationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putEnabledForSecuritySettingAuthentication']>>
 >;
-export type GetSecuritySettingAuthenticationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSecuritySettingAuthentication']>>>;
-export type PutSecuritySettingGeneralSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingGeneralSetting']>>>;
-export type PutSecuritySettingShareLinkSettingResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingShareLinkSetting']>>
+export type GetAuthenticationForSecuritySettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAuthenticationForSecuritySetting']>>
 >;
-export type GetSecuritySettingAllShareLinksResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSecuritySettingAllShareLinks']>>>;
-export type DeleteSecuritySettingAllShareLinksResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteSecuritySettingAllShareLinks']>>
+export type PutGeneralSettingForSecuritySettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGeneralSettingForSecuritySetting']>>
 >;
-export type PutSecuritySettingLocalSettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingLocalSetting']>>>;
-export type PutSecuritySettingLdapResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingLdap']>>>;
-export type PutSecuritySettingSamlResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingSaml']>>>;
-export type PutSecuritySettingOidcResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingOidc']>>>;
-export type PutSecuritySettingGoogleOauthResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingGoogleOauth']>>>;
-export type PutSecuritySettingGithubOauthResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSecuritySettingGithubOauth']>>>;
+export type PutShareLinkSettingForSecuritySettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putShareLinkSettingForSecuritySetting']>>
+>;
+export type GetAllShareLinksForSecuritySettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAllShareLinksForSecuritySetting']>>
+>;
+export type DeleteAllShareLinksForSecuritySettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteAllShareLinksForSecuritySetting']>>
+>;
+export type PutLocalSettingForSecuritySettingResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putLocalSettingForSecuritySetting']>>
+>;
+export type PutLdapForSecuritySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putLdapForSecuritySetting']>>>;
+export type PutSamlForSecuritySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSamlForSecuritySetting']>>>;
+export type PutOidcForSecuritySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putOidcForSecuritySetting']>>>;
+export type PutGoogleOauthForSecuritySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGoogleOauthForSecuritySetting']>>>;
+export type PutGithubOauthForSecuritySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGithubOauthForSecuritySetting']>>>;
 export type GetShareLinksResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getShareLinks']>>>;
 export type PostShareLinksResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postShareLinks']>>>;
 export type DeleteShareLinksResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteShareLinks']>>>;
-export type DeleteShareLinksAllResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteShareLinksAll']>>>;
-export type DeleteShareLinksIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteShareLinksId']>>>;
+export type DeleteAllForShareLinksResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteAllForShareLinks']>>>;
+export type DeleteShareLinksByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteShareLinksById']>>>;
 export type GetSlackIntegrationLegacySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSlackIntegrationLegacySetting']>>>;
 export type PutSlackIntegrationLegacySettingResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationLegacySetting']>>>;
 export type GetSlackIntegrationSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSlackIntegrationSettings']>>>;
-export type PutSlackIntegrationSettingsBotTypeResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationSettingsBotType']>>
+export type PutBotTypeForSlackIntegrationSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putBotTypeForSlackIntegrationSettings']>>
 >;
-export type DeleteSlackIntegrationBotTypeResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteSlackIntegrationBotType']>>>;
-export type PutSlackIntegrationSettingsWithoutProxyUpdateSettingsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationSettingsWithoutProxyUpdateSettings']>>
+export type DeleteBotTypeForSlackIntegrationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteBotTypeForSlackIntegration']>>>;
+export type PutUpdateSettingsForSlackIntegrationSettingsWithoutProxyResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUpdateSettingsForSlackIntegrationSettingsWithoutProxy']>>
 >;
-export type PutSlackIntegrationSettingsWithoutProxyUpdatePermissionsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationSettingsWithoutProxyUpdatePermissions']>>
+export type PutUpdatePermissionsForSlackIntegrationSettingsWithoutProxyResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUpdatePermissionsForSlackIntegrationSettingsWithoutProxy']>>
 >;
-export type PostSlackIntegrationSettingsSlackAppIntegrationsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationSettingsSlackAppIntegrations']>>
+export type PostSlackAppIntegrationsForSlackIntegrationSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackAppIntegrationsForSlackIntegrationSettings']>>
 >;
-export type DeleteSlackIntegrationSettingsSlackAppIntegrationsIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteSlackIntegrationSettingsSlackAppIntegrationsId']>>
+export type DeleteSlackAppIntegrationsByIdForSlackIntegrationSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteSlackAppIntegrationsByIdForSlackIntegrationSettings']>>
 >;
-export type PutSlackIntegrationSettingsProxyUriResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationSettingsProxyUri']>>
+export type PutProxyUriForSlackIntegrationSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putProxyUriForSlackIntegrationSettings']>>
 >;
-export type PutSlackIntegrationSettingsSlackAppIntegrationsIdMakeprimaryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationSettingsSlackAppIntegrationsIdMakeprimary']>>
+export type PutMakeprimaryByIdForSlackIntegrationSettingsSlackAppIntegrationsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putMakeprimaryByIdForSlackIntegrationSettingsSlackAppIntegrations']>>
 >;
-export type PutSlackIntegrationSettingsSlackAppIntegrationsIdRegenerateTokensResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationSettingsSlackAppIntegrationsIdRegenerateTokens']>>
+export type PutRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrationsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations']>>
 >;
-export type PutSlackIntegrationSettingsSlackAppIntegrationsIdPermissionsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSlackIntegrationSettingsSlackAppIntegrationsIdPermissions']>>
+export type PutPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrationsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrations']>>
 >;
-export type PostSlackIntegrationSettingsSlackAppIntegrationsIdRelationTestResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationSettingsSlackAppIntegrationsIdRelationTest']>>
+export type PostRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrationsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrations']>>
 >;
-export type PostSlackIntegrationSettingsWithoutProxyTestResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationSettingsWithoutProxyTest']>>
+export type PostTestForSlackIntegrationSettingsWithoutProxyResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postTestForSlackIntegrationSettingsWithoutProxy']>>
 >;
-export type PostSlackIntegrationCommandsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationCommands']>>>;
-export type PostSlackIntegrationProxiedVerifyResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationProxiedVerify']>>
+export type PostCommandsForSlackIntegrationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postCommandsForSlackIntegration']>>>;
+export type PostVerifyForSlackIntegrationProxiedResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postVerifyForSlackIntegrationProxied']>>
 >;
-export type PostSlackIntegrationProxiedCommandsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationProxiedCommands']>>
+export type PostCommandsForSlackIntegrationProxiedResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postCommandsForSlackIntegrationProxied']>>
 >;
-export type PostSlackIntegrationInteractionsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationInteractions']>>>;
-export type PostSlackIntegrationProxiedInteractionsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationProxiedInteractions']>>
+export type PostInteractionsForSlackIntegrationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postInteractionsForSlackIntegration']>>
 >;
-export type GetSlackIntegrationSupportedCommandsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSlackIntegrationSupportedCommands']>>
+export type PostInteractionsForSlackIntegrationProxiedResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postInteractionsForSlackIntegrationProxied']>>
 >;
-export type PostSlackIntegrationEventsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationEvents']>>>;
-export type PostSlackIntegrationProxiedEventsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postSlackIntegrationProxiedEvents']>>
+export type GetSupportedCommandsForSlackIntegrationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSupportedCommandsForSlackIntegration']>>
 >;
-export type GetStatisticsUserResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getStatisticsUser']>>>;
+export type PostEventsForSlackIntegrationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postEventsForSlackIntegration']>>>;
+export type PostEventsForSlackIntegrationProxiedResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postEventsForSlackIntegrationProxied']>>
+>;
+export type GetUserForStatisticsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserForStatistics']>>>;
 export type PostCompleteRegistrationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postCompleteRegistration']>>>;
 export type GetUserGroupRelationsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupRelations']>>>;
 export type GetUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroups']>>>;
 export type PostUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postUserGroups']>>>;
-export type GetUserGroupsAncestorsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsAncestors']>>>;
-export type GetUserGroupsChildrenResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsChildren']>>>;
+export type GetAncestorsForUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getAncestorsForUserGroups']>>>;
+export type GetChildrenForUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getChildrenForUserGroups']>>>;
 export type GetSelectableParentGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSelectableParentGroups']>>>;
 export type GetSelectableChildGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getSelectableChildGroups']>>>;
-export type GetUserGroupsIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsId']>>>;
-export type DeleteUserGroupsIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteUserGroupsId']>>>;
-export type PutUserGroupsIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUserGroupsId']>>>;
-export type GetUserGroupsIdUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsIdUsers']>>>;
-export type GetUserGroupsIdUnrelatedUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsIdUnrelatedUsers']>>>;
-export type PostUserGroupsIdUsersUsernameResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postUserGroupsIdUsersUsername']>>>;
-export type DeleteUserGroupsIdUsersUsernameResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteUserGroupsIdUsersUsername']>>>;
-export type GetUserGroupsIdUserGroupRelationsResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsIdUserGroupRelations']>>
+export type GetUserGroupsByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsById']>>>;
+export type DeleteUserGroupsByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteUserGroupsById']>>>;
+export type PutUserGroupsByIdResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUserGroupsById']>>>;
+export type GetUsersByIdForUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsersByIdForUserGroups']>>>;
+export type GetUnrelatedUsersByIdForUserGroupsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUnrelatedUsersByIdForUserGroups']>>
 >;
-export type GetUserGroupsIdPagesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupsIdPages']>>>;
+export type PostUsersByUsernameByIdForUserGroupsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postUsersByUsernameByIdForUserGroups']>>
+>;
+export type DeleteUsersByUsernameByIdForUserGroupsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteUsersByUsernameByIdForUserGroups']>>
+>;
+export type GetUserGroupRelationsByIdForUserGroupsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUserGroupRelationsByIdForUserGroups']>>
+>;
+export type GetPagesByIdForUserGroupsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getPagesByIdForUserGroups']>>>;
 export type PutUserUiSettingsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUserUiSettings']>>>;
 export type GetUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsers']>>>;
-export type GetUsersIdRecentResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsersIdRecent']>>>;
-export type PostUsersInviteResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postUsersInvite']>>>;
-export type PutUsersIdGrantAdminResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersIdGrantAdmin']>>>;
-export type PutUsersIdRevokeAdminResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersIdRevokeAdmin']>>>;
-export type PutUsersIdGrantReadOnlyResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersIdGrantReadOnly']>>>;
-export type PutUsersIdRevokeReadOnlyResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersIdRevokeReadOnly']>>>;
-export type PutUsersIdActivateResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersIdActivate']>>>;
-export type PutUsersIdDeactivateResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersIdDeactivate']>>>;
-export type DeleteUsersIdRemoveResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteUsersIdRemove']>>>;
-export type GetUsersExternalAccountsResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsersExternalAccounts']>>>;
-export type DeleteUsersExternalAccountsIdRemoveResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteUsersExternalAccountsIdRemove']>>
+export type GetRecentByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getRecentByIdForUsers']>>>;
+export type PostInviteForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postInviteForUsers']>>>;
+export type PutGrantAdminByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGrantAdminByIdForUsers']>>>;
+export type PutRevokeAdminByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putRevokeAdminByIdForUsers']>>>;
+export type PutGrantReadOnlyByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putGrantReadOnlyByIdForUsers']>>>;
+export type PutRevokeReadOnlyByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putRevokeReadOnlyByIdForUsers']>>>;
+export type PutActivateByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putActivateByIdForUsers']>>>;
+export type PutDeactivateByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putDeactivateByIdForUsers']>>>;
+export type DeleteRemoveByIdForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteRemoveByIdForUsers']>>>;
+export type GetExternalAccountsForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getExternalAccountsForUsers']>>>;
+export type DeleteRemoveByIdForUsersExternalAccountsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['deleteRemoveByIdForUsersExternalAccounts']>>
 >;
-export type PutUsersUpdateImageUrlCacheResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersUpdateImageUrlCache']>>>;
-export type PutUsersResetPasswordResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersResetPassword']>>>;
-export type PutUsersResetPasswordEmailResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersResetPasswordEmail']>>>;
-export type PutUsersSendInvitationEmailResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUsersSendInvitationEmail']>>>;
-export type GetUsersListResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsersList']>>>;
-export type GetUsersUsernamesResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsersUsernames']>>>;
+export type PutUpdateImageUrlCacheForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putUpdateImageUrlCacheForUsers']>>>;
+export type PutResetPasswordForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putResetPasswordForUsers']>>>;
+export type PutResetPasswordEmailForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putResetPasswordEmailForUsers']>>>;
+export type PutSendInvitationEmailForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['putSendInvitationEmailForUsers']>>>;
+export type GetListForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getListForUsers']>>>;
+export type GetUsernamesForUsersResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['getUsernamesForUsers']>>>;
 export type PostLoginResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postLogin']>>>;
 export type PostRegisterResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getGrowirestapiv3>['postRegister']>>>;
