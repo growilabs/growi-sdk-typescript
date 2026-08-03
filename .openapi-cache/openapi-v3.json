@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v3",
-    "version": "7.5.7-RC.0"
+    "version": "8.0.1-RC.0"
   },
   "servers": [
     {
@@ -139,6 +139,250 @@
           }
         }
       },
+      "AiProviderStatus": {
+        "description": "Per-provider status for the admin UI. The stored API key value is never returned — only isApiKeySet exposes its presence (Req 1.8, 1.9).",
+        "type": "object",
+        "required": [
+          "enabled",
+          "isApiKeySet"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the provider is toggled on by the admin."
+          },
+          "isApiKeySet": {
+            "type": "boolean",
+            "description": "Whether an API key is stored for the provider. The key value itself is never returned."
+          },
+          "azureOpenaiSettings": {
+            "type": "object",
+            "description": "Azure OpenAI connection settings — present only on the 'azure-openai' entry. These carry no secrets, so they may be returned.",
+            "properties": {
+              "resourceName": {
+                "type": "string"
+              },
+              "baseURL": {
+                "type": "string"
+              },
+              "apiVersion": {
+                "type": "string"
+              },
+              "useEntraId": {
+                "type": "boolean",
+                "description": "Whether Azure OpenAI authenticates via Microsoft Entra ID instead of an API key (absent = false)."
+              }
+            }
+          }
+        }
+      },
+      "AiSettingsResponse": {
+        "description": "The currently effective multi-provider AI configuration for the admin UI. No API key value is ever returned — only the per-provider isApiKeySet flag (Req 1.8, 1.9).",
+        "type": "object",
+        "required": [
+          "aiEnabled",
+          "providers",
+          "allowedModels",
+          "useOnlyEnvVars",
+          "isConfigured"
+        ],
+        "properties": {
+          "aiEnabled": {
+            "type": "boolean",
+            "description": "State of app:aiEnabled (the AI enable toggle)."
+          },
+          "providers": {
+            "type": "object",
+            "description": "Status of every supported provider (openai, anthropic, google, azure-openai). All four are always present as fixed slots (Req 1.1): an unconfigured provider is returned as a disabled entry, never omitted.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AiProviderStatus"
+            }
+          },
+          "allowedModels": {
+            "type": "array",
+            "description": "The cross-provider allow-list (ai:allowedModels). Each entry carries its owning provider, model id (deployment name for Azure OpenAI), optional provider-namespaced providerOptions, and an isDefault flag (exactly one entry is the default). Always an array (empty when no models are configured).",
+            "items": {
+              "type": "object",
+              "required": [
+                "provider",
+                "modelId",
+                "displayName"
+              ],
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "enum": [
+                    "openai",
+                    "anthropic",
+                    "google",
+                    "azure-openai"
+                  ],
+                  "description": "The model's owning provider."
+                },
+                "modelId": {
+                  "type": "string",
+                  "description": "The model id (or, for Azure OpenAI, the deployment name)."
+                },
+                "displayName": {
+                  "type": "string",
+                  "description": "The official display name resolved from the catalog (the modelId itself for catalog-less providers / free-text / removed ids). Display-only — never sent back in the PUT request."
+                },
+                "providerOptions": {
+                  "type": "object",
+                  "description": "Provider-namespaced options (e.g. {\"openai\":{...}})."
+                },
+                "isDefault": {
+                  "type": "boolean",
+                  "description": "Whether this entry is the default model."
+                }
+              }
+            }
+          },
+          "useOnlyEnvVars": {
+            "type": "boolean",
+            "description": "When true (env:useOnlyEnvVars:ai), provider connection settings are fixed by env vars and read-only."
+          },
+          "isConfigured": {
+            "type": "boolean",
+            "description": "Whether at least one available provider has at least one allowed model (isAiConfigured())."
+          }
+        }
+      },
+      "SelectableModelsResponse": {
+        "description": "The selectable models for a provider, narrowed to chat + tool-capable models by the catalog filter (applied identically at vendoring time and on a runtime refresh). Carries model id + display-name information only — never an API key, provider credentials, or providerOptions (Req 7.1).",
+        "type": "object",
+        "required": [
+          "models"
+        ],
+        "properties": {
+          "models": {
+            "type": "array",
+            "description": "The models offered for selection. An empty array for a valid but catalog-less provider (e.g. azure-openai).",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The bare model id (the AI SDK model id)."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The official display name (the id itself when models.dev has no name)."
+                }
+              }
+            }
+          }
+        }
+      },
+      "RefreshModelCatalogResponse": {
+        "description": "Metadata of a successful model-catalog refresh. Carries the fetch timestamp and per-provider selectable-model counts only — never an API key, provider credentials, or providerOptions (Req 7.1).",
+        "type": "object",
+        "required": [
+          "fetchedAt",
+          "counts"
+        ],
+        "properties": {
+          "fetchedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the catalog snapshot was fetched from models.dev."
+          },
+          "counts": {
+            "type": "object",
+            "description": "provider → number of selectable model ids.",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "AiProviderUpdateRequest": {
+        "description": "Per-provider section of the PUT request. Full-state replace (`enabled` omitted = false) with one merge exception: `apiKey` is write-only — an empty or omitted value keeps the stored key (there is no clear operation), and a new key is applied only when a non-empty string is sent (Req 1.4).",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the provider is toggled on. Omitted = false."
+          },
+          "apiKey": {
+            "type": "string",
+            "description": "Write-only; never returned by GET. Empty or omitted keeps the stored key; a non-empty value overwrites it. Keys are never cleared."
+          },
+          "azureOpenaiSettings": {
+            "type": "object",
+            "description": "Azure OpenAI connection settings — only meaningful for the 'azure-openai' entry (full-state replace).",
+            "properties": {
+              "resourceName": {
+                "type": "string"
+              },
+              "baseURL": {
+                "type": "string"
+              },
+              "apiVersion": {
+                "type": "string"
+              },
+              "useEntraId": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "AiSettingsUpdateRequest": {
+        "description": "Each top-level section (aiEnabled / providers / allowedModels) is OMIT = LEAVE UNCHANGED; a present section is a full-state replace of that section. When `providers` is present it MUST carry an entry for every supported provider (fixed-slot model). An empty `allowedModels` array is accepted and stored as \"no allowed models\" (Req 3.3). In env-only mode a request containing `providers` or `aiEnabled` is rejected with 400; only `allowedModels` is editable (Req 5.2, 5.3).",
+        "type": "object",
+        "properties": {
+          "aiEnabled": {
+            "type": "boolean",
+            "description": "Toggle for app:aiEnabled. Omit = unchanged."
+          },
+          "providers": {
+            "type": "object",
+            "description": "Per-provider update sections keyed by provider (openai, anthropic, google, azure-openai). Omit = unchanged; when present, all four entries are required.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AiProviderUpdateRequest"
+            }
+          },
+          "allowedModels": {
+            "type": "array",
+            "description": "The cross-provider allow-list (full-state replace). Omit = unchanged; an empty array is stored as \"no allowed models\". When non-empty, every entry needs a supported provider, a non-empty unique (provider, modelId) pair, and exactly one entry must be the default.",
+            "items": {
+              "type": "object",
+              "required": [
+                "provider",
+                "modelId"
+              ],
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "enum": [
+                    "openai",
+                    "anthropic",
+                    "google",
+                    "azure-openai"
+                  ]
+                },
+                "modelId": {
+                  "type": "string",
+                  "description": "The model id (deployment name for Azure OpenAI)."
+                },
+                "providerOptions": {
+                  "type": "object",
+                  "description": "Provider-namespaced options (e.g. {\"openai\":{...}}); omit for no options."
+                },
+                "isDefault": {
+                  "type": "boolean",
+                  "description": "Marks the default entry. Exactly one entry must set this true."
+                }
+              }
+            }
+          }
+        }
+      },
       "ActivityResponse": {
         "type": "object",
         "properties": {
@@ -168,10 +412,12 @@
                     },
                     "targetModel": {
                       "type": "string",
+                      "description": "Model name of the activity target. For attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD) this is \"Attachment\".",
                       "example": "Page"
                     },
                     "target": {
                       "type": "string",
+                      "description": "ID of the activity target. For attachment activities this is the attachment ID; combined with the snapshot fields it lets consumers build a download link for attachments that still exist (ATTACHMENT_ADD / ATTACHMENT_DOWNLOAD, distinguished by `action`).",
                       "example": "675547e97f208f8050a361d4"
                     },
                     "action": {
@@ -183,11 +429,32 @@
                       "properties": {
                         "username": {
                           "type": "string",
+                          "description": "Username of the operator. Omitted when the activity was recorded without an authenticated user (e.g. guest ATTACHMENT_DOWNLOAD).",
                           "example": "growi"
                         },
                         "_id": {
                           "type": "string",
                           "example": "67e33da5d97e8d3b53e99f96"
+                        },
+                        "originalName": {
+                          "type": "string",
+                          "description": "Original file name of the attachment. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD).",
+                          "example": "design-v2.pdf"
+                        },
+                        "pagePath": {
+                          "type": "string",
+                          "description": "Path of the page the attachment belongs or belonged to. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD) when it could be resolved at capture time.",
+                          "example": "/Sandbox/attachments"
+                        },
+                        "pageId": {
+                          "type": "string",
+                          "description": "ID of the page the attachment belongs or belonged to. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD).",
+                          "example": "675547e97f208f8050a361d4"
+                        },
+                        "fileSize": {
+                          "type": "integer",
+                          "description": "File size in bytes of the attachment. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD).",
+                          "example": 12345
                         }
                       }
                     },
@@ -3706,6 +3973,7 @@
         "Activity",
         "AdminHome",
         "AppSettings",
+        "AiSettings",
         "ExternalUserGroups",
         "SecuritySetting",
         "MarkDownSetting",
@@ -3814,8 +4082,7 @@
               }
             }
           }
-        },
-        "operationId": "getExternalUserGroupRelations"
+        }
       }
     },
     "/external-user-groups": {
@@ -3888,8 +4155,7 @@
               }
             }
           }
-        },
-        "operationId": "getExternalUserGroups"
+        }
       }
     },
     "/external-user-groups/ancestors": {
@@ -3933,8 +4199,7 @@
               }
             }
           }
-        },
-        "operationId": "getAncestorsForExternalUserGroups"
+        }
       }
     },
     "/external-user-groups/children": {
@@ -3994,8 +4259,7 @@
               }
             }
           }
-        },
-        "operationId": "getChildrenForExternalUserGroups"
+        }
       }
     },
     "/external-user-groups/{id}": {
@@ -4036,8 +4300,7 @@
               }
             }
           }
-        },
-        "operationId": "getExternalUserGroupsById"
+        }
       },
       "delete": {
         "tags": [
@@ -4104,8 +4367,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteExternalUserGroupsById"
+        }
       },
       "put": {
         "tags": [
@@ -4159,8 +4421,7 @@
               }
             }
           }
-        },
-        "operationId": "putExternalUserGroupsById"
+        }
       }
     },
     "/external-user-groups/{id}/external-user-group-relations": {
@@ -4204,8 +4465,7 @@
               }
             }
           }
-        },
-        "operationId": "getExternalUserGroupRelationsByIdForExternalUserGroups"
+        }
       }
     },
     "/external-user-groups/ldap/sync-settings": {
@@ -4256,8 +4516,7 @@
               }
             }
           }
-        },
-        "operationId": "getSyncSettingsForExternalUserGroupsLdap"
+        }
       },
       "put": {
         "tags": [
@@ -4316,8 +4575,7 @@
               }
             }
           }
-        },
-        "operationId": "putSyncSettingsForExternalUserGroupsLdap"
+        }
       }
     },
     "/external-user-groups/keycloak/sync-settings": {
@@ -4368,8 +4626,7 @@
               }
             }
           }
-        },
-        "operationId": "getSyncSettingsForExternalUserGroupsKeycloak"
+        }
       },
       "put": {
         "tags": [
@@ -4428,8 +4685,7 @@
               }
             }
           }
-        },
-        "operationId": "putSyncSettingsForExternalUserGroupsKeycloak"
+        }
       }
     },
     "/external-user-groups/ldap/sync": {
@@ -4454,8 +4710,7 @@
               }
             }
           }
-        },
-        "operationId": "putSyncForExternalUserGroupsLdap"
+        }
       }
     },
     "/external-user-groups/keycloak/sync": {
@@ -4480,8 +4735,7 @@
               }
             }
           }
-        },
-        "operationId": "putSyncForExternalUserGroupsKeycloak"
+        }
       }
     },
     "/external-user-groups/ldap/sync-status": {
@@ -4506,8 +4760,7 @@
               }
             }
           }
-        },
-        "operationId": "getSyncStatusForExternalUserGroupsLdap"
+        }
       }
     },
     "/templates": {
@@ -4569,8 +4822,7 @@
               }
             }
           }
-        },
-        "operationId": "getTemplates"
+        }
       }
     },
     "/templates/preset-templates/{templateId}/{locale}": {
@@ -4621,8 +4873,7 @@
               }
             }
           }
-        },
-        "operationId": "getPresetTemplatesByLocaleByTemplateIdForTemplates"
+        }
       }
     },
     "/templates/plugin-templates/{organizationId}/{reposId}/{templateId}/{locale}": {
@@ -4691,14 +4942,13 @@
               }
             }
           }
-        },
-        "operationId": "getPluginTemplatesByLocaleByTemplateIdByReposIdByOrganizationIdForTemplates"
+        }
       }
     },
     "/ai-tools/suggest-path": {
       "post": {
         "summary": "Suggest page paths based on content",
-        "description": "Analyzes the given content and suggests appropriate page paths using keyword extraction, search, and AI evaluation.",
+        "description": "Analyzes the given content and suggests appropriate page paths using an agentic search over the wiki.",
         "tags": [
           "AI Tools"
         ],
@@ -4726,7 +4976,7 @@
                   "body": {
                     "type": "string",
                     "description": "The page content to analyze for path suggestions",
-                    "maxLength": 50000
+                    "maxLength": 100000
                   }
                 }
               }
@@ -4747,8 +4997,171 @@
           "500": {
             "description": "Failed to generate path suggestions"
           }
+        }
+      }
+    },
+    "/ai-settings": {
+      "get": {
+        "tags": [
+          "AiSettings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          },
+          {
+            "accessTokenHeaderAuth": []
+          }
+        ],
+        "summary": "/ai-settings",
+        "description": "Get the currently effective AI settings. No API key value is ever returned (only isApiKeySet).",
+        "responses": {
+          "200": {
+            "description": "The effective AI settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiSettingsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to get AI settings."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AiSettings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          },
+          {
+            "accessTokenHeaderAuth": []
+          }
+        ],
+        "summary": "/ai-settings",
+        "description": "Update the AI settings. Each top-level section (aiEnabled / providers / allowedModels) is omit = leave unchanged; a present section is a full-state replace. In env-only mode (env:useOnlyEnvVars:ai) a request that contains providers or aiEnabled is rejected with 400 (connection settings are env-only); only allowedModels stays editable.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiSettingsUpdateRequest"
+              }
+            }
+          }
         },
-        "operationId": "postSuggestPathForAiTools"
+        "responses": {
+          "200": {
+            "description": "AI settings updated."
+          },
+          "400": {
+            "description": "Validation failed, or a connection-setting change was attempted while env-only mode is active."
+          },
+          "500": {
+            "description": "Failed to update AI settings."
+          }
+        }
+      }
+    },
+    "/ai-settings/available-models": {
+      "get": {
+        "tags": [
+          "AiSettings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          },
+          {
+            "accessTokenHeaderAuth": []
+          }
+        ],
+        "summary": "/ai-settings/available-models",
+        "description": "Get the selectable models (id + display name) for a provider from the effective catalog (the runtime-refreshed snapshot when newer, otherwise the committed offline catalog). The response carries model id/display-name information only (no secrets).",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "openai",
+                "anthropic",
+                "google",
+                "azure-openai"
+              ]
+            },
+            "description": "The provider to scope the model list to."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The selectable model ids. An empty array for a valid but catalog-less provider (e.g. azure-openai).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SelectableModelsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provider query parameter is missing or not a known provider."
+          },
+          "500": {
+            "description": "Failed to get available models."
+          }
+        }
+      }
+    },
+    "/ai-settings/refresh-model-catalog": {
+      "post": {
+        "tags": [
+          "AiSettings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          },
+          {
+            "accessTokenHeaderAuth": []
+          }
+        ],
+        "summary": "/ai-settings/refresh-model-catalog",
+        "description": "Refresh the selectable-model catalog from models.dev (the fixed built-in source) and persist it for subsequent available-models lookups. Admin-only. On failure the last-good catalog stays in effect.",
+        "responses": {
+          "200": {
+            "description": "The catalog was refreshed and persisted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefreshModelCatalogResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The refresh failed (network / upstream schema drift); the last-good catalog is preserved."
+          }
+        }
       }
     },
     "/plugins": {
@@ -4806,8 +5219,7 @@
               }
             }
           }
-        },
-        "operationId": "postPlugins"
+        }
       }
     },
     "/plugins/{id}/activate": {
@@ -4849,8 +5261,7 @@
               }
             }
           }
-        },
-        "operationId": "putActivateByIdForPlugins"
+        }
       }
     },
     "/plugins/{id}/remove": {
@@ -4892,8 +5303,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteRemoveByIdForPlugins"
+        }
       }
     },
     "/revisions/changes": {
@@ -5014,8 +5424,7 @@
           "403": {
             "description": "Insufficient scope (requires read:features:page)"
           }
-        },
-        "operationId": "getChangesForRevisions"
+        }
       }
     },
     "/revisions/diff": {
@@ -5125,8 +5534,7 @@
           "403": {
             "description": "Insufficient scope (requires read:features:page)"
           }
-        },
-        "operationId": "postDiffForRevisions"
+        }
       }
     },
     "/activity": {
@@ -5189,8 +5597,88 @@
               }
             }
           }
+        }
+      }
+    },
+    "/activity/list": {
+      "post": {
+        "summary": "/activity/list",
+        "description": "Same as `GET /activity` but takes limit / offset / searchFilter in the request body. The audit-log UI uses this so the searchFilter (which lists every selected action) never bloats the query string and hits a URL-length limit for large action-group configurations.",
+        "tags": [
+          "Activity"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          },
+          {
+            "accessTokenHeaderAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "limit": {
+                    "type": "integer"
+                  },
+                  "offset": {
+                    "type": "integer"
+                  },
+                  "searchFilter": {
+                    "type": "object",
+                    "properties": {
+                      "usernames": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "actions": {
+                        "type": "array",
+                        "description": "Omit this field to match every activity. Send it only to restrict the result to the listed actions.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "dates": {
+                        "type": "object",
+                        "properties": {
+                          "startDate": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "endDate": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         },
-        "operationId": "getActivity"
+        "responses": {
+          "200": {
+            "description": "Activity fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/admin-home/": {
@@ -5220,8 +5708,7 @@
               }
             }
           }
-        },
-        "operationId": "getAdminHome"
+        }
       }
     },
     "/app-settings/file-upload-settings": {
@@ -5263,8 +5750,7 @@
               }
             }
           }
-        },
-        "operationId": "putFileUploadSettingsForAppSettings"
+        }
       }
     },
     "/app-settings": {
@@ -5301,8 +5787,7 @@
               }
             }
           }
-        },
-        "operationId": "getAppSettings"
+        }
       }
     },
     "/app-settings/app-setting": {
@@ -5344,8 +5829,7 @@
               }
             }
           }
-        },
-        "operationId": "putAppSettingForAppSettings"
+        }
       }
     },
     "/app-settings/site-url-setting": {
@@ -5393,8 +5877,7 @@
               }
             }
           }
-        },
-        "operationId": "putSiteUrlSettingForAppSettings"
+        }
       }
     },
     "/app-settings/smtp-setting": {
@@ -5436,8 +5919,7 @@
               }
             }
           }
-        },
-        "operationId": "putSmtpSettingForAppSettings"
+        }
       }
     },
     "/app-settings/smtp-test": {
@@ -5464,8 +5946,7 @@
               }
             }
           }
-        },
-        "operationId": "postSmtpTestForAppSettings"
+        }
       }
     },
     "/app-settings/ses-setting": {
@@ -5501,8 +5982,7 @@
               }
             }
           }
-        },
-        "operationId": "putSesSettingForAppSettings"
+        }
       }
     },
     "/app-settings/oauth2-setting": {
@@ -5571,8 +6051,7 @@
               }
             }
           }
-        },
-        "operationId": "putOauth2SettingForAppSettings"
+        }
       }
     },
     "/app-settings/v5-schema-migration": {
@@ -5611,8 +6090,7 @@
               }
             }
           }
-        },
-        "operationId": "postV5SchemaMigrationForAppSettings"
+        }
       }
     },
     "/app-settings/maintenance-mode": {
@@ -5666,8 +6144,7 @@
               }
             }
           }
-        },
-        "operationId": "postMaintenanceModeForAppSettings"
+        }
       }
     },
     "/attachment/list": {
@@ -5719,8 +6196,7 @@
               }
             }
           }
-        },
-        "operationId": "getListForAttachment"
+        }
       }
     },
     "/attachment/limit": {
@@ -5765,8 +6241,7 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        },
-        "operationId": "getLimitForAttachment"
+        }
       }
     },
     "/attachment": {
@@ -5847,8 +6322,7 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        },
-        "operationId": "postAttachment"
+        }
       }
     },
     "/attachment/{id}": {
@@ -5884,8 +6358,7 @@
               "type": "string"
             }
           }
-        ],
-        "operationId": "getAttachmentById"
+        ]
       }
     },
     "/bookmark-folder": {
@@ -5941,8 +6414,7 @@
               }
             }
           }
-        },
-        "operationId": "postBookmarkFolder"
+        }
       },
       "put": {
         "tags": [
@@ -6008,8 +6480,7 @@
               }
             }
           }
-        },
-        "operationId": "putBookmarkFolder"
+        }
       }
     },
     "/bookmark-folder/list/{userId}": {
@@ -6060,8 +6531,7 @@
               }
             }
           }
-        },
-        "operationId": "getListByUserIdForBookmarkFolder"
+        }
       }
     },
     "/bookmark-folder/{id}": {
@@ -6110,8 +6580,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteBookmarkFolderById"
+        }
       }
     },
     "/bookmark-folder/add-bookmark-to-folder": {
@@ -6168,8 +6637,7 @@
               }
             }
           }
-        },
-        "operationId": "postAddBookmarkToFolderForBookmarkFolder"
+        }
       }
     },
     "/bookmark-folder/update-bookmark": {
@@ -6225,8 +6693,7 @@
               }
             }
           }
-        },
-        "operationId": "putUpdateBookmarkForBookmarkFolder"
+        }
       }
     },
     "/bookmarks/info": {
@@ -6257,8 +6724,7 @@
               }
             }
           }
-        },
-        "operationId": "getInfoForBookmarks"
+        }
       }
     },
     "/bookmarks/{userId}": {
@@ -6290,8 +6756,7 @@
               }
             }
           }
-        },
-        "operationId": "getBookmarksByUserId"
+        }
       }
     },
     "/bookmarks": {
@@ -6326,8 +6791,7 @@
               }
             }
           }
-        },
-        "operationId": "putBookmarks"
+        }
       }
     },
     "/content-disposition-settings/": {
@@ -6373,8 +6837,7 @@
               }
             }
           }
-        },
-        "operationId": "putContentDispositionSettings"
+        }
       }
     },
     "/content-disposition-settings": {
@@ -6420,8 +6883,7 @@
               }
             }
           }
-        },
-        "operationId": "getContentDispositionSettings"
+        }
       }
     },
     "/customize-setting": {
@@ -6453,8 +6915,7 @@
               }
             }
           }
-        },
-        "operationId": "getCustomizeSetting"
+        }
       }
     },
     "/customize-setting/layout": {
@@ -6480,8 +6941,7 @@
               }
             }
           }
-        },
-        "operationId": "getLayoutForCustomizeSetting"
+        }
       },
       "put": {
         "tags": [
@@ -6517,8 +6977,7 @@
               }
             }
           }
-        },
-        "operationId": "putLayoutForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/theme": {
@@ -6557,8 +7016,7 @@
               }
             }
           }
-        },
-        "operationId": "getThemeForCustomizeSetting"
+        }
       },
       "put": {
         "tags": [
@@ -6597,8 +7055,7 @@
               }
             }
           }
-        },
-        "operationId": "putThemeForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/sidebar": {
@@ -6624,8 +7081,7 @@
               }
             }
           }
-        },
-        "operationId": "getSidebarForCustomizeSetting"
+        }
       },
       "put": {
         "tags": [
@@ -6664,8 +7120,7 @@
               }
             }
           }
-        },
-        "operationId": "putSidebarForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/function": {
@@ -6706,8 +7161,7 @@
               }
             }
           }
-        },
-        "operationId": "putFunctionForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/presentation": {
@@ -6748,8 +7202,7 @@
               }
             }
           }
-        },
-        "operationId": "putPresentationForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/highlight": {
@@ -6790,8 +7243,7 @@
               }
             }
           }
-        },
-        "operationId": "putHighlightForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/customizeTitle": {
@@ -6832,8 +7284,7 @@
               }
             }
           }
-        },
-        "operationId": "putCustomizeTitleForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/customize-noscript": {
@@ -6874,8 +7325,7 @@
               }
             }
           }
-        },
-        "operationId": "putCustomizeNoscriptForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/customize-css": {
@@ -6916,8 +7366,7 @@
               }
             }
           }
-        },
-        "operationId": "putCustomizeCssForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/customize-script": {
@@ -6958,8 +7407,7 @@
               }
             }
           }
-        },
-        "operationId": "putCustomizeScriptForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/customize-logo": {
@@ -7000,8 +7448,7 @@
               }
             }
           }
-        },
-        "operationId": "putCustomizeLogoForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/upload-brand-logo": {
@@ -7063,8 +7510,7 @@
               }
             }
           }
-        },
-        "operationId": "putUploadBrandLogoForCustomizeSetting"
+        }
       }
     },
     "/customize-setting/delete-brand-logo": {
@@ -7090,8 +7536,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteDeleteBrandLogoForCustomizeSetting"
+        }
       }
     },
     "/export/status": {
@@ -7120,8 +7565,7 @@
               }
             }
           }
-        },
-        "operationId": "getStatusForExport"
+        }
       }
     },
     "/export": {
@@ -7168,8 +7612,7 @@
               }
             }
           }
-        },
-        "operationId": "postExport"
+        }
       }
     },
     "/export/{fileName}": {
@@ -7207,8 +7650,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteExportByFileName"
+        }
       }
     },
     "/forgot-password": {
@@ -7250,8 +7692,7 @@
               }
             }
           }
-        },
-        "operationId": "postForgotPassword"
+        }
       },
       "put": {
         "summary": "Reset password",
@@ -7296,8 +7737,7 @@
               }
             }
           }
-        },
-        "operationId": "putForgotPassword"
+        }
       }
     },
     "/g2g-transfer/files": {
@@ -7340,8 +7780,7 @@
               }
             }
           }
-        },
-        "operationId": "getFilesForG2gTransfer"
+        }
       }
     },
     "/g2g-transfer": {
@@ -7408,8 +7847,7 @@
               }
             }
           }
-        },
-        "operationId": "postG2gTransfer"
+        }
       }
     },
     "/g2g-transfer/attachment": {
@@ -7461,8 +7899,7 @@
               }
             }
           }
-        },
-        "operationId": "postAttachmentForG2gTransfer"
+        }
       }
     },
     "/g2g-transfer/growi-info": {
@@ -7492,8 +7929,7 @@
               }
             }
           }
-        },
-        "operationId": "getGrowiInfoForG2gTransfer"
+        }
       }
     },
     "/g2g-transfer/generate-key": {
@@ -7546,8 +7982,7 @@
               }
             }
           }
-        },
-        "operationId": "postGenerateKeyForG2gTransfer"
+        }
       }
     },
     "/g2g-transfer/transfer": {
@@ -7611,8 +8046,7 @@
               }
             }
           }
-        },
-        "operationId": "postTransferForG2gTransfer"
+        }
       }
     },
     "/healthcheck": {
@@ -7707,8 +8141,7 @@
               }
             }
           }
-        },
-        "operationId": "getHealthcheck"
+        }
       }
     },
     "/import/status": {
@@ -7744,8 +8177,7 @@
               }
             }
           }
-        },
-        "operationId": "getStatusForImport"
+        }
       }
     },
     "/import": {
@@ -7802,8 +8234,7 @@
           "200": {
             "description": "Import process has requested"
           }
-        },
-        "operationId": "postImport"
+        }
       }
     },
     "/import/upload": {
@@ -7850,8 +8281,7 @@
               }
             }
           }
-        },
-        "operationId": "postUploadForImport"
+        }
       }
     },
     "/import/all": {
@@ -7876,8 +8306,7 @@
           "200": {
             "description": "all files are deleted"
           }
-        },
-        "operationId": "deleteAllForImport"
+        }
       }
     },
     "/in-app-notification/list": {
@@ -7935,8 +8364,7 @@
               }
             }
           }
-        },
-        "operationId": "getListForInAppNotification"
+        }
       }
     },
     "/in-app-notification/status": {
@@ -7973,8 +8401,7 @@
               }
             }
           }
-        },
-        "operationId": "getStatusForInAppNotification"
+        }
       }
     },
     "/in-app-notification/open": {
@@ -8023,8 +8450,7 @@
               }
             }
           }
-        },
-        "operationId": "postOpenForInAppNotification"
+        }
       }
     },
     "/in-app-notification/all-statuses-open": {
@@ -8049,8 +8475,7 @@
           "200": {
             "description": "All notifications opened successfully"
           }
-        },
-        "operationId": "putAllStatusesOpenForInAppNotification"
+        }
       }
     },
     "/installer": {
@@ -8110,8 +8535,7 @@
               }
             }
           }
-        },
-        "operationId": "postInstaller"
+        }
       }
     },
     "/invited": {
@@ -8172,8 +8596,7 @@
               }
             }
           }
-        },
-        "operationId": "postInvited"
+        }
       }
     },
     "/logout": {
@@ -8195,8 +8618,7 @@
           "500": {
             "description": "Internal server error"
           }
-        },
-        "operationId": "postLogout"
+        }
       }
     },
     "/markdown-setting": {
@@ -8227,8 +8649,7 @@
               }
             }
           }
-        },
-        "operationId": "getMarkdownSetting"
+        }
       }
     },
     "/markdown-setting/lineBreak": {
@@ -8269,8 +8690,7 @@
               }
             }
           }
-        },
-        "operationId": "putLineBreakForMarkdownSetting"
+        }
       }
     },
     "/markdown-setting/indent": {
@@ -8312,8 +8732,7 @@
               }
             }
           }
-        },
-        "operationId": "putIndentForMarkdownSetting"
+        }
       }
     },
     "/markdown-setting/xss": {
@@ -8349,8 +8768,7 @@
               }
             }
           }
-        },
-        "operationId": "putXssForMarkdownSetting"
+        }
       }
     },
     "/mongo/collections": {
@@ -8382,8 +8800,7 @@
               }
             }
           }
-        },
-        "operationId": "getCollectionsForMongo"
+        }
       }
     },
     "/notification-setting/": {
@@ -8414,8 +8831,7 @@
               }
             }
           }
-        },
-        "operationId": "getNotificationSetting"
+        }
       }
     },
     "/notification-setting/user-notification": {
@@ -8468,8 +8884,7 @@
               }
             }
           }
-        },
-        "operationId": "postUserNotificationForNotificationSetting"
+        }
       }
     },
     "/notification-setting/user-notification/{id}": {
@@ -8505,8 +8920,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteUserNotificationByIdForNotificationSetting"
+        }
       }
     },
     "/notification-setting/global-notification/{id}": {
@@ -8546,8 +8960,7 @@
               }
             }
           }
-        },
-        "operationId": "getGlobalNotificationByIdForNotificationSetting"
+        }
       },
       "put": {
         "tags": [
@@ -8592,8 +9005,7 @@
               }
             }
           }
-        },
-        "operationId": "putGlobalNotificationByIdForNotificationSetting"
+        }
       },
       "delete": {
         "tags": [
@@ -8628,8 +9040,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteGlobalNotificationByIdForNotificationSetting"
+        }
       }
     },
     "/notification-setting/global-notification": {
@@ -8670,8 +9081,7 @@
               }
             }
           }
-        },
-        "operationId": "postGlobalNotificationForNotificationSetting"
+        }
       }
     },
     "/notification-setting/notify-for-page-grant": {
@@ -8706,8 +9116,7 @@
               }
             }
           }
-        },
-        "operationId": "putNotifyForPageGrantForNotificationSetting"
+        }
       }
     },
     "/notification-setting/global-notification/{id}/enabled": {
@@ -8763,8 +9172,7 @@
               }
             }
           }
-        },
-        "operationId": "putEnabledByIdForNotificationSettingGlobalNotification"
+        }
       }
     },
     "/page-listing/root": {
@@ -8801,8 +9209,7 @@
               }
             }
           }
-        },
-        "operationId": "getRootForPageListing"
+        }
       }
     },
     "/page-listing/children": {
@@ -8858,8 +9265,7 @@
               }
             }
           }
-        },
-        "operationId": "getChildrenForPageListing"
+        }
       }
     },
     "/page-listing/info": {
@@ -8929,8 +9335,7 @@
               }
             }
           }
-        },
-        "operationId": "getInfoForPageListing"
+        }
       }
     },
     "/page-listing/item": {
@@ -8977,8 +9382,7 @@
               }
             }
           }
-        },
-        "operationId": "getItemForPageListing"
+        }
       }
     },
     "/page/shared": {
@@ -9028,8 +9432,7 @@
           "404": {
             "description": "Share link not found or page not found"
           }
-        },
-        "operationId": "getSharedForPage"
+        }
       }
     },
     "/page/info": {
@@ -9075,8 +9478,7 @@
           "500": {
             "description": "Internal server error."
           }
-        },
-        "operationId": "getInfoForPage"
+        }
       }
     },
     "/page": {
@@ -9139,8 +9541,7 @@
               }
             }
           }
-        },
-        "operationId": "getPage"
+        }
       },
       "post": {
         "tags": [
@@ -9224,8 +9625,7 @@
           "409": {
             "description": "page path is already existed"
           }
-        },
-        "operationId": "postPage"
+        }
       },
       "put": {
         "tags": [
@@ -9322,8 +9722,7 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        },
-        "operationId": "putPage"
+        }
       }
     },
     "/page/exist": {
@@ -9360,8 +9759,7 @@
               }
             }
           }
-        },
-        "operationId": "getExistForPage"
+        }
       }
     },
     "/page/likes": {
@@ -9391,8 +9789,7 @@
               }
             }
           }
-        },
-        "operationId": "putLikesForPage"
+        }
       }
     },
     "/page/grant-data": {
@@ -9434,8 +9831,7 @@
           "500": {
             "description": "Internal server error."
           }
-        },
-        "operationId": "getGrantDataForPage"
+        }
       }
     },
     "/page/non-user-related-groups-granted": {
@@ -9483,8 +9879,7 @@
           "500": {
             "description": "Internal server error."
           }
-        },
-        "operationId": "getNonUserRelatedGroupsGrantedForPage"
+        }
       }
     },
     "/page/applicable-grant": {
@@ -9544,8 +9939,7 @@
           "500": {
             "description": "Internal server error."
           }
-        },
-        "operationId": "getApplicableGrantForPage"
+        }
       }
     },
     "/{pageId}/grant": {
@@ -9603,8 +9997,7 @@
               }
             }
           }
-        },
-        "operationId": "putGrantByPageId"
+        }
       }
     },
     "/page/export/{pageId}": {
@@ -9633,8 +10026,7 @@
           "200": {
             "description": "Return page's markdown"
           }
-        },
-        "operationId": "getExportByPageIdForPage"
+        }
       }
     },
     "/page/exist-paths": {
@@ -9686,8 +10078,7 @@
           "500": {
             "description": "Internal server error."
           }
-        },
-        "operationId": "getExistPathsForPage"
+        }
       }
     },
     "/page/subscribe": {
@@ -9724,8 +10115,7 @@
           "500": {
             "description": "Internal server error."
           }
-        },
-        "operationId": "putSubscribeForPage"
+        }
       }
     },
     "/{pageId}/content-width": {
@@ -9775,8 +10165,7 @@
               }
             }
           }
-        },
-        "operationId": "putContentWidthByPageId"
+        }
       }
     },
     "/page/{pageId}/publish": {
@@ -9808,8 +10197,7 @@
               }
             }
           }
-        },
-        "operationId": "putPublishByPageIdForPage"
+        }
       }
     },
     "/page/{pageId}/unpublish": {
@@ -9841,8 +10229,7 @@
               }
             }
           }
-        },
-        "operationId": "putUnpublishByPageIdForPage"
+        }
       }
     },
     "/{pageId}/yjs-data": {
@@ -9890,8 +10277,7 @@
               }
             }
           }
-        },
-        "operationId": "getYjsDataByPageId"
+        }
       }
     },
     "/{pageId}/sync-latest-revision-body-to-yjs-draft": {
@@ -9947,8 +10333,7 @@
               }
             }
           }
-        },
-        "operationId": "putSyncLatestRevisionBodyToYjsDraftByPageId"
+        }
       }
     },
     "/pages/recent": {
@@ -9989,8 +10374,7 @@
           "200": {
             "description": "Return pages recently updated"
           }
-        },
-        "operationId": "getRecentForPages"
+        }
       }
     },
     "/pages/rename": {
@@ -10057,8 +10441,7 @@
           "409": {
             "description": "page path is already existed"
           }
-        },
-        "operationId": "putRenameForPages"
+        }
       }
     },
     "/pages/resume-rename": {
@@ -10094,8 +10477,7 @@
               }
             }
           }
-        },
-        "operationId": "postResumeRenameForPages"
+        }
       }
     },
     "/pages/empty-trash": {
@@ -10122,8 +10504,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteEmptyTrashForPages"
+        }
       }
     },
     "/pages/list": {
@@ -10203,8 +10584,7 @@
               }
             }
           }
-        },
-        "operationId": "getListForPages"
+        }
       }
     },
     "/pages/duplicate": {
@@ -10261,8 +10641,7 @@
           "500": {
             "description": "Internal server error."
           }
-        },
-        "operationId": "postDuplicateForPages"
+        }
       }
     },
     "/pages/subordinated-list": {
@@ -10307,8 +10686,7 @@
               }
             }
           }
-        },
-        "operationId": "getSubordinatedListForPages"
+        }
       }
     },
     "/pages/delete": {
@@ -10373,8 +10751,7 @@
               }
             }
           }
-        },
-        "operationId": "postDeleteForPages"
+        }
       }
     },
     "/pages/convert-pages-by-path": {
@@ -10410,8 +10787,7 @@
               }
             }
           }
-        },
-        "operationId": "postConvertPagesByPathForPages"
+        }
       }
     },
     "/pages/legacy-pages-migration": {
@@ -10453,8 +10829,7 @@
               }
             }
           }
-        },
-        "operationId": "postLegacyPagesMigrationForPages"
+        }
       }
     },
     "/pages/v5-migration-status": {
@@ -10483,8 +10858,7 @@
               }
             }
           }
-        },
-        "operationId": "getV5MigrationStatusForPages"
+        }
       }
     },
     "/personal-setting": {
@@ -10510,8 +10884,7 @@
               }
             }
           }
-        },
-        "operationId": "getPersonalSetting"
+        }
       },
       "put": {
         "tags": [
@@ -10545,8 +10918,7 @@
               }
             }
           }
-        },
-        "operationId": "putPersonalSetting"
+        }
       }
     },
     "/personal-setting/is-password-set": {
@@ -10576,8 +10948,7 @@
               }
             }
           }
-        },
-        "operationId": "getIsPasswordSetForPersonalSetting"
+        }
       }
     },
     "/personal-setting/image-type": {
@@ -10618,8 +10989,7 @@
               }
             }
           }
-        },
-        "operationId": "putImageTypeForPersonalSetting"
+        }
       }
     },
     "/personal-setting/external-accounts": {
@@ -10645,8 +11015,7 @@
               }
             }
           }
-        },
-        "operationId": "getExternalAccountsForPersonalSetting"
+        }
       }
     },
     "/personal-setting/password": {
@@ -10690,8 +11059,7 @@
               }
             }
           }
-        },
-        "operationId": "putPasswordForPersonalSetting"
+        }
       }
     },
     "/personal-setting/api-token": {
@@ -10722,8 +11090,7 @@
               }
             }
           }
-        },
-        "operationId": "putApiTokenForPersonalSetting"
+        }
       }
     },
     "/personal-setting/access-token": {
@@ -10731,7 +11098,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "getAccessTokenForPersonalSetting",
+        "operationId": "getAccessToken",
         "summary": "/personal-setting/access-token",
         "description": "Get access token",
         "responses": {
@@ -10756,7 +11123,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "postAccessTokenForPersonalSetting",
+        "operationId": "generateccessToken",
         "summary": "/personal-setting/access-token",
         "description": "Generate access token",
         "responses": {
@@ -10802,7 +11169,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "deleteAccessTokenForPersonalSetting",
+        "operationId": "deleteAccessToken",
         "summary": "/personal-setting/access-token",
         "description": "Delete access token",
         "responses": {
@@ -10817,7 +11184,7 @@
         "tags": [
           "GeneralSetting"
         ],
-        "operationId": "deleteAllForPersonalSettingAccessToken",
+        "operationId": "deleteAllAccessToken",
         "summary": "/personal-setting/access-token/all",
         "description": "Delete all access tokens",
         "responses": {
@@ -10865,8 +11232,7 @@
               }
             }
           }
-        },
-        "operationId": "putAssociateLdapForPersonalSetting"
+        }
       }
     },
     "/personal-setting/disassociate-ldap": {
@@ -10902,8 +11268,7 @@
               }
             }
           }
-        },
-        "operationId": "putDisassociateLdapForPersonalSetting"
+        }
       }
     },
     "/personal-setting/editor-settings": {
@@ -10948,8 +11313,7 @@
               }
             }
           }
-        },
-        "operationId": "putEditorSettingsForPersonalSetting"
+        }
       },
       "get": {
         "tags": [
@@ -10969,8 +11333,7 @@
               }
             }
           }
-        },
-        "operationId": "getEditorSettingsForPersonalSetting"
+        }
       }
     },
     "/personal-setting/in-app-notification-settings": {
@@ -11016,8 +11379,7 @@
               }
             }
           }
-        },
-        "operationId": "putInAppNotificationSettingsForPersonalSetting"
+        }
       },
       "get": {
         "tags": [
@@ -11041,8 +11403,7 @@
               }
             }
           }
-        },
-        "operationId": "getInAppNotificationSettingsForPersonalSetting"
+        }
       }
     },
     "/revisions/list": {
@@ -11103,8 +11464,7 @@
               }
             }
           }
-        },
-        "operationId": "getListForRevisions"
+        }
       }
     },
     "/revisions/{id}": {
@@ -11148,8 +11508,7 @@
               }
             }
           }
-        },
-        "operationId": "getRevisionsById"
+        }
       }
     },
     "/search/indices": {
@@ -11176,8 +11535,7 @@
               }
             }
           }
-        },
-        "operationId": "getIndicesForSearch"
+        }
       },
       "put": {
         "tags": [
@@ -11220,8 +11578,7 @@
               }
             }
           }
-        },
-        "operationId": "putIndicesForSearch"
+        }
       }
     },
     "/search/connection": {
@@ -11235,8 +11592,7 @@
           "200": {
             "description": "Successfully connected"
           }
-        },
-        "operationId": "postConnectionForSearch"
+        }
       }
     },
     "/security-setting/": {
@@ -11290,8 +11646,7 @@
               }
             }
           }
-        },
-        "operationId": "getSecuritySetting"
+        }
       }
     },
     "/security-setting/authentication/enabled": {
@@ -11330,8 +11685,7 @@
               }
             }
           }
-        },
-        "operationId": "putEnabledForSecuritySettingAuthentication"
+        }
       }
     },
     "/security-setting/authentication": {
@@ -11369,8 +11723,7 @@
               }
             }
           }
-        },
-        "operationId": "getAuthenticationForSecuritySetting"
+        }
       }
     },
     "/security-setting/general-setting": {
@@ -11406,8 +11759,7 @@
               }
             }
           }
-        },
-        "operationId": "putGeneralSettingForSecuritySetting"
+        }
       }
     },
     "/security-setting/share-link-setting": {
@@ -11447,8 +11799,7 @@
               }
             }
           }
-        },
-        "operationId": "putShareLinkSettingForSecuritySetting"
+        }
       }
     },
     "/security-setting/all-share-links": {
@@ -11479,8 +11830,7 @@
               }
             }
           }
-        },
-        "operationId": "getAllShareLinksForSecuritySetting"
+        }
       },
       "delete": {
         "tags": [
@@ -11509,8 +11859,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteAllShareLinksForSecuritySetting"
+        }
       }
     },
     "/security-setting/local-setting": {
@@ -11550,8 +11899,7 @@
               }
             }
           }
-        },
-        "operationId": "putLocalSettingForSecuritySetting"
+        }
       }
     },
     "/security-setting/ldap": {
@@ -11591,8 +11939,7 @@
               }
             }
           }
-        },
-        "operationId": "putLdapForSecuritySetting"
+        }
       }
     },
     "/security-setting/saml": {
@@ -11632,8 +11979,7 @@
               }
             }
           }
-        },
-        "operationId": "putSamlForSecuritySetting"
+        }
       }
     },
     "/security-setting/oidc": {
@@ -11673,8 +12019,7 @@
               }
             }
           }
-        },
-        "operationId": "putOidcForSecuritySetting"
+        }
       }
     },
     "/security-setting/google-oauth": {
@@ -11714,8 +12059,7 @@
               }
             }
           }
-        },
-        "operationId": "putGoogleOauthForSecuritySetting"
+        }
       }
     },
     "/security-setting/github-oauth": {
@@ -11755,8 +12099,7 @@
               }
             }
           }
-        },
-        "operationId": "putGithubOauthForSecuritySetting"
+        }
       }
     },
     "/share-links/": {
@@ -11799,8 +12142,7 @@
               }
             }
           }
-        },
-        "operationId": "getShareLinks"
+        }
       },
       "post": {
         "tags": [
@@ -11848,8 +12190,7 @@
               }
             }
           }
-        },
-        "operationId": "postShareLinks"
+        }
       },
       "delete": {
         "tags": [
@@ -11884,8 +12225,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteShareLinks"
+        }
       }
     },
     "/share-links/all": {
@@ -11916,8 +12256,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteAllForShareLinks"
+        }
       }
     },
     "/share-links/{id}": {
@@ -11946,8 +12285,7 @@
           "200": {
             "description": "Succeeded to delete one share link"
           }
-        },
-        "operationId": "deleteShareLinksById"
+        }
       }
     },
     "/slack-integration-legacy-setting/": {
@@ -11990,8 +12328,7 @@
               }
             }
           }
-        },
-        "operationId": "getSlackIntegrationLegacySetting"
+        }
       },
       "put": {
         "tags": [
@@ -12042,8 +12379,7 @@
               }
             }
           }
-        },
-        "operationId": "putSlackIntegrationLegacySetting"
+        }
       }
     },
     "/slack-integration-settings/": {
@@ -12104,8 +12440,7 @@
               }
             }
           }
-        },
-        "operationId": "getSlackIntegrationSettings"
+        }
       }
     },
     "/slack-integration-settings/bot-type/": {
@@ -12129,8 +12464,7 @@
           "200": {
             "description": "Succeeded to put botType setting."
           }
-        },
-        "operationId": "putBotTypeForSlackIntegrationSettings"
+        }
       }
     },
     "/slack-integration/bot-type/": {
@@ -12153,8 +12487,7 @@
           "200": {
             "description": "Succeeded to delete botType setting."
           }
-        },
-        "operationId": "deleteBotTypeForSlackIntegration"
+        }
       }
     },
     "/slack-integration-settings/without-proxy/update-settings/": {
@@ -12191,8 +12524,7 @@
           "200": {
             "description": "Succeeded to put CustomBotWithoutProxy setting."
           }
-        },
-        "operationId": "putUpdateSettingsForSlackIntegrationSettingsWithoutProxy"
+        }
       }
     },
     "/slack-integration-settings/without-proxy/update-permissions/": {
@@ -12229,8 +12561,7 @@
           "200": {
             "description": "Succeeded to put CustomBotWithoutProxy permissions."
           }
-        },
-        "operationId": "putUpdatePermissionsForSlackIntegrationSettingsWithoutProxy"
+        }
       }
     },
     "/slack-integration-settings/slack-app-integrations": {
@@ -12276,8 +12607,7 @@
               }
             }
           }
-        },
-        "operationId": "postSlackAppIntegrationsForSlackIntegrationSettings"
+        }
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}": {
@@ -12318,8 +12648,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteSlackAppIntegrationsByIdForSlackIntegrationSettings"
+        }
       }
     },
     "/slack-integration-settings/proxy-uri": {
@@ -12359,8 +12688,7 @@
               }
             }
           }
-        },
-        "operationId": "putProxyUriForSlackIntegrationSettings"
+        }
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/makeprimary": {
@@ -12389,8 +12717,7 @@
           "200": {
             "description": "Succeeded to make it primary"
           }
-        },
-        "operationId": "putMakeprimaryByIdForSlackIntegrationSettingsSlackAppIntegrations"
+        }
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/regenerate-tokens": {
@@ -12426,8 +12753,7 @@
               }
             }
           }
-        },
-        "operationId": "putRegenerateTokensByIdForSlackIntegrationSettingsSlackAppIntegrations"
+        }
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/permissions": {
@@ -12483,8 +12809,7 @@
               }
             }
           }
-        },
-        "operationId": "putPermissionsByIdForSlackIntegrationSettingsSlackAppIntegrations"
+        }
       }
     },
     "/slack-integration-settings/slack-app-integrations/{id}/relation-test": {
@@ -12527,8 +12852,7 @@
           "200": {
             "description": "Succeeded to delete botType setting."
           }
-        },
-        "operationId": "postRelationTestByIdForSlackIntegrationSettingsSlackAppIntegrations"
+        }
       }
     },
     "/slack-integration-settings/without-proxy/test": {
@@ -12560,8 +12884,7 @@
           "200": {
             "description": "Succeeded to connect to slack work space."
           }
-        },
-        "operationId": "postTestForSlackIntegrationSettingsWithoutProxy"
+        }
       }
     },
     "/slack-integration/commands": {
@@ -12598,8 +12921,7 @@
               }
             }
           }
-        },
-        "operationId": "postCommandsForSlackIntegration"
+        }
       }
     },
     "/slack-integration/proxied/verify": {
@@ -12648,8 +12970,7 @@
               }
             }
           }
-        },
-        "operationId": "postVerifyForSlackIntegrationProxied"
+        }
       }
     },
     "/slack-integration/proxied/commands": {
@@ -12686,8 +13007,7 @@
               }
             }
           }
-        },
-        "operationId": "postCommandsForSlackIntegrationProxied"
+        }
       }
     },
     "/slack-integration/interactions": {
@@ -12716,8 +13036,7 @@
           "200": {
             "description": "OK"
           }
-        },
-        "operationId": "postInteractionsForSlackIntegration"
+        }
       }
     },
     "/slack-integration/proxied/interactions": {
@@ -12746,8 +13065,7 @@
           "200": {
             "description": "OK"
           }
-        },
-        "operationId": "postInteractionsForSlackIntegrationProxied"
+        }
       }
     },
     "/slack-integration/supported-commands": {
@@ -12787,8 +13105,7 @@
               }
             }
           }
-        },
-        "operationId": "getSupportedCommandsForSlackIntegration"
+        }
       }
     },
     "/slack-integration/events": {
@@ -12829,8 +13146,7 @@
               }
             }
           }
-        },
-        "operationId": "postEventsForSlackIntegration"
+        }
       }
     },
     "/slack-integration/proxied/events": {
@@ -12874,8 +13190,7 @@
               }
             }
           }
-        },
-        "operationId": "postEventsForSlackIntegrationProxied"
+        }
       }
     },
     "/statistics/user": {
@@ -12898,8 +13213,7 @@
               }
             }
           }
-        },
-        "operationId": "getUserForStatistics"
+        }
       }
     },
     "/complete-registration": {
@@ -12957,8 +13271,7 @@
               }
             }
           }
-        },
-        "operationId": "postCompleteRegistration"
+        }
       }
     },
     "/user-group-relations": {
@@ -13003,8 +13316,7 @@
               }
             }
           }
-        },
-        "operationId": "getUserGroupRelations"
+        }
       }
     },
     "/user-groups": {
@@ -13081,8 +13393,7 @@
               }
             }
           }
-        },
-        "operationId": "getUserGroups"
+        }
       },
       "post": {
         "tags": [
@@ -13134,8 +13445,7 @@
               }
             }
           }
-        },
-        "operationId": "postUserGroups"
+        }
       }
     },
     "/user-groups/ancestors": {
@@ -13180,8 +13490,7 @@
               }
             }
           }
-        },
-        "operationId": "getAncestorsForUserGroups"
+        }
       }
     },
     "/user-groups/children": {
@@ -13245,8 +13554,7 @@
               }
             }
           }
-        },
-        "operationId": "getChildrenForUserGroups"
+        }
       }
     },
     "/selectable-parent-groups": {
@@ -13291,8 +13599,7 @@
               }
             }
           }
-        },
-        "operationId": "getSelectableParentGroups"
+        }
       }
     },
     "/selectable-child-groups": {
@@ -13337,8 +13644,7 @@
               }
             }
           }
-        },
-        "operationId": "getSelectableChildGroups"
+        }
       }
     },
     "/user-groups/{id}": {
@@ -13380,8 +13686,7 @@
               }
             }
           }
-        },
-        "operationId": "getUserGroupsById"
+        }
       },
       "delete": {
         "tags": [
@@ -13445,8 +13750,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteUserGroupsById"
+        }
       },
       "put": {
         "tags": [
@@ -13513,8 +13817,7 @@
               }
             }
           }
-        },
-        "operationId": "putUserGroupsById"
+        }
       }
     },
     "/user-groups/{id}/users": {
@@ -13559,8 +13862,7 @@
               }
             }
           }
-        },
-        "operationId": "getUsersByIdForUserGroups"
+        }
       }
     },
     "/user-groups/{id}/unrelated-users": {
@@ -13637,8 +13939,7 @@
               }
             }
           }
-        },
-        "operationId": "getUnrelatedUsersByIdForUserGroups"
+        }
       }
     },
     "/user-groups/{id}/users/{username}": {
@@ -13694,8 +13995,7 @@
               }
             }
           }
-        },
-        "operationId": "postUsersByUsernameByIdForUserGroups"
+        }
       },
       "delete": {
         "tags": [
@@ -13750,8 +14050,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteUsersByUsernameByIdForUserGroups"
+        }
       }
     },
     "/user-groups/{id}/user-group-relations": {
@@ -13796,8 +14095,7 @@
               }
             }
           }
-        },
-        "operationId": "getUserGroupRelationsByIdForUserGroups"
+        }
       }
     },
     "/user-groups/{id}/pages": {
@@ -13842,8 +14140,7 @@
               }
             }
           }
-        },
-        "operationId": "getPagesByIdForUserGroups"
+        }
       }
     },
     "/user-ui-settings": {
@@ -13876,6 +14173,9 @@
                       },
                       "preferCollapsedModeByUser": {
                         "type": "boolean"
+                      },
+                      "aiChatSelectedModelKey": {
+                        "type": "string"
                       }
                     }
                   }
@@ -13906,14 +14206,16 @@
                     },
                     "preferCollapsedModeByUser": {
                       "type": "boolean"
+                    },
+                    "aiChatSelectedModelKey": {
+                      "type": "string"
                     }
                   }
                 }
               }
             }
           }
-        },
-        "operationId": "putUserUiSettings"
+        }
       }
     },
     "/users": {
@@ -13988,8 +14290,7 @@
               }
             }
           }
-        },
-        "operationId": "getUsers"
+        }
       }
     },
     "/users/{id}/recent": {
@@ -14024,8 +14325,7 @@
               }
             }
           }
-        },
-        "operationId": "getRecentByIdForUsers"
+        }
       }
     },
     "/users/invite": {
@@ -14095,8 +14395,7 @@
               }
             }
           }
-        },
-        "operationId": "postInviteForUsers"
+        }
       }
     },
     "/users/{id}/grant-admin": {
@@ -14138,8 +14437,7 @@
               }
             }
           }
-        },
-        "operationId": "putGrantAdminByIdForUsers"
+        }
       }
     },
     "/users/{id}/revoke-admin": {
@@ -14181,8 +14479,7 @@
               }
             }
           }
-        },
-        "operationId": "putRevokeAdminByIdForUsers"
+        }
       }
     },
     "/users/{id}/grant-read-only": {
@@ -14224,8 +14521,7 @@
               }
             }
           }
-        },
-        "operationId": "putGrantReadOnlyByIdForUsers"
+        }
       }
     },
     "/users/{id}/revoke-read-only": {
@@ -14267,8 +14563,7 @@
               }
             }
           }
-        },
-        "operationId": "putRevokeReadOnlyByIdForUsers"
+        }
       }
     },
     "/users/{id}/activate": {
@@ -14310,8 +14605,7 @@
               }
             }
           }
-        },
-        "operationId": "putActivateByIdForUsers"
+        }
       }
     },
     "/users/{id}/deactivate": {
@@ -14353,8 +14647,7 @@
               }
             }
           }
-        },
-        "operationId": "putDeactivateByIdForUsers"
+        }
       }
     },
     "/users/{id}/remove": {
@@ -14396,8 +14689,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteRemoveByIdForUsers"
+        }
       }
     },
     "/users/external-accounts": {
@@ -14437,8 +14729,7 @@
               }
             }
           }
-        },
-        "operationId": "getExternalAccountsForUsers"
+        }
       }
     },
     "/users/external-accounts/{id}/remove": {
@@ -14480,8 +14771,7 @@
               }
             }
           }
-        },
-        "operationId": "deleteRemoveByIdForUsersExternalAccounts"
+        }
       }
     },
     "/users/update.imageUrlCache": {
@@ -14525,8 +14815,7 @@
               }
             }
           }
-        },
-        "operationId": "putUpdate.imageUrlCacheForUsers"
+        }
       }
     },
     "/users/reset-password": {
@@ -14574,8 +14863,7 @@
               }
             }
           }
-        },
-        "operationId": "putResetPasswordForUsers"
+        }
       }
     },
     "/users/reset-password-email": {
@@ -14611,8 +14899,7 @@
           "200": {
             "description": "success send new password email"
           }
-        },
-        "operationId": "putResetPasswordEmailForUsers"
+        }
       }
     },
     "/users/send-invitation-email": {
@@ -14665,8 +14952,7 @@
               }
             }
           }
-        },
-        "operationId": "putSendInvitationEmailForUsers"
+        }
       }
     },
     "/users/list": {
@@ -14712,8 +14998,7 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        },
-        "operationId": "getListForUsers"
+        }
       }
     },
     "/users/usernames": {
@@ -14821,8 +15106,7 @@
               }
             }
           }
-        },
-        "operationId": "getUsernamesForUsers"
+        }
       }
     },
     "/login": {
@@ -14870,8 +15154,7 @@
               }
             }
           }
-        },
-        "operationId": "postLogin"
+        }
       }
     },
     "/register": {
@@ -14925,8 +15208,7 @@
               }
             }
           }
-        },
-        "operationId": "postRegister"
+        }
       }
     }
   },
