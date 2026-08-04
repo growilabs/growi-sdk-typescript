@@ -1,13 +1,11 @@
-name: PR Checks for SDK Update
+name: PR Checks
 
 on:
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  lint-and-test:
-    # Only target pull requests with the sdk-update label
-    if: contains(github.event.pull_request.labels.*.name, 'sdk-update')
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -32,3 +30,8 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+
+      # tsc used to run only after a merge, inside `release-sdk:publish`, so a
+      # type error surfaced while a release was already under way.
+      - name: Build
+        run: pnpm build

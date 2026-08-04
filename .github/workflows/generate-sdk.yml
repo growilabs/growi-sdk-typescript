@@ -52,6 +52,20 @@ jobs:
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         run: pnpm run generate:api
 
+      # Verify here rather than relying on the checks of the pull request opened
+      # below. That pull request is authored by github-actions[bot] via the
+      # default GITHUB_TOKEN, and runs triggered that way are held as
+      # `action_required` until someone presses "Approve and run" — which is why
+      # pr-checks.yml had not actually executed on a generated pull request
+      # since 2026-07-08. This step always runs, so a broken regeneration fails
+      # the workflow before any changeset or pull request is created.
+      - name: Verify the generated SDK
+        if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
+        run: |
+          pnpm lint
+          pnpm test
+          pnpm build
+
       - name: Create Changeset for SDK update
         if: steps.check_changes.outputs.openapi_spec_has_changed == 'true'
         run: |
