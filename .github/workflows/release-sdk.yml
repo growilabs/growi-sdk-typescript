@@ -43,6 +43,17 @@ jobs:
             echo ".changeset directory already exists."
           fi
 
+      # Last gate before the step below can publish. The release pull request is
+      # authored by changesets/action through the default GITHUB_TOKEN, so its
+      # own checks can sit unapproved; this job is triggered by the push that
+      # merges it, so it always runs. `release-sdk:publish` also builds, but only
+      # on the pushes that publish — this covers the ones that only version.
+      - name: Verify before releasing
+        run: |
+          pnpm lint
+          pnpm test
+          pnpm build
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
