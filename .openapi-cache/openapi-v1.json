@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v1",
-    "version": "8.0.1-RC.0"
+    "version": "8.0.6-RC.0"
   },
   "servers": [
     {
@@ -1195,7 +1195,8 @@
         ],
         "operationId": "getComments",
         "summary": "/comments.get",
-        "description": "Get comments of the page of the revision",
+        "deprecated": true,
+        "description": "Deprecated. Use GET /comments (apiv3) instead, which also returns inline comments.\nGet comments of the page of the revision\n",
         "parameters": [
           {
             "in": "query",
@@ -1654,7 +1655,7 @@
                   "revision_id": {
                     "type": "string",
                     "format": "ObjectId",
-                    "description": "Revision ID for conflict detection",
+                    "description": "Revision ID for conflict detection. Required to soft delete a non-empty page — omitting it is rejected with 'invalid_body', and a value that is not the page's latest revision is rejected with 'outdated'. Not consulted when completely is true, or for an empty page.",
                     "example": "507f1f77bcf86cd799439012"
                   },
                   "completely": {
@@ -1683,6 +1684,7 @@
                   "summary": "Recursive soft delete",
                   "value": {
                     "page_id": "507f1f77bcf86cd799439011",
+                    "revision_id": "507f1f77bcf86cd799439012",
                     "recursively": true
                   }
                 },
