@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v3",
-    "version": "8.0.6-RC.0"
+    "version": "8.0.13-RC.0"
   },
   "servers": [
     {
@@ -135,6 +135,67 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PathSuggestion"
+            }
+          }
+        }
+      },
+      "AiUsageReport": {
+        "type": "object",
+        "required": [
+          "windows",
+          "catalog"
+        ],
+        "properties": {
+          "growiAppIdForCloud": {
+            "type": "integer",
+            "description": "Present only when the GROWI.cloud app ID is configured"
+          },
+          "windows": {
+            "type": "array",
+            "description": "Totals per requested start time, in request order",
+            "items": {
+              "type": "object",
+              "required": [
+                "since",
+                "weightedUnits",
+                "unweightedTokens"
+              ],
+              "properties": {
+                "since": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The requested start time, echoed back in UTC"
+                },
+                "weightedUnits": {
+                  "type": "number",
+                  "description": "Sum of usage weighted against the base model"
+                },
+                "unweightedTokens": {
+                  "type": "integer",
+                  "description": "Input + output tokens of records whose weighted usage is unknown"
+                }
+              }
+            }
+          },
+          "catalog": {
+            "type": "object",
+            "required": [
+              "source",
+              "contentFetchedAt"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "bundled",
+                  "refreshed"
+                ]
+              },
+              "contentFetchedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When the effective model catalog's content was fetched"
+              }
             }
           }
         }
@@ -560,6 +621,202 @@
           }
         }
       },
+      "InlineCommentAnchor": {
+        "description": "Where an inline comment points in the page body. Every value is measured against the page body as rendered in the browser, as plain text (the text a reader sees and selects, without markdown syntax), not against the markdown source. When the page is displayed, the passage is searched for again with `quote` and `approxOffset`: an exact match first, then the closest approximate match; if neither is found the comment is still shown, only without a highlight.\n",
+        "type": "object",
+        "required": [
+          "quote",
+          "prefix",
+          "suffix",
+          "approxOffset"
+        ],
+        "properties": {
+          "quote": {
+            "type": "string",
+            "description": "The commented passage, exactly as it appears in the rendered text. Must not be empty. The server does not check that it occurs in the page.\n"
+          },
+          "prefix": {
+            "type": "string",
+            "description": "Text right before the passage. Stored, but not used to find the passage again. May be empty.\n"
+          },
+          "suffix": {
+            "type": "string",
+            "description": "Text right after the passage. Stored, but not used to find the passage again. May be empty.\n"
+          },
+          "approxOffset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Rough position of the start of the passage in the rendered text, in UTF-16 code units. Used only to choose among several occurrences of the same `quote`.\n"
+          }
+        }
+      },
+      "InlineComment": {
+        "description": "An origin inline comment: a comment anchored to a passage of the page body. Only origin comments carry an anchor and a resolved state; replies are `InlineCommentReply`.\n",
+        "type": "object",
+        "required": [
+          "id",
+          "pageId",
+          "creatorId",
+          "creator",
+          "comment",
+          "anchorOriginRevisionId",
+          "anchor",
+          "resolvedById",
+          "resolvedAt",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "pageId": {
+            "type": "string"
+          },
+          "creatorId": {
+            "type": "string"
+          },
+          "creator": {
+            "type": "object",
+            "nullable": true,
+            "description": "Always null in the responses of the write operations. GET /comments returns the creator."
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comment body (markdown)."
+          },
+          "anchorOriginRevisionId": {
+            "type": "string",
+            "description": "The revision of the page the anchor was taken from. Never changes after creation."
+          },
+          "anchor": {
+            "$ref": "#/components/schemas/InlineCommentAnchor"
+          },
+          "resolvedById": {
+            "type": "string",
+            "nullable": true,
+            "description": "The user who resolved the thread. Null while unresolved."
+          },
+          "resolvedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When the thread was resolved. Null while unresolved."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "InlineCommentReply": {
+        "description": "A reply to an origin inline comment. Has no anchor and no resolved state.",
+        "type": "object",
+        "required": [
+          "id",
+          "pageId",
+          "creatorId",
+          "creator",
+          "comment",
+          "replyToId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "pageId": {
+            "type": "string"
+          },
+          "creatorId": {
+            "type": "string"
+          },
+          "creator": {
+            "type": "object",
+            "nullable": true,
+            "description": "Always null in the responses of the write operations. GET /comments returns the creator."
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comment body (markdown)."
+          },
+          "replyToId": {
+            "type": "string",
+            "description": "The origin inline comment this reply belongs to."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ChangeProposalSettings": {
+        "type": "object",
+        "required": [
+          "isEnabled",
+          "enabledOperationTypes",
+          "autoApplyPolicy",
+          "maxOperationsPerProposal",
+          "maxProposalsPerUserPerDay",
+          "perPageNotificationsEnabled",
+          "useOnlyEnvVars"
+        ],
+        "properties": {
+          "isEnabled": {
+            "type": "boolean",
+            "description": "Whether change proposals can be created and applied"
+          },
+          "enabledOperationTypes": {
+            "type": "array",
+            "description": "The operation types a change proposal may carry",
+            "items": {
+              "type": "string",
+              "enum": [
+                "edit",
+                "create",
+                "move"
+              ]
+            }
+          },
+          "autoApplyPolicy": {
+            "type": "string",
+            "enum": [
+              "none",
+              "own-pages",
+              "all"
+            ]
+          },
+          "maxOperationsPerProposal": {
+            "type": "integer",
+            "minimum": 1,
+            "nullable": true,
+            "description": "null means the number of operations is not checked"
+          },
+          "maxProposalsPerUserPerDay": {
+            "type": "integer",
+            "minimum": 1,
+            "nullable": true,
+            "description": "null means no daily limit"
+          },
+          "perPageNotificationsEnabled": {
+            "type": "boolean",
+            "description": "Whether applying sends the same per-page notifications as a human edit (only when the proposal also asks for them)"
+          },
+          "useOnlyEnvVars": {
+            "type": "boolean",
+            "description": "True when CHANGE_PROPOSAL_USES_ONLY_ENV_VARS fixes every value above to its environment variable; the values are then read-only.\n"
+          }
+        }
+      },
       "ActivityResponse": {
         "type": "object",
         "properties": {
@@ -589,17 +846,17 @@
                     },
                     "targetModel": {
                       "type": "string",
-                      "description": "Model name of the activity target. For attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD) this is \"Attachment\".",
+                      "description": "Model name of the activity target. For attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD / ATTACHMENT_REEXTRACT) this is \"Attachment\".",
                       "example": "Page"
                     },
                     "target": {
                       "type": "string",
-                      "description": "ID of the activity target. For attachment activities this is the attachment ID; combined with the snapshot fields it lets consumers build a download link for attachments that still exist (ATTACHMENT_ADD / ATTACHMENT_DOWNLOAD, distinguished by `action`).",
+                      "description": "ID of the activity target. For attachment activities this is the attachment ID; combined with the snapshot fields it lets consumers build a download link for attachments that still exist (ATTACHMENT_ADD / ATTACHMENT_DOWNLOAD / ATTACHMENT_REEXTRACT, distinguished by `action`).",
                       "example": "675547e97f208f8050a361d4"
                     },
                     "action": {
                       "type": "string",
-                      "example": "PAGE_UPDATE"
+                      "example": "PAGE_DELETE_COMPLETELY"
                     },
                     "snapshot": {
                       "type": "object",
@@ -615,23 +872,33 @@
                         },
                         "originalName": {
                           "type": "string",
-                          "description": "Original file name of the attachment. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD).",
+                          "description": "Original file name of the attachment. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD / ATTACHMENT_REEXTRACT).",
                           "example": "design-v2.pdf"
                         },
                         "pagePath": {
                           "type": "string",
-                          "description": "Path of the page the attachment belongs or belonged to. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD) when it could be resolved at capture time.",
+                          "description": "Path of the page the attachment belongs or belonged to. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD / ATTACHMENT_REEXTRACT) when it could be resolved at capture time.",
                           "example": "/Sandbox/attachments"
                         },
                         "pageId": {
                           "type": "string",
-                          "description": "ID of the page the attachment belongs or belonged to. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD).",
+                          "description": "ID of the page the attachment belongs or belonged to. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD / ATTACHMENT_REEXTRACT).",
                           "example": "675547e97f208f8050a361d4"
                         },
                         "fileSize": {
                           "type": "integer",
-                          "description": "File size in bytes of the attachment. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD).",
+                          "description": "File size in bytes of the attachment. Present on attachment activities (ATTACHMENT_ADD / ATTACHMENT_REMOVE / ATTACHMENT_DOWNLOAD / ATTACHMENT_REEXTRACT).",
                           "example": 12345
+                        },
+                        "reviewChannel": {
+                          "type": "string",
+                          "enum": [
+                            "ui",
+                            "api",
+                            "ai-tool"
+                          ],
+                          "description": "Channel a change proposal review activity came through. Present on change proposal approve, reject, abstain and reviewer change activities.",
+                          "example": "ui"
                         }
                       }
                     },
@@ -685,7 +952,7 @@
                         },
                         "username": {
                           "type": "string",
-                          "example": "growi"
+                          "example": "grow"
                         },
                         "createdAt": {
                           "type": "string",
@@ -828,6 +1095,10 @@
         "description": "AppSettingParams",
         "type": "object",
         "properties": {
+          "awsUseOnlyEnvVars": {
+            "type": "boolean",
+            "example": false
+          },
           "azureReferenceFileWithRelayMode": {
             "type": "boolean",
             "example": false
@@ -3383,6 +3654,113 @@
           }
         }
       },
+      "UserActivitiesResponse": {
+        "type": "object",
+        "properties": {
+          "serializedPaginationResult": {
+            "type": "object",
+            "properties": {
+              "docs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "67e33da5d97e8d3b53e99f95"
+                    },
+                    "action": {
+                      "type": "string",
+                      "example": "PAGE_UPDATE"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-03-25T23:35:01.584Z"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "669a5aa48d45e62b521d00e4"
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "growi"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Taro"
+                        },
+                        "imageUrlCached": {
+                          "type": "string",
+                          "example": "/images/icons/user.svg"
+                        }
+                      }
+                    },
+                    "target": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "675547e97f208f8050a361d4"
+                        },
+                        "path": {
+                          "type": "string",
+                          "example": "/Sandbox/page"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "totalDocs": {
+                "type": "integer",
+                "example": 3
+              },
+              "limit": {
+                "type": "integer",
+                "example": 10
+              },
+              "offset": {
+                "type": "integer",
+                "example": 0
+              },
+              "page": {
+                "type": "integer",
+                "example": 1
+              },
+              "totalPages": {
+                "type": "integer",
+                "example": 1
+              },
+              "hasPrevPage": {
+                "type": "boolean",
+                "example": false
+              },
+              "hasNextPage": {
+                "type": "boolean",
+                "example": false
+              },
+              "prevPage": {
+                "type": "integer",
+                "nullable": true,
+                "example": null
+              },
+              "nextPage": {
+                "type": "integer",
+                "nullable": true,
+                "example": null
+              },
+              "pagingCounter": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          }
+        }
+      },
       "User": {
         "description": "User",
         "type": "object",
@@ -4150,6 +4528,8 @@
         "Attachment",
         "Bookmarks",
         "BookmarkFolders",
+        "ChangeProposals",
+        "Comments",
         "Page",
         "Pages",
         "PageListing",
@@ -4175,6 +4555,7 @@
         "AdminHome",
         "AppSettings",
         "AiSettings",
+        "ChangeProposalSettings",
         "ExternalUserGroups",
         "SecuritySetting",
         "MarkDownSetting",
@@ -4211,6 +4592,7 @@
       "tags": [
         "Healthcheck",
         "Statistics",
+        "AiUsage",
         "",
         "",
         "",
@@ -5220,6 +5602,60 @@
         "operationId": "postSuggestPathForAiTools"
       }
     },
+    "/ai-usage": {
+      "get": {
+        "tags": [
+          "AiUsage"
+        ],
+        "security": [],
+        "summary": "/ai-usage",
+        "description": "Get the GROWI-wide AI usage totals since each given start time, and the freshness of the model catalog used for weighting. Only the exact path accepts requests; any other spelling returns 404.",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "required": true,
+            "description": "Start times (1 to 10) as ISO 8601 date-times with a timezone, not in the future and not more than 90 days ago. Repeat the parameter for multiple values; encode '+' as %2B.",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 10,
+              "items": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usage totals",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiUsageReport"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid since values"
+          },
+          "404": {
+            "description": "The path is not spelled exactly /_api/v3/ai-usage"
+          },
+          "405": {
+            "description": "Methods other than GET (the Allow header lists GET)"
+          },
+          "429": {
+            "description": "Too many requests"
+          }
+        },
+        "operationId": "getAiUsage"
+      }
+    },
     "/ai-settings": {
       "get": {
         "tags": [
@@ -5859,6 +6295,1535 @@
         "operationId": "getComments"
       }
     },
+    "/inline-comments/{id}/replies": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Reply to an inline comment",
+        "description": "Adds a reply to an origin inline comment. A reply cannot itself be replied to: `id` must be an origin inline comment. Requires login, or an access token with the scope `write:features:page`, and permission to view the page. Not available through a share link. Read-only users are refused unless read-only users are allowed to comment.\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the origin inline comment to reply to."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "comment"
+                ],
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "description": "Reply body (markdown)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created reply.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "inlineCommentReply"
+                  ],
+                  "properties": {
+                    "inlineCommentReply": {
+                      "$ref": "#/components/schemas/InlineCommentReply"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, or the caller is a read-only user (code `validation_failed`); `id` is not an origin inline comment (code `inline-comment-not-origin`); the reply could not be created (code `inline-comment-reply-create-failed`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated, or the access token lacks the required scope."
+          },
+          "404": {
+            "description": "The comment does not exist (code `inline-comment-not-found`), or its page does not exist or the caller may not view it (code `notfound_or_forbidden`; these two page cases are indistinguishable).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postRepliesByIdForInlineComments"
+      }
+    },
+    "/inline-comments": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Create an inline comment",
+        "description": "Creates an origin inline comment anchored to a passage of the page body. See `InlineCommentAnchor` for how the anchor is measured and how it is used when the page is displayed. Requires login, or an access token with the scope `write:features:page`, and permission to view the page. Not available through a share link. Read-only users are refused unless read-only users are allowed to comment.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "pageId",
+                  "anchorOriginRevisionId",
+                  "comment",
+                  "anchor"
+                ],
+                "properties": {
+                  "pageId": {
+                    "type": "string",
+                    "description": "ID of the page."
+                  },
+                  "anchorOriginRevisionId": {
+                    "type": "string",
+                    "description": "ID of the page revision the anchor was taken from: the latest revision when the passage was chosen.\n"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Comment body (markdown)."
+                  },
+                  "anchor": {
+                    "$ref": "#/components/schemas/InlineCommentAnchor"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created inline comment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "inlineComment"
+                  ],
+                  "properties": {
+                    "inlineComment": {
+                      "$ref": "#/components/schemas/InlineComment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, or the caller is a read-only user (code `validation_failed`); an empty `anchor.quote`, or an `anchorOriginRevisionId` of a revision of another page (code `inline-comment-create-failed`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated, or the access token lacks the required scope."
+          },
+          "404": {
+            "description": "The page does not exist, or the caller may not view it. The two cases are deliberately indistinguishable (code `notfound_or_forbidden`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postInlineComments"
+      }
+    },
+    "/inline-comments/replies/{id}": {
+      "delete": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Delete a reply to an inline comment",
+        "description": "Deletes a reply to an inline comment. Only the creator may delete. Requires login, or an access token with the scope `write:features:page`, and permission to view the page. Not available through a share link. Read-only users are refused unless read-only users are allowed to comment.\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the reply."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted. The body is an empty object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, or the caller is a read-only user (code `validation_failed`); `id` is not a reply to an inline comment (code `inline-comment-not-reply`); the reply could not be deleted (code `inline-comment-delete-failed`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated, or the access token lacks the required scope; or the caller is not the creator of the reply (code `inline-comment-forbidden`).\n"
+          },
+          "404": {
+            "description": "The reply does not exist (code `inline-comment-not-found`), or its page does not exist or the caller may not view it (code `notfound_or_forbidden`; these two page cases are indistinguishable).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteRepliesByIdForInlineComments"
+      },
+      "put": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Edit a reply to an inline comment",
+        "description": "Changes the body of a reply to an inline comment. Only the creator may edit. Requires login, or an access token with the scope `write:features:page`, and permission to view the page. Not available through a share link. Read-only users are refused unless read-only users are allowed to comment.\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the reply."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "comment"
+                ],
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "New reply body (markdown)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated reply.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "inlineCommentReply"
+                  ],
+                  "properties": {
+                    "inlineCommentReply": {
+                      "$ref": "#/components/schemas/InlineCommentReply"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, or the caller is a read-only user (code `validation_failed`); `id` is not a reply to an inline comment (code `inline-comment-not-reply`); the reply could not be updated (code `inline-comment-update-failed`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated, or the access token lacks the required scope; or the caller is not the creator of the reply (code `inline-comment-forbidden`).\n"
+          },
+          "404": {
+            "description": "The reply does not exist (code `inline-comment-not-found`), or its page does not exist or the caller may not view it (code `notfound_or_forbidden`; these two page cases are indistinguishable).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putRepliesByIdForInlineComments"
+      }
+    },
+    "/inline-comments/{id}": {
+      "delete": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Delete an inline comment",
+        "description": "Deletes an origin inline comment together with all of its replies. Only the creator may delete. To delete a single reply, use DELETE /inline-comments/replies/{id}. Requires login, or an access token with the scope `write:features:page`, and permission to view the page. Not available through a share link. Read-only users are refused unless read-only users are allowed to comment.\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the origin inline comment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted. The body is an empty object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, or the caller is a read-only user (code `validation_failed`); `id` is not an origin inline comment (code `inline-comment-not-origin`); the comment could not be deleted (code `inline-comment-delete-failed`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated, or the access token lacks the required scope; or the caller is not the creator of the comment (code `inline-comment-forbidden`).\n"
+          },
+          "404": {
+            "description": "The comment does not exist (code `inline-comment-not-found`), or its page does not exist or the caller may not view it (code `notfound_or_forbidden`; these two page cases are indistinguishable).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteInlineCommentsById"
+      },
+      "put": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Edit an inline comment",
+        "description": "Changes the body of an origin inline comment. The anchor and the resolved state are not changed. Only the creator may edit. To edit a reply, use PUT /inline-comments/replies/{id}. Requires login, or an access token with the scope `write:features:page`, and permission to view the page. Not available through a share link. Read-only users are refused unless read-only users are allowed to comment.\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the origin inline comment."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "comment"
+                ],
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "New comment body (markdown)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated inline comment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "inlineComment"
+                  ],
+                  "properties": {
+                    "inlineComment": {
+                      "$ref": "#/components/schemas/InlineComment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, or the caller is a read-only user (code `validation_failed`); `id` is not an origin inline comment (code `inline-comment-not-origin`); the comment could not be updated (code `inline-comment-update-failed`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated, or the access token lacks the required scope; or the caller is not the creator of the comment (code `inline-comment-forbidden`).\n"
+          },
+          "404": {
+            "description": "The comment does not exist (code `inline-comment-not-found`), or its page does not exist or the caller may not view it (code `notfound_or_forbidden`; these two page cases are indistinguishable).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putInlineCommentsById"
+      }
+    },
+    "/inline-comments/{id}/resolve": {
+      "put": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Resolve or unresolve an inline comment thread",
+        "description": "Marks an origin inline comment as resolved or unresolved. Only origin comments have a resolved state. Anyone who may comment on the page may do this, not only the creator. Requires login, or an access token with the scope `write:features:page`, and permission to view the page. Not available through a share link. Read-only users are refused unless read-only users are allowed to comment.\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the origin inline comment."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "resolved"
+                ],
+                "properties": {
+                  "resolved": {
+                    "type": "boolean",
+                    "description": "true to resolve the thread, false to reopen it."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated inline comment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "inlineComment"
+                  ],
+                  "properties": {
+                    "inlineComment": {
+                      "$ref": "#/components/schemas/InlineComment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, or the caller is a read-only user (code `validation_failed`); `id` is not an origin inline comment (code `inline-comment-not-origin`); the state could not be changed (code `inline-comment-resolve-failed`).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated, or the access token lacks the required scope."
+          },
+          "404": {
+            "description": "The comment does not exist (code `inline-comment-not-found`), or its page does not exist or the caller may not view it (code `notfound_or_forbidden`; these two page cases are indistinguishable).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorV3"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putResolveByIdForInlineComments"
+      }
+    },
+    "/change-proposals/{id}/approve": {
+      "post": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Approve and apply pending operations of a change proposal, as its requester or a reviewer",
+        "description": "Approves the chosen pending operations (each chosen key also approves the other pending operations on the same page), or every pending operation when operationKeys is omitted, and applies them before responding. \"in-progress\" means another run holds the apply; it applies the approved operations, and its optional results hold the caller's operations as freshly read so a client can show progress. The requester and the reviewers may approve, each only the operations on pages they may view; anyone else, and a reviewer who may view none of its pages, gets the same 404 as a missing id. Requires the `write:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operationKeys": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1000,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The apply result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "done",
+                            "in-progress"
+                          ]
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "reason": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body (code validation_failed), or a read-only user"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          },
+          "404": {
+            "description": "The proposal does not exist, or the caller is neither its requester nor a reviewer who may view one of its pages (code notfound)"
+          },
+          "409": {
+            "description": "The proposal is no longer open (code not_open)"
+          }
+        },
+        "operationId": "postApproveByIdForChangeProposals"
+      }
+    },
+    "/change-proposals/{id}/discard": {
+      "post": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Discard the caller's change proposal",
+        "description": "Skips every pending operation and closes the proposal as discarded. Applied operations stay applied. Only the requester may discard; anyone else gets the same 404 as a missing id. Requires the `write:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Discarded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A read-only user"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          },
+          "404": {
+            "description": "The proposal does not exist or the caller is not its requester (code notfound)"
+          },
+          "409": {
+            "description": "The proposal is no longer open (code not_open)"
+          }
+        },
+        "operationId": "postDiscardByIdForChangeProposals"
+      }
+    },
+    "/change-proposals/{id}": {
+      "get": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Get a change proposal as the caller may see it",
+        "description": "Returns only the operations on pages the caller may view; a viewer other than the requester gets no proposed bodies, no requester state and no pending operations. A missing, malformed or entirely invisible proposal gets one identical 404. The requester and the reviewers also get reviewer-facing values: reviewers and, per operation, order, baseIsLatest, approval (with byRequester, true when the requester approved it), rejections and abstentions; the requester alone gets wholeRejections. Requires the `read:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The proposal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "proposal": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          },
+          "404": {
+            "description": "Not found (code notfound)"
+          }
+        },
+        "operationId": "getChangeProposalsById"
+      }
+    },
+    "/change-proposals/applied": {
+      "get": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "List applied change proposals the caller may see, most recently applied first",
+        "description": "Lists proposals with at least one applied, reverted or revert-refused operation on a page the caller may view. No total count is returned; continue with nextCursor. Requires the `read:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Summaries and the cursor to continue from",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "nextCursor": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid cursor or limit"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          }
+        },
+        "operationId": "getAppliedForChangeProposals"
+      }
+    },
+    "/change-proposals/mine": {
+      "get": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "List the caller's own change proposals, newest first",
+        "description": "Requires the `read:features:page` scope.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One page of summaries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "hasNext": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid page or limit"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          }
+        },
+        "operationId": "getMineForChangeProposals"
+      }
+    },
+    "/change-proposals/{id}/revert": {
+      "post": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Revert applied operations of a change proposal",
+        "description": "Reverts the chosen operations, or every applied operation the caller may see when operationKeys is omitted, by creating and applying a revert proposal before responding. Anyone who may view the operation's page may revert it. An operation missing from the result is still being applied by another run; read the revert proposal for its outcome. A proposal with nothing the caller may see gets the same 404 as a missing id. Requires the `write:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operationKeys": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1000,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The revert result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "revertProposalId": {
+                          "type": "string",
+                          "description": "Absent when nothing could be reverted"
+                        },
+                        "operations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "outcome": {
+                                "type": "string",
+                                "enum": [
+                                  "reverted",
+                                  "revert-refused",
+                                  "skipped"
+                                ]
+                              },
+                              "reason": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or a read-only user"
+          },
+          "403": {
+            "description": "Not authenticated, insufficient scope, or a user who may not write"
+          },
+          "404": {
+            "description": "The proposal does not exist or holds nothing the caller may see (code notfound)"
+          }
+        },
+        "operationId": "postRevertByIdForChangeProposals"
+      }
+    },
+    "/change-proposals/review-queue": {
+      "get": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "List open change proposals waiting for review by the caller",
+        "description": "Lists proposals the caller is a reviewer of that still have pending operations on pages the caller may view. No total count is returned; continue with nextCursor. Requires the `read:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Opaque cursor, a 24-character lowercase hexadecimal string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Summaries and the cursor to continue from",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "nextCursor": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid cursor or limit (code validation_failed)"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          }
+        },
+        "operationId": "getReviewQueueForChangeProposals"
+      }
+    },
+    "/change-proposals/{id}/reviewers": {
+      "patch": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Add or remove reviewers of a change proposal",
+        "description": "One request either adds or removes reviewers, so the body holds exactly one of add and remove. A user who is not active, or a group that does not exist, is answered with code reviewer_not_found. Requires the `write:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "add": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "kind",
+                        "id"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "user",
+                            "user-group",
+                            "external-user-group"
+                          ]
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "User ID or group ID"
+                        }
+                      }
+                    }
+                  },
+                  "remove": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "kind",
+                        "id"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "user",
+                            "user-group",
+                            "external-user-group"
+                          ]
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "User ID or group ID"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "The reviewers were changed"
+          },
+          "400": {
+            "description": "Invalid request body (code validation_failed), an unknown or inactive reviewer (code reviewer_not_found), too many reviewers (code too_many_reviewers), or reviewers are disabled on this wiki (code reviewers_disabled)"
+          },
+          "403": {
+            "description": "Not authenticated, insufficient scope, or a user who may not change proposals (code user_not_allowed)"
+          },
+          "404": {
+            "description": "The proposal does not exist, or the caller may not see it (code notfound)"
+          },
+          "409": {
+            "description": "The proposal is no longer open (code not_open)"
+          }
+        },
+        "operationId": "patchReviewersByIdForChangeProposals"
+      }
+    },
+    "/change-proposals/{id}/reviews": {
+      "post": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Reject or abstain from pending operations of a change proposal, as a reviewer",
+        "description": "Records a rejection or an abstention. A rejection without operationKeys rejects the whole proposal (results is then empty); an abstention always needs operationKeys. Only pending operations on pages the caller may view are affected. The requester cannot review their own proposal. Requires the `write:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "reject",
+                      "abstain"
+                    ]
+                  },
+                  "operationKeys": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1000,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "maxLength": 500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The review was recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "done"
+                          ]
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "nullable": true
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body (code validation_failed), a comment over 500 characters (code comment_too_long), or the caller is the requester (code requester_cannot_review)"
+          },
+          "403": {
+            "description": "Not authenticated, insufficient scope, or a user who may not change proposals (code user_not_allowed)"
+          },
+          "404": {
+            "description": "The proposal does not exist, or the caller is neither its requester nor a reviewer who may view one of its pages (code notfound)"
+          },
+          "409": {
+            "description": "The proposal is no longer open (code not_open)"
+          }
+        },
+        "operationId": "postReviewsByIdForChangeProposals"
+      }
+    },
+    "/change-proposals/revision-marks": {
+      "post": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Find the change proposals that created the given revisions",
+        "description": "Returns a mark only for revisions whose operation the caller may see. A read sent as POST because the id list can be long. Requires the `read:features:page` scope.\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "revisionIds"
+                ],
+                "properties": {
+                  "revisionIds": {
+                    "type": "array",
+                    "maxItems": 100,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The marks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "marks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "revisionId": {
+                            "type": "string"
+                          },
+                          "proposalId": {
+                            "type": "string"
+                          },
+                          "isRevert": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid revision id list"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          }
+        },
+        "operationId": "postRevisionMarksForChangeProposals"
+      }
+    },
+    "/change-proposals/{id}/per-page-notifications": {
+      "put": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Change whether applying the caller's change proposal sends per-page notifications",
+        "description": "Applies to operations applied after the change only. Per-page notifications are sent only while the admin setting is also on. Only the requester may change it; anyone else gets the same 404 as a missing id. Requires the `write:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enabled"
+                ],
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Changed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or a read-only user"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          },
+          "404": {
+            "description": "The proposal does not exist or the caller is not its requester (code notfound)"
+          },
+          "409": {
+            "description": "The proposal is no longer open (code not_open)"
+          }
+        },
+        "operationId": "putPerPageNotificationsByIdForChangeProposals"
+      }
+    },
+    "/change-proposals/{id}/skip": {
+      "post": {
+        "tags": [
+          "ChangeProposals"
+        ],
+        "summary": "Skip pending operations of the caller's change proposal",
+        "description": "Marks the chosen pending operations as skipped; the proposal settles once nothing is pending. Only the requester may skip; anyone else gets the same 404 as a missing id. Requires the `write:features:page` scope.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "operationKeys"
+                ],
+                "properties": {
+                  "operationKeys": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1000,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Skipped",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or a read-only user"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          },
+          "404": {
+            "description": "The proposal does not exist or the caller is not its requester (code notfound)"
+          },
+          "409": {
+            "description": "The proposal is no longer open (code not_open)"
+          }
+        },
+        "operationId": "postSkipByIdForChangeProposals"
+      }
+    },
+    "/change-proposal-settings": {
+      "get": {
+        "tags": [
+          "ChangeProposalSettings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          },
+          {
+            "accessTokenHeaderAuth": []
+          }
+        ],
+        "summary": "Get the change proposal settings",
+        "description": "Admin only. Requires the `read:admin:app` scope.",
+        "responses": {
+          "200": {
+            "description": "The effective settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "settings": {
+                      "$ref": "#/components/schemas/ChangeProposalSettings"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "302": {
+            "description": "The caller is logged in but not an admin (redirected to /)"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          }
+        },
+        "operationId": "getChangeProposalSettings"
+      },
+      "put": {
+        "tags": [
+          "ChangeProposalSettings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          },
+          {
+            "accessTokenInQuery": []
+          },
+          {
+            "accessTokenHeaderAuth": []
+          }
+        ],
+        "summary": "Update the change proposal settings",
+        "description": "Admin only. Requires the `write:admin:app` scope. Omitted fields stay unchanged; unknown fields are refused. Turning `isEnabled` off withdraws every pending change proposal before the response. Refused with 400 while the settings are fixed by environment variables (`useOnlyEnvVars`).\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "isEnabled": {
+                    "type": "boolean"
+                  },
+                  "enabledOperationTypes": {
+                    "type": "array",
+                    "description": "The full list of enabled types; an empty list turns every type off",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "edit",
+                        "create",
+                        "move"
+                      ]
+                    }
+                  },
+                  "autoApplyPolicy": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "own-pages",
+                      "all"
+                    ]
+                  },
+                  "maxOperationsPerProposal": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "nullable": true,
+                    "description": "null stops checking the number of operations"
+                  },
+                  "maxProposalsPerUserPerDay": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "nullable": true,
+                    "description": "null removes the daily limit"
+                  },
+                  "perPageNotificationsEnabled": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The settings after the update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "settings": {
+                      "$ref": "#/components/schemas/ChangeProposalSettings"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "302": {
+            "description": "The caller is logged in but not an admin (redirected to /)"
+          },
+          "400": {
+            "description": "Invalid request body, or the settings are fixed by environment variables (code settings_fixed_by_env_vars)"
+          },
+          "403": {
+            "description": "Not authenticated or insufficient scope"
+          }
+        },
+        "operationId": "putChangeProposalSettings"
+      }
+    },
     "/activity": {
       "get": {
         "summary": "/activity",
@@ -5867,15 +7832,9 @@
         ],
         "security": [
           {
-            "bearer": [],
-            "cookieAuth": []
-          },
-          {
-            "accessTokenInQuery": [],
             "bearer": []
           },
           {
-            "accessTokenHeaderAuth": [],
             "accessTokenInQuery": []
           },
           {
@@ -7158,6 +9117,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Page is not found or forbidden."
           }
         },
         "operationId": "getInfoForBookmarks"
@@ -8143,7 +10105,7 @@
         },
         "responses": {
           "200": {
-            "description": "Password reset request processed",
+            "description": "Password reset request accepted. Also returned when the email does not belong to an active account. Always returned a fixed time (`PASSWORD_RESET_RESPONSE_DELAY_MS` in `~/interfaces/password-reset`) after the request was received.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8151,6 +10113,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Sending the password reset email failed or did not finish in time (error code `password-reset-request-failed`). Always returned a fixed time (`PASSWORD_RESET_RESPONSE_DELAY_MS` in `~/interfaces/password-reset`) after the request was received."
           }
         },
         "operationId": "postForgotPassword"
@@ -11157,7 +13122,7 @@
             "description": "Page is not found or forbidden."
           },
           "409": {
-            "description": "The destination path is already taken, cannot be used, or revisionId is not the latest revision."
+            "description": "The destination path is already taken, cannot be used, revisionId is not the latest revision, the grant of the page is not assignable at the destination, or another page operation is in progress."
           },
           "500": {
             "description": "Failed to rename page."
@@ -11226,6 +13191,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "The requester is not allowed to delete any of the trashed pages completely."
           }
         },
         "operationId": "deleteEmptyTrashForPages"
@@ -11366,6 +13334,9 @@
           "404": {
             "description": "Page is not found."
           },
+          "409": {
+            "description": "The destination path is already taken, the grant of the page is not assignable there, or another page operation is in progress."
+          },
           "500": {
             "description": "Internal server error."
           }
@@ -11480,6 +13451,15 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "The requester is not allowed to delete any of the selected pages."
+          },
+          "404": {
+            "description": "None of the selected pages is found or readable."
+          },
+          "409": {
+            "description": "Every selected page has been updated since its given revisionId."
           }
         },
         "operationId": "postDeleteForPages"
@@ -11863,6 +13843,11 @@
       "post": {
         "tags": [
           "GeneralSetting"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
         ],
         "operationId": "postAccessTokenForPersonalSetting",
         "summary": "/personal-setting/access-token",
@@ -12306,6 +14291,10 @@
                       "normalize",
                       "rebuild"
                     ]
+                  },
+                  "includeAttachments": {
+                    "type": "boolean",
+                    "description": "With `rebuild`, also rebuild the attachment full-text index after the pages. The response does not wait for completion; progress and the result are sent over Socket.io (`finishAddAttachment` / `attachmentRebuildingFailed`).\n"
                   }
                 }
               }
@@ -12327,6 +14316,15 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "`search-service-unconfigured` / `search-service-unreachable`, or invalid parameters\n"
+          },
+          "409": {
+            "description": "`rebuild_in_progress` — a rebuild with `includeAttachments` is already running\n"
+          },
+          "503": {
+            "description": "`feature_disabled` — `includeAttachments` was requested while attachment full-text search is disabled — or the operation itself failed\n"
           }
         },
         "operationId": "putIndicesForSearch"
@@ -14143,6 +16141,113 @@
         "operationId": "postCompleteRegistration"
       }
     },
+    "/user-activities": {
+      "get": {
+        "summary": "/user-activities",
+        "description": "List the activities a user performed on pages that the requester is allowed to see, newest first",
+        "tags": [
+          "Activity"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of rows to return. Defaults to the page-list size configured on the server.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          },
+          {
+            "name": "targetUserId",
+            "in": "query",
+            "required": false,
+            "description": "MongoDB ObjectId of the user whose activities are listed. Defaults to the requester.",
+            "schema": {
+              "type": "string",
+              "example": "669a5aa48d45e62b521d00e4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activities fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserActivitiesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A query parameter is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ErrorV3"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requester is not logged in",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Forbidden"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to get user activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ErrorV3"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getUserActivities"
+      }
+    },
     "/user-group-relations": {
       "get": {
         "tags": [
@@ -15061,6 +17166,9 @@
                       },
                       "aiChatSelectedModelKey": {
                         "type": "string"
+                      },
+                      "aiChatSidebarWidth": {
+                        "type": "number"
                       }
                     }
                   }
@@ -15094,6 +17202,9 @@
                     },
                     "aiChatSelectedModelKey": {
                       "type": "string"
+                    },
+                    "aiChatSidebarWidth": {
+                      "type": "number"
                     }
                   }
                 }
