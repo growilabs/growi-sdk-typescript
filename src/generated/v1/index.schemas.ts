@@ -566,17 +566,32 @@ export type GetComments200AllOf = {
 export type GetComments200 = ApiResponseSuccess & GetComments200AllOf;
 
 export type AddCommentBodyCommentForm = {
-  page_id?: ObjectId;
-  revision_id?: ObjectId;
-  comment?: CommentBody;
+  page_id: ObjectId;
+  /** ID of a revision of the page, usually the latest one. */
+  revision_id: ObjectId;
+  comment: CommentBody;
   comment_position?: CommentPosition;
   /** ID of the comment to reply to. It must be a top-level (not itself a reply), non-inline comment of the same page; otherwise the request fails. Omit it, or send an empty string, to post a top-level comment. To reply to an inline comment, use POST /_api/v3/inline-comments/{id}/replies.
    */
   replyTo?: ObjectId;
 };
 
+/**
+ * Optional. Notifies Slack channels of the new comment when Slack integration is configured. Omit it to send no Slack notification.
+
+ */
+export type AddCommentBodySlackNotificationForm = {
+  /** true to send the notification. */
+  isSlackEnabled?: boolean;
+  /** Comma-separated channel names, e.g. "general,dev". */
+  slackChannels?: string;
+};
+
 export type AddCommentBody = {
   commentForm: AddCommentBodyCommentForm;
+  /** Optional. Notifies Slack channels of the new comment when Slack integration is configured. Omit it to send no Slack notification.
+   */
+  slackNotificationForm?: AddCommentBodySlackNotificationForm;
 };
 
 export type AddComment200AllOf = {
@@ -586,19 +601,16 @@ export type AddComment200AllOf = {
 
 export type AddComment200 = ApiResponseSuccess & AddComment200AllOf;
 
-export type UpdateCommentBodyFormCommentForm = {
-  page_id?: ObjectId;
-  revision_id?: ObjectId;
-  comment_id?: ObjectId;
-  comment?: CommentBody;
-};
-
-export type UpdateCommentBodyForm = {
-  commentForm?: UpdateCommentBodyFormCommentForm;
+export type UpdateCommentBodyCommentForm = {
+  comment_id: ObjectId;
+  /** ID of a revision of the comment's page, usually the latest one. The comment is re-linked to this revision.
+   */
+  revision_id: ObjectId;
+  comment: CommentBody;
 };
 
 export type UpdateCommentBody = {
-  form: UpdateCommentBodyForm;
+  commentForm: UpdateCommentBodyCommentForm;
 };
 
 export type UpdateComment200AllOf = {
