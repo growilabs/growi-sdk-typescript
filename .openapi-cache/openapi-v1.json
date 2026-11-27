@@ -1264,12 +1264,22 @@
                 "properties": {
                   "commentForm": {
                     "type": "object",
+                    "required": [
+                      "page_id",
+                      "revision_id",
+                      "comment"
+                    ],
                     "properties": {
                       "page_id": {
                         "$ref": "#/components/schemas/ObjectId"
                       },
                       "revision_id": {
-                        "$ref": "#/components/schemas/ObjectId"
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/ObjectId"
+                          }
+                        ],
+                        "description": "ID of a revision of the page, usually the latest one."
                       },
                       "comment": {
                         "$ref": "#/components/schemas/CommentBody"
@@ -1284,6 +1294,20 @@
                           }
                         ],
                         "description": "ID of the comment to reply to. It must be a top-level (not itself a reply), non-inline comment of the same page; otherwise the request fails. Omit it, or send an empty string, to post a top-level comment. To reply to an inline comment, use POST /_api/v3/inline-comments/{id}/replies.\n"
+                      }
+                    }
+                  },
+                  "slackNotificationForm": {
+                    "type": "object",
+                    "description": "Optional. Notifies Slack channels of the new comment when Slack integration is configured. Omit it to send no Slack notification.\n",
+                    "properties": {
+                      "isSlackEnabled": {
+                        "type": "boolean",
+                        "description": "true to send the notification."
+                      },
+                      "slackChannels": {
+                        "type": "string",
+                        "description": "Comma-separated channel names, e.g. \"general,dev\"."
                       }
                     }
                   }
@@ -1341,31 +1365,33 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "form": {
+                  "commentForm": {
                     "type": "object",
+                    "required": [
+                      "comment_id",
+                      "revision_id",
+                      "comment"
+                    ],
                     "properties": {
-                      "commentForm": {
-                        "type": "object",
-                        "properties": {
-                          "page_id": {
+                      "comment_id": {
+                        "$ref": "#/components/schemas/ObjectId"
+                      },
+                      "revision_id": {
+                        "allOf": [
+                          {
                             "$ref": "#/components/schemas/ObjectId"
-                          },
-                          "revision_id": {
-                            "$ref": "#/components/schemas/ObjectId"
-                          },
-                          "comment_id": {
-                            "$ref": "#/components/schemas/ObjectId"
-                          },
-                          "comment": {
-                            "$ref": "#/components/schemas/CommentBody"
                           }
-                        }
+                        ],
+                        "description": "ID of a revision of the comment's page, usually the latest one. The comment is re-linked to this revision.\n"
+                      },
+                      "comment": {
+                        "$ref": "#/components/schemas/CommentBody"
                       }
                     }
                   }
                 },
                 "required": [
-                  "form"
+                  "commentForm"
                 ]
               }
             }
