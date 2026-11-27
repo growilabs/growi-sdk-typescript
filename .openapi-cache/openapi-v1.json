@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "GROWI REST API v1",
-    "version": "8.0.6-RC.0"
+    "version": "8.0.13-RC.0"
   },
   "servers": [
     {
@@ -1276,6 +1276,14 @@
                       },
                       "comment_position": {
                         "$ref": "#/components/schemas/CommentPosition"
+                      },
+                      "replyTo": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/ObjectId"
+                          }
+                        ],
+                        "description": "ID of the comment to reply to. It must be a top-level (not itself a reply), non-inline comment of the same page; otherwise the request fails. Omit it, or send an empty string, to post a top-level comment. To reply to an inline comment, use POST /_api/v3/inline-comments/{id}/replies.\n"
                       }
                     }
                   }
@@ -1883,6 +1891,18 @@
             "name": "limit",
             "schema": {
               "$ref": "#/components/schemas/Limit"
+            }
+          },
+          {
+            "in": "query",
+            "name": "facet",
+            "description": "Optional. `attachments` searches attachment content only while\nattachment full-text search is enabled; the data then lists\nthe parent pages of the hits in relevance order. Each item's\n`data` is the same page document the page search returns,\nand its `meta` carries `attachmentHits` and, only when the\npage itself (path, body or comments) also matches the query,\nthe page search's `elasticSearchResult` (left out when that\nsnippet search fails or times out). Items whose page no\nlonger exists are left out. The response meta carries\n`facet`, `total` (always null), `hitsCount` (the number of\nitems before pages that no longer exist were left out; fewer\nthan `limit` means no more items) and\n`primaryResultIncomplete`; `limit` must then be an integer\nfrom 1 to 200 and `offset` a non-negative integer. While the\nfeature is enabled, any other value than `pages` /\n`attachments` is answered `{ ok: false, code: 400 }`.\nOmitted, `pages`, combined with `nq`, or with the feature\ndisabled, the response is the plain page search.\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pages",
+                "attachments"
+              ]
             }
           }
         ],
